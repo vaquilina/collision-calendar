@@ -1,47 +1,8 @@
-import { DB } from "sqlite";
+import { DB } from 'sqlite';
 
 /** Initialize the main database. */
 export const initDB = (): void => {
-  const db = new DB("collision-calendar.db");
-
-  /*
-   * Location
-   * - location must be associated to an owner user
-   * - location doesn't care about users; only spaces
-   *
-   * Space
-   * - a room or section housed within a location
-   *
-   * Collision
-   * - explicit collisions are defined as two spaces that cannot have block overlap
-   * - implicit collisions occur when two blocks at the same space have block overlap
-   *
-   * - hash passwords before storing in db
-   * - generate avatars; store as base64 image?
-   *
-   * - could package a db with the client for user settings
-   *
-   * Occupant
-   * - a user occupying a space
-   *
-   * Proposal
-   * - a set of blocks to be voted on by occupants
-   *
-   * Vote
-   * - a vote provided by an occupant for a block within a proposal
-   *
-   * Block
-   * - represents a block of time when the space will be occupied
-   * - blocks can have occupants; users who are part of the space who will be occupying it during the block
-   * - if a block's proposal id is not null, it is considered pending (waiting for votes)
-   *
-   * Repeat
-   * - defines a repetition rule for a block
-   * - unit: day|week|month|year
-   * - interval: number (eg. every 2 units)
-   * - start: the beginning of the repeat (eg. starting on 05/04/2025)
-   * - end: the end of the repeat; may be null to repeat indefinitely
-   */
+  const db = new DB('collision-calendar.db');
 
   db.execute(`
   PRAGMA foreign_keys = ON;
