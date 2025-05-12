@@ -1,4 +1,4 @@
-# ![calendar icon](client/assets/favicon-32x32.png) Collision Calendar
+# ![calendar icon](client/assets/android-chrome-192x192.png) Collision Calendar
 
 A FOSS, web-based tool for scheduling shared spaces.
 
