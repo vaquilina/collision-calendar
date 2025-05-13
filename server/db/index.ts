@@ -13,7 +13,8 @@ export const initDB = (): void => {
     name TEXT NOT NULL,
     password TEXT,
     avatar TEXT,
-    created_at DATETIME DEFAULT CURRENT_TIMESTAMP
+    created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME
   );
   
   CREATE TABLE IF NOT EXISTS location (
@@ -21,6 +22,7 @@ export const initDB = (): void => {
     name TEXT NOT NULL,
     owneruserid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(owneruserid) REFERENCES user(id)
   );
   
@@ -29,6 +31,7 @@ export const initDB = (): void => {
     name TEXT NOT NULL,
     locationid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME
     FOREIGN KEY(locationid) REFERENCES location(id)
   );
   
@@ -37,6 +40,7 @@ export const initDB = (): void => {
     spaceid_l INTEGER NOT NULL,
     spaceid_r INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(spaceid_l) REFERENCES space(id),
     FOREIGN KEY(spaceid_r) REFERENCES space(id)
   );
@@ -46,6 +50,7 @@ export const initDB = (): void => {
     userid INTEGER NOT NULL,
     spaceid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(userid) REFERENCES user(id),
     FOREIGN KEY(spaceid) REFERENCES space(id)
   );
@@ -55,6 +60,7 @@ export const initDB = (): void => {
     name TEXT NOT NULL,
     spaceid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(spaceid) REFERENCES space(id)
   );
 
@@ -67,6 +73,7 @@ export const initDB = (): void => {
     spaceid INTEGER NOT NULL,
     proposalid INTEGER,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(spaceid) REFERENCES space(id),
     FOREIGN KEY(proposalid) REFERENCES proposal(id)
   );
@@ -79,6 +86,7 @@ export const initDB = (): void => {
     end DATETIME,
     blockid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(blockid) REFERENCES block(id)
   );
   
@@ -87,9 +95,12 @@ export const initDB = (): void => {
     answer INTEGER NOT NULL,
     blockid INTEGER NOT NULL,
     proposalid INTEGER NOT NULL,
+    occupantid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
+    updated_at DATETIME,
     FOREIGN KEY(blockid) REFERENCES block(id),
-    FOREIGN KEY(proposalid) REFERENCES proposal(id)
+    FOREIGN KEY(proposalid) REFERENCES proposal(id),
+    FOREIGN KEY(occupantid) REFERENCES occupant(id)
   );
 `);
 
