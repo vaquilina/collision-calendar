@@ -31,7 +31,7 @@ export const initDB = (): void => {
     name TEXT NOT NULL,
     locationid INTEGER NOT NULL,
     created_at DATETIME DEFAULT CURRENT_TIMESTAMP,
-    updated_at DATETIME
+    updated_at DATETIME,
     FOREIGN KEY(locationid) REFERENCES location(id)
   );
   
@@ -106,3 +106,5 @@ export const initDB = (): void => {
 
   db.close();
 };
+
+initDB();
