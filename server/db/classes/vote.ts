@@ -2,9 +2,9 @@ import { BaseRecord } from './base_record.ts';
 import { Block } from './block.ts';
 import { Proposal } from './proposal.ts';
 import { Occupant } from './occupant.ts';
-import { VoteAnswer } from '../../types.ts';
+import { VoteAnswer } from '../../../types/types.ts';
 
-/** Represents an {@link Occupant}'s vote for a {@link Block} in a {@link Proposal}. */
+/** Represents an {@link Occupant}'s vote for a {@link Block} as part of a {@link Proposal}. */
 export class Vote extends BaseRecord {
   constructor(
     values: BaseRecord & {
@@ -14,7 +14,7 @@ export class Vote extends BaseRecord {
       occupantid: Occupant['id'];
     },
   ) {
-    super({ id: values.id, created_at: values.created_at, updated_at: values.updated_at });
+    super({ id: values.id, created_at: values.created_at });
 
     this.answer = values.answer;
     this.blockid = values.blockid;

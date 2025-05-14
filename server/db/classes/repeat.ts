@@ -1,11 +1,11 @@
 import { BaseRecord } from './base_record.ts';
 import { Block } from './block.ts';
-import { RepeatUnit } from '../../types.ts';
+import { RepeatUnit } from '../../../types/types.ts';
 
 /**
  * Represents a repeat rule for a {@link Block}.
  * @remarks
- * Reads: *"Starting on (start), repeat this block every (interval) (unit)s until (end)."*
+ * Reads: *"Starting on (start), repeat this block every (interval) * (unit)s until (end)."*
  */
 export class Repeat extends BaseRecord {
   constructor(
@@ -17,7 +17,7 @@ export class Repeat extends BaseRecord {
       blockid: Block['id'];
     },
   ) {
-    super({ id: values.id, created_at: values.created_at, updated_at: values.updated_at });
+    super({ id: values.id, created_at: values.created_at });
 
     this.unit = values.unit;
     this.interval = values.interval;

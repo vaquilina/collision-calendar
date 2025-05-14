@@ -8,13 +8,13 @@ export class Block extends BaseRecord {
     values: BaseRecord & {
       name: string;
       color: string;
-      start: Temporal.ZonedDateTime;
-      end: Temporal.ZonedDateTime;
+      start: Temporal.PlainDateTime;
+      end: Temporal.PlainDateTime;
       spaceid: Space['id'];
-      proposalid?: Proposal['id'];
+      proposalid: Proposal['id'] | null;
     },
   ) {
-    super({ id: values.id, created_at: values.created_at, updated_at: values.updated_at });
+    super({ id: values.id, created_at: values.created_at });
 
     this.name = values.name;
     this.color = values.color;
@@ -26,8 +26,8 @@ export class Block extends BaseRecord {
 
   name: string;
   color: string;
-  start: Temporal.ZonedDateTime;
-  end: Temporal.ZonedDateTime;
+  start: Temporal.PlainDateTime;
+  end: Temporal.PlainDateTime;
   spaceid: Space['id'];
-  proposalid?: Proposal['id'];
+  proposalid: Proposal['id'] | null;
 }

@@ -12,58 +12,24 @@ A FOSS, web-based tool for scheduling shared spaces.
     - [ ] Signup
     - [ ] Log in/out
     - [ ] Auth middleware
-    - [ ] Permissions
+    - [ ] Permissions middleware
     - [ ] Invites
   - [ ] DB locks/connection pooling
-  - [ ] ORM/DB type safety
-  - [ ] API Endpoints
+  - [ ] DB type safety
+  - [ ] API Endpoints (CRUD)
     - [ ] auth/
       - [ ] user
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
     - [ ] api/
-      - [ ] location/
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
+      - [ ] calendar/
+      - [ ] calendar_access/
       - [ ] space/
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
+      - [ ] space_access/
       - [ ] proposal/
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
       - [ ] block/
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
       - [ ] repeat/
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
       - [ ] occupant
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
       - [ ] vote
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
       - [ ] collision
-        - [ ] create
-        - [ ] retrieve
-        - [ ] update
-        - [ ] delete
 - [ ] Client
   - [ ] Auth
     - [ ] Sign up
@@ -74,9 +40,9 @@ A FOSS, web-based tool for scheduling shared spaces.
   - [ ] Calendar
     - [ ] Blocks
       - [ ] Available Colours/picker
-      - TODO: determine required functionality
+      - TODO: fill this in
     - [ ] Proposals
-      - TODO: determine required functionality
+      - TODO: fill this in
     - [ ] Voting UI
     - [ ] Views
       - [ ] Month
@@ -101,5 +67,3 @@ A FOSS, web-based tool for scheduling shared spaces.
 ## Data Design
 
 See [DB.md](server/db/DB.md)
-
-## 
