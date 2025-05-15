@@ -1,17 +1,14 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@hono/hono@^4.7.9": "4.7.9",
     "jsr:@std/assert@1": "1.0.13",
     "jsr:@std/internal@^1.0.6": "1.0.6",
     "npm:@faker-js/faker@^9.7.0": "9.7.0",
     "npm:@hono/zod-validator@0.5": "0.5.0_hono@4.7.9_zod@3.24.4",
+    "npm:hono@^4.7.9": "4.7.9",
     "npm:zod@^3.24.4": "3.24.4"
   },
   "jsr": {
-    "@hono/hono@4.7.9": {
-      "integrity": "929baffb76209d2ce4c3442bab45957d5dda1726efb82cef13ec3a51d239c543"
-    },
     "@std/assert@1.0.13": {
       "integrity": "ae0d31e41919b12c656c742b22522c32fb26ed0cba32975cb0de2a273cb68b29",
       "dependencies": [
@@ -507,10 +504,10 @@
     "members": {
       "server": {
         "dependencies": [
-          "jsr:@hono/hono@^4.7.9",
           "jsr:@std/assert@1",
           "npm:@faker-js/faker@^9.7.0",
           "npm:@hono/zod-validator@0.5",
+          "npm:hono@^4.7.9",
           "npm:zod@^3.24.4"
         ]
       }
