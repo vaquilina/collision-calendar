@@ -1,4 +1,4 @@
-# <img src='client/assets/android-chrome-192x192.png' width="48" alt="calendar icon" /> Collision Calendar
+# Collision Calendar
 
 A FOSS, web-based tool for scheduling shared spaces.
 
@@ -66,4 +66,4 @@ A FOSS, web-based tool for scheduling shared spaces.
 
 ## Data Design
 
-See [DB.md](server/db/DB.md)
+See [DB.md](docs/DB.md)
