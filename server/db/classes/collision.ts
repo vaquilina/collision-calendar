@@ -1,14 +1,12 @@
 import { BaseRecord } from './base_record.ts';
-import { Space } from './space.ts';
-
-// deno-lint-ignore no-unused-vars
-import { Block } from './block.ts';
+import type { Space } from './space.ts';
+import type { Block as _Block } from './block.ts';
 
 /**
  * Represents an **explicit collision**.
  * @remarks
- * An explicit collision defines an incompatibilty between two {@link Space}s; they cannot be occupied at the same time.
- * (No {@link Block} overlap)
+ * An explicit collision defines an incompatibilty between two {@link Space Spaces}; they cannot be occupied at the same time.
+ * (No {@link _Block Block} overlap)
  */
 export class Collision extends BaseRecord {
   constructor(values: BaseRecord & { spaceid_l: Space['id']; spaceid_r: Space['id'] }) {

@@ -1,5 +1,5 @@
 import { BaseRecord } from './base_record.ts';
-import { User } from './user.ts';
+import type { User } from './user.ts';
 
 /** Represents a top-level calendar container. */
 export class Calendar extends BaseRecord {

@@ -1,10 +1,10 @@
 import { BaseRecord } from './base_record.ts';
-import { Block } from './block.ts';
-import { Proposal } from './proposal.ts';
-import { Occupant } from './occupant.ts';
-import { VoteAnswer } from '../../../types/types.ts';
+import type { Block } from './block.ts';
+import type { Proposal } from './proposal.ts';
+import type { Occupant } from './occupant.ts';
+import type { VoteAnswer } from '../../../types/types.ts';
 
-/** Represents an {@link Occupant}'s vote for a {@link Block} as part of a {@link Proposal}. */
+/** Represents an {@link Occupant Occupant's} vote for or against a {@link Block} as part of a {@link Proposal}. */
 export class Vote extends BaseRecord {
   constructor(
     values: BaseRecord & {

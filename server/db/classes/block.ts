@@ -1,6 +1,6 @@
 import { BaseRecord } from './base_record.ts';
-import { Space } from './space.ts';
-import { Proposal } from './proposal.ts';
+import type { Space } from './space.ts';
+import type { Proposal } from './proposal.ts';
 
 /** Represents a block of time during which a {@link Space} will be occupied. */
 export class Block extends BaseRecord {

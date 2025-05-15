@@ -1,6 +1,6 @@
 import { BaseRecord } from './base_record.ts';
-import { User } from './user.ts';
-import { Space } from './space.ts';
+import type { User } from './user.ts';
+import type { Space } from './space.ts';
 
 /** Represents an association between a {@link User} and a {@link Space}. */
 export class Occupant extends BaseRecord {

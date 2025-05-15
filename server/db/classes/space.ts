@@ -1,5 +1,5 @@
 import { BaseRecord } from './base_record.ts';
-import { Calendar } from './calendar.ts';
+import type { Calendar } from './calendar.ts';
 
 /** Represents a group/section within a {@link Calendar}. */
 export class Space extends BaseRecord {

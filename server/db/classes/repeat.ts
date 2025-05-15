@@ -1,6 +1,6 @@
 import { BaseRecord } from './base_record.ts';
-import { Block } from './block.ts';
-import { RepeatUnit } from '../../../types/types.ts';
+import type { Block } from './block.ts';
+import type { RepeatUnit } from '../../../types/types.ts';
 
 /**
  * Represents a repeat rule for a {@link Block}.
