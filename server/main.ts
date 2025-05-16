@@ -9,11 +9,11 @@ Deno.env.set('DB_PATH', 'db/collision-calendar.db');
 
 const app = new Hono()
   /* 404 handler */
-  .notFound((c) => c.text(`${faker.word.interjection()}! 404 Page not found`, 404))
+  .notFound((c) => c.text('resource not found', 404))
   /* Error handler */
   .onError((err, c) => {
     console.error(`${err}`);
-    return c.text('An unexpected issue has occurred', 500);
+    return c.text(`${faker.word.interjection()}! something broke`, 500);
   })
   /* Routes */
   .route('/user', user);
