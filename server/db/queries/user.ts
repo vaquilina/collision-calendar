@@ -3,6 +3,23 @@ import { DB } from 'sqlite';
 import type { User } from '../classes/user.ts';
 import type { Email } from '../../../types/types.ts';
 
+/** Get prepared query for retrieving a {@link User} record by id. */
+export const selectUserQuery = (db: DB) =>
+  db.prepareQuery<
+    [User],
+    { id: number; name: string; email: Email; password: string; created_at: string },
+    { id: number }
+  >('SELECT * FROM user WHERE id = :id');
+
+/** Get prepared query for retrieving many {@link User} records by id.  */
+export const selectUsersQuery = (db: DB) =>
+  db.prepareQuery<
+    [User],
+    { id: number; name: string; email: Email; password: string; created_at: string },
+    { ids: string }
+  >('SELECT * FROM user WHERE id in (:ids)');
+
+/** Get prepared query for inserting a {@link User} record.  */
 export const insertUserQuery = (db: DB) =>
   db.prepareQuery<
     [User],
@@ -12,31 +29,45 @@ export const insertUserQuery = (db: DB) =>
     'INSERT INTO user (name, email, password, created_at) VALUES(:name, :email, :password, :created_at)',
   );
 
-export const updateUserQuery = (db: DB) =>
+/** Get prepared query for updating the `name` field of a {@link User} record. */
+export const updateUserNameQuery = (db: DB) =>
   db.prepareQuery<
     [User],
     { id: number; name: string; email: Email; password: string; created_at: string },
-    { name: string; email: Email; password: string }
+    { name: string; id: number }
+  >(`
+    UPDATE user
+       SET name = :name
+     WHERE id = :id
+    `);
+
+/** Get prepared query for updating the `email` field of a {@link User} record. */
+export const updateUserEmailQuery = (db: DB) =>
+  db.prepareQuery<
+    [User],
+    { id: number; name: string; email: Email; password: string; created_at: string },
+    { email: string; id: number }
   >(`
   UPDATE user
-     SET name = :name, email = :email, password = :password
+     SET email = :email
      WHERE id = :id
   `);
 
-export const selectUserQuery = (db: DB) =>
+/** Get prepared query for updating the `password` field of a {@link User} record. */
+export const updateUserPasswordQuery = (db: DB) =>
   db.prepareQuery<
     [User],
     { id: number; name: string; email: Email; password: string; created_at: string },
-    { id: number }
-  >('SELECT * FROM user WHERE id = :id');
+    { password: string; id: number }
+  >(
+    `
+    UPDATE user
+       SET password = :password
+     WHERE id = :id
+    `,
+  );
 
-export const selectUsersQuery = (db: DB) =>
-  db.prepareQuery<
-    [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
-    { ids: string }
-  >('SELECT * FROM user WHERE id in (:ids)');
-
+/** Get prepared query for deleting a {@link User} record. */
 export const deleteUserQuery = (db: DB) =>
   db.prepareQuery<
     [User],
