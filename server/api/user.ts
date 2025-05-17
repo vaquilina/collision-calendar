@@ -9,8 +9,9 @@ import {
   deleteUserQuery,
   insertUserQuery,
   selectUserQuery,
-  selectUsersQuery,
-  updateUserQuery,
+  updateUserEmailQuery,
+  updateUserNameQuery,
+  updateUserPasswordQuery,
 } from '../db/queries/user.ts';
 
 export const user = new Hono()
@@ -26,7 +27,7 @@ export const user = new Hono()
 
     return c.json(processed_users);
   })
-  /* get one user */
+  /* get user */
   .get('/:id', (c) => {
     const id = c.req.param('id');
 
@@ -41,7 +42,7 @@ export const user = new Hono()
 
     return c.json(user);
   })
-  /* create a user */
+  /* create user */
   .post('/', async (c) => {
     const body: { name: string; email: Email; password: string } = await c.req.json();
 
@@ -58,12 +59,16 @@ export const user = new Hono()
 
     return c.json('created user', 201);
   })
-  .patch('/', async (c) => {
-    const body: { id: number; name?: string; email?: Email; password?: string } = await c.req.json();
+  /* update user */
+  .patch('/:id', async (c) => {
+    const id = Number.parseInt(c.req.param('id'));
+    const body: { field: 'name' | 'email' | 'password'; value: string } = await c.req.json();
 
     const db = new DB(Deno.env.get('DB_PATH'), { mode: 'write' });
+
+    // ensure user exists
     const fetch_query = selectUserQuery(db);
-    const record = fetch_query.firstEntry({ id: body.id });
+    const record = fetch_query.firstEntry({ id });
     fetch_query.finalize();
 
     if (!record) {
@@ -71,15 +76,50 @@ export const user = new Hono()
       return c.notFound();
     }
 
-    const update_query = updateUserQuery(db);
-    update_query.execute({
-      name: body?.name ? body.name : record.name,
-      email: body?.email ? body.email : record.email,
-      password: body?.password ? body.password : record.password,
-    });
-    update_query.finalize();
+    switch (body.field) {
+      case 'name': {
+        const query = updateUserNameQuery(db);
+        query.execute({ id, name: body.value });
+        query.finalize();
+        break;
+      }
+      case 'email': {
+        const query = updateUserEmailQuery(db);
+        query.execute({ id, email: body.value });
+        query.finalize();
+        break;
+      }
+      case 'password': {
+        const query = updateUserPasswordQuery(db);
+        query.execute({ id, password: body.value });
+        query.finalize();
+      }
+    }
+
     db.close();
 
-    return c.json('updated user');
+    return c.json(`updated user ${body.field}`);
   })
-  .delete('/:id', (c) => c.json(`delete ${c.req.param('id')}`));
+  /* delete user */
+  .delete('/:id', (c) => {
+    const id = Number.parseInt(c.req.param('id'));
+
+    if (!id || Number.isNaN(id)) return c.text('bad request', 400);
+
+    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'write' });
+
+    // ensure record exists
+    const fetch_query = selectUserQuery(db);
+    const record = fetch_query.firstEntry({ id });
+    fetch_query.finalize();
+
+    if (!record) return c.notFound();
+
+    const query = deleteUserQuery(db);
+    query.execute({ id });
+    query.finalize();
+
+    db.close();
+
+    return c.json('deleted user');
+  });
