@@ -15,7 +15,7 @@ import type { User } from '../db/classes/user.ts';
 import type { Email } from '../../types/types.ts';
 
 /** {@link User} route. */
-export const user = new Hono()
+export const user = new Hono().basePath('/user')
   /* get all users  */
   .get('/', (c) => {
     const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
