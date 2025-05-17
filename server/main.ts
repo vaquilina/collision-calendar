@@ -1,27 +1,29 @@
 import { Hono } from 'hono';
-
 import { faker } from '@faker-js/faker';
 
-import { initDB } from './db/init.ts';
+// Middleware
+import { requestId, RequestIdVariables } from 'hono/request-id';
+import { logger } from 'hono/logger';
 
 // Routes
 import { user } from './api/user.ts';
 
-// Initialize DB
-initDB();
+import { initDB } from './db/init.ts';
 
 // Set environment variables
 Deno.env.set('DB_PATH', 'db/collision-calendar.db');
 
-const app = new Hono()
-  /* 404 handler */
+// Initialize DB
+initDB();
+
+const app = new Hono<{ Variables: RequestIdVariables }>()
+  .use('*', requestId())
+  .use(logger())
   .notFound((c) => c.text('resource not found', 404))
-  /* Error handler */
   .onError((err, c) => {
     console.error(`${err}`);
     return c.text(`${faker.word.interjection()}! something broke`, 500);
   })
-  /* Routes */
-  .route('/user', user);
+  .route('/', user);
 
 Deno.serve(app.fetch);
