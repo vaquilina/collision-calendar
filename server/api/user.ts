@@ -1,9 +1,6 @@
 import { Hono } from 'hono';
-
 import { DB } from 'sqlite';
-
-import type { User } from '../db/classes/user.ts';
-import type { Email } from '../../types/types.ts';
+import * as bcrypt from '@da/bcrypt';
 
 import {
   deleteUserQuery,
@@ -14,6 +11,10 @@ import {
   updateUserPasswordQuery,
 } from '../db/queries/user.ts';
 
+import type { User } from '../db/classes/user.ts';
+import type { Email } from '../../types/types.ts';
+
+/** {@link User} route. */
 export const user = new Hono()
   /* get all users  */
   .get('/', (c) => {
@@ -46,12 +47,14 @@ export const user = new Hono()
   .post('/', async (c) => {
     const body: { name: string; email: Email; password: string } = await c.req.json();
 
+    const hashed_password = await bcrypt.hash(body.password);
+
     const db = new DB(Deno.env.get('DB_PATH'), { mode: 'write' });
     const query = insertUserQuery(db);
     query.execute({
       name: body.name,
       email: body.email,
-      password: body.password,
+      password: hashed_password,
       created_at: Temporal.Now.instant().toString(),
     });
     query.finalize();
@@ -90,8 +93,10 @@ export const user = new Hono()
         break;
       }
       case 'password': {
+        const hashed_password = await bcrypt.hash(body.value);
+
         const query = updateUserPasswordQuery(db);
-        query.execute({ id, password: body.value });
+        query.execute({ id, password: hashed_password });
         query.finalize();
       }
     }
