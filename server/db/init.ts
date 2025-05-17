@@ -2,7 +2,7 @@ import { DB } from 'sqlite';
 
 /** Initialize the main database. */
 export const initDB = (): void => {
-  const db = new DB('collision-calendar.db');
+  const db = new DB(Deno.env.get('DB_PATH'));
 
   db.execute(`
   PRAGMA foreign_keys = ON;
