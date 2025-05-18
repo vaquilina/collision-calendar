@@ -1,8 +1,8 @@
 import { BaseRecord } from './base_record.ts';
+import { VoteAnswer } from '../../../types/types.ts';
 import type { Block } from './block.ts';
 import type { Proposal } from './proposal.ts';
 import type { Occupant } from './occupant.ts';
-import type { VoteAnswer } from '../../../types/types.ts';
 
 /** Reprents a vote provided by an {@link Occupant}, for or against a {@link Block} that is part of a {@link Proposal}. */
 export class Vote extends BaseRecord {
