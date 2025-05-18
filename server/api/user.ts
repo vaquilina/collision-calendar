@@ -16,18 +16,6 @@ import type { Email } from '../../types/types.ts';
 
 /** {@link User} route. */
 export const user = new Hono().basePath('/user')
-  /* get all users  */
-  .get('/', (c) => {
-    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
-    const users = db.queryEntries<{ id: number; name: string; email: Email; password: string; created_at: string }>(
-      'SELECT * FROM user',
-    );
-    db.close();
-
-    const processed_users = users.map<User>((u) => ({ ...u, created_at: Temporal.Instant.from(u.created_at) }));
-
-    return c.json(processed_users);
-  })
   /* get user */
   .get('/:id', (c) => {
     const id = c.req.param('id');
@@ -44,8 +32,8 @@ export const user = new Hono().basePath('/user')
     return c.json(user);
   })
   /* get many users */
-  .get('/many', (c) => {
-    // eg. /user/many?ids=1&ids=2
+  .get('/', (c) => {
+    // eg. /user?ids=1&ids=2
     const ids = c.req.queries('ids');
 
     const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
@@ -62,7 +50,7 @@ export const user = new Hono().basePath('/user')
 
     db.close();
 
-    const users = entries.map((entry) => ({ ...entry, created_at: Temporal.Instant.from(entry.created_at) }));
+    const users = entries.map<User>((entry) => ({ ...entry, created_at: Temporal.Instant.from(entry.created_at) }));
 
     return c.json(users);
   })
