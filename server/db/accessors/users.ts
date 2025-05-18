@@ -1,21 +1,68 @@
 import { DB } from 'sqlite';
-import type { User } from '../classes/user.ts';
+import type { AccessPermissions } from '../../../types/types.ts';
 import type { Email } from '../../../types/types.ts';
+import type { Calendar } from '../classes/calendar.ts';
+import type { Space } from '../classes/space.ts';
 
-/** A complete {@link User} record as returned from the database. */
+import { selectCalendarAccessQuery } from '../queries/calendar_access.ts';
+import { selectUserQuery } from '../queries/user.ts';
+import { selectSpaceAccessQuery } from '../queries/space_access.ts';
+
 type UserEntry = {
-  id: number;
-  name: string;
   email: Email;
   password: string;
-  created_at: string;
 };
 
-/** Get a list of all {@link User Users}. */
-export const getAllUsers = (): User[] => {
+/** Get a list of all {@link UserEntry users} in the system to compare against for authentication. */
+export const getAllUsers = (): UserEntry[] => {
   const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
-  const records = db.queryEntries<UserEntry>('SELECT * FROM user');
+  const user_entries = db.queryEntries<UserEntry>('SELECT email, password FROM user');
   db.close();
 
-  return records?.map<User>((u) => ({ ...u, created_at: Temporal.Instant.from(u.created_at) })) ?? [];
+  return user_entries;
+};
+
+/** Get a list of all {@link UserEntry users} with specific {@link AccessPermissions} for a {@link Calendar}. */
+export const getAllUsersWithCalendarAccess = (
+  calendar_id: Calendar['id'],
+  permissions: AccessPermissions,
+): UserEntry[] => {
+  const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+
+  const calendar_access_query = selectCalendarAccessQuery(db);
+  const calendar_access_entries = calendar_access_query.allEntries({ calendar_id, permissions });
+  calendar_access_query.finalize();
+
+  const user_query = selectUserQuery(db);
+  const user_entries: UserEntry[] = [];
+  for (const { user_id } of calendar_access_entries) {
+    const user = user_query.firstEntry({ id: user_id });
+    if (user) user_entries.push({ email: user.email, password: user.password });
+  }
+  user_query.finalize();
+
+  db.close();
+
+  return user_entries;
+};
+
+/** Get a list of all {@link UserEntry users} with specific {@link AccessPermissions} for a {@link Space}. */
+export const getAllUsersWithSpaceAccess = (space_id: Space['id'], permissions: AccessPermissions): UserEntry[] => {
+  const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+
+  const space_access_query = selectSpaceAccessQuery(db);
+  const space_access_entries = space_access_query.allEntries({ space_id, permissions });
+  space_access_query.finalize();
+
+  const user_query = selectUserQuery(db);
+  const user_entries: UserEntry[] = [];
+  for (const { user_id } of space_access_entries) {
+    const user = user_query.firstEntry({ id: user_id });
+    if (user) user_entries.push({ email: user.email, password: user.password });
+  }
+  user_query.finalize();
+
+  db.close();
+
+  return user_entries;
 };
