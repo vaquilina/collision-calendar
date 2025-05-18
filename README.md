@@ -1,5 +1,7 @@
 # Collision Calendar
 
+**🚧 IN DEVELOPMENT 🚧**
+
 A FOSS web-based tool for scheduling shared spaces.
 
 This was created to solve two problems:
@@ -8,8 +10,6 @@ This was created to solve two problems:
    always be occupied simultaneously
 2. Easing the process of finding blocks of time that are agreeable to a group of
    people
-
-**🚧 IN DEVELOPMENT 🚧**
 
 ## Data Design
 
