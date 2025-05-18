@@ -43,6 +43,29 @@ export const user = new Hono().basePath('/user')
 
     return c.json(user);
   })
+  /* get many users */
+  .get('/many', (c) => {
+    // eg. /user/many?ids=1&ids=2
+    const ids = c.req.queries('ids');
+
+    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+    const query = selectUserQuery(db);
+
+    const entries: ReturnType<typeof query.allEntries> = [];
+    if (ids) {
+      for (const id of ids) {
+        const entry = query.firstEntry({ id: Number.parseInt(id) });
+        if (entry) entries.push(entry);
+      }
+    }
+    query.finalize();
+
+    db.close();
+
+    const users = entries.map((entry) => ({ ...entry, created_at: Temporal.Instant.from(entry.created_at) }));
+
+    return c.json(users);
+  })
   /* create user */
   .post('/', async (c) => {
     const body: { name: string; email: Email; password: string } = await c.req.json();
