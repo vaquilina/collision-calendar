@@ -1,7 +1,9 @@
 # Database
 
-Collision Calendar uses a central [SQLite3](https://sqlite.org/index.html)
-database for shared data. The server manages the database via
+A single [SQLite3](https://sqlite.org/index.html) database is used for shared
+data.
+
+The server manages the database via
 [deno-sqlite](https://deno.land/x/sqlite@v3.9.1).
 
 ## ER Diagram
