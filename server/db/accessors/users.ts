@@ -2,6 +2,7 @@ import { DB } from 'sqlite';
 import type { User } from '../classes/user.ts';
 import type { Email } from '../../../types/types.ts';
 
+/** A complete {@link User} record as returned from the database. */
 type UserEntry = {
   id: number;
   name: string;
