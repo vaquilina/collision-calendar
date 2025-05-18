@@ -10,6 +10,8 @@ export class Space extends BaseRecord {
     this.calendarid = values.calendarid;
   }
 
+  /** Name for the space. */
   name: string;
+  /** ID of the {@link Calendar} the space belongs to. */
   calendarid: Calendar['id'];
 }

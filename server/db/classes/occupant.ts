@@ -11,6 +11,8 @@ export class Occupant extends BaseRecord {
     this.spaceid = values.spaceid;
   }
 
+  /** ID of the {@link User} occupying the {@link Space}. */
   userid: User['id'];
+  /** ID of the {@link Space} the {@link User} is occupying. */
   spaceid: Space['id'];
 }

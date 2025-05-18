@@ -15,7 +15,10 @@ export class CalendarAccess extends BaseRecord {
     this.permissions = values.permissions;
   }
 
+  /** ID of the {@link User} the permissions are granted to. */
   userid: User['id'];
+  /** ID of the {@link Calendar} the permissions apply to. */
   calendarid: Calendar['id'];
+  /** {@link AccessPermissions} inidcating the permissions granted. */
   permissions: AccessPermissions;
 }

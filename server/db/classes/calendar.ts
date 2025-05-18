@@ -10,6 +10,8 @@ export class Calendar extends BaseRecord {
     this.owneruserid = values.owneruserid;
   }
 
+  /** Name of the calendar. */
   name: string;
+  /** ID of the {@link User} that owns the calendar. */
   owneruserid: User['id'];
 }

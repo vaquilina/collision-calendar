@@ -16,6 +16,8 @@ export class Collision extends BaseRecord {
     this.spaceid_r = values.spaceid_r;
   }
 
+  /** ID of the {@link Space} defining the collision. */
   spaceid_l: Space['id'];
+  /** ID of the {@link Space} the defining space cannot collide with. */
   spaceid_r: Space['id'];
 }

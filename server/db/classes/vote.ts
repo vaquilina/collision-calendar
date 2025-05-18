@@ -4,7 +4,7 @@ import type { Proposal } from './proposal.ts';
 import type { Occupant } from './occupant.ts';
 import type { VoteAnswer } from '../../../types/types.ts';
 
-/** Represents an {@link Occupant Occupant's} vote for or against a {@link Block} as part of a {@link Proposal}. */
+/** Reprents a vote provided by an {@link Occupant}, for or against a {@link Block} that is part of a {@link Proposal}. */
 export class Vote extends BaseRecord {
   constructor(
     values: BaseRecord & {
@@ -22,8 +22,12 @@ export class Vote extends BaseRecord {
     this.occupantid = values.occupantid;
   }
 
+  /** Vote answer. */
   answer: VoteAnswer;
+  /** ID of the {@link Block} voted on. */
   blockid: Block['id'];
+  /** ID of the {@link Proposal} the {@link Block} voted on belongs to. */
   proposalid: Proposal['id'];
+  /** ID of the {@link Occupant} providing the vote. */
   occupantid: Occupant['id'];
 }

@@ -13,7 +13,10 @@ export class SpaceAccess extends BaseRecord {
     this.permissions = values.permissions;
   }
 
+  /** ID of the {@link Space} the permissions apply to. */
   spaceid: Space['id'];
+  /** ID of the {@link User} the permissions are granted to. */
   userid: User['id'];
+  /** {@link AccessPermissions} indicating the permissions granted. */
   permissions: AccessPermissions;
 }

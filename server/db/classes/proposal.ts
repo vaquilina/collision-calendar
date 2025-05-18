@@ -12,6 +12,8 @@ export class Proposal extends BaseRecord {
     this.spaceid = values.spaceid;
   }
 
+  /** Name for the proposal. */
   name: string;
+  /** ID of the {@link Space} the proposal pertains to. */
   spaceid: Space['id'];
 }

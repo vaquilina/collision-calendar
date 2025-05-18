@@ -26,9 +26,14 @@ export class Repeat extends BaseRecord {
     this.blockid = values.blockid;
   }
 
+  /** Unit by which the {@link Block} repeats. */
   unit: RepeatUnit;
+  /** Interval by which the {@link Block} repeats. */
   interval: number;
+  /** [Calendar date](https://docs.deno.com/api/web/~/Temporal.PlainDate) when the repeat begins being applied. */
   start: Temporal.PlainDate;
+  /** [Calendar date](https://docs.deno.com/api/web/~/Temporal.PlainDate) when the repeat stops being applied. */
   end: Temporal.PlainDate;
+  /** ID of the {@link Block} the repeat applies to. */
   blockid: Block['id'];
 }
