@@ -11,14 +11,6 @@ export const selectUserQuery = (db: DB) =>
     { id: number }
   >('SELECT * FROM user WHERE id = :id');
 
-/** Get prepared query for retrieving many {@link User} records by id.  */
-export const selectUsersQuery = (db: DB) =>
-  db.prepareQuery<
-    [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
-    { ids: string }
-  >('SELECT * FROM user WHERE id in (:ids)');
-
 /** Get prepared query for inserting a {@link User} record.  */
 export const insertUserQuery = (db: DB) =>
   db.prepareQuery<
