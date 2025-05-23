@@ -1,4 +1,5 @@
 import { DB } from 'sqlite';
+
 import type { CalendarAccess } from '../classes/calendar_access.ts';
 import type { AccessPermissions } from '../../../types/types.ts';
 

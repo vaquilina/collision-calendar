@@ -1,4 +1,5 @@
 import { DB } from 'sqlite';
+
 import type { SpaceAccess } from '../classes/space_access.ts';
 import type { AccessPermissions } from '../../../types/types.ts';
 

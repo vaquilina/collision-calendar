@@ -1,4 +1,5 @@
 import { BaseRecord } from './base_record.ts';
+
 import type { User } from './user.ts';
 import type { Space } from './space.ts';
 

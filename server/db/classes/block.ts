@@ -1,4 +1,5 @@
 import { BaseRecord } from './base_record.ts';
+
 import type { Space } from './space.ts';
 import type { Proposal } from './proposal.ts';
 

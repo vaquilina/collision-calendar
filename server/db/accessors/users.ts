@@ -1,19 +1,20 @@
 import { DB } from 'sqlite';
-import type { AccessPermissions } from '../../../types/types.ts';
-import type { Email } from '../../../types/types.ts';
-import type { Calendar } from '../classes/calendar.ts';
-import type { Space } from '../classes/space.ts';
 
 import { selectCalendarAccessQuery } from '../queries/calendar_access.ts';
 import { selectUserQuery } from '../queries/user.ts';
 import { selectSpaceAccessQuery } from '../queries/space_access.ts';
+
+import type { AccessPermissions } from '../../../types/types.ts';
+import type { Email } from '../../../types/types.ts';
+import type { Calendar } from '../classes/calendar.ts';
+import type { Space } from '../classes/space.ts';
 
 type UserEntry = {
   email: Email;
   password: string;
 };
 
-/** Get a list of all {@link UserEntry users} in the system to compare against for authentication. */
+/** Get a list of all users in the system to compare against for authentication. */
 export const getAllUsers = (): UserEntry[] => {
   const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
   const user_entries = db.queryEntries<UserEntry>('SELECT email, password FROM user');
@@ -22,7 +23,7 @@ export const getAllUsers = (): UserEntry[] => {
   return user_entries;
 };
 
-/** Get a list of all {@link UserEntry users} with specific {@link AccessPermissions} for a {@link Calendar}. */
+/** Get a list of all users with specific {@link AccessPermissions} for a {@link Calendar}. */
 export const getAllUsersWithCalendarAccess = (
   calendar_id: Calendar['id'],
   permissions: AccessPermissions,
@@ -46,7 +47,7 @@ export const getAllUsersWithCalendarAccess = (
   return user_entries;
 };
 
-/** Get a list of all {@link UserEntry users} with specific {@link AccessPermissions} for a {@link Space}. */
+/** Get a list of all users with specific {@link AccessPermissions} for a {@link Space}. */
 export const getAllUsersWithSpaceAccess = (space_id: Space['id'], permissions: AccessPermissions): UserEntry[] => {
   const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
 

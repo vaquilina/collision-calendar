@@ -2,6 +2,11 @@ import { Hono } from 'hono';
 import { DB } from 'sqlite';
 import * as bcrypt from '@da/bcrypt';
 
+import { jwt } from 'hono/jwt';
+import { env } from 'hono/adapter';
+
+import { processEntry } from '../util/db.ts';
+
 import {
   deleteUserQuery,
   insertUserQuery,
@@ -11,11 +16,20 @@ import {
   updateUserPasswordQuery,
 } from '../db/queries/user.ts';
 
-import type { User } from '../db/classes/user.ts';
+import { User } from '../db/classes/user.ts';
+
+import type { JwtVariables } from 'hono/jwt';
 import type { Email } from '../../types/types.ts';
 
+type Variables = JwtVariables;
+
 /** {@link User} route. */
-export const user = new Hono().basePath('/user')
+export const user = new Hono<{ Variables: Variables }>().basePath('/user')
+  .use('/*', (c, next) => {
+    const { JWT_SECRET } = env<{ JWT_SECRET: string }>(c, 'deno');
+    const jwtMiddleware = jwt({ secret: JWT_SECRET });
+    return jwtMiddleware(c, next);
+  })
   /* get user */
   .get('/:id', (c) => {
     const id = c.req.param('id');
@@ -23,7 +37,7 @@ export const user = new Hono().basePath('/user')
     const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
     const query = selectUserQuery(db);
     const entry = query.firstEntry({ id: Number.parseInt(id) });
-    const user = entry ? { ...entry, created_at: Temporal.Instant.from(entry.created_at) } : undefined;
+    const user = entry ? new User(processEntry(entry)) : undefined;
     query.finalize();
     db.close();
 
@@ -50,7 +64,7 @@ export const user = new Hono().basePath('/user')
 
     db.close();
 
-    const users = entries.map<User>((entry) => ({ ...entry, created_at: Temporal.Instant.from(entry.created_at) }));
+    const users = entries.map((entry) => new User(processEntry<typeof entry>(entry)));
 
     return c.json(users);
   })

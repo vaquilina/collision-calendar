@@ -1,4 +1,5 @@
 import { BaseRecord } from './base_record.ts';
+
 import type { Calendar } from './calendar.ts';
 
 /** Represents a group/section within a {@link Calendar}. */

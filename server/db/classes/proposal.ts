@@ -1,4 +1,5 @@
 import { BaseRecord } from './base_record.ts';
+
 import type { Space } from './space.ts';
 import type { Block as _Block } from './block.ts';
 import type { Occupant as _Occupant } from './occupant.ts';

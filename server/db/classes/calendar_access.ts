@@ -1,7 +1,8 @@
 import { BaseRecord } from './base_record.ts';
-import { AccessPermissions } from '../../../types/types.ts';
+
 import type { Calendar } from './calendar.ts';
 import type { User } from './user.ts';
+import type { AccessPermissions } from '../../../types/types.ts';
 
 /** Represents {@link AccessPermissions} granted to a {@link User} for a {@link Calendar}. */
 export class CalendarAccess extends BaseRecord {
