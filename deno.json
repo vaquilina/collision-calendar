@@ -1,5 +1,5 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
-  "workspace": ["./server"],
+  "workspace": ["./authorizer", "./client", "./server"],
   "unstable": ["temporal"]
 }

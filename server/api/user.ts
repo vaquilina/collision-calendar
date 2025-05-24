@@ -2,9 +2,6 @@ import { Hono } from 'hono';
 import { DB } from 'sqlite';
 import * as bcrypt from '@da/bcrypt';
 
-import { jwt } from 'hono/jwt';
-import { env } from 'hono/adapter';
-
 import { processEntry } from '../util/db.ts';
 
 import {
@@ -18,18 +15,10 @@ import {
 
 import { User } from '../db/classes/user.ts';
 
-import type { JwtVariables } from 'hono/jwt';
 import type { Email } from '../../types/types.ts';
 
-type Variables = JwtVariables;
-
 /** {@link User} route. */
-export const user = new Hono<{ Variables: Variables }>().basePath('/user')
-  .use('/*', (c, next) => {
-    const { JWT_SECRET } = env<{ JWT_SECRET: string }>(c, 'deno');
-    const jwtMiddleware = jwt({ secret: JWT_SECRET });
-    return jwtMiddleware(c, next);
-  })
+export const user = new Hono().basePath('/user')
   /* get user */
   .get('/:id', (c) => {
     const id = c.req.param('id');
