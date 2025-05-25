@@ -2,7 +2,7 @@
 export type Email = `${string}@${string}`;
 
 /** String union of valid repeat units. */
-export type RepeatUnit = "day" | "week" | "month" | "year";
+export type RepeatUnit = 'day' | 'week' | 'month' | 'year';
 
 /**
  * Enum for valid vote answers.

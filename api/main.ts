@@ -4,9 +4,9 @@ import { faker } from '@faker-js/faker';
 import { logger } from 'hono/logger';
 import { serveStatic } from 'hono/deno';
 
-import { user } from './api/user.ts';
+import { user } from './routes/user.ts';
 
-import { initDB } from './db/init.ts';
+import { initDB } from '../db/init.ts';
 
 // Set environment variables
 Deno.env.set('DB_PATH', 'db/collision-calendar.db');

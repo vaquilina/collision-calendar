@@ -1,6 +1,6 @@
 import { BaseRecord } from './base_record.ts';
 
-import type { Email } from '../../../types/types.ts';
+import type { Email } from '../../types/types.ts';
 
 /** Represents a user of the system. */
 export class User extends BaseRecord {

@@ -1,7 +1,7 @@
 import { DB } from 'sqlite';
 
 import type { CalendarAccess } from '../classes/calendar_access.ts';
-import type { AccessPermissions } from '../../../types/types.ts';
+import type { AccessPermissions } from '../../types/types.ts';
 
 /** Get prepared query for retrieving {@link CalendarAccess} records. */
 export const selectCalendarAccessQuery = (db: DB) =>

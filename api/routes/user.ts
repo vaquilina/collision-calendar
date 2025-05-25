@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 import { DB } from 'sqlite';
 import * as bcrypt from '@da/bcrypt';
 
-import { processEntry } from '../util/db.ts';
+import { processEntry } from '../../db/util/db.ts';
 
 import {
   deleteUserQuery,
@@ -11,9 +11,9 @@ import {
   updateUserEmailQuery,
   updateUserNameQuery,
   updateUserPasswordQuery,
-} from '../db/queries/user.ts';
+} from '../../db/queries/user.ts';
 
-import { User } from '../db/classes/user.ts';
+import { User } from '../../db/classes/user.ts';
 
 import type { Email } from '../../types/types.ts';
 

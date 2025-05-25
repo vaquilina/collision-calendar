@@ -1,5 +1,5 @@
 import { BaseRecord } from './base_record.ts';
-import { AccessPermissions } from '../../../types/types.ts';
+import { AccessPermissions } from '../../types/types.ts';
 
 import type { Space } from './space.ts';
 import type { User } from './user.ts';
