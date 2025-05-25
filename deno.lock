@@ -203,6 +203,7 @@
   },
   "redirects": {
     "https://deno.land/x/sqlite/mod.ts": "https://deno.land/x/sqlite@v3.9.1/mod.ts",
+    "https://esm.sh/@faker-js/faker": "https://esm.sh/@faker-js/faker@9.8.0",
     "https://esm.sh/destr@^2.0.5?target=denonext": "https://esm.sh/destr@2.0.5?target=denonext",
     "https://esm.sh/unstorage": "https://esm.sh/unstorage@1.16.0",
     "https://esm.sh/unstorage/drivers/deno-kv": "https://esm.sh/unstorage@1.16.0/drivers/deno-kv"
@@ -217,6 +218,8 @@
     "https://deno.land/x/sqlite@v3.9.1/src/function.ts": "bc778cab7a6d771f690afa27264c524d22fcb96f1bb61959ade7922c15a4ab8d",
     "https://deno.land/x/sqlite@v3.9.1/src/query.ts": "d58abda928f6582d77bad685ecf551b1be8a15e8e38403e293ec38522e030cad",
     "https://deno.land/x/sqlite@v3.9.1/src/wasm.ts": "e79d0baa6e42423257fb3c7cc98091c54399254867e0f34a09b5bdef37bd9487",
+    "https://esm.sh/@faker-js/faker@9.8.0": "9bb259df210012d36aeb32de041b95bf144925f2fe50ae1882daad5c8c6c5dea",
+    "https://esm.sh/@faker-js/faker@9.8.0/denonext/faker.mjs": "ed0c2aa2240469ab40c1c33f0efa6ed91bef7aefbdeba8707fa9400fbf585c41",
     "https://esm.sh/destr@2.0.5/denonext/destr.mjs": "228e13dbaf710326ff1fd6169ac9703becd7857fac1be1ddb92c1c07e0246c25",
     "https://esm.sh/destr@2.0.5?target=denonext": "9977494da96d0b916cfac7d5e1feede2eca7b6f2dcc450a0067896760a560110",
     "https://esm.sh/unstorage@1.16.0": "d6b1e304d0536fb4fced4a72a30bbe0baf2912ef584b0fd2e5761a92fe295f9b",
@@ -233,7 +236,6 @@
       "api": {
         "dependencies": [
           "jsr:@da/bcrypt@^1.0.1",
-          "npm:@faker-js/faker@^9.8.0",
           "npm:@hono/zod-validator@0.5",
           "npm:hono@^4.7.10",
           "npm:zod@^3.25.28"

@@ -6,7 +6,7 @@
   },
   "imports": {
     "@da/bcrypt": "jsr:@da/bcrypt@^1.0.1",
-    "@faker-js/faker": "npm:@faker-js/faker@^9.8.0",
+    "faker": "https://esm.sh/@faker-js/faker",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.5.0",
     "hono": "npm:hono@^4.7.10",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",

@@ -1,5 +1,5 @@
 import { Hono } from 'hono';
-import { faker } from '@faker-js/faker';
+import { faker } from 'faker';
 
 import { logger } from 'hono/logger';
 import { serveStatic } from 'hono/deno';
