@@ -6,7 +6,7 @@ import { serveStatic } from 'hono/deno';
 
 import { user } from './routes/user.ts';
 
-import { initDB } from '../db/init.ts';
+import { initDB } from '../db/init_db.ts';
 
 // Set environment variables
 Deno.env.set('DB_PATH', 'db/collision-calendar.db');

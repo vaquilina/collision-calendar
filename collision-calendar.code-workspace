@@ -6,9 +6,11 @@
   ],
   "settings": {
     "deno.enable": true,
+    "deno.cacheOnSave": true,
     "deno.suggest.imports.autoDiscover": true,
     "deno.codeLens.implementations": true,
     "deno.codeLens.references": true,
+    "deno.codeLens.referencesAllFunctions": true,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "denoland.vscode-deno",
     "editor.inlayHints.enabled": "off"

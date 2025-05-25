@@ -1,6 +1,6 @@
 {
   "tasks": {
-    "initdb": "deno run init.ts"
+    "initdb": "deno run init_db.ts"
   },
   "imports": {
     "sqlite": "https://deno.land/x/sqlite/mod.ts"

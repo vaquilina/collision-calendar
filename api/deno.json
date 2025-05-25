@@ -11,9 +11,5 @@
     "hono": "npm:hono@^4.7.10",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
     "zod": "npm:zod@^3.25.28"
-  },
-  "compilerOptions": {
-    "jsx": "precompile",
-    "jsxImportSource": "hono/jsx"
   }
 }
