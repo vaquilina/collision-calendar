@@ -4,14 +4,13 @@ import { PasswordUI } from '@openauthjs/openauth/ui/password';
 
 import { DB } from 'sqlite';
 
-import { processEntry } from '../db/util/db.ts';
-import { selectUserByEmailQuery } from '../db/queries/user.ts';
+import { processEntry } from '@collision-calendar/db/util';
+import { selectUserByEmailQuery } from '@collision-calendar/db/queries';
+import { User } from '@collision-calendar/db/classes';
 
 import { subjects } from './subjects.ts';
 
-import { User } from '../db/classes/user.ts';
-
-import type { Email } from '../types/types.ts';
+import type { Email } from '@collision-calendar/types';
 
 async function getUser(email: string) {
   const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });

@@ -1,11 +1,15 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
+  "name": "@collision-calendar/authorizer",
+  "version": "0.1.0",
   "tasks": {
     "dev": "deno run --watch main.ts"
   },
   "imports": {
     "@openauthjs/openauth": "npm:@openauthjs/openauth@^0.4.3",
     "zod": "npm:zod@^3.25.28",
-    "sqlite": "https://deno.land/x/sqlite/mod.ts"
-  }
+    "sqlite": "https://deno.land/x/sqlite/mod.ts",
+    "denomailer": "https://deno.land/x/denomailer/mod.ts"
+  },
+  "exports": "./mod.ts"
 }

@@ -1,8 +1,18 @@
 {
+  "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
+  "name": "@collision-calendar/db",
+  "version": "0.1.0",
   "tasks": {
     "initdb": "deno run init_db.ts"
   },
   "imports": {
     "sqlite": "https://deno.land/x/sqlite/mod.ts"
+  },
+  "exports": {
+    "./accessors": "./accessors/mod.ts",
+    "./classes": "./classes/mod.ts",
+    "./init": "./init/mod.ts",
+    "./queries": "./queries/mod.ts",
+    "./util": "./util/mod.ts"
   }
 }

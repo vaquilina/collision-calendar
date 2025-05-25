@@ -1,7 +1,7 @@
 import { BaseRecord } from './base_record.ts';
 
 import type { Block } from './block.ts';
-import type { RepeatUnit } from '../../types/types.ts';
+import type { RepeatUnit } from '@collision-calendar/types';
 
 /**
  * Represents a repeat rule for a {@link Block}.

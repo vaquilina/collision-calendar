@@ -1,7 +1,6 @@
-import { DB } from 'sqlite';
-
+import type { DB } from 'sqlite';
 import type { User } from '../classes/user.ts';
-import type { Email } from '../../types/types.ts';
+import type { Email } from '@collision-calendar/types';
 
 /** Get prepared query for retrieving a {@link User} record by id. */
 export const selectUserQuery = (db: DB) =>

@@ -1,7 +1,6 @@
-import { DB } from 'sqlite';
-
+import type { DB } from 'sqlite';
 import type { CalendarAccess } from '../classes/calendar_access.ts';
-import type { AccessPermissions } from '../../types/types.ts';
+import type { AccessPermissions } from '@collision-calendar/types';
 
 /** Get prepared query for retrieving {@link CalendarAccess} records. */
 export const selectCalendarAccessQuery = (db: DB) =>

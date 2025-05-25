@@ -2,8 +2,6 @@ import { Hono } from 'hono';
 import { DB } from 'sqlite';
 import * as bcrypt from '@da/bcrypt';
 
-import { processEntry } from '../../db/util/db.ts';
-
 import {
   deleteUserQuery,
   insertUserQuery,
@@ -11,11 +9,11 @@ import {
   updateUserEmailQuery,
   updateUserNameQuery,
   updateUserPasswordQuery,
-} from '../../db/queries/user.ts';
+} from '@collision-calendar/db/queries';
+import { processEntry } from '@collision-calendar/db/util';
+import { User } from '@collision-calendar/db/classes';
 
-import { User } from '../../db/classes/user.ts';
-
-import type { Email } from '../../types/types.ts';
+import type { Email } from '@collision-calendar/types';
 
 /** {@link User} route. */
 export const user = new Hono().basePath('/user')

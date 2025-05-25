@@ -1,8 +1,8 @@
 import { BaseRecord } from './base_record.ts';
-import { AccessPermissions } from '../../types/types.ts';
 
 import type { Space } from './space.ts';
 import type { User } from './user.ts';
+import type { AccessPermissions } from '@collision-calendar/types';
 
 /** Represents {@link AccessPermissions} granted to a {@link User} for a {@link Space}. */
 export class SpaceAccess extends BaseRecord {

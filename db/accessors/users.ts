@@ -4,8 +4,8 @@ import { selectCalendarAccessQuery } from '../queries/calendar_access.ts';
 import { selectUserQuery } from '../queries/user.ts';
 import { selectSpaceAccessQuery } from '../queries/space_access.ts';
 
-import type { AccessPermissions } from '../../types/types.ts';
-import type { Email } from '../../types/types.ts';
+import type { AccessPermissions } from '@collision-calendar/types';
+import type { Email } from '@collision-calendar/types';
 import type { Calendar } from '../classes/calendar.ts';
 import type { Space } from '../classes/space.ts';
 
