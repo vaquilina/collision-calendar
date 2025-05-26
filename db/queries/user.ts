@@ -1,12 +1,11 @@
 import type { DB } from 'sqlite';
 import type { User } from '../classes/user.ts';
-import type { Email } from '@collision-calendar/types';
 
 /** Get prepared query for retrieving a {@link User} record by id. */
 export const selectUserQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
+    { id: number; name: string; email: string; password: string; created_at: string },
     { id: number }
   >('SELECT * FROM user WHERE id = :id');
 
@@ -14,16 +13,16 @@ export const selectUserQuery = (db: DB) =>
 export const selectUserByEmailQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
-    { email: Email }
+    { id: number; name: string; email: string; password: string; created_at: string },
+    { email: string }
   >('SELECT * FROM user WHERE email = :email');
 
 /** Get prepared query for inserting a {@link User} record.  */
 export const insertUserQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
-    { name: string; email: Email; password: string; created_at: string }
+    { id: number; name: string; email: string; password: string; created_at: string },
+    { name: string; email: string; password: string; created_at: string }
   >(
     'INSERT INTO user (name, email, password, created_at) VALUES(:name, :email, :password, :created_at)',
   );
@@ -32,7 +31,7 @@ export const insertUserQuery = (db: DB) =>
 export const updateUserNameQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
+    { id: number; name: string; email: string; password: string; created_at: string },
     { name: string; id: number }
   >(`
     UPDATE user
@@ -44,7 +43,7 @@ export const updateUserNameQuery = (db: DB) =>
 export const updateUserEmailQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
+    { id: number; name: string; email: string; password: string; created_at: string },
     { email: string; id: number }
   >(`
   UPDATE user
@@ -56,7 +55,7 @@ export const updateUserEmailQuery = (db: DB) =>
 export const updateUserPasswordQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
+    { id: number; name: string; email: string; password: string; created_at: string },
     { password: string; id: number }
   >(
     `
@@ -70,6 +69,6 @@ export const updateUserPasswordQuery = (db: DB) =>
 export const deleteUserQuery = (db: DB) =>
   db.prepareQuery<
     [User],
-    { id: number; name: string; email: Email; password: string; created_at: string },
+    { id: number; name: string; email: string; password: string; created_at: string },
     { id: number }
   >('DELETE FROM user WHERE id = :id');

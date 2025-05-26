@@ -1,12 +1,10 @@
 import { BaseRecord } from './base_record.ts';
 
-import type { Email } from '@collision-calendar/types';
-
 /** Represents a user of the system. */
 export class User extends BaseRecord {
   constructor(
     values: BaseRecord & {
-      email: Email;
+      email: string;
       name: string;
       password: string;
     },
@@ -19,7 +17,7 @@ export class User extends BaseRecord {
   }
 
   /** User's email. */
-  email: Email;
+  email: string;
   /** User's display name. */
   name: string;
   /**

@@ -1,6 +1,3 @@
-/** Basic email type; comprised of address and domain parts. */
-export type Email = `${string}@${string}`;
-
 /** String union of valid repeat units. */
 export type RepeatUnit = 'day' | 'week' | 'month' | 'year';
 

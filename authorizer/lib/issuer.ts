@@ -10,13 +10,11 @@ import { User } from '@collision-calendar/db/classes';
 
 import { subjects } from './subjects.ts';
 
-import type { Email } from '@collision-calendar/types';
-
 async function getUser(email: string) {
   const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
   const query = selectUserByEmailQuery(db);
 
-  const entry = query.firstEntry({ email: email as Email });
+  const entry = query.firstEntry({ email });
   query.finalize();
   db.close();
 
