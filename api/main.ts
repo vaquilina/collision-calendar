@@ -1,15 +1,22 @@
-import { Hono } from 'hono';
+import * as path from '@std/path';
+
 import { faker } from 'faker';
+
+import { Hono } from 'hono';
 
 import { logger } from 'hono/logger';
 import { serveStatic } from 'hono/deno';
 
-import { user } from './routes/user.ts';
-
 import { initDB } from '@collision-calendar/db/init';
 
+import { user } from './routes/user.ts';
+
+// Resolve database path
+Deno.chdir(path.dirname(path.fromFileUrl(Deno.mainModule))); // directory of entry point
+const db_path = path.resolve('..', 'db', 'collision-calendar.db');
+
 // Set environment variables
-Deno.env.set('DB_PATH', 'db/collision-calendar.db');
+Deno.env.set('DB_PATH', db_path);
 
 // Initialize DB
 initDB();
