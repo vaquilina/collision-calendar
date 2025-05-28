@@ -7,7 +7,7 @@
   },
   "imports": {
     "@openauthjs/openauth": "npm:@openauthjs/openauth@^0.4.3",
-    "zod": "npm:zod@^3.25.32",
+    "zod": "npm:zod@^3.25.34",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   },
