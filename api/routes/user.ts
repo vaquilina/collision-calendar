@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 
 import { zValidator } from '@hono/zod-validator';
 
-import { z } from 'zod';
+import { z } from 'zod/v4';
 
 import { DB } from 'sqlite';
 
@@ -19,16 +19,21 @@ import {
 import { processEntry } from '@collision-calendar/db/util';
 import { User } from '@collision-calendar/db/classes';
 
-/** Zod enum for the fields of a {@link User} that can be updated. */
-const zUserUpdateFieldEnum = z.enum(['name', 'email', 'password']);
+const zUserIdSchema = z.preprocess((val) => {
+  if (typeof val === 'string') return Number.parseInt(val);
 
-const zUserIdSchema = z.coerce.number().int().positive();
+  return val;
+}, z.int().positive());
 
 const getUserSchema = z.object({ id: zUserIdSchema });
 const getUsersSchema = z.object({ ids: z.array(zUserIdSchema) });
-const createUserSchema = z.object({ name: z.string(), email: z.string().email(), password: z.string() });
+const createUserSchema = z.object({ name: z.string(), email: z.email(), password: z.string() });
 const updateUserParamSchema = z.object({ id: zUserIdSchema });
-const updateUserBodySchema = z.object({ field: zUserUpdateFieldEnum, value: z.string() });
+const updateUserBodySchema = z.discriminatedUnion('field', [
+  z.object({ field: z.literal('name'), value: z.string() }),
+  z.object({ field: z.literal('email'), value: z.email() }),
+  z.object({ field: z.literal('password'), value: z.string() }),
+]);
 const deleteUserSchema = z.object({ id: zUserIdSchema });
 
 /** {@link User} route. */
