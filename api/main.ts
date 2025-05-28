@@ -17,6 +17,7 @@ const db_path = path.resolve('..', 'db', 'collision-calendar.db');
 
 // Set environment variables
 Deno.env.set('DB_PATH', db_path);
+Deno.env.set('SMTP_PORT', '1025'); // replace
 
 // Initialize DB
 initDB();
