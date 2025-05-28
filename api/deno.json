@@ -10,6 +10,7 @@
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.6.0",
     "hono": "npm:hono@^4.7.10",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
-    "zod": "npm:zod@3.25.32"
+    "zod": "npm:zod@3.25.32",
+    "denomailer": "https://deno.land/x/denomailer/mod.ts"
   }
 }
