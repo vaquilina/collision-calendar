@@ -1,5 +1,7 @@
 import { DB } from 'sqlite';
 
+import { ENV_VAR } from '../init/init_env.ts';
+
 import { selectCalendarAccessQuery } from '../queries/calendar_access.ts';
 import { selectUserQuery } from '../queries/user.ts';
 import { selectSpaceAccessQuery } from '../queries/space_access.ts';
@@ -15,7 +17,7 @@ type UserEntry = {
 
 /** Get a list of all users in the system to compare against for authentication. */
 export const getAllUsers = (): UserEntry[] => {
-  const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
   const user_entries = db.queryEntries<UserEntry>('SELECT email, password FROM user');
   db.close();
 
@@ -27,7 +29,7 @@ export const getAllUsersWithCalendarAccess = (
   calendar_id: Calendar['id'],
   permissions: AccessPermissions,
 ): UserEntry[] => {
-  const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
 
   const calendar_access_query = selectCalendarAccessQuery(db);
   const calendar_access_entries = calendar_access_query.allEntries({ calendar_id, permissions });
@@ -48,7 +50,7 @@ export const getAllUsersWithCalendarAccess = (
 
 /** Get a list of all users with specific {@link AccessPermissions} for a {@link Space}. */
 export const getAllUsersWithSpaceAccess = (space_id: Space['id'], permissions: AccessPermissions): UserEntry[] => {
-  const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
 
   const space_access_query = selectSpaceAccessQuery(db);
   const space_access_entries = space_access_query.allEntries({ space_id, permissions });

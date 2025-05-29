@@ -1,8 +1,10 @@
 import { DB } from 'sqlite';
 
+import { ENV_VAR } from './init_env.ts';
+
 /** Initialize the main database. */
 export const initDB = (): void => {
-  const db = new DB(Deno.env.get('DB_PATH'));
+  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH));
 
   db.execute(`
   PRAGMA foreign_keys = ON;

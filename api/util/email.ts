@@ -1,5 +1,7 @@
 import { type SendConfig, SMTPClient } from 'denomailer';
 
+import { ENV_VAR } from '@collision-calendar/db/init';
+
 /**
  * Send an email with the provided send config.
  * @see https://github.com/EC-Nordbund/denomailer
@@ -7,8 +9,8 @@ import { type SendConfig, SMTPClient } from 'denomailer';
  * @todo add hardcoded replyTo email?
  */
 export const sendMail = async (sendConfig: SendConfig) => {
-  const port = Deno.env.get('SMTP_PORT');
-  if (!port) throw new Error('SMTP_PORT not set');
+  const port = Deno.env.get(ENV_VAR.SMTP_PORT);
+  if (!port) throw new Error('SMTP port not set');
 
   const client = new SMTPClient({
     /* TODO: remove this */

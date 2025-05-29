@@ -16,6 +16,7 @@ import {
   updateUserNameQuery,
   updateUserPasswordQuery,
 } from '@collision-calendar/db/queries';
+import { ENV_VAR } from '@collision-calendar/db/init';
 import { processEntry } from '@collision-calendar/db/util';
 import { User } from '@collision-calendar/db/classes';
 
@@ -42,7 +43,7 @@ export const user = new Hono().basePath('/user')
   .get('/:id', zValidator('param', getUserSchema), (c) => {
     const { id } = c.req.valid('param');
 
-    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
     const query = selectUserQuery(db);
     const entry = query.firstEntry({ id: id });
     const user = entry ? new User(processEntry(entry)) : undefined;
@@ -58,7 +59,7 @@ export const user = new Hono().basePath('/user')
     // eg. /user?ids=1&ids=2
     const { ids } = c.req.valid('query');
 
-    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
     const query = selectUserQuery(db);
 
     const entries: ReturnType<typeof query.allEntries> = [];
@@ -82,7 +83,7 @@ export const user = new Hono().basePath('/user')
 
     const hashed_password = await bcrypt.hash(body.password);
 
-    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'write' });
+    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
     const query = insertUserQuery(db);
     query.execute({
       name: body.name,
@@ -100,7 +101,7 @@ export const user = new Hono().basePath('/user')
     const { id } = c.req.valid('param');
     const { field, value } = c.req.valid('json');
 
-    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'write' });
+    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
 
     // ensure user exists
     const fetch_query = selectUserQuery(db);
@@ -142,7 +143,7 @@ export const user = new Hono().basePath('/user')
   .delete('/:id', zValidator('param', deleteUserSchema), (c) => {
     const { id } = c.req.valid('param');
 
-    const db = new DB(Deno.env.get('DB_PATH'), { mode: 'write' });
+    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
 
     // ensure record exists
     const fetch_query = selectUserQuery(db);

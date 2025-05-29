@@ -5,13 +5,14 @@ import { PasswordUI } from '@openauthjs/openauth/ui/password';
 import { DB } from 'sqlite';
 
 import { selectUserByEmailQuery } from '@collision-calendar/db/queries';
+import { ENV_VAR } from '@collision-calendar/db/init';
 
 import { sendMail } from '@collision-calendar/api/util';
 
 import { subjects } from './subjects.ts';
 
 function getUser(email: string) {
-  const db = new DB(Deno.env.get('DB_PATH'), { mode: 'read' });
+  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
   const query = selectUserByEmailQuery(db);
 
   const userEntry = query.firstEntry({ email });
