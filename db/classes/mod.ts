@@ -11,17 +11,17 @@ import { User } from './user.ts';
 import { Vote } from './vote.ts';
 
 const getTables = async (): Promise<string[]> => {
-  const excludeEntries = ['mod', 'base_record'];
+  const exclude_entries = ['mod', 'base_record'];
 
-  const classesPath = import.meta.dirname;
-  if (!classesPath) throw new Error('could not resolve classes path');
+  const classes_path = import.meta.dirname;
+  if (!classes_path) throw new Error('could not resolve classes path');
 
   const tables: string[] = [];
-  for await (const dirEntry of Deno.readDir(classesPath)) {
-    const tableName = dirEntry.name.slice(0, -3);
-    if (excludeEntries.includes(tableName)) continue;
+  for await (const dir_entry of Deno.readDir(classes_path)) {
+    const table_name = dir_entry.name.slice(0, -3);
+    if (exclude_entries.includes(table_name)) continue;
 
-    tables.push(tableName);
+    tables.push(table_name);
   }
 
   return tables;
