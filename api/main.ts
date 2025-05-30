@@ -9,14 +9,14 @@ import { initDB, initEnv, initKV } from '@collision-calendar/db/init';
 
 import { user } from './routes/user.ts';
 
+// Initialize environment variables
+initEnv();
+
 // Initialize DB
 initDB();
 
 // Initialize KV storage
 initKV();
-
-// Initialize environment variables
-initEnv();
 
 const app = new Hono()
   .use(logger())
