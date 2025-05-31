@@ -2,9 +2,14 @@ import { DB } from 'sqlite';
 
 import { ENV_VAR } from './init_env.ts';
 
-/** Initialize the main database. */
-export const initDB = (): void => {
-  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH));
+/**
+ * Initialize the main database.
+ * @remarks
+ * If the `path` property of `opts` is set, that path is used;
+ * If passed an empty object, an in-memory database is created.
+ */
+export const initDB = (opts?: { path?: string | undefined }): void => {
+  const db = new DB(opts ? opts?.path : Deno.env.get(ENV_VAR.DB_PATH));
 
   db.execute(`
   PRAGMA foreign_keys = ON;
