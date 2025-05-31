@@ -5,18 +5,19 @@
     "jsr:@std/assert@^1.0.13": "1.0.13",
     "jsr:@std/data-structures@^1.0.8": "1.0.8",
     "jsr:@std/fs@^1.0.17": "1.0.17",
+    "jsr:@std/fs@^1.0.18": "1.0.18",
     "jsr:@std/internal@^1.0.6": "1.0.8",
     "jsr:@std/internal@^1.0.7": "1.0.7",
     "jsr:@std/internal@^1.0.8": "1.0.8",
     "jsr:@std/path@^1.0.9": "1.1.0",
     "jsr:@std/path@^1.1.0": "1.1.0",
     "jsr:@std/testing@^1.0.13": "1.0.13",
-    "npm:@hono/zod-validator@0.6": "0.6.0_hono@4.7.10_zod@3.25.39",
+    "npm:@hono/zod-validator@0.7": "0.7.0_hono@4.7.10_zod@3.25.42",
     "npm:@openauthjs/openauth@~0.4.3": "0.4.3_arctic@2.3.4_hono@4.7.10",
     "npm:hono@^4.7.10": "4.7.10",
     "npm:unstorage@^1.16.0": "1.16.0",
-    "npm:zod@3.25.39": "3.25.39",
-    "npm:zod@^3.25.39": "3.25.39"
+    "npm:zod@3.25.42": "3.25.42",
+    "npm:zod@^3.25.42": "3.25.42"
   },
   "jsr": {
     "@da/bcrypt@1.0.1": {
@@ -37,6 +38,12 @@
         "jsr:@std/path@^1.0.9"
       ]
     },
+    "@std/fs@1.0.18": {
+      "integrity": "24bcad99eab1af4fde75e05da6e9ed0e0dce5edb71b7e34baacf86ffe3969f3a",
+      "dependencies": [
+        "jsr:@std/path@^1.1.0"
+      ]
+    },
     "@std/internal@1.0.7": {
       "integrity": "39eeb5265190a7bc5d5591c9ff019490bd1f2c3907c044a11b0d545796158a0f"
     },
@@ -51,15 +58,15 @@
       "dependencies": [
         "jsr:@std/assert",
         "jsr:@std/data-structures",
-        "jsr:@std/fs",
+        "jsr:@std/fs@^1.0.17",
         "jsr:@std/internal@^1.0.8",
         "jsr:@std/path@^1.1.0"
       ]
     }
   },
   "npm": {
-    "@hono/zod-validator@0.6.0_hono@4.7.10_zod@3.25.39": {
-      "integrity": "sha512-3aVk+cvuOE/9D6H2ugaG1kt14NT9rFyZzwRW6+aaPhMufMSiyKNvb/7pscZ/U302F8cTPD2TSTJiOUmx6TPqGg==",
+    "@hono/zod-validator@0.7.0_hono@4.7.10_zod@3.25.42": {
+      "integrity": "sha512-qe2ZE6sHFE98dcUrbYMtS3bAV8hqcCOflykvZga2S7XhmNSZzT+dIz4OuMILsjLHkJw9JMn912/dB7dQOmuPvg==",
       "dependencies": [
         "hono",
         "zod"
@@ -216,8 +223,8 @@
         "ufo"
       ]
     },
-    "zod@3.25.39": {
-      "integrity": "sha512-yrva2T2x4R+FMFTPBVD/YPS7ct8njqjnV93zNx/MlwqLAxcnxwRGbXWyWF63/nErl3rdRd8KARObon7BiWzabQ=="
+    "zod@3.25.42": {
+      "integrity": "sha512-PcALTLskaucbeHc41tU/xfjfhcz8z0GdhhDcSgrCTmSazUuqnYqiXO63M0QUBVwpBlsLsNVn5qHSC5Dw3KZvaQ=="
     }
   },
   "redirects": {
@@ -258,7 +265,7 @@
   "workspace": {
     "dependencies": [
       "jsr:@std/assert@^1.0.13",
-      "jsr:@std/fs@^1.0.17",
+      "jsr:@std/fs@^1.0.18",
       "jsr:@std/path@^1.1.0",
       "jsr:@std/testing@^1.0.13",
       "npm:unstorage@^1.16.0"
@@ -267,15 +274,15 @@
       "api": {
         "dependencies": [
           "jsr:@da/bcrypt@^1.0.1",
-          "npm:@hono/zod-validator@0.6",
+          "npm:@hono/zod-validator@0.7",
           "npm:hono@^4.7.10",
-          "npm:zod@3.25.39"
+          "npm:zod@3.25.42"
         ]
       },
       "authorizer": {
         "dependencies": [
           "npm:@openauthjs/openauth@~0.4.3",
-          "npm:zod@^3.25.39"
+          "npm:zod@^3.25.42"
         ]
       }
     }
