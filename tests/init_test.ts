@@ -5,7 +5,7 @@ import { exists } from '@std/fs';
 import { DB } from 'sqlite';
 
 import { Tables } from '@collision-calendar/db/classes';
-import { ENV_VAR, initDB, initEnv, initKV } from '@collision-calendar/db/init';
+import { ENV_VAR, initDB, initEnv } from '@collision-calendar/db/init';
 
 Deno.test('environment variables are set', () => {
   initEnv();
@@ -39,5 +39,3 @@ Deno.test('db contains expected tables', () => {
 
   assertArrayIncludes<string>(entries.map((e) => e.name), Tables);
 });
-
-//Deno.test('kv exists at expected path', async () => {});

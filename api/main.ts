@@ -5,7 +5,7 @@ import { Hono } from 'hono';
 import { logger } from 'hono/logger';
 import { serveStatic } from 'hono/deno';
 
-import { initDB, initEnv, initKV } from '@collision-calendar/db/init';
+import { initDB, initEnv } from '@collision-calendar/db/init';
 
 import { user } from './routes/user.ts';
 
@@ -14,9 +14,6 @@ initEnv();
 
 // Initialize DB
 initDB();
-
-// Initialize KV storage
-initKV();
 
 const app = new Hono()
   .use(logger())
