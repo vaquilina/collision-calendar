@@ -11,7 +11,7 @@
     "faker": "https://esm.sh/@faker-js/faker",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.0",
     "hono": "npm:hono@^4.7.11",
-    "zod": "npm:zod@3.25.44",
+    "zod": "npm:zod@3.25.45",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   },
   "exports": {

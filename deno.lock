@@ -10,12 +10,12 @@
     "jsr:@std/internal@^1.0.8": "1.0.8",
     "jsr:@std/path@^1.1.0": "1.1.0",
     "jsr:@std/testing@^1.0.13": "1.0.13",
-    "npm:@hono/zod-validator@0.7": "0.7.0_hono@4.7.11_zod@3.25.44",
+    "npm:@hono/zod-validator@0.7": "0.7.0_hono@4.7.11_zod@3.25.45",
     "npm:@openauthjs/openauth@~0.4.3": "0.4.3_arctic@2.3.4_hono@4.7.11",
     "npm:hono@^4.7.11": "4.7.11",
     "npm:unstorage@^1.16.0": "1.16.0",
-    "npm:zod@3.25.44": "3.25.44",
-    "npm:zod@^3.25.44": "3.25.44"
+    "npm:zod@3.25.45": "3.25.45",
+    "npm:zod@^3.25.45": "3.25.45"
   },
   "jsr": {
     "@da/bcrypt@1.0.1": {
@@ -54,7 +54,7 @@
     }
   },
   "npm": {
-    "@hono/zod-validator@0.7.0_hono@4.7.11_zod@3.25.44": {
+    "@hono/zod-validator@0.7.0_hono@4.7.11_zod@3.25.45": {
       "integrity": "sha512-qe2ZE6sHFE98dcUrbYMtS3bAV8hqcCOflykvZga2S7XhmNSZzT+dIz4OuMILsjLHkJw9JMn912/dB7dQOmuPvg==",
       "dependencies": [
         "hono",
@@ -212,8 +212,8 @@
         "ufo"
       ]
     },
-    "zod@3.25.44": {
-      "integrity": "sha512-BVwH2PnqCwxUN+SNjzRL6kcGvvz1JuojtB+uZB1Hg8DA56Zqn0pjpIwMrb1IhUsF75DjpEe4fhxPKO6+AErqzw=="
+    "zod@3.25.45": {
+      "integrity": "sha512-kv1swJBZqv98NQibL0oVvkQE8rXT+6qGNM1FpZkFcJG2jnz4vbtu48bgaitp85CaBPLSKXibrEsU7MzJoVoZAA=="
     }
   },
   "redirects": {
@@ -265,13 +265,13 @@
           "jsr:@da/bcrypt@^1.0.1",
           "npm:@hono/zod-validator@0.7",
           "npm:hono@^4.7.11",
-          "npm:zod@3.25.44"
+          "npm:zod@3.25.45"
         ]
       },
       "authorizer": {
         "dependencies": [
           "npm:@openauthjs/openauth@~0.4.3",
-          "npm:zod@^3.25.44"
+          "npm:zod@^3.25.45"
         ]
       }
     }
