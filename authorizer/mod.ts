@@ -1,3 +1,3 @@
-import issuer from './lib/issuer.ts';
+import { Issuer } from './lib/issuer.ts';
 
-Deno.serve(issuer.fetch);
+Deno.serve(Issuer.fetch);
