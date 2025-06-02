@@ -2,16 +2,8 @@ import { DB } from 'sqlite';
 
 import { ENV_VAR } from './init_env.ts';
 
-/**
- * Initialize the main database.
- * @remarks
- * If the `path` property of `opts` is set, that path is used;
- * If passed an empty object, an in-memory database is created.
- */
-export const initDB = (opts?: { path?: string | undefined }): void => {
-  const db = new DB(opts ? opts?.path : Deno.env.get(ENV_VAR.DB_PATH));
-
-  db.execute(`
+/** SQL query to create the tables. */
+export const create_tables_sql: string = `
   PRAGMA foreign_keys = ON;
 
   CREATE TABLE IF NOT EXISTS user (
@@ -40,7 +32,7 @@ export const initDB = (opts?: { path?: string | undefined }): void => {
     FOREIGN KEY(userid) REFERENCES user(id)
   );
   
-  CREATE TABLE IF NOT EXISTS space (
+  CREATE TABLE IF NOT EXISTS space ( 
     id INTEGER PRIMARY KEY,
     name TEXT NOT NULL,
     calendarid INTEGER NOT NULL,
@@ -118,7 +110,13 @@ export const initDB = (opts?: { path?: string | undefined }): void => {
     FOREIGN KEY(proposalid) REFERENCES proposal(id),
     FOREIGN KEY(occupantid) REFERENCES occupant(id)
   );
-`);
+`;
+
+/** Initialize the main database. */
+export const initDB = (): void => {
+  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH));
+
+  db.execute(create_tables_sql);
 
   db.close();
 };
