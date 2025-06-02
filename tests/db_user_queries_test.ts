@@ -54,7 +54,7 @@ Deno.test('DB: User queries', async (t) => {
       password: mock_data.password,
       created_at: mock_data.created_at.toString(),
     });
-
-    db.close();
   });
+
+  db.close();
 });
