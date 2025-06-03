@@ -1,4 +1,4 @@
-import { assert, assertExists, assertObjectMatch } from '@std/assert';
+import { assert, assertExists, assertNotEquals, assertObjectMatch } from '@std/assert';
 
 import { DB } from 'sqlite';
 
@@ -138,6 +138,135 @@ Deno.test('DB: User queries', async (t) => {
 
     const entries = db.queryEntries(`SELECT * FROM user WHERE id = ${user.id}`);
     assert(entries.length === 0, 'user table contains rows');
+  });
+
+  await t.step('query: update user name', () => {
+    const mock_data = {
+      name: faker.person.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    // insert a user
+    db.query(
+      `INSERT INTO user (name, email, password, created_at)
+       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+    );
+
+    // retrieve inserted user
+    const [user] = db.queryEntries<{ id: number; name: string; email: string; password: string; created_at: string }>(
+      `SELECT * FROM user
+       WHERE name = '${mock_data.name}'
+         AND email = '${mock_data.email}'
+         AND password = '${mock_data.password}'
+         AND created_at = '${mock_data.created_at}'
+      `,
+    );
+    assertExists(user, 'inserted user not found');
+
+    // test query
+    let new_name = '';
+    do {
+      new_name = faker.person.firstName();
+    } while (!new_name.localeCompare(mock_data.name));
+
+    const query = updateUserNameQuery(db);
+    query.execute({ id: user.id, name: new_name });
+    query.finalize();
+
+    const [updated_user] = db.queryEntries(`SELECT * FROM user WHERE id = ${user.id}`);
+    assertExists(updated_user, 'updated user not found');
+    assertNotEquals(updated_user.name, user.name, 'user name not updated');
+
+    // clean up
+    db.query(`DELETE FROM user WHERE id = ${user.id}`);
+  });
+
+  await t.step('query: update user email', () => {
+    const mock_data = {
+      name: faker.person.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    // insert a user
+    db.query(
+      `INSERT INTO user (name, email, password, created_at)
+       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+    );
+
+    // retrieve inserted user
+    const [user] = db.queryEntries<{ id: number; name: string; email: string; password: string; created_at: string }>(
+      `SELECT * FROM user
+       WHERE name = '${mock_data.name}'
+         AND email = '${mock_data.email}'
+         AND password = '${mock_data.password}'
+         AND created_at = '${mock_data.created_at}'
+      `,
+    );
+    assertExists(user, 'inserted user not found');
+
+    // test query
+    let new_email = '';
+    do {
+      new_email = faker.internet.email();
+    } while (!new_email.localeCompare(mock_data.email));
+
+    const query = updateUserEmailQuery(db);
+    query.execute({ id: user.id, email: new_email });
+    query.finalize();
+
+    const [updated_user] = db.queryEntries(`SELECT * FROM user WHERE id = ${user.id}`);
+    assertExists(updated_user, 'updated user not found');
+    assertNotEquals(updated_user.email, user.email, 'user email not updated');
+
+    // clean up
+    db.query(`DELETE FROM user WHERE id = ${user.id}`);
+  });
+
+  await t.step('query: update user password', () => {
+    const mock_data = {
+      name: faker.person.firstName(),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    // insert a user
+    db.query(
+      `INSERT INTO user (name, email, password, created_at)
+       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+    );
+
+    // retrieve inserted user
+    const [user] = db.queryEntries<{ id: number; name: string; email: string; password: string; created_at: string }>(
+      `SELECT * FROM user
+       WHERE name = '${mock_data.name}'
+         AND email = '${mock_data.email}'
+         AND password = '${mock_data.password}'
+         AND created_at = '${mock_data.created_at}'
+      `,
+    );
+    assertExists(user, 'inserted user not found');
+
+    // test query
+    let new_password = '';
+    do {
+      new_password = faker.internet.password();
+    } while (!new_password.localeCompare(mock_data.password));
+
+    const query = updateUserPasswordQuery(db);
+    query.execute({ id: user.id, password: new_password });
+    query.finalize();
+
+    const [updated_user] = db.queryEntries(`SELECT * FROM user WHERE id = ${user.id}`);
+    assertExists(updated_user, 'updated user not found');
+    assertNotEquals(updated_user.password, user.password, 'user password not updated');
+
+    // clean up
+    db.query(`DELETE FROM user WHERE id = ${user.id}`);
   });
 
   db.close();
