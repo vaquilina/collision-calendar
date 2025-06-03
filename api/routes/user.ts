@@ -16,8 +16,11 @@ import {
   updateUserNameQuery,
   updateUserPasswordQuery,
 } from '@collision-calendar/db/queries';
+
 import { ENV_VAR } from '@collision-calendar/db/init';
+
 import { processEntry } from '@collision-calendar/db/util';
+
 import { User } from '@collision-calendar/db/classes';
 
 const zUserIdSchema = z.preprocess((val) => {
