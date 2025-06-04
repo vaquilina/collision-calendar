@@ -1,3 +1,3 @@
-import { getAllUsers, getAllUsersWithCalendarAccess, getAllUsersWithSpaceAccess } from './users.ts';
+import { getAllUserLogins, getAllUsersWithCalendarAccess, getAllUsersWithSpaceAccess } from './users.ts';
 
-export { getAllUsers, getAllUsersWithCalendarAccess, getAllUsersWithSpaceAccess };
+export { getAllUserLogins, getAllUsersWithCalendarAccess, getAllUsersWithSpaceAccess };
