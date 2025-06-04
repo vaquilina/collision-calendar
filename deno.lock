@@ -9,14 +9,15 @@
     "jsr:@std/internal@^1.0.6": "1.0.8",
     "jsr:@std/internal@^1.0.8": "1.0.8",
     "jsr:@std/path@^1.1.0": "1.1.0",
+    "jsr:@std/random@~0.1.2": "0.1.2",
     "jsr:@std/testing@^1.0.13": "1.0.13",
     "npm:@faker-js/faker@^9.8.0": "9.8.0",
-    "npm:@hono/zod-validator@0.7": "0.7.0_hono@4.7.11_zod@3.25.49",
+    "npm:@hono/zod-validator@0.7": "0.7.0_hono@4.7.11_zod@3.25.50",
     "npm:@openauthjs/openauth@~0.4.3": "0.4.3_arctic@2.3.4_hono@4.7.11",
     "npm:hono@^4.7.11": "4.7.11",
     "npm:unstorage@^1.16.0": "1.16.0",
-    "npm:zod@3.25.49": "3.25.49",
-    "npm:zod@^3.25.49": "3.25.49"
+    "npm:zod@3.25.50": "3.25.50",
+    "npm:zod@^3.25.50": "3.25.50"
   },
   "jsr": {
     "@da/bcrypt@1.0.1": {
@@ -43,6 +44,9 @@
     "@std/path@1.1.0": {
       "integrity": "ddc94f8e3c275627281cbc23341df6b8bcc874d70374f75fec2533521e3d6886"
     },
+    "@std/random@0.1.2": {
+      "integrity": "21e28f39dcc72d522bb0d2bc13586567d6044c86ee77a0056fcde0e13758c3ee"
+    },
     "@std/testing@1.0.13": {
       "integrity": "74418be16f627dfe996937ab0ffbdbda9c1f35534b78724658d981492f121e71",
       "dependencies": [
@@ -58,7 +62,7 @@
     "@faker-js/faker@9.8.0": {
       "integrity": "sha512-U9wpuSrJC93jZBxx/Qq2wPjCuYISBueyVUGK7qqdmj7r/nxaxwW8AQDCLeRO7wZnjj94sh3p246cAYjUKuqgfg=="
     },
-    "@hono/zod-validator@0.7.0_hono@4.7.11_zod@3.25.49": {
+    "@hono/zod-validator@0.7.0_hono@4.7.11_zod@3.25.50": {
       "integrity": "sha512-qe2ZE6sHFE98dcUrbYMtS3bAV8hqcCOflykvZga2S7XhmNSZzT+dIz4OuMILsjLHkJw9JMn912/dB7dQOmuPvg==",
       "dependencies": [
         "hono",
@@ -216,8 +220,8 @@
         "ufo"
       ]
     },
-    "zod@3.25.49": {
-      "integrity": "sha512-JMMPMy9ZBk3XFEdbM3iL1brx4NUSejd6xr3ELrrGEfGb355gjhiAWtG3K5o+AViV/3ZfkIrCzXsZn6SbLwTR8Q=="
+    "zod@3.25.50": {
+      "integrity": "sha512-VstOnRxf4tlSq0raIwbn0n+LA34SxVoZ8r3pkwSUM0jqNiA/HCMQEVjTuS5FZmHsge+9MDGTiAuHyml5T0um6A=="
     }
   },
   "redirects": {
@@ -260,6 +264,7 @@
       "jsr:@std/assert@^1.0.13",
       "jsr:@std/fs@^1.0.18",
       "jsr:@std/path@^1.1.0",
+      "jsr:@std/random@~0.1.2",
       "jsr:@std/testing@^1.0.13",
       "npm:@faker-js/faker@^9.8.0",
       "npm:unstorage@^1.16.0"
@@ -270,13 +275,13 @@
           "jsr:@da/bcrypt@^1.0.1",
           "npm:@hono/zod-validator@0.7",
           "npm:hono@^4.7.11",
-          "npm:zod@3.25.49"
+          "npm:zod@3.25.50"
         ]
       },
       "authorizer": {
         "dependencies": [
           "npm:@openauthjs/openauth@~0.4.3",
-          "npm:zod@^3.25.49"
+          "npm:zod@^3.25.50"
         ]
       }
     }

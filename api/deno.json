@@ -10,10 +10,11 @@
     "@da/bcrypt": "jsr:@da/bcrypt@^1.0.1",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.0",
     "hono": "npm:hono@^4.7.11",
-    "zod": "npm:zod@3.25.49",
+    "zod": "npm:zod@3.25.50",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   },
   "exports": {
-    "./util": "./util/email.ts"
+    "./util": "./util/email.ts",
+    "./routes": "./routes/user.ts"
   }
 }
