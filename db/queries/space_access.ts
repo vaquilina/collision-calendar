@@ -10,7 +10,7 @@ export const selectSpaceAccessQuery = (db: DB) =>
     { spaceid: number; permissions: AccessPermissions }
   >(
     `
-  SELECT spaceid, userid,
+  SELECT spaceid, userid
     FROM space_access
    WHERE spaceid = :spaceid AND permissions = :permissions
   `,
