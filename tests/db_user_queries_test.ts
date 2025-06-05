@@ -25,7 +25,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: insert user', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
@@ -54,7 +54,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: select user', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
@@ -87,7 +87,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: select user by email', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
@@ -113,7 +113,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: delete user', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
@@ -142,7 +142,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: update user name', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
@@ -185,7 +185,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: update user email', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
@@ -228,7 +228,7 @@ Deno.test('DB: User queries', async (t) => {
 
   await t.step('query: update user password', () => {
     const mock_data = {
-      name: faker.person.firstName(),
+      name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
       created_at: Temporal.Now.instant().toString(),
