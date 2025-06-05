@@ -16,12 +16,12 @@ export class User extends BaseRecord {
     this.password = values.password;
   }
 
-  /** User's email. */
+  /** The user's login email. */
   email: string;
-  /** User's display name. */
+  /** The user's display name. */
   name: string;
   /**
-   * User's password.
+   * The user's password.
    * @remarks
    * Passwords are [hashed](https://github.com/darkaqua/bcrypt) before being stored in the database.
    */
