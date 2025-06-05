@@ -6,10 +6,10 @@ import type { AccessPermissions } from '@collision-calendar/types';
 export const selectCalendarAccessQuery = (db: DB) =>
   db.prepareQuery<
     [CalendarAccess],
-    { calendar_id: number; user_id: number },
-    { calendar_id: number; permissions: AccessPermissions }
+    { calendarid: number; userid: number },
+    { calendarid: number; permissions: AccessPermissions }
   >(`
-  SELECT calendar_id, user_id
+  SELECT calendarid, userid
     FROM calendar_access
-   WHERE calendar_id = :calendar_id AND permissions = :permissions
+   WHERE calendarid = :calendarid AND permissions = :permissions
   `);

@@ -17,18 +17,18 @@ export const getAllUserLogins = (db: DB): UserLogin[] => db.queryEntries<UserLog
 
 /** Get a list of all {@link UserLogin user logins} with specific {@link AccessPermissions} for a {@link Calendar}. */
 export const getAllUsersWithCalendarAccess = (
-  calendar_id: Calendar['id'],
+  calendarid: Calendar['id'],
   permissions: AccessPermissions,
   db: DB,
 ): UserLogin[] => {
   const calendar_access_query = selectCalendarAccessQuery(db);
-  const calendar_access_entries = calendar_access_query.allEntries({ calendar_id, permissions });
+  const calendar_access_entries = calendar_access_query.allEntries({ calendarid, permissions });
   calendar_access_query.finalize();
 
   const user_query = selectUserQuery(db);
   const user_entries: UserLogin[] = [];
-  for (const { user_id } of calendar_access_entries) {
-    const user = user_query.firstEntry({ id: user_id });
+  for (const { userid } of calendar_access_entries) {
+    const user = user_query.firstEntry({ id: userid });
     if (user) user_entries.push({ email: user.email, password: user.password });
   }
   user_query.finalize();
@@ -38,18 +38,18 @@ export const getAllUsersWithCalendarAccess = (
 
 /** Get a list of all {@link UserLogin user logins} with specific {@link AccessPermissions} for a {@link Space}. */
 export const getAllUsersWithSpaceAccess = (
-  space_id: Space['id'],
+  spaceid: Space['id'],
   permissions: AccessPermissions,
   db: DB,
 ): UserLogin[] => {
   const space_access_query = selectSpaceAccessQuery(db);
-  const space_access_entries = space_access_query.allEntries({ space_id, permissions });
+  const space_access_entries = space_access_query.allEntries({ spaceid, permissions });
   space_access_query.finalize();
 
   const user_query = selectUserQuery(db);
   const user_entries: UserLogin[] = [];
-  for (const { user_id } of space_access_entries) {
-    const user = user_query.firstEntry({ id: user_id });
+  for (const { userid } of space_access_entries) {
+    const user = user_query.firstEntry({ id: userid });
     if (user) user_entries.push({ email: user.email, password: user.password });
   }
   user_query.finalize();

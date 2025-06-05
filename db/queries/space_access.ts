@@ -6,12 +6,12 @@ import type { AccessPermissions } from '@collision-calendar/types';
 export const selectSpaceAccessQuery = (db: DB) =>
   db.prepareQuery<
     [SpaceAccess],
-    { space_id: number; user_id: number },
-    { space_id: number; permissions: AccessPermissions }
+    { spaceid: number; userid: number },
+    { spaceid: number; permissions: AccessPermissions }
   >(
     `
-  SELECT space_id, user_id,
+  SELECT spaceid, userid,
     FROM space_access
-   WHERE space_id = :space_id AND permissions = :permissions
+   WHERE spaceid = :spaceid AND permissions = :permissions
   `,
   );
