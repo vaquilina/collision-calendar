@@ -19,7 +19,11 @@ export const create_tables_sql: string = `
     name        TEXT NOT NULL,
     owneruserid INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(owneruserid) REFERENCES user(id)
+
+    CONSTRAINT fk_user
+      FOREIGN KEY(owneruserid)
+      REFERENCES user(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS calendar_access (
@@ -28,8 +32,16 @@ export const create_tables_sql: string = `
     userid      INTEGER NOT NULL,
     permissions INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(calendarid) REFERENCES calendar(id),
-    FOREIGN KEY(userid) REFERENCES user(id)
+
+    CONSTRAINT fk_calendar
+      FOREIGN KEY(calendarid)
+      REFERENCES calendar(id)
+      ON DELETE CASCADE,
+
+    CONSTRAINT fk_user
+      FOREIGN KEY(userid)
+      REFERENCES user(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS space ( 
@@ -37,16 +49,29 @@ export const create_tables_sql: string = `
     name        TEXT NOT NULL,
     calendarid  INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(calendarid) REFERENCES calendar(id)
+    
+    CONSTRAINT fk_calendar
+      FOREIGN KEY(calendarid)
+      REFERENCES calendar(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS space_access (
     id          INTEGER PRIMARY KEY,
     spaceid     INTEGER NOT NULL,
     userid      INTEGER NOT NULL,
+    permissions INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(spaceid) REFERENCES space(id),
-    FOREIGN KEY(userid) REFERENCES user(id)
+    
+    CONSTRAINT fk_space
+      FOREIGN KEY(spaceid)
+      REFERENCES space(id)
+      ON DELETE CASCADE,
+
+    CONSTRAINT fk_user
+      FOREIGN KEY(userid)
+      REFERENCES user(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS collision (
@@ -54,8 +79,16 @@ export const create_tables_sql: string = `
     spaceid_l   INTEGER NOT NULL,
     spaceid_r   INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(spaceid_l) REFERENCES space(id),
-    FOREIGN KEY(spaceid_r) REFERENCES space(id)
+    
+    CONSTRAINT fk_space_l
+      FOREIGN KEY(spaceid_l)
+      REFERENCES space(id)
+      ON DELETE CASCADE,
+
+    CONSTRAINT fk_space_r
+      FOREIGN KEY(spaceid_r)
+      REFERENCES space(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS occupant (
@@ -63,8 +96,16 @@ export const create_tables_sql: string = `
     userid      INTEGER NOT NULL,
     spaceid     INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(userid) REFERENCES user(id),
-    FOREIGN KEY(spaceid) REFERENCES space(id)
+    
+    CONSTRAINT fk_user
+      FOREIGN KEY(userid)
+      REFERENCES user(id)
+      ON DELETE CASCADE,
+    
+    CONSTRAINT fk_space
+      FOREIGN KEY(spaceid)
+      REFERENCES space(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS proposal (
@@ -72,7 +113,11 @@ export const create_tables_sql: string = `
     name        TEXT NOT NULL,
     spaceid     INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(spaceid) REFERENCES space(id)
+    
+    CONSTRAINT fk_space
+      FOREIGN KEY(spaceid)
+      REFERENCES space(id)
+      ON DELETE CASCADE
   );
 
   CREATE TABLE IF NOT EXISTS block (
@@ -82,10 +127,28 @@ export const create_tables_sql: string = `
     start       INTEGER NOT NULL,
     end         INTEGER NOT NULL,
     spaceid     INTEGER NOT NULL,
-    proposalid  INTEGER,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(spaceid) REFERENCES space(id),
-    FOREIGN KEY(proposalid) REFERENCES proposal(id)
+    
+    CONSTRAINT fk_space
+      FOREIGN KEY(spaceid)
+      REFERENCES space(id)
+      ON DELETE CASCADE
+  );
+  
+  CREATE TABLE IF NOT EXISTS proposal_block (
+    id          INTEGER PRIMARY KEY,
+    proposalid  INTEGER NOT NULL,
+    blockid     INTEGER NOT NULL,
+
+    CONSTRAINT fk_proposal
+      FOREIGN KEY(proposalid)
+      REFERENCES proposal(id)
+      ON DELETE CASCADE
+    
+    CONSTRAINT fk_block
+      FOREIGN KEY(blockid)
+      REFERENCES block(id)
+      ON DELETE CASCADE
   );
   
   CREATE TABLE IF NOT EXISTS repeat (
@@ -96,7 +159,10 @@ export const create_tables_sql: string = `
     end         INTEGER,
     blockid     INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(blockid) REFERENCES block(id)
+    
+    CONSTRAINT fk_block
+      FOREIGN KEY(blockid)
+      REFERENCES block(id)
   );
   
   CREATE TABLE IF NOT EXISTS vote (
@@ -106,9 +172,21 @@ export const create_tables_sql: string = `
     proposalid  INTEGER NOT NULL,
     occupantid  INTEGER NOT NULL,
     created_at  TEXT NOT NULL,
-    FOREIGN KEY(blockid) REFERENCES block(id),
-    FOREIGN KEY(proposalid) REFERENCES proposal(id),
-    FOREIGN KEY(occupantid) REFERENCES occupant(id)
+    
+    CONSTRAINT fk_block
+      FOREIGN KEY(blockid)
+      REFERENCES block(id)
+      ON DELETE CASCADE,
+
+    CONSTRAINT fk_proposal
+      FOREIGN KEY(proposalid)
+      REFERENCES proposal(id)
+      ON DELETE CASCADE,
+    
+    CONSTRAINT fk_occupant
+      FOREIGN KEY(occupantid)
+      REFERENCES occupant(id)
+      ON DELETE CASCADE
   );
 `;
 
