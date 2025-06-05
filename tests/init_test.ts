@@ -7,35 +7,36 @@ import { DB } from 'sqlite';
 import { Tables } from '@collision-calendar/db/classes';
 import { ENV_VAR, initDB, initEnv } from '@collision-calendar/db/init';
 
-Deno.test('environment variables are set', () => {
-  initEnv();
+Deno.test('INIT', async (t) => {
+  await t.step('environment variables are set', () => {
+    initEnv();
 
-  for (const key of Object.values(ENV_VAR)) {
-    assertEquals(Deno.env.has(key), true, `${key} not set`);
-  }
-});
+    for (const key of Object.values(ENV_VAR)) {
+      assertEquals(Deno.env.has(key), true, `${key} not set`);
+    }
+  });
+  await t.step('sqlite db exists at expected path', async () => {
+    const db_path = Deno.env.get(ENV_VAR.DB_PATH);
+    assertExists(db_path, `${ENV_VAR.DB_PATH} not set`);
 
-Deno.test('sqlite db exists at expected path', async () => {
-  const db_path = Deno.env.get(ENV_VAR.DB_PATH);
-  assertExists(db_path, `${ENV_VAR.DB_PATH} not set`);
+    initDB();
 
-  initDB();
+    assertEquals(await exists(db_path), true, `no db found at path: ${db_path}`);
+  });
 
-  assertEquals(await exists(db_path), true, `no db found at path: ${db_path}`);
-});
+  await t.step('db contains expected tables', () => {
+    initDB();
 
-Deno.test('db contains expected tables', () => {
-  initDB();
+    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
 
-  const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
-
-  const entries = db.queryEntries<{ name: string }>(`
+    const entries = db.queryEntries<{ name: string }>(`
     SELECT name
     FROM sqlite_master
     WHERE type = 'table'
   `);
 
-  db.close();
+    db.close();
 
-  assertArrayIncludes<string>(entries.map((e) => e.name), Tables);
+    assertArrayIncludes<string>(entries.map((e) => e.name), Tables);
+  });
 });
