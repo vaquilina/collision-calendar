@@ -4,6 +4,7 @@ import { CalendarAccess } from './calendar_access.ts';
 import { Collision } from './collision.ts';
 import { Occupant } from './occupant.ts';
 import { Proposal } from './proposal.ts';
+import { ProposalBlock } from './proposal_block.ts';
 import { Repeat } from './repeat.ts';
 import { Space } from './space.ts';
 import { SpaceAccess } from './space_access.ts';
@@ -37,6 +38,7 @@ export {
   Collision,
   Occupant,
   Proposal,
+  ProposalBlock,
   Repeat,
   Space,
   SpaceAccess,
