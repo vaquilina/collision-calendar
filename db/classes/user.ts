@@ -2,13 +2,7 @@ import { BaseRecord } from './base_record.ts';
 
 /** Represents a user of the system. */
 export class User extends BaseRecord {
-  constructor(
-    values: BaseRecord & {
-      email: string;
-      name: string;
-      password: string;
-    },
-  ) {
+  constructor(values: BaseRecord & { email: string; name: string; password: string }) {
     super({ id: values.id, created_at: values.created_at });
 
     this.email = values.email;
