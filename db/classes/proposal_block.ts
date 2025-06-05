@@ -1,6 +1,7 @@
 import { BaseRecord } from './base_record.ts';
 
-import type { Block, Proposal } from '@collision-calendar/db/classes';
+import type { Block } from './block.ts';
+import type { Proposal } from './proposal.ts';
 
 /** Represents an association between a {@link Proposal} and a {@link Block}. */
 export class ProposalBlock extends BaseRecord {
@@ -11,9 +12,9 @@ export class ProposalBlock extends BaseRecord {
     this.blockid = values.blockid;
   }
 
-  /** The ID of the {@link Proposal}. */
+  /** The ID of the {@link Proposal} which the {@link Block} is a part of. */
   proposalid: Proposal['id'];
 
-  /** The ID of the {@link Block}. */
+  /** The ID of the {@link Block} that is a part of the {@link Proposal}. */
   blockid: Block['id'];
 }
