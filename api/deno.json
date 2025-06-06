@@ -10,7 +10,7 @@
     "@da/bcrypt": "jsr:@da/bcrypt@^1.0.1",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.0",
     "hono": "npm:hono@^4.7.11",
-    "zod": "npm:zod@3.25.51",
+    "zod": "npm:zod@3.25.53",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   },
   "exports": {
