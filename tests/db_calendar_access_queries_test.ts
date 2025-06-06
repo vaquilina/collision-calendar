@@ -143,6 +143,12 @@ Deno.test('DB: CalendarAccess queries', async (t) => {
         DELETE FROM user;
       `,
     );
+    const test_calendar_entries = db.queryEntries<CalendarEntry>('SELECT * FROM calendar');
+    assertEquals(test_calendar_entries.length, 0, 'Not all calendar records were deleted');
+    const test_user_entries = db.queryEntries<UserEntry>('SELECT * FROM user');
+    assertEquals(test_user_entries.length, 0, 'Not all user entries were deleted');
+    const test_calendar_access_entries = db.queryEntries<CalendarAccessEntry>('SELECT * FROM calendar_access');
+    assertEquals(test_calendar_access_entries.length, 0, 'Not all calendar access entries were deleted');
   });
 
   db.close();
