@@ -37,13 +37,15 @@ Deno.test('DB: User queries', async (t) => {
     query.finalize();
 
     // retrieve created record
-    const [user] = db.queryEntries(`
-      SELECT * FROM user
-      WHERE name = '${mock_data.name}'
-        AND email = '${mock_data.email}'
-        AND password = '${mock_data.password}'
-        AND created_at = '${mock_data.created_at}'
-      `);
+    const [user] = db.queryEntries(
+      `
+        SELECT * FROM user
+        WHERE name = '${mock_data.name}'
+          AND email = '${mock_data.email}'
+          AND password = '${mock_data.password}'
+          AND created_at = '${mock_data.created_at}'
+      `,
+    );
 
     assertExists(user, 'inserted user not found');
     assertObjectMatch(user, { ...mock_data, id: user.id });
@@ -62,8 +64,13 @@ Deno.test('DB: User queries', async (t) => {
 
     // insert a user
     db.query(
-      `INSERT INTO user (name, email, password, created_at)
-       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+      `
+       INSERT INTO user (name, email, password, created_at)
+       VALUES ('${mock_data.name}',
+               '${mock_data.email}',
+               '${mock_data.password}',
+               '${mock_data.created_at}')
+      `,
     );
 
     // determine the user's id
@@ -95,8 +102,13 @@ Deno.test('DB: User queries', async (t) => {
 
     // insert a user
     db.query(
-      `INSERT INTO user (name, email, password, created_at)
-       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_data.name}',
+                '${mock_data.email}',
+                '${mock_data.password}',
+                '${mock_data.created_at}')
+      `,
     );
 
     // test query
@@ -121,8 +133,13 @@ Deno.test('DB: User queries', async (t) => {
 
     // insert a user
     db.query(
-      `INSERT INTO user (name, email, password, created_at)
-       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_data.name}',
+                '${mock_data.email}',
+                '${mock_data.password}',
+                '${mock_data.created_at}')
+      `,
     );
 
     // retrieve inserted record
@@ -150,13 +167,19 @@ Deno.test('DB: User queries', async (t) => {
 
     // insert a user
     db.query(
-      `INSERT INTO user (name, email, password, created_at)
-       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_data.name}',
+                '${mock_data.email}',
+                '${mock_data.password}',
+                '${mock_data.created_at}')
+      `,
     );
 
     // retrieve inserted user
     const [user] = db.queryEntries<{ id: number; name: string; email: string; password: string; created_at: string }>(
-      `SELECT * FROM user
+      `
+       SELECT * FROM user
        WHERE name = '${mock_data.name}'
          AND email = '${mock_data.email}'
          AND password = '${mock_data.password}'
@@ -193,13 +216,19 @@ Deno.test('DB: User queries', async (t) => {
 
     // insert a user
     db.query(
-      `INSERT INTO user (name, email, password, created_at)
-       VALUES ('${mock_data.name}', '${mock_data.email}', '${mock_data.password}', '${mock_data.created_at}')`,
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_data.name}',
+                '${mock_data.email}',
+                '${mock_data.password}',
+                '${mock_data.created_at}')
+      `,
     );
 
     // retrieve inserted user
     const [user] = db.queryEntries<{ id: number; name: string; email: string; password: string; created_at: string }>(
-      `SELECT * FROM user
+      `
+       SELECT * FROM user
        WHERE name = '${mock_data.name}'
          AND email = '${mock_data.email}'
          AND password = '${mock_data.password}'
@@ -242,11 +271,12 @@ Deno.test('DB: User queries', async (t) => {
 
     // retrieve inserted user
     const [user] = db.queryEntries<{ id: number; name: string; email: string; password: string; created_at: string }>(
-      `SELECT * FROM user
-       WHERE name = '${mock_data.name}'
-         AND email = '${mock_data.email}'
-         AND password = '${mock_data.password}'
-         AND created_at = '${mock_data.created_at}'
+      `
+        SELECT * FROM user
+        WHERE name = '${mock_data.name}'
+          AND email = '${mock_data.email}'
+          AND password = '${mock_data.password}'
+          AND created_at = '${mock_data.created_at}'
       `,
     );
     assertExists(user, 'inserted user not found');

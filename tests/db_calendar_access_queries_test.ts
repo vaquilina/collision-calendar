@@ -75,7 +75,9 @@ Deno.test('DB: CalendarAccess queries', async (t) => {
     db.execute(
       `
         INSERT INTO calendar (name, owneruserid, created_at)
-        VALUES ('${mock_calendar_data.name}', ${mock_calendar_data.owneruserid}, '${mock_calendar_data.created_at}')
+        VALUES ('${mock_calendar_data.name}',
+                 ${mock_calendar_data.owneruserid},
+                '${mock_calendar_data.created_at}')
       `,
     );
 

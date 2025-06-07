@@ -29,11 +29,13 @@ Deno.test('INIT', async (t) => {
 
     const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
 
-    const entries = db.queryEntries<{ name: string }>(`
-    SELECT name
-    FROM sqlite_master
-    WHERE type = 'table'
-  `);
+    const entries = db.queryEntries<{ name: string }>(
+      `
+        SELECT name
+        FROM sqlite_master
+        WHERE type = 'table'
+      `,
+    );
 
     db.close();
 
