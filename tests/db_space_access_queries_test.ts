@@ -30,7 +30,7 @@ Deno.test('DB: SpaceAccess queries', async (t) => {
 
   const access_permissions_values: AccessPermissions[] = [100, 110, 111];
 
-  await t.step('query: select space access', (t) => {
+  await t.step('query: select space access', () => {
     // create users
     const mock_user_data: UserData[] = [];
     const user_entries: UserEntry[] = [];
@@ -181,6 +181,15 @@ Deno.test('DB: SpaceAccess queries', async (t) => {
       );
     }
     query.finalize();
+
+    // clean up
+    db.execute(
+      `
+        DELETE FROM space;
+        DELETE FROM calendar;
+        DELETE FROM user;
+      `,
+    );
   });
 
   db.close();
