@@ -17,7 +17,8 @@ export class User extends BaseRecord {
   /**
    * The user's password.
    * @remarks
-   * Passwords are [hashed](https://github.com/darkaqua/bcrypt) before being stored in the database.
+   * Passwords are hashed before being stored in the database.
+   * @see https://docs.deno.com/api/web/~/Temporal.PlainDateTime
    */
   password: string;
 }

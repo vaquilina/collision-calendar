@@ -26,9 +26,15 @@ export class Block extends BaseRecord {
   name: string;
   /** Color of the block. */
   color: string;
-  /** Calendar date and wall-clock time when the block starts. */
+  /**
+   * Calendar date and wall-clock time when the block starts.
+   * @see https://docs.deno.com/api/web/~/Temporal.PlainDateTime
+   */
   start: Temporal.PlainDateTime;
-  /** Calendar date and wall-clock time when the block ends. */
+  /**
+   * Calendar date and wall-clock time when the block ends.
+   * @see https://docs.deno.com/api/web/~/Temporal.PlainDateTime
+   */
   end: Temporal.PlainDateTime;
   /** ID of the {@link Space} the block belongs to. */
   spaceid: Space['id'];

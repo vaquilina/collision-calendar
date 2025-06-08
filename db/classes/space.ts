@@ -2,7 +2,7 @@ import { BaseRecord } from './base_record.ts';
 
 import type { Calendar } from './calendar.ts';
 
-/** Represents a group/section within a {@link Calendar}. */
+/** Represents a group within a {@link Calendar}. */
 export class Space extends BaseRecord {
   constructor(values: BaseRecord & { name: string; calendarid: Calendar['id'] }) {
     super({ id: values.id, created_at: values.created_at });

@@ -7,6 +7,9 @@ export class BaseRecord {
 
   /** Record ID; Primary key.  */
   id: number;
-  /** [Instant](https://docs.deno.com/api/web/~/Temporal.Instant) when the record was created. */
+  /**
+   * Instant when the record was created.
+   * @see https://docs.deno.com/api/web/~/Temporal.Instant
+   */
   created_at: Temporal.Instant;
 }

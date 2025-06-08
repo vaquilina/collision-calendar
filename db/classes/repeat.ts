@@ -6,7 +6,7 @@ import type { RepeatUnit } from '@collision-calendar/types';
 /**
  * Represents a repeat rule for a {@link Block}.
  * @remarks
- * Reads: *"Starting on (start), repeat this block every (interval) * (unit)s until (end)."*
+ * *"From \<start\>, repeat this block every (\<interval\> * \<unit\>) until \<end\>"*
  */
 export class Repeat extends BaseRecord {
   constructor(
@@ -31,9 +31,15 @@ export class Repeat extends BaseRecord {
   unit: RepeatUnit;
   /** Interval by which the {@link Block} repeats. */
   interval: number;
-  /** [Calendar date](https://docs.deno.com/api/web/~/Temporal.PlainDate) when the repeat begins being applied. */
+  /**
+   * Calendar date when the repeat starts being applied.
+   * @see https://docs.deno.com/api/web/~/Temporal.PlainDate
+   */
   start: Temporal.PlainDate;
-  /** [Calendar date](https://docs.deno.com/api/web/~/Temporal.PlainDate) when the repeat stops being applied. */
+  /**
+   * Calendar date when the repeat stops being applied.
+   * @see https://docs.deno.com/api/web/~/Temporal.PlainDate
+   */
   end: Temporal.PlainDate;
   /** ID of the {@link Block} the repeat applies to. */
   blockid: Block['id'];

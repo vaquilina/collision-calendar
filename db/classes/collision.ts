@@ -6,8 +6,8 @@ import type { Block as _Block } from './block.ts';
 /**
  * Represents an **explicit collision**.
  * @remarks
- * An explicit collision defines an incompatibilty between two {@link Space Spaces}; they cannot be occupied at the same time.
- * (No {@link _Block Block} overlap)
+ * An explicit collision defines the relationship between two {@link Space Spaces} that cannot be occupied at the same time.
+ * This means that a {@link _Block Block} at either space cannot overlap with a block at the other.
  */
 export class Collision extends BaseRecord {
   constructor(values: BaseRecord & { spaceid_l: Space['id']; spaceid_r: Space['id'] }) {
