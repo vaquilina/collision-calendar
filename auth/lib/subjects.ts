@@ -8,6 +8,6 @@ import { z } from 'zod/v4';
  */
 export const subjects = createSubjects({
   user: z.object({
-    userID: z.int().optional(),
+    userid: z.int().optional(),
   }),
 });

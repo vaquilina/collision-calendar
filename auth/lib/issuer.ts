@@ -38,6 +38,10 @@ function getUser(email: string) {
   return userEntry.id;
 }
 
+/**
+ * OpenAuth Issuer.
+ * @see https://openauth.js.org/docs/issuer/
+ */
 export const Issuer = issuer({
   providers: {
     password: PasswordProvider(
@@ -53,6 +57,7 @@ export const Issuer = issuer({
             content: `Your password reset confirmation code is ${code}`,
           });
         },
+        validatePassword: (password) => password.length < 8 ? 'Password must be at least 8 characters' : undefined,
       }),
     ),
   },
@@ -60,7 +65,7 @@ export const Issuer = issuer({
   success(ctx, value) {
     if (value.provider === 'password') {
       return ctx.subject('user', {
-        userID: getUser(value.email),
+        userid: getUser(value.email),
       });
     }
     throw new Error('invalid provider');
