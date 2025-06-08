@@ -1,14 +1,13 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
-  "name": "@collision-calendar/authorizer",
+  "name": "@collision-calendar/auth",
   "version": "0.1.0",
   "tasks": {
-    "dev": "deno run --watch main.ts"
+    "dev:auth": "deno run --watch-hmr --allow-net --allow-env --allow-read main.ts"
   },
-  "imports": {
-    "@openauthjs/openauth": "npm:@openauthjs/openauth@^0.4.3",
-    "zod": "npm:zod@^3.25.56",
-    "denomailer": "https://deno.land/x/denomailer/mod.ts"
-  },
-  "exports": "./mod.ts"
+  "exports": {
+    ".": "./main.ts",
+    "./issuer": "./lib/issuer.ts",
+    "./subjects": "./lib/subjects.ts"
+  }
 }

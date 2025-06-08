@@ -3,7 +3,8 @@
   "name": "@collision-calendar/db",
   "version": "0.1.0",
   "tasks": {
-    "initdb": "deno run init_db.ts"
+    "init:db": "deno run --allow-env --allow-read --allow-write init/init_db.ts",
+    "init:env": "deno run --allow-env --allow-read --allow-write init/init_env.ts"
   },
   "exports": {
     "./accessors": "./accessors/mod.ts",
