@@ -226,8 +226,7 @@
   },
   "redirects": {
     "https://deno.land/x/denomailer/mod.ts": "https://deno.land/x/denomailer@1.6.0/mod.ts",
-    "https://deno.land/x/sqlite/mod.ts": "https://deno.land/x/sqlite@v3.9.1/mod.ts",
-    "https://esm.sh/@faker-js/faker": "https://esm.sh/@faker-js/faker@9.8.0"
+    "https://deno.land/x/sqlite/mod.ts": "https://deno.land/x/sqlite@v3.9.1/mod.ts"
   },
   "remote": {
     "https://deno.land/std@0.173.0/encoding/base64.ts": "7de04c2f8aeeb41453b09b186480be90f2ff357613b988e99fabb91d2eeceba1",
@@ -248,16 +247,13 @@
     "https://deno.land/x/denomailer@1.6.0/deps.ts": "12bef188bb2a490fedc82ac1889f3d438e8a15887c423b045fee532b31a43102",
     "https://deno.land/x/denomailer@1.6.0/mod.ts": "71a197dff098194ab53691abd3c9d22a276ef04e1382eb85f5632dbcb5a83bf3",
     "https://deno.land/x/sqlite@v3.9.1/build/sqlite.js": "2afc7875c7b9c85d89730c4a311ab3a304e5d1bf761fbadd8c07bbdf130f5f9b",
-    "https://deno.land/x/sqlite@v3.9.1/build/vfs.js": "7f7778a9fe499cd10738d6e43867340b50b67d3e39142b0065acd51a84cd2e03",
     "https://deno.land/x/sqlite@v3.9.1/mod.ts": "e09fc79d8065fe222578114b109b1fd60077bff1bb75448532077f784f4d6a83",
     "https://deno.land/x/sqlite@v3.9.1/src/constants.ts": "90f3be047ec0a89bcb5d6fc30db121685fc82cb00b1c476124ff47a4b0472aa9",
     "https://deno.land/x/sqlite@v3.9.1/src/db.ts": "03d0c860957496eadedd86e51a6e650670764630e64f56df0092e86c90752401",
     "https://deno.land/x/sqlite@v3.9.1/src/error.ts": "f7a15cb00d7c3797da1aefee3cf86d23e0ae92e73f0ba3165496c3816ab9503a",
     "https://deno.land/x/sqlite@v3.9.1/src/function.ts": "bc778cab7a6d771f690afa27264c524d22fcb96f1bb61959ade7922c15a4ab8d",
     "https://deno.land/x/sqlite@v3.9.1/src/query.ts": "d58abda928f6582d77bad685ecf551b1be8a15e8e38403e293ec38522e030cad",
-    "https://deno.land/x/sqlite@v3.9.1/src/wasm.ts": "e79d0baa6e42423257fb3c7cc98091c54399254867e0f34a09b5bdef37bd9487",
-    "https://esm.sh/@faker-js/faker@9.8.0": "9bb259df210012d36aeb32de041b95bf144925f2fe50ae1882daad5c8c6c5dea",
-    "https://esm.sh/@faker-js/faker@9.8.0/denonext/faker.mjs": "ed0c2aa2240469ab40c1c33f0efa6ed91bef7aefbdeba8707fa9400fbf585c41"
+    "https://deno.land/x/sqlite@v3.9.1/src/wasm.ts": "e79d0baa6e42423257fb3c7cc98091c54399254867e0f34a09b5bdef37bd9487"
   },
   "workspace": {
     "dependencies": [
@@ -278,7 +274,7 @@
           "npm:zod@3.25.56"
         ]
       },
-      "authorizer": {
+      "auth": {
         "dependencies": [
           "npm:@openauthjs/openauth@~0.4.3",
           "npm:zod@^3.25.56"

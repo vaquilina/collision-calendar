@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
-  "workspace": ["./authorizer", "./db", "./client", "./api", "./types"],
+  "workspace": ["./auth", "./db", "./client", "./api", "./types"],
   "unstable": ["temporal", "kv"],
   "fmt": {
     "useTabs": false,
