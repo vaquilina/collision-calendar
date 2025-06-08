@@ -4,6 +4,7 @@ import * as path from '@std/path';
 export const ENV_VAR = {
   DB_PATH: 'DB_PATH',
   SMTP_PORT: 'SMTP_PORT',
+  AUTH_PORT: 'AUTH_PORT',
 } as const;
 
 /** Set environment variables. */
@@ -14,4 +15,5 @@ export const initEnv = (): void => {
 
   Deno.env.set(ENV_VAR.DB_PATH, db_path);
   Deno.env.set(ENV_VAR.SMTP_PORT, '1025'); // replace
+  Deno.env.set(ENV_VAR.AUTH_PORT, '3001');
 };
