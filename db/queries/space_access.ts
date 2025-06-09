@@ -2,7 +2,7 @@ import type { DB } from 'sqlite';
 import type { SpaceAccess } from '../classes/space_access.ts';
 import type { AccessPermissions } from '@collision-calendar/types';
 
-/** Get prepared query for retrieving {@link SpaceAccess} records. */
+/** Get prepared query for retrieving {@link SpaceAccess} entries. */
 export const selectSpaceAccessQuery = (db: DB) =>
   db.prepareQuery<
     [SpaceAccess],

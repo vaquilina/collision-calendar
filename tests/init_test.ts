@@ -11,7 +11,9 @@ Deno.test('INIT', async (t) => {
   await t.step('environment variables are set', () => {
     initEnv();
 
-    for (const key of Object.values(ENV_VAR)) {
+    const keys = Object.values(ENV_VAR);
+
+    for (const key of keys) {
       assertEquals(Deno.env.has(key), true, `${key} not set`);
     }
   });

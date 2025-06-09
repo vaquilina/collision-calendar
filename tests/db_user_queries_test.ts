@@ -10,13 +10,13 @@ import {
   deleteUserQuery,
   insertUserQuery,
   selectUserByEmailQuery,
-  selectUserQuery,
+  selectUserByIdQuery,
   updateUserEmailQuery,
   updateUserNameQuery,
   updateUserPasswordQuery,
 } from '@collision-calendar/db/queries';
 
-Deno.test('DB: User queries', async (t) => {
+Deno.test('DB: user queries', async (t) => {
   // open a database in memory
   const db = new DB();
 
@@ -54,7 +54,7 @@ Deno.test('DB: User queries', async (t) => {
     db.query(`DELETE FROM user WHERE id = ${user.id}`);
   });
 
-  await t.step('query: select user', () => {
+  await t.step('query: select user by id', () => {
     const mock_data = {
       name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
@@ -81,7 +81,7 @@ Deno.test('DB: User queries', async (t) => {
     const id = inserted_user.id;
 
     // test query
-    const query = selectUserQuery(db);
+    const query = selectUserByIdQuery(db);
     const user = query.firstEntry({ id });
     query.finalize();
 

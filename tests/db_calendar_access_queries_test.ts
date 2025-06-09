@@ -19,7 +19,7 @@ type CalendarEntry = CalendarData & { id: number };
 type CalendarAccessData = { userid: number; calendarid: number; permissions: AccessPermissions; created_at: string };
 type CalendarAccessEntry = CalendarAccessData & { id: number };
 
-Deno.test('DB: CalendarAccess queries', async (t) => {
+Deno.test('DB: calendar_access queries', async (t) => {
   // open an in-memory database
   const db = new DB();
 
@@ -28,7 +28,7 @@ Deno.test('DB: CalendarAccess queries', async (t) => {
 
   const access_permissions_values: AccessPermissions[] = [100, 110, 111];
 
-  await t.step('query: select calendar access', () => {
+  await t.step('query: select calendar_access', () => {
     // create users
     const number_of_users_to_insert = randomIntegerBetween(3, 6);
     const mock_user_data: UserData[] = [];

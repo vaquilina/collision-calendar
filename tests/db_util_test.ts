@@ -2,7 +2,7 @@ import { assertInstanceOf, assertObjectMatch } from '@std/assert';
 
 import { processEntry } from '@collision-calendar/db/util';
 
-Deno.test('processEntry returns { created_at: Temporal.Instant }', () => {
+Deno.test('processEntry converts created_at field to Instant', () => {
   const unprocessed_entry = { created_at: Temporal.Now.instant().toString() };
   const expected_entry = { created_at: Temporal.Instant.from(unprocessed_entry.created_at) };
 

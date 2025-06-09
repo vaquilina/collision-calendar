@@ -2,7 +2,7 @@ import type { DB } from 'sqlite';
 import type { User } from '../classes/user.ts';
 
 /** Get prepared query for retrieving a {@link User} record by id. */
-export const selectUserQuery = (db: DB) =>
+export const selectUserByIdQuery = (db: DB) =>
   db.prepareQuery<
     [User],
     { id: number; name: string; email: string; password: string; created_at: string },
