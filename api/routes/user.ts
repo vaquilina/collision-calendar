@@ -11,7 +11,7 @@ import * as bcrypt from '@da/bcrypt';
 import {
   deleteUserQuery,
   insertUserQuery,
-  selectUserQuery,
+  selectUserByIdQuery,
   updateUserEmailQuery,
   updateUserNameQuery,
   updateUserPasswordQuery,
@@ -47,7 +47,7 @@ export const user = new Hono().basePath('/user')
     const { id } = c.req.valid('param');
 
     const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
-    const query = selectUserQuery(db);
+    const query = selectUserByIdQuery(db);
     const entry = query.firstEntry({ id: id });
     const user = entry ? new User(processEntry(entry)) : undefined;
     query.finalize();
@@ -63,7 +63,7 @@ export const user = new Hono().basePath('/user')
     const { ids } = c.req.valid('query');
 
     const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
-    const query = selectUserQuery(db);
+    const query = selectUserByIdQuery(db);
 
     const entries: ReturnType<typeof query.allEntries> = [];
     if (ids) {
@@ -107,7 +107,7 @@ export const user = new Hono().basePath('/user')
     const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
 
     // ensure user exists
-    const fetch_query = selectUserQuery(db);
+    const fetch_query = selectUserByIdQuery(db);
     const record = fetch_query.firstEntry({ id });
     fetch_query.finalize();
 
@@ -149,7 +149,7 @@ export const user = new Hono().basePath('/user')
     const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
 
     // ensure record exists
-    const fetch_query = selectUserQuery(db);
+    const fetch_query = selectUserByIdQuery(db);
     const record = fetch_query.firstEntry({ id });
     fetch_query.finalize();
 
