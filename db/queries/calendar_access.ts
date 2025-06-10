@@ -12,7 +12,8 @@ export const selectCalendarAccessQuery = (db: DB) =>
     `
       SELECT calendarid, userid
         FROM calendar_access
-       WHERE calendarid = :calendarid AND permissions = :permissions
+       WHERE calendarid = :calendarid
+         AND permissions = :permissions
     `,
   );
 
@@ -50,7 +51,7 @@ export const deleteCalendarAccessByIdQuery = (db: DB) =>
   );
 
 /** Get prepared query for deleting {@link CalendarAccess} records by user id and calendar id. */
-export const deleteCalendarAccessByUserAndCalendar = (db: DB) =>
+export const deleteCalendarAccessByUserAndCalendarQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { userid: number; calendarid: number }>(
     `
       DELETE FROM calendar_access

@@ -12,7 +12,8 @@ export const selectSpaceAccessQuery = (db: DB) =>
     `
       SELECT spaceid, userid
         FROM space_access
-       WHERE spaceid = :spaceid AND permissions = :permissions
+       WHERE spaceid = :spaceid
+         AND permissions = :permissions
     `,
   );
 
@@ -48,7 +49,7 @@ export const deleteSpaceAccessByIdQuery = (db: DB) =>
     `,
   );
 
-export const deleteSpaceAccessByUserAndSpace = (db: DB) =>
+export const deleteSpaceAccessByUserAndSpaceQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { userid: number; spaceid: number }>(
     `
       DELETE FROM space_access
