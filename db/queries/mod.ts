@@ -14,15 +14,24 @@ import {
   updateSpaceNameQuery,
 } from './space.ts';
 import {
+  deleteBlockQuery,
+  insertBlockQuery,
+  selectBlockByIdQuery,
+  selectBlockBySpaceQuery,
+  updateBlockColorQuery,
+  updateBlockNameQuery,
+  updateBlockTimeQuery,
+} from './block.ts';
+import {
   deleteCalendarAccessByIdQuery,
-  deleteCalendarAccessByUserAndCalendar,
+  deleteCalendarAccessByUserAndCalendarQuery,
   insertCalendarAccessQuery,
   selectCalendarAccessQuery,
   updateCalendarAccessPermissionsQuery,
 } from './calendar_access.ts';
 import {
   deleteSpaceAccessByIdQuery,
-  deleteSpaceAccessByUserAndSpace,
+  deleteSpaceAccessByUserAndSpaceQuery,
   insertSpaceAccessQuery,
   selectSpaceAccessQuery,
   updateSpaceAccessPermissionsQuery,
@@ -38,18 +47,22 @@ import {
 } from './user.ts';
 
 export {
+  deleteBlockQuery,
   deleteCalendarAccessByIdQuery,
-  deleteCalendarAccessByUserAndCalendar,
+  deleteCalendarAccessByUserAndCalendarQuery,
   deleteCalendarQuery,
   deleteSpaceAccessByIdQuery,
-  deleteSpaceAccessByUserAndSpace,
+  deleteSpaceAccessByUserAndSpaceQuery,
   deleteSpaceQuery,
   deleteUserQuery,
+  insertBlockQuery,
   insertCalendarAccessQuery,
   insertCalendarQuery,
   insertSpaceAccessQuery,
   insertSpaceQuery,
   insertUserQuery,
+  selectBlockByIdQuery,
+  selectBlockBySpaceQuery,
   selectCalendarAccessQuery,
   selectCalendarByIdQuery,
   selectCalendarByOwnerUserIdQuery,
@@ -58,6 +71,9 @@ export {
   selectSpaceByIdQuery,
   selectUserByEmailQuery,
   selectUserByIdQuery,
+  updateBlockColorQuery,
+  updateBlockNameQuery,
+  updateBlockTimeQuery,
   updateCalendarAccessPermissionsQuery,
   updateCalendarNameQuery,
   updateCalendarOwnerUserIdQuery,
