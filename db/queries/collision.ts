@@ -59,7 +59,7 @@ export const deleteCollisionByIdQuery = (db: DB) =>
  * @remarks
  * This query deletes rows where the provided space id matches either space.
  */
-export const deleteCollisionBySpaceId = (db: DB) =>
+export const deleteCollisionBySpaceIdQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { spaceid: number }>(
     `
       DELETE FROM collision
