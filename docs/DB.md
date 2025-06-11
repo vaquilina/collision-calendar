@@ -2,7 +2,7 @@
 
 A single [SQLite3](https://sqlite.org/index.html) database is used for shared data.
 
-The server manages the database via [deno-sqlite](https://deno.land/x/sqlite@v3.9.1).
+The server manages the database with [deno-sqlite](https://deno.land/x/sqlite@v3.9.1).
 
 ## ER Diagram
 
