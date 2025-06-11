@@ -188,6 +188,23 @@ export const create_tables_sql: string = `
       REFERENCES occupant(id)
       ON DELETE CASCADE
   );
+  
+  CREATE TABLE IF NOT EXISTS user_vote (
+    id          INTEGER PRIMARY KEY,
+    userid      INTEGER NOT NULL,
+    voteid      INTEGER NOT NULL,
+    created_at  TEXT NOT NULL,
+
+    CONSTRAINT fk_user
+      FOREIGN KEY(userid)
+      REFERENCES user(id)
+      ON DELETE CASCADE,
+
+    CONSTRAINT fk_vote
+      FOREIGN KEY(voteid)
+      REFERENCE vote(id)
+      ON DELETE CASCADE
+  );
 `;
 
 /** Initialize the main database. */
