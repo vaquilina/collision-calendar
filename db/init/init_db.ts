@@ -202,7 +202,7 @@ export const create_tables_sql: string = `
 
     CONSTRAINT fk_vote
       FOREIGN KEY(voteid)
-      REFERENCE vote(id)
+      REFERENCES vote(id)
       ON DELETE CASCADE
   );
 `;
