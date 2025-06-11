@@ -2,7 +2,7 @@ import { DB } from 'sqlite';
 
 import { ENV_VAR } from './init_env.ts';
 
-/** SQL query to create the tables. */
+/** SQL script to create the tables. */
 export const create_tables_sql: string = `
   PRAGMA foreign_keys = ON;
 
