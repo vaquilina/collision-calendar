@@ -2,7 +2,7 @@
 
 **🚧 IN DEVELOPMENT 🚧**
 
-A FOSS web-based tool for scheduling shared spaces.
+A FOSS, self-hosted, web-based tool for scheduling shared spaces.
 
 This was created to solve two problems:
 
@@ -16,14 +16,14 @@ See [DB.md](docs/DB.md)
 
 ## Stack
 
-- Runtime: [Deno](https://docs.deno.com/)
-- SQLite module: [deno-sqlite](https://deno.land/x/sqlite@v3.9.1)
-- Storage layer: [unstorage](https://unstorage.unjs.io/)
-  - Driver: [Deno KV](https://docs.deno.com/deploy/kv/manual/)
-- Server framework: [Hono](https://hono.dev/docs/)
-  - Reqest validation: [Zod validator middleware](https://github.com/honojs/middleware/tree/main/packages/zod-validator)
-- Schema validator: [Zod](https://zod.dev/)
-- Auth flow: [OpenAuth](https://openauth.js.org/)
-- Password hashing: [deno-bcrypt](https://github.com/darkaqua/bcrypt)
-- SMTP client: [denomailer](https://github.com/EC-Nordbund/denomailer)
-- Client framework: [SolidJS](https://www.solidjs.com/)
+- [Deno](https://docs.deno.com/)
+- [deno-sqlite](https://deno.land/x/sqlite@v3.9.1)
+- [unstorage](https://unstorage.unjs.io/)
+- [Deno KV](https://docs.deno.com/deploy/kv/manual/)
+- [Hono](https://hono.dev/docs/)
+- [Zod validator middleware](https://github.com/honojs/middleware/tree/main/packages/zod-validator)
+- [Zod](https://zod.dev/)
+- [OpenAuth](https://openauth.js.org/)
+- [deno-bcrypt](https://github.com/darkaqua/bcrypt)
+- [denomailer](https://github.com/EC-Nordbund/denomailer)
+- [SolidJS](https://www.solidjs.com/)
