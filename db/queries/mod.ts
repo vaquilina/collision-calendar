@@ -42,6 +42,13 @@ import {
   selectOccupantByUserIdQuery,
 } from './occupant.ts';
 import {
+  deleteProposalByIdQuery,
+  deleteProposalBySpaceIdQuery,
+  insertProposalQuery,
+  selectProposalByIdQuery,
+  selectProposalBySpaceIdQuery,
+} from './proposal.ts';
+import {
   deleteCalendarAccessByIdQuery,
   deleteCalendarAccessByUserAndCalendarQuery,
   insertCalendarAccessQuery,
@@ -76,6 +83,8 @@ export {
   deleteOccupantBySpaceIdQuery,
   deleteOccupantByUserAndSpaceQuery,
   deleteOccupantByUserIdQuery,
+  deleteProposalByIdQuery,
+  deleteProposalBySpaceIdQuery,
   deleteSpaceAccessByIdQuery,
   deleteSpaceAccessByUserAndSpaceQuery,
   deleteSpaceQuery,
@@ -85,6 +94,7 @@ export {
   insertCalendarQuery,
   insertCollisionQuery,
   insertOccupantQuery,
+  insertProposalQuery,
   insertSpaceAccessQuery,
   insertSpaceQuery,
   insertUserQuery,
@@ -100,6 +110,8 @@ export {
   selectOccupantBySpaceIdQuery,
   selectOccupantByUserAndSpaceQuery,
   selectOccupantByUserIdQuery,
+  selectProposalByIdQuery,
+  selectProposalBySpaceIdQuery,
   selectSpaceAccessQuery,
   selectSpaceByCalendarIdQuery,
   selectSpaceByIdQuery,
