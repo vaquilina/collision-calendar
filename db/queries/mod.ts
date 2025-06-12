@@ -1,5 +1,5 @@
 import {
-  deleteCalendarQuery,
+  deleteCalendarByIdQuery,
   insertCalendarQuery,
   selectCalendarByIdQuery,
   selectCalendarByOwnerUserIdQuery,
@@ -7,14 +7,14 @@ import {
   updateCalendarOwnerUserIdQuery,
 } from './calendar.ts';
 import {
-  deleteSpaceQuery,
+  deleteSpaceByIdQuery,
   insertSpaceQuery,
   selectSpaceByCalendarIdQuery,
   selectSpaceByIdQuery,
   updateSpaceNameQuery,
 } from './space.ts';
 import {
-  deleteBlockQuery,
+  deleteBlockByIdQuery,
   insertBlockQuery,
   selectBlockByIdQuery,
   selectBlockBySpaceQuery,
@@ -82,18 +82,18 @@ import {
   deleteCalendarAccessByIdQuery,
   deleteCalendarAccessByUserAndCalendarQuery,
   insertCalendarAccessQuery,
-  selectCalendarAccessQuery,
+  selectCalendarAccessByIdAndPermissionsQuery,
   updateCalendarAccessPermissionsQuery,
 } from './calendar_access.ts';
 import {
   deleteSpaceAccessByIdQuery,
   deleteSpaceAccessByUserAndSpaceQuery,
   insertSpaceAccessQuery,
-  selectSpaceAccessQuery,
+  selectSpaceAccessByIdAndPermissionsQuery,
   updateSpaceAccessPermissionsQuery,
 } from './space_access.ts';
 import {
-  deleteUserQuery,
+  deleteUserByIdQuery,
   insertUserQuery,
   selectUserByEmailQuery,
   selectUserByIdQuery,
@@ -103,10 +103,10 @@ import {
 } from './user.ts';
 
 export {
-  deleteBlockQuery,
+  deleteBlockByIdQuery,
   deleteCalendarAccessByIdQuery,
   deleteCalendarAccessByUserAndCalendarQuery,
-  deleteCalendarQuery,
+  deleteCalendarByIdQuery,
   deleteCollisionByIdQuery,
   deleteCollisionBySpaceIdQuery,
   deleteOccupantByIdQuery,
@@ -123,8 +123,8 @@ export {
   deleteRepeatByIdQuery,
   deleteSpaceAccessByIdQuery,
   deleteSpaceAccessByUserAndSpaceQuery,
-  deleteSpaceQuery,
-  deleteUserQuery,
+  deleteSpaceByIdQuery,
+  deleteUserByIdQuery,
   deleteVoteByBlockAndProposalQuery,
   deleteVoteByBlockIdQuery,
   deleteVoteByIdQuery,
@@ -143,7 +143,7 @@ export {
   insertVoteQuery,
   selectBlockByIdQuery,
   selectBlockBySpaceQuery,
-  selectCalendarAccessQuery,
+  selectCalendarAccessByIdAndPermissionsQuery,
   selectCalendarByIdQuery,
   selectCalendarByOwnerUserIdQuery,
   selectCollisionByIdQuery,
@@ -161,7 +161,7 @@ export {
   selectProposalBySpaceIdQuery,
   selectRepeatByBlockIdQuery,
   selectRepeatByIdQuery,
-  selectSpaceAccessQuery,
+  selectSpaceAccessByIdAndPermissionsQuery,
   selectSpaceByCalendarIdQuery,
   selectSpaceByIdQuery,
   selectUserByEmailQuery,

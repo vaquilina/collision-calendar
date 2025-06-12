@@ -37,5 +37,5 @@ export const updateSpaceNameQuery = (db: DB) =>
   );
 
 /** Get prepared query for deleting a {@link Space} record by id. */
-export const deleteSpaceQuery = (db: DB) =>
+export const deleteSpaceByIdQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { id: number }>(' DELETE FROM space WHERE id = :id');

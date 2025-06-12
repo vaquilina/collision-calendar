@@ -7,7 +7,7 @@ import { faker } from '@faker-js/faker';
 import { create_tables_sql } from '@collision-calendar/db/init';
 
 import {
-  deleteUserQuery,
+  deleteUserByIdQuery,
   insertUserQuery,
   selectUserByEmailQuery,
   selectUserByIdQuery,
@@ -149,7 +149,7 @@ Deno.test('DB: user queries', async (t) => {
     assertExists(user, 'inserted user not found');
 
     // test query
-    const query = deleteUserQuery(db);
+    const query = deleteUserByIdQuery(db);
     query.execute({ id: user.id });
     query.finalize();
 

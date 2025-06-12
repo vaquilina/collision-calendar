@@ -65,7 +65,7 @@ export const updateBlockTimeQuery = (db: DB) =>
   );
 
 /** Get prepared query for deleting a {@link Block} record. */
-export const deleteBlockQuery = (db: DB) =>
+export const deleteBlockByIdQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { id: number }>(
     'DELETE FROM block WHERE id = :id',
   );

@@ -57,5 +57,5 @@ export const updateUserPasswordQuery = (db: DB) =>
   );
 
 /** Get prepared query for deleting a {@link User} record. */
-export const deleteUserQuery = (db: DB) =>
+export const deleteUserByIdQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { id: number }>('DELETE FROM user WHERE id = :id');

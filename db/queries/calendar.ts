@@ -47,5 +47,5 @@ export const updateCalendarOwnerUserIdQuery = (db: DB) =>
   );
 
 /** Get prepared query for deleting a {@link Calendar} record by id. */
-export const deleteCalendarQuery = (db: DB) =>
+export const deleteCalendarByIdQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { id: number }>('DELETE FROM calendar WHERE id = :id');

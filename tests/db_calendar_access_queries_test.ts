@@ -6,7 +6,7 @@ import { DB } from 'sqlite';
 
 import { faker } from '@faker-js/faker';
 
-import { selectCalendarAccessQuery } from '@collision-calendar/db/queries';
+import { selectCalendarAccessByIdAndPermissionsQuery } from '@collision-calendar/db/queries';
 
 import { create_tables_sql } from '@collision-calendar/db/init';
 
@@ -118,7 +118,7 @@ Deno.test('DB: calendar_access queries', async (t) => {
     assertEquals(mock_calendar_access_data.length, calendar_access_entries.length);
 
     // test query
-    const query = selectCalendarAccessQuery(db);
+    const query = selectCalendarAccessByIdAndPermissionsQuery(db);
     const query_results: { [permissions: number]: { userid: number; calendarid: number }[] } = [];
     for (const access_permissions_value of access_permissions_values) {
       query_results[access_permissions_value] = query.allEntries({

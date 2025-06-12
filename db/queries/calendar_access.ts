@@ -3,7 +3,7 @@ import type { CalendarAccess } from '../classes/calendar_access.ts';
 import type { AccessPermissions } from '@collision-calendar/types';
 
 /** Get prepared query for retrieving {@link CalendarAccess} entries. */
-export const selectCalendarAccessQuery = (db: DB) =>
+export const selectCalendarAccessByIdAndPermissionsQuery = (db: DB) =>
   db.prepareQuery<
     [CalendarAccess],
     { calendarid: number; userid: number },

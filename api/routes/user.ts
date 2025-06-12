@@ -9,7 +9,7 @@ import { DB } from 'sqlite';
 import * as bcrypt from '@da/bcrypt';
 
 import {
-  deleteUserQuery,
+  deleteUserByIdQuery,
   insertUserQuery,
   selectUserByIdQuery,
   updateUserEmailQuery,
@@ -158,7 +158,7 @@ export const user = new Hono().basePath('/user')
       return c.notFound();
     }
 
-    const query = deleteUserQuery(db);
+    const query = deleteUserByIdQuery(db);
     query.execute({ id });
     query.finalize();
 

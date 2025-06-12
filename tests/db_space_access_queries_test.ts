@@ -6,7 +6,7 @@ import { faker } from '@faker-js/faker';
 
 import { DB } from 'sqlite';
 
-import { selectSpaceAccessQuery } from '@collision-calendar/db/queries';
+import { selectSpaceAccessByIdAndPermissionsQuery } from '@collision-calendar/db/queries';
 
 import { create_tables_sql } from '@collision-calendar/db/init';
 
@@ -156,7 +156,7 @@ Deno.test('DB: space_access queries', async (t) => {
     }
 
     // test query
-    const query = selectSpaceAccessQuery(db);
+    const query = selectSpaceAccessByIdAndPermissionsQuery(db);
     const results: { [permissions: number]: { spaceid: number; userid: number }[] } = {};
     for (const access_permissions_value of access_permissions_values) {
       results[access_permissions_value] = query.allEntries({
