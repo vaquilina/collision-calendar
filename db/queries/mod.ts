@@ -23,6 +23,13 @@ import {
   updateBlockTimeQuery,
 } from './block.ts';
 import {
+  deleteRepeatByBlockIdQuery,
+  deleteRepeatByIdQuery,
+  insertRepeatQuery,
+  selectRepeatByBlockIdQuery,
+  selectRepeatByIdQuery,
+} from './repeat.ts';
+import {
   deleteCollisionByIdQuery,
   deleteCollisionBySpaceIdQuery,
   insertCollisionQuery,
@@ -112,6 +119,8 @@ export {
   deleteProposalBlockByProposalIdQuery,
   deleteProposalByIdQuery,
   deleteProposalBySpaceIdQuery,
+  deleteRepeatByBlockIdQuery,
+  deleteRepeatByIdQuery,
   deleteSpaceAccessByIdQuery,
   deleteSpaceAccessByUserAndSpaceQuery,
   deleteSpaceQuery,
@@ -127,6 +136,7 @@ export {
   insertOccupantQuery,
   insertProposalBlockQuery,
   insertProposalQuery,
+  insertRepeatQuery,
   insertSpaceAccessQuery,
   insertSpaceQuery,
   insertUserQuery,
@@ -149,6 +159,8 @@ export {
   selectProposalBlockByProposalIdQuery,
   selectProposalByIdQuery,
   selectProposalBySpaceIdQuery,
+  selectRepeatByBlockIdQuery,
+  selectRepeatByIdQuery,
   selectSpaceAccessQuery,
   selectSpaceByCalendarIdQuery,
   selectSpaceByIdQuery,
