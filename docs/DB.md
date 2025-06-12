@@ -6,6 +6,6 @@ The server manages the database with [deno-sqlite](https://deno.land/x/sqlite@v3
 
 ## ER Diagram
 
-Generated with [SQL Sandbox](https://www.convertcsv.com/sqlite-online.htm)
+Generated with [SQLite Sandbox](https://www.convertcsv.com/sqlite-online.htm)
 
 ![ER Diagram](img/erd.svg)
