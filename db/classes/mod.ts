@@ -10,6 +10,7 @@ import { Space } from './space.ts';
 import { SpaceAccess } from './space_access.ts';
 import { User } from './user.ts';
 import { Vote } from './vote.ts';
+import { UserVote } from './user_vote.ts';
 
 const getTables = async (): Promise<string[]> => {
   const exclude_entries = ['mod', 'base_record'];
@@ -44,5 +45,6 @@ export {
   SpaceAccess,
   Tables,
   User,
+  UserVote,
   Vote,
 };
