@@ -34,7 +34,7 @@ Deno.test('DB: calendar_access queries', async (t) => {
   const access_permissions_values: AccessPermissions[] = [100, 110, 111];
 
   // create users
-  const number_of_users_to_insert = randomIntegerBetween(3, 6);
+  const number_of_users_to_insert = 10;
   const mock_user_data: UserData[] = [];
   const user_entries: UserEntry[] = [];
   for (let i = 0; i < number_of_users_to_insert; i++) {
@@ -97,7 +97,7 @@ Deno.test('DB: calendar_access queries', async (t) => {
 
   await t.step('query: select calendar_access by id & permissions', () => {
     // create calendar access
-    const number_of_calendar_access_to_insert = randomIntegerBetween(3, number_of_users_to_insert);
+    const number_of_calendar_access_to_insert = 8;
     const mock_calendar_access_data: CalendarAccessData[] = [];
     for (let i = 0; i < number_of_calendar_access_to_insert; i++) {
       mock_calendar_access_data[i] = {
@@ -146,7 +146,7 @@ Deno.test('DB: calendar_access queries', async (t) => {
 
   await t.step('query: insert calendar_access', () => {
     const mock_calendar_access_data: CalendarAccessData = {
-      userid: user_entries[randomIntegerBetween(0, number_of_users_to_insert - 1)].id,
+      userid: user_entries[7].id,
       calendarid: calendar_entry.id,
       permissions: access_permissions_values[randomIntegerBetween(0, access_permissions_values.length - 1)],
       created_at: Temporal.Now.instant().toString(),
