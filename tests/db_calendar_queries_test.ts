@@ -224,5 +224,79 @@ Deno.test('DB: calendar queries', async (t) => {
     );
   });
 
+  await t.step('query: delete calendar by id', () => {
+    const mock_user_data: UserData = {
+      name: faker.person.firstName().replaceAll(`'`, ''),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      created_at: Temporal.Now.instant.toString(),
+    };
+
+    db.execute(
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_user_data.name}',
+                '${mock_user_data.email}',
+                '${mock_user_data.password}',
+                '${mock_user_data.created_at}')
+      `,
+    );
+
+    const [user_entry] = db.queryEntries<UserEntry>('SELECT * FROM user');
+    assertExists(user_entry, 'inserted user not found');
+    assertEquals<UserData>({
+      name: user_entry.name,
+      email: user_entry.email,
+      password: user_entry.password,
+      created_at: user_entry.created_at,
+    }, {
+      name: mock_user_data.name,
+      email: mock_user_data.email,
+      password: mock_user_data.password,
+      created_at: mock_user_data.created_at,
+    }, 'entry does not match input');
+
+    const mock_calendar_data: CalendarData = {
+      name: faker.company.name().replaceAll(`'`, ''),
+      owneruserid: user_entry.id,
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    db.execute(
+      `
+        INSERT INTO calendar (name, owneruserid, created_at)
+        VALUES ('${mock_calendar_data.name}',
+                 ${mock_calendar_data.owneruserid},
+                '${mock_calendar_data.created_at}')
+      `,
+    );
+
+    const [calendar_entry] = db.queryEntries<CalendarEntry>('SELECT * FROM calendar');
+    assertExists(calendar_entry, 'inserted calendar not found');
+    assertEquals<CalendarData>({
+      name: calendar_entry.name,
+      owneruserid: calendar_entry.owneruserid,
+      created_at: calendar_entry.created_at,
+    }, {
+      name: mock_calendar_data.name,
+      owneruserid: mock_calendar_data.owneruserid,
+      created_at: mock_calendar_data.created_at,
+    }, 'entry does not match data');
+
+    const query = deleteCalendarByIdQuery(db);
+    query.execute({ id: calendar_entry.id });
+    query.finalize();
+
+    const [entry] = db.queryEntries(`SELECT * FROM calendar WHERE id = ${calendar_entry.id}`);
+    assertEquals(entry, undefined, 'calendar entry not deleted');
+
+    db.execute(
+      `
+        DELETE FROM calendar;
+        DELETE FROM user;
+      `,
+    );
+  });
+
   db.close();
 });
