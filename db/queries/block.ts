@@ -69,3 +69,9 @@ export const deleteBlockByIdQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { id: number }>(
     'DELETE FROM block WHERE id = :id',
   );
+
+/** Get prepared query for deleting {@link Block} records by space id. */
+export const deleteBlockBySpaceIdQuery = (db: DB) =>
+  db.prepareQuery<Row, RowObject, { spaceid: number }>(
+    'DELETE FROM block WHERE spaceid = :spaceid',
+  );

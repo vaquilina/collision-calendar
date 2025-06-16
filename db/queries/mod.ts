@@ -15,6 +15,7 @@ import {
 } from './space.ts';
 import {
   deleteBlockByIdQuery,
+  deleteBlockBySpaceIdQuery,
   insertBlockQuery,
   selectBlockByIdQuery,
   selectBlockBySpaceQuery,
@@ -104,6 +105,7 @@ import {
 
 export {
   deleteBlockByIdQuery,
+  deleteBlockBySpaceIdQuery,
   deleteCalendarAccessByIdQuery,
   deleteCalendarAccessByUserAndCalendarQuery,
   deleteCalendarByIdQuery,
