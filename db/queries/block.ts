@@ -12,7 +12,7 @@ export const selectBlockByIdQuery = (db: DB) =>
   );
 
 /** Get prepared query for retrieving {@link Block} records by space id. */
-export const selectBlockBySpaceQuery = (db: DB) =>
+export const selectBlockBySpaceIdQuery = (db: DB) =>
   db.prepareQuery<
     [Block],
     { id: number; name: string; color: string; start: string; end: string; spaceid: number; created_at: string },
