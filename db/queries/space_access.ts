@@ -25,7 +25,7 @@ export const insertSpaceAccessQuery = (db: DB) =>
     { spaceid: number; userid: number; permissions: AccessPermissions; created_at: string }
   >(
     `
-      INSERT INTO calendar_access (spaceid, userid, permissions, created_at)
+      INSERT INTO space_access (spaceid, userid, permissions, created_at)
       VALUES (:spaceid, :userid, :permissions, :created_at)
     `,
   );
@@ -34,7 +34,7 @@ export const insertSpaceAccessQuery = (db: DB) =>
 export const updateSpaceAccessPermissionsQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { permissions: AccessPermissions; userid: number; spaceid: number }>(
     `
-      UPDATE space_acess
+      UPDATE space_access
          SET permissions = :permissions
        WHERE userid = :userid
          AND spaceid = :spaceid
