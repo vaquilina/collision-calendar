@@ -11,7 +11,6 @@ import { create_tables_sql } from '@collision-calendar/db/init';
 import {
   deleteCollisionByIdQuery,
   deleteCollisionBySpaceIdQuery,
-  deleteUserByIdQuery,
   insertCollisionQuery,
   selectCollisionByIdQuery,
   selectCollisionBySpaceIdQuery,
@@ -241,6 +240,57 @@ Deno.test('DB: collision queries', async (t) => {
     assertExists(inserted_entry);
     assertObjectMatch(inserted_entry, mock_collision_data);
   });
+
+  await t.step('query: delete collision by id', () => {
+    const [collision_entry] = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
+    assertExists(collision_entry);
+
+    const query = deleteCollisionByIdQuery(db);
+    query.execute({ id: collision_entry.id });
+    query.finalize();
+
+    const [deleted_entry] = db.queryEntries<CollisionEntry>(`SELECT * FROM collision WHERE id = ${collision_entry.id}`);
+    assertEquals(deleted_entry, undefined);
+  });
+
+  await t.step('query: delete collision by space id', () => {
+    const entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
+    assertExists(entries);
+    assertGreater(entries.length, 0);
+
+    const spaceids = [...new Set(entries.flatMap(({ spaceid_l, spaceid_r }) => [spaceid_l, spaceid_r]))];
+    const space_id_to_delete = spaceids[randomIntegerBetween(0, spaceids.length - 1)];
+
+    const query = deleteCollisionBySpaceIdQuery(db);
+    query.execute({ spaceid: space_id_to_delete });
+    query.finalize();
+
+    const deleted_entries = db.queryEntries<CollisionEntry>(
+      `
+        SELECT * FROM collision
+         WHERE spaceid_l = ${space_id_to_delete}
+            OR spaceid_r = ${space_id_to_delete}
+      `,
+    );
+    assertEquals(deleted_entries.length, 0);
+  });
+
+  db.execute(
+    `
+      DELETE FROM collision;
+      DELETE FROM space;
+      DELETE FROM calendar;
+      DELETE FROM user;
+    `,
+  );
+  const deleted_collision_entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
+  assertEquals(deleted_collision_entries.length, 0);
+  const deleted_space_entries = db.queryEntries<SpaceEntry>('SELECT * FROM space');
+  assertEquals(deleted_space_entries.length, 0);
+  const deleted_calendar_entries = db.queryEntries<CalendarEntry>('SELECT * FROM calendar');
+  assertEquals(deleted_calendar_entries.length, 0);
+  const deleted_user_entries = db.queryEntries<UserEntry>('SELECT * FROM user');
+  assertEquals(deleted_user_entries.length, 0);
 
   db.close();
 });
