@@ -194,9 +194,9 @@ Deno.test('DB: collision queries', async (t) => {
     const target_entry = entries[randomIntegerBetween(0, number_of_collisions_to_insert - 1)];
     const { spaceid_l: spaceid_1, spaceid_r: spaceid_2 } = target_entry;
 
-    const filtered_entries = entries.filter((e) =>
-      [spaceid_1, spaceid_2].includes(e.spaceid_l) && [spaceid_1, spaceid_2].includes(e.spaceid_r)
-    );
+    const spaceids: [number, number] = [spaceid_1, spaceid_2];
+
+    const filtered_entries = entries.filter((e) => spaceids.includes(e.spaceid_l) && spaceids.includes(e.spaceid_r));
     assertGreater(filtered_entries.length, 0);
 
     const query = selectCollisionBySpaceIdsQuery(db);
