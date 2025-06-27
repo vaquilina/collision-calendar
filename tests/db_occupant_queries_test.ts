@@ -1,6 +1,6 @@
 import { DB } from 'sqlite';
 
-import { assertEquals, assertExists, assertGreater, assertObjectMatch } from '@std/assert';
+import { assertEquals, assertExists, assertGreater, assertNotEquals, assertObjectMatch } from '@std/assert';
 
 import { randomIntegerBetween, sample } from '@std/random';
 
@@ -140,14 +140,161 @@ Deno.test('DB: occupant queries', async (t) => {
     assertObjectMatch(actual_entry, expected_entry);
     assertEquals(actual_entry, expected_entry);
   });
-  await t.step('query: select occupant by space id', () => {});
-  await t.step('query: select occupant by user id', () => {});
-  await t.step('query: select occupant by user and space', () => {});
-  await t.step('query: insert occupant', () => {});
-  await t.step('query: delete occupant by id', () => {});
-  await t.step('query: delete occupant by space id', () => {});
-  await t.step('query: delete occupant by user id', () => {});
-  await t.step('query: delete occupant by user and space', () => {});
+  await t.step('query: select occupant by space id', () => {
+    const space_id_to_select = sample(occupant_entries.map((e) => e.spaceid));
+    assertExists(space_id_to_select);
+
+    const expected_entries = occupant_entries.filter((e) => e.spaceid === space_id_to_select);
+
+    const query = selectOccupantBySpaceIdQuery(db);
+    const actual_entries = query.allEntries({ spaceid: space_id_to_select });
+    query.finalize();
+
+    assertGreater(actual_entries.length, 0);
+    assertEquals(actual_entries.length, expected_entries.length);
+
+    for (const actual_entry of actual_entries) {
+      const expected_entry = expected_entries.find((e) => e.id === actual_entry.id);
+      assertExists(expected_entry);
+      assertObjectMatch(actual_entry, expected_entry);
+    }
+  });
+  await t.step('query: select occupant by user id', () => {
+    const user_id_to_select = sample(occupant_entries.map((e) => e.userid));
+    assertExists(user_id_to_select);
+
+    const expected_entries = occupant_entries.filter((e) => e.userid === user_id_to_select);
+
+    const query = selectOccupantByUserIdQuery(db);
+    const actual_entries = query.allEntries({ userid: user_id_to_select });
+    query.finalize();
+
+    assertGreater(actual_entries.length, 0);
+    assertEquals(actual_entries.length, expected_entries.length);
+
+    for (const actual_entry of actual_entries) {
+      const expected_entry = expected_entries.find((e) => e.id === actual_entry.id);
+      assertExists(expected_entry);
+      assertObjectMatch(actual_entry, expected_entry);
+    }
+  });
+  await t.step('query: select occupant by user and space', () => {
+    const { userid, spaceid } = sample(occupant_entries)!;
+
+    const expected_entries = occupant_entries.filter((e) => e.userid === userid && e.spaceid === spaceid);
+    assertGreater(expected_entries.length, 0);
+
+    const query = selectOccupantByUserAndSpaceQuery(db);
+    const actual_entries = query.allEntries({ userid, spaceid });
+    query.finalize();
+
+    assertGreater(actual_entries.length, 0);
+    assertEquals(actual_entries.length, expected_entries.length);
+
+    for (const actual_entry of actual_entries) {
+      const expected_entry = expected_entries.find((e) => e.id === actual_entry.id);
+      assertExists(expected_entry);
+      assertObjectMatch(actual_entry, expected_entry);
+    }
+  });
+  await t.step('query: insert occupant', () => {
+    const mock_occupant_data: OccupantData = {
+      userid: sample(user_entries.map((e) => e.id))!,
+      spaceid: sample(space_entries.map((e) => e.id))!,
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    const { userid, spaceid, created_at } = mock_occupant_data;
+
+    const query = insertOccupantQuery(db);
+    query.execute({ userid, spaceid, created_at });
+    query.finalize();
+
+    const [result_entry] = db.queryEntries<OccupantEntry>(
+      `
+        SELECT * FROM occupant
+         WHERE userid = ${userid}
+           AND spaceid = ${spaceid}
+           AND created_at = '${created_at}'
+      `,
+    );
+    assertExists(result_entry);
+    assertObjectMatch(result_entry, mock_occupant_data);
+  });
+  await t.step('query: delete occupant by id', () => {
+    const entries = db.queryEntries<OccupantEntry>('SELECT * FROM occupant');
+    assertGreater(entries.length, 0);
+
+    const id_to_delete = sample(entries.map((e) => e.id));
+    assertExists(id_to_delete);
+
+    const query = deleteOccupantByIdQuery(db);
+    query.execute({ id: id_to_delete });
+    query.finalize();
+
+    const result_entries = db.queryEntries<OccupantEntry>('SELECT * FROM occupant');
+    assertGreater(result_entries.length, 0);
+    assertNotEquals(result_entries.length, entries.length);
+
+    const deleted_entry = result_entries.find((e) => e.id === id_to_delete);
+    assertEquals(deleted_entry, undefined);
+  });
+  await t.step('query: delete occupant by space id', () => {
+    const entries = db.queryEntries<OccupantEntry>('SELECT * FROM occupant');
+    assertGreater(entries.length, 0);
+
+    const space_id_to_select = sample(entries.map((e) => e.spaceid));
+    assertExists(space_id_to_select);
+
+    const expected_entries = entries.filter((e) => e.spaceid === space_id_to_select);
+    assertGreater(expected_entries.length, 0);
+
+    const query = deleteOccupantBySpaceIdQuery(db);
+    query.execute({ spaceid: space_id_to_select });
+    query.finalize();
+
+    const actual_entries = db.queryEntries<OccupantEntry>(
+      `SELECT * FROM occupant WHERE spaceid = ${space_id_to_select}`,
+    );
+    assertEquals(actual_entries.length, 0);
+  });
+  await t.step('query: delete occupant by user id', () => {
+    const entries = db.queryEntries<OccupantEntry>('SELECT * FROM occupant');
+    assertGreater(entries.length, 0);
+
+    const user_id_to_select = sample(entries.map((e) => e.userid));
+    assertExists(user_id_to_select);
+
+    const expected_entries = entries.filter((e) => e.userid === user_id_to_select);
+    assertGreater(expected_entries.length, 0);
+
+    const query = deleteOccupantByUserIdQuery(db);
+    query.execute({ userid: user_id_to_select });
+    query.finalize();
+
+    const actual_entries = db.queryEntries<OccupantEntry>(
+      `SELECT * FROM occupant WHERE userid = ${user_id_to_select}`,
+    );
+    assertEquals(actual_entries.length, 0);
+  });
+  await t.step('query: delete occupant by user and space', () => {
+    const entries = db.queryEntries<OccupantEntry>('SELECT * FROM occupant');
+    assertGreater(entries.length, 0);
+
+    const { userid, spaceid } = sample(entries)!;
+
+    const expected_entries = entries.filter((e) => e.userid === userid && e.spaceid === spaceid);
+    assertGreater(expected_entries.length, 0);
+
+    const query = deleteOccupantByUserAndSpaceQuery(db);
+    query.execute({ userid, spaceid });
+    query.finalize();
+
+    const actual_entries = db.queryEntries<OccupantEntry>(
+      `SELECT * FROM occupant WHERE userid = ${userid} AND spaceid = ${spaceid}`,
+    );
+    assertEquals(actual_entries.length, 0);
+  });
 
   db.execute(
     `
