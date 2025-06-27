@@ -55,6 +55,7 @@ import {
   insertProposalQuery,
   selectProposalByIdQuery,
   selectProposalBySpaceIdQuery,
+  updateProposalNameQuery,
 } from './proposal.ts';
 import {
   deleteProposalBlockByBlockIdQuery,
@@ -179,6 +180,7 @@ export {
   updateCalendarAccessPermissionsQuery,
   updateCalendarNameQuery,
   updateCalendarOwnerUserIdQuery,
+  updateProposalNameQuery,
   updateSpaceAccessPermissionsQuery,
   updateSpaceNameQuery,
   updateUserEmailQuery,
