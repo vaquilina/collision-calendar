@@ -139,6 +139,7 @@ export const create_tables_sql: string = `
     id          INTEGER PRIMARY KEY,
     proposalid  INTEGER NOT NULL,
     blockid     INTEGER NOT NULL,
+    created_at  TEXT NOT NULL,
 
     CONSTRAINT fk_proposal
       FOREIGN KEY(proposalid)
