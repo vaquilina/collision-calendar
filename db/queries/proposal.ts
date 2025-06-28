@@ -26,7 +26,7 @@ export const insertProposalQuery = (db: DB) =>
 export const updateProposalNameQuery = (db: DB) =>
   db.prepareQuery<Row, RowObject, { name: string; id: number }>(
     `
-      UPDATE propsoal
+      UPDATE proposal
          SET name = :name
        WHERE id = :id
     `,
