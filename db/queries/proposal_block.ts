@@ -18,7 +18,7 @@ export const selectProposalBlockByProposalIdQuery = (db: DB) =>
     { id: number; proposalid: number; blockid: number; created_at: string },
     { proposalid: number }
   >(
-    'SELECT * FROM proposal_block WHERE proposalid = :id',
+    'SELECT * FROM proposal_block WHERE proposalid = :proposalid',
   );
 
 /** Get prepared query for retrieving {@link ProposalBlock} records by block id. */
