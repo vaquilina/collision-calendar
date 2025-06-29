@@ -208,7 +208,7 @@ Deno.test('DB: proposal_block queries', async (t) => {
     query.finalize();
 
     assertExists(actual_entries);
-    assertEquals(actual_entries.sort((a, b) => a.id - b.id), expected_entries.sort((a, b) => a.id - b.id));
+    assertEquals(actual_entries.toSorted((a, b) => a.id - b.id), expected_entries.toSorted((a, b) => a.id - b.id));
   });
   await t.step('query: select proposal_block by proposal id', () => {
     const proposal_id_to_select = sample([...new Set(proposal_block_entries.map((e) => e.proposalid))]);
@@ -222,7 +222,7 @@ Deno.test('DB: proposal_block queries', async (t) => {
     query.finalize();
 
     assertExists(actual_entries);
-    assertEquals(actual_entries.sort((a, b) => a.id - b.id), expected_entries.sort((a, b) => a.id - b.id));
+    assertEquals(actual_entries.toSorted((a, b) => a.id - b.id), expected_entries.toSorted((a, b) => a.id - b.id));
   });
   await t.step('query: select proposal_block by proposal and block', () => {
     const expected_entry = sample(proposal_block_entries);
