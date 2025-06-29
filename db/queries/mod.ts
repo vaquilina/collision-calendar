@@ -76,8 +76,8 @@ import {
   insertVoteQuery,
   selectVoteByBlockAndProposalQuery,
   selectVoteByBlockIdQuery,
-  selectVoteByCalendarIdQuery,
   selectVoteByIdQuery,
+  selectVoteByOccupantIdQuery,
   selectVoteByProposalIdQuery,
 } from './vote.ts';
 import {
@@ -171,8 +171,8 @@ export {
   selectUserByIdQuery,
   selectVoteByBlockAndProposalQuery,
   selectVoteByBlockIdQuery,
-  selectVoteByCalendarIdQuery,
   selectVoteByIdQuery,
+  selectVoteByOccupantIdQuery,
   selectVoteByProposalIdQuery,
   updateBlockColorQuery,
   updateBlockNameQuery,

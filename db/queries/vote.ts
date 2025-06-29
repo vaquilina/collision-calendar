@@ -6,7 +6,7 @@ import type { VoteAnswer } from '@collision-calendar/types';
 export const selectVoteByIdQuery = (db: DB) =>
   db.prepareQuery<
     [Vote],
-    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; calendarid: number; created_at: string },
+    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; occupantid: number; created_at: string },
     { id: number }
   >('SELECT * FROM vote WHERE id = :id');
 
@@ -14,7 +14,7 @@ export const selectVoteByIdQuery = (db: DB) =>
 export const selectVoteByBlockIdQuery = (db: DB) =>
   db.prepareQuery<
     [Vote],
-    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; calendarid: number; created_at: string },
+    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; occupantid: number; created_at: string },
     { blockid: number }
   >('SELECT * FROM vote WHERE blockid = :blockid');
 
@@ -22,32 +22,32 @@ export const selectVoteByBlockIdQuery = (db: DB) =>
 export const selectVoteByProposalIdQuery = (db: DB) =>
   db.prepareQuery<
     [Vote],
-    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; calendarid: number; created_at: string },
+    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; occupantid: number; created_at: string },
     { proposalid: number }
   >('SELECT * FROM vote WHERE proposalid = :proposalid');
 
-/** Get prepared query for retrieving {@link Vote} records by calendar id. */
-export const selectVoteByCalendarIdQuery = (db: DB) =>
+/** Get prepared query for retrieving {@link Vote} records by occupant id. */
+export const selectVoteByOccupantIdQuery = (db: DB) =>
   db.prepareQuery<
     [Vote],
-    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; calendarid: number; created_at: string },
-    { calendarid: number }
-  >('SELECT * FROM vote WHERE calendarid = :calendarid');
+    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; occupantid: number; created_at: string },
+    { occupantid: number }
+  >('SELECT * FROM vote WHERE occupantid = :occupantid');
 
 /** Get prepared query for retrieving {@link Vote} records by block id and proposal id. */
 export const selectVoteByBlockAndProposalQuery = (db: DB) =>
   db.prepareQuery<
     [Vote],
-    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; calendarid: number; created_at: string },
+    { id: number; answer: VoteAnswer; blockid: number; proposalid: number; occupantid: number; created_at: string },
     { blockid: number; proposalid: number }
   >('SELECT * FROM vote WHERE blockid = :blockid AND proposalid = :proposalid');
 
 /** Get prepared query for inserting a {@link Vote} record. */
 export const insertVoteQuery = (db: DB) =>
-  db.prepareQuery<Row, RowObject, { blockid: number; proposalid: number; calendarid: number; created_at: string }>(
+  db.prepareQuery<Row, RowObject, { blockid: number; proposalid: number; occupantid: number; created_at: string }>(
     `
-      INSERT INTO vote (blockid, proposalid, calendarid, created_at)
-      VALUES (:blockid, :proposalid, :calendarid, :created_at)
+      INSERT INTO vote (blockid, proposalid, occupantid, created_at)
+      VALUES (:blockid, :proposalid, :occupantid, :created_at)
     `,
   );
 
