@@ -44,10 +44,14 @@ export const selectVoteByBlockAndProposalQuery = (db: DB) =>
 
 /** Get prepared query for inserting a {@link Vote} record. */
 export const insertVoteQuery = (db: DB) =>
-  db.prepareQuery<Row, RowObject, { blockid: number; proposalid: number; occupantid: number; created_at: string }>(
+  db.prepareQuery<
+    Row,
+    RowObject,
+    { blockid: number; proposalid: number; occupantid: number; answer: VoteAnswer; created_at: string }
+  >(
     `
-      INSERT INTO vote (blockid, proposalid, occupantid, created_at)
-      VALUES (:blockid, :proposalid, :occupantid, :created_at)
+      INSERT INTO vote (blockid, proposalid, occupantid, answer, created_at)
+      VALUES (:blockid, :proposalid, :occupantid, :answer, :created_at)
     `,
   );
 

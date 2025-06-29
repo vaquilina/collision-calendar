@@ -22,6 +22,7 @@ import {
 } from '@collision-calendar/db/queries';
 
 import type { VoteAnswer } from '@collision-calendar/types';
+import { SpaceAccess } from '@collision-calendar/db/classes';
 
 type UserData = { name: string; email: string; password: string; created_at: string };
 type UserEntry = UserData & { id: number };
@@ -36,7 +37,7 @@ type BlockEntry = BlockData & { id: number };
 type ProposalData = { name: string; spaceid: number; created_at: string };
 type ProposalEntry = ProposalData & { id: number };
 type ProposalBlockEntry = { proposalid: number; blockid: number; created_at: string; id: number };
-type VoteData = { answer: VoteAnswer; blockid: number; occupantid: number; proposalid: number };
+type VoteData = { answer: VoteAnswer; blockid: number; occupantid: number; proposalid: number; created_at: string };
 type VoteEntry = VoteData & { id: number };
 
 Deno.test('DB: vote queries', async (t) => {
@@ -44,7 +45,7 @@ Deno.test('DB: vote queries', async (t) => {
 
   db.execute(create_tables_sql);
 
-  const number_of_users_to_insert = randomIntegerBetween(4, 6);
+  const number_of_users_to_insert = randomIntegerBetween(40, 60);
   for (let i = 0; i < number_of_users_to_insert; i++) {
     const mock_user_data: UserData = {
       name: faker.person.firstName().replaceAll(`,`, ''),
@@ -69,7 +70,7 @@ Deno.test('DB: vote queries', async (t) => {
   assertEquals(user_entries.length, number_of_users_to_insert);
 
   const mock_calendar_data: CalendarData = {
-    name: faker.company.name().replaceAll(`,`, ''),
+    name: faker.company.name().replaceAll(`'`, ''),
     owneruserid: sample(user_entries.map((e) => e.id))!,
     created_at: Temporal.Now.instant().toString(),
   };
@@ -185,7 +186,7 @@ Deno.test('DB: vote queries', async (t) => {
         INSERT INTO proposal_block (proposalid, blockid, created_at)
         VALUES (${proposalid},
                 ${blockid},
-                ${Temporal.Now.instant().toString()})
+               '${Temporal.Now.instant().toString()}')
       `,
     );
   }
@@ -194,27 +195,236 @@ Deno.test('DB: vote queries', async (t) => {
   assertExists(proposal_block_entries);
   assertEquals(proposal_block_entries.length, proposal_blocks_to_insert.length);
 
-  // create votes
+  let i = 0;
+  for (const proposal_block_entry of proposal_block_entries) {
+    const mock_vote_data: VoteData = {
+      answer: randomIntegerBetween(0, 1),
+      blockid: proposal_block_entry.blockid,
+      proposalid: proposal_block_entry.proposalid,
+      occupantid: occupant_entries[i].id,
+      created_at: Temporal.Now.instant().toString(),
+    };
 
-  await t.step('query: select vote by id', () => {});
+    i += 1;
 
-  await t.step('query: select vote by block id', () => {});
+    db.execute(
+      `
+        INSERT INTO vote (answer, blockid, proposalid, occupantid, created_at)
+        VALUES (${mock_vote_data.answer},
+                ${mock_vote_data.blockid},
+                ${mock_vote_data.proposalid},
+                ${mock_vote_data.occupantid},
+               '${mock_vote_data.created_at}')
+      `,
+    );
+  }
 
-  await t.step('query: select vote by proposal id', () => {});
+  const vote_entries = db.queryEntries<VoteEntry>('SELECT * FROM vote');
+  assertExists(vote_entries);
+  assertGreater(vote_entries.length, 0);
+  assertEquals(vote_entries.length, proposal_block_entries.length);
 
-  await t.step('query: select vote by block and proposal', () => {});
+  await t.step('query: select vote by id', () => {
+    const expected_entry = sample(vote_entries);
+    assertExists(expected_entry);
 
-  await t.step('query: select vote by occupant id', () => {});
+    const query = selectVoteByIdQuery(db);
+    const actual_entry = query.firstEntry({ id: expected_entry.id });
+    query.finalize();
 
-  await t.step('query: insert vote', () => {});
+    assertExists(actual_entry);
+    assertEquals(actual_entry, expected_entry);
+  });
 
-  await t.step('query: delete vote by id', () => {});
+  await t.step('query: select vote by block id', () => {
+    const blockid = sample(proposal_block_entries.map((e) => e.blockid));
+    assertExists(blockid);
 
-  await t.step('query: delete vote by block id', () => {});
+    const expected_entries = vote_entries.filter((e) => e.blockid === blockid);
+    assertGreater(expected_entries.length, 0);
 
-  await t.step('query: delete vote by proposal id', () => {});
+    const query = selectVoteByBlockIdQuery(db);
+    const actual_entries = query.allEntries({ blockid });
+    query.finalize();
 
-  await t.step('query: delete vote by proposal and block', () => {});
+    assertExists(actual_entries);
+    assertEquals(actual_entries.toSorted((a, b) => a.id - b.id), expected_entries.toSorted((a, b) => a.id - b.id));
+  });
+
+  await t.step('query: select vote by proposal id', () => {
+    const proposalid = sample(proposal_block_entries.map((e) => e.proposalid));
+    assertExists(proposalid);
+
+    const expected_entries = vote_entries.filter((e) => e.proposalid === proposalid);
+    assertGreater(expected_entries.length, 0);
+
+    const query = selectVoteByProposalIdQuery(db);
+    const actual_entries = query.allEntries({ proposalid });
+    query.finalize();
+
+    assertExists(actual_entries);
+    assertEquals(actual_entries, expected_entries);
+  });
+
+  await t.step('query: select vote by block and proposal', () => {
+    const { blockid, proposalid } = sample(proposal_block_entries)!;
+    assertExists(blockid);
+    assertExists(proposalid);
+
+    const expected_entries = vote_entries.filter((e) => e.blockid === blockid && e.proposalid === proposalid);
+    assertGreater(expected_entries.length, 0);
+
+    const query = selectVoteByBlockAndProposalQuery(db);
+    const actual_entries = query.allEntries({ blockid, proposalid });
+    query.finalize();
+
+    assertExists(actual_entries);
+    assertEquals(actual_entries, expected_entries);
+  });
+
+  await t.step('query: select vote by occupant id', () => {
+    const occupantid = sample(vote_entries.map((e) => e.occupantid));
+    assertExists(occupantid);
+
+    const expected_entries = vote_entries.filter((e) => e.occupantid === occupantid);
+    assertGreater(expected_entries.length, 0);
+
+    const query = selectVoteByOccupantIdQuery(db);
+    const actual_entries = query.allEntries({ occupantid });
+    query.finalize();
+
+    assertExists(actual_entries);
+    assertEquals(actual_entries, expected_entries);
+  });
+
+  await t.step('query: insert vote', () => {
+    const occupant_voter_ids = vote_entries.map((e) => e.occupantid);
+    const remaining_occupants = occupant_entries.filter((e) => !occupant_voter_ids.includes(e.id));
+    assertGreater(remaining_occupants.length, 0);
+
+    const proposal_block = sample(proposal_block_entries);
+    assertExists(proposal_block);
+
+    const mock_vote_data: VoteData = {
+      blockid: proposal_block.blockid,
+      proposalid: proposal_block.proposalid,
+      occupantid: sample(remaining_occupants.map((e) => e.id))!,
+      created_at: Temporal.Now.instant().toString(),
+      answer: randomIntegerBetween(0, 1),
+    };
+
+    const query = insertVoteQuery(db);
+    query.execute(mock_vote_data);
+    query.finalize();
+
+    const [actual_entry] = db.queryEntries(
+      `
+        SELECT * FROM vote
+         WHERE blockid = ${mock_vote_data.blockid}
+           AND proposalid = ${mock_vote_data.proposalid}
+           AND occupantid = ${mock_vote_data.occupantid}
+           AND answer = ${mock_vote_data.answer}
+           AND created_at = '${mock_vote_data.created_at}'
+      `,
+    );
+
+    assertExists(actual_entry);
+    assertObjectMatch(actual_entry, mock_vote_data);
+  });
+
+  const getEntries = () => db.queryEntries<VoteEntry>('SELECT * FROM vote');
+
+  await t.step('query: delete vote by id', () => {
+    const entries = getEntries();
+    assertGreater(entries.length, 0);
+
+    const id = sample(entries.map((e) => e.id));
+    assertExists(id);
+
+    const query = deleteVoteByIdQuery(db);
+    query.execute({ id });
+    query.finalize();
+
+    const [actual_entry] = db.queryEntries<VoteEntry>(
+      `
+        SELECT * FROM vote
+         WHERE id = ${id}
+      `,
+    );
+
+    assertEquals(actual_entry, undefined);
+  });
+
+  await t.step('query: delete vote by block id', () => {
+    const entries = getEntries();
+    assertGreater(entries.length, 0);
+
+    const blockid = sample(entries.map((e) => e.blockid));
+    assertExists(blockid);
+
+    const query = deleteVoteByBlockIdQuery(db);
+    query.execute({ blockid });
+    query.finalize();
+
+    const actual_entries = db.queryEntries<VoteEntry>(
+      `
+        SELECT * FROM vote
+         WHERE blockid = ${blockid}
+      `,
+    );
+    assertEquals(actual_entries.length, 0);
+  });
+
+  await t.step('query: delete vote by proposal id', () => {
+    const entries = getEntries();
+    assertGreater(entries.length, 0);
+
+    const proposalid = sample(entries.map((e) => e.proposalid));
+    assertExists(proposalid);
+
+    const query = deleteVoteByProposalIdQuery(db);
+    query.execute({ proposalid });
+    query.finalize();
+
+    const actual_entries = db.queryEntries<VoteEntry>(
+      `
+        SELECT * FROM vote
+         WHERE proposalid = ${proposalid}
+      `,
+    );
+
+    assertEquals(actual_entries.length, 0);
+  });
+
+  await t.step('query: delete vote by proposal and block', () => {
+    const insert_query = insertVoteQuery(db);
+    for (const vote_entry of vote_entries) {
+      const { blockid, proposalid, occupantid, answer, created_at } = vote_entry;
+      insert_query.execute({ blockid, proposalid, occupantid, answer, created_at });
+    }
+    insert_query.finalize();
+
+    const entries = getEntries();
+    assertGreater(entries.length, 0);
+
+    const { proposalid, blockid } = sample(entries)!;
+    assertExists(proposalid);
+    assertExists(blockid);
+
+    const query = deleteVoteByBlockAndProposalQuery(db);
+    query.execute({ blockid, proposalid });
+    query.finalize();
+
+    const actual_entries = db.queryEntries<VoteEntry>(
+      `
+        SELECT * FROM vote
+         WHERE blockid = ${blockid}
+           AND proposalid = ${proposalid}
+      `,
+    );
+
+    assertEquals(actual_entries.length, 0);
+  });
 
   db.execute(
     `
