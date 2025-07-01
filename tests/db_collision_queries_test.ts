@@ -1,6 +1,6 @@
 import { DB } from 'sqlite';
 
-import { assertArrayIncludes, assertEquals, assertExists, assertGreater, assertObjectMatch } from '@std/assert';
+import { assertEquals, assertExists, assertGreater, assertObjectMatch } from '@std/assert';
 
 import { randomIntegerBetween, sample } from '@std/random';
 
@@ -26,6 +26,14 @@ type SpaceEntry = SpaceData & { id: number };
 type CollisionData = { spaceid_l: number; spaceid_r: number; created_at: string };
 type CollisionEntry = CollisionData & { id: number };
 
+/** @see https://stackoverflow.com/a/36255356/13113770 */
+const pairwise = (list: number[]): [number, number][] => {
+  if (list.length < 2) return [];
+  const first = list[0];
+  const rest = list.slice(1);
+  const pairs: [number, number][] = list.map((i) => [first, i]);
+  return pairs.concat(pairwise(rest));
+};
 Deno.test('DB: collision queries', async (t) => {
   const db = new DB();
 
@@ -71,8 +79,7 @@ Deno.test('DB: collision queries', async (t) => {
   assertExists(calendar_entry, 'inserted calendar not found');
   assertObjectMatch(calendar_entry, mock_calendar_data);
 
-  const number_of_spaces_to_insert = randomIntegerBetween(5, 10);
-  const space_entries: SpaceEntry[] = [];
+  const number_of_spaces_to_insert = randomIntegerBetween(10, 20);
   for (let i = 0; i < number_of_spaces_to_insert; i++) {
     const mock_space_data: SpaceData = {
       name: faker.commerce.department().replaceAll(`'`, ''),
@@ -88,69 +95,34 @@ Deno.test('DB: collision queries', async (t) => {
         VALUES ('${name}', ${calendarid}, '${created_at}')
       `,
     );
-
-    const [space_entry] = db.queryEntries<SpaceEntry>(
-      `
-        SELECT * FROM space
-         WHERE name = '${name}'
-           AND calendarid = ${calendarid}
-           AND created_at = '${created_at}'
-      `,
-    );
-    assertExists(space_entry);
-    assertObjectMatch(space_entry, mock_space_data);
-
-    space_entries[i] = space_entry;
   }
 
-  const getUniqSpaceId = (spaceid: number) => {
-    const ids = space_entries.map((e) => e.id);
-    let new_space_id: number;
-    do {
-      new_space_id = sample(ids)!;
-    } while (new_space_id === spaceid);
-    return new_space_id;
-  };
+  const space_entries = db.queryEntries<SpaceEntry>('SELECT * FROM space');
+  assertGreater(space_entries.length, 0);
 
-  const number_of_collisions_to_insert = randomIntegerBetween(3, 6);
-  const collision_entries = [];
-  for (let i = 0; i < number_of_collisions_to_insert; i++) {
-    const first_space_id = space_entries[randomIntegerBetween(0, number_of_spaces_to_insert - 1)].id;
+  for (const pair of pairwise(space_entries.map((e) => e.id)).filter(([id1, id2]) => id1 !== id2)) {
+    const [spaceid_l, spaceid_r] = pair;
+
     const mock_collision_data: CollisionData = {
-      spaceid_l: first_space_id,
-      spaceid_r: getUniqSpaceId(first_space_id),
+      spaceid_l,
+      spaceid_r,
       created_at: Temporal.Now.instant().toString(),
     };
-
-    const { spaceid_l, spaceid_r, created_at } = mock_collision_data;
 
     db.execute(
       `
         INSERT INTO collision (spaceid_l, spaceid_r, created_at)
-        VALUES (${spaceid_l}, ${spaceid_r}, '${created_at}')
+        VALUES (${spaceid_l},
+                ${spaceid_r},
+               '${mock_collision_data.created_at}')
       `,
     );
-
-    const [collision_entry] = db.queryEntries<CollisionEntry>(
-      `
-        SELECT * FROM collision
-         WHERE spaceid_l = ${spaceid_l}
-           AND spaceid_r = ${spaceid_r}
-           AND created_at = '${created_at}'
-      `,
-    );
-    assertExists(collision_entry, 'inserted collision not found');
-    assertObjectMatch(collision_entry, mock_collision_data);
-
-    collision_entries[i] = collision_entry;
   }
 
-  await t.step('query: select collision by id', () => {
-    const entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
-    assertExists(entries);
-    assertGreater(entries.length, 0);
+  const collision_entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
 
-    const expected_entry = entries[randomIntegerBetween(0, entries.length - 1)];
+  await t.step('query: select collision by id', () => {
+    const expected_entry = sample(collision_entries);
     assertExists(expected_entry);
 
     const query = selectCollisionByIdQuery(db);
@@ -162,83 +134,97 @@ Deno.test('DB: collision queries', async (t) => {
   });
 
   await t.step('query: select collision by space id', () => {
-    const entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
-    assertExists(entries);
-
-    const space_id_to_query = sample(space_entries.map((e) => e.id))!;
-
-    const filtered_entries = entries.filter((e) =>
-      e.spaceid_l === space_id_to_query || e.spaceid_r === space_id_to_query
-    );
+    const spaceid = sample(collision_entries.flatMap((e) => [e.spaceid_l, e.spaceid_r]));
+    assertExists(spaceid);
+    const expected_entries = collision_entries.filter((e) => e.spaceid_l === spaceid || e.spaceid_r === spaceid);
+    assertGreater(expected_entries.length, 0);
 
     const query = selectCollisionBySpaceIdQuery(db);
-    const result_entries = query.allEntries({ spaceid: space_id_to_query });
+    const actual_entries = query.allEntries({ spaceid });
     query.finalize();
 
-    assertExists(result_entries);
-    assertEquals(result_entries.length, filtered_entries.length);
-
-    for (const result_entry of result_entries) {
-      const expected_entry = filtered_entries.find((e) => e.id === result_entry.id);
-      assertExists(expected_entry);
-      assertObjectMatch(result_entry, expected_entry);
-    }
+    assertExists(actual_entries);
+    assertGreater(actual_entries.length, 0);
+    assertEquals(actual_entries.toSorted((a, b) => a.id - b.id), expected_entries.toSorted((a, b) => a.id - b.id));
   });
 
   await t.step('query: select collision by space ids', () => {
-    const entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
-    assertExists(entries);
-    assertGreater(entries.length, 0);
+    const spaceids = space_entries.map((e) => e.id);
+    assertGreater(spaceids.length, 0);
 
-    const target_entry = entries[randomIntegerBetween(0, number_of_collisions_to_insert - 1)];
-    const { spaceid_l: spaceid_1, spaceid_r: spaceid_2 } = target_entry;
+    const spaceid_1 = sample(spaceids);
+    assertExists(spaceid_1);
+    const spaceid_2 = sample(spaceids.filter((id) => id !== spaceid_1));
+    assertExists(spaceid_2);
 
-    const spaceids: [number, number] = [spaceid_1, spaceid_2];
-
-    const filtered_entries = entries.filter((e) => spaceids.includes(e.spaceid_l) && spaceids.includes(e.spaceid_r));
-    assertGreater(filtered_entries.length, 0);
+    const expected_entries = collision_entries.filter((e) =>
+      [spaceid_1, spaceid_2].includes(e.spaceid_l) && [spaceid_1, spaceid_2].includes(e.spaceid_r)
+    );
+    assertGreater(expected_entries.length, 0);
 
     const query = selectCollisionBySpaceIdsQuery(db);
-    const result_entries = query.allEntries({ spaceid_1, spaceid_2 });
+    const actual_entries = query.allEntries({ spaceid_1, spaceid_2 });
     query.finalize();
 
-    assertExists(result_entries);
-    assertGreater(result_entries.length, 0);
-    assertArrayIncludes(result_entries, filtered_entries);
+    assertExists(actual_entries);
+    assertEquals(actual_entries.toSorted((a, b) => a.id - b.id), expected_entries.toSorted((a, b) => a.id - b.id));
   });
 
   await t.step('query: insert collision', () => {
-    const first_space_id = space_entries[randomIntegerBetween(0, number_of_spaces_to_insert - 1)].id;
+    const new_space_entries: SpaceEntry[] = [];
+    for (let i = 0; i < 2; i++) {
+      const mock_space_data: SpaceData = {
+        name: faker.commerce.department().replaceAll(`'`, ''),
+        calendarid: calendar_entry.id,
+        created_at: Temporal.Now.instant().toString(),
+      };
+
+      db.execute(
+        `
+          INSERT INTO space (name, calendarid, created_at)
+          VALUES ('${mock_space_data.name}',
+                   ${mock_space_data.calendarid},
+                  '${mock_space_data.created_at}')
+        `,
+      );
+
+      const [space_entry] = db.queryEntries<SpaceEntry>(
+        `
+          SELECT * FROM space
+           WHERE name = '${mock_space_data.name}'
+             AND calendarid = ${mock_space_data.calendarid}
+             AND created_at = '${mock_space_data.created_at}'
+        `,
+      );
+
+      assertExists(space_entry);
+      assertObjectMatch(space_entry, mock_space_data);
+
+      new_space_entries.push(space_entry);
+    }
+
+    const [spaceid_l, spaceid_r] = new_space_entries.map((e) => e.id);
+
     const mock_collision_data: CollisionData = {
-      spaceid_l: first_space_id,
-      spaceid_r: getUniqSpaceId(first_space_id),
+      spaceid_l,
+      spaceid_r,
       created_at: Temporal.Now.instant().toString(),
     };
 
-    const entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
-    assertExists(entries);
-    assertGreater(entries.length, 0);
-
-    const { spaceid_l, spaceid_r, created_at } = mock_collision_data;
-
     const query = insertCollisionQuery(db);
-    query.execute({ spaceid_l, spaceid_r, created_at });
+    query.execute(mock_collision_data);
     query.finalize();
 
-    const new_entries = db.queryEntries<CollisionEntry>('SELECT * FROM collision');
-    assertExists(new_entries);
-    assertGreater(new_entries.length, entries.length);
-
-    const [inserted_entry] = db.queryEntries<CollisionEntry>(
+    const [actual_entry] = db.queryEntries<CollisionEntry>(
       `
         SELECT * FROM collision
          WHERE spaceid_l = ${spaceid_l}
            AND spaceid_r = ${spaceid_r}
-           AND created_at = '${created_at}'
       `,
     );
-    assertExists(inserted_entry);
-    assertObjectMatch(inserted_entry, mock_collision_data);
+
+    assertExists(actual_entry);
+    assertObjectMatch(actual_entry, mock_collision_data);
   });
 
   await t.step('query: delete collision by id', () => {

@@ -198,8 +198,37 @@ Deno.test('DB: occupant queries', async (t) => {
     }
   });
   await t.step('query: insert occupant', () => {
+    const mock_user_data: UserData = {
+      name: faker.person.firstName().replaceAll(`'`, ''),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    db.execute(
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_user_data.name}',
+                '${mock_user_data.email}',
+                '${mock_user_data.password}',
+                '${mock_user_data.created_at}')
+      `,
+    );
+
+    const [user_entry] = db.queryEntries<UserEntry>(
+      `
+        SELECT * FROM user
+         WHERE name = '${mock_user_data.name}'
+           AND email = '${mock_user_data.email}'
+           AND password = '${mock_user_data.password}'
+           AND created_at = '${mock_user_data.created_at}'
+      `,
+    );
+    assertExists(user_entry);
+    assertObjectMatch(user_entry, mock_user_data);
+
     const mock_occupant_data: OccupantData = {
-      userid: sample(user_entries.map((e) => e.id))!,
+      userid: user_entry.id,
       spaceid: sample(space_entries.map((e) => e.id))!,
       created_at: Temporal.Now.instant().toString(),
     };
