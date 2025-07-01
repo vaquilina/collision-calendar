@@ -3,14 +3,14 @@ import type { CalendarAccess } from '../classes/calendar_access.ts';
 import type { AccessPermissions } from '@collision-calendar/types';
 
 /** Get prepared query for retrieving {@link CalendarAccess} entries. */
-export const selectCalendarAccessByIdAndPermissionsQuery = (db: DB) =>
+export const selectCalendarAccessByCalendarIdAndPermissionsQuery = (db: DB) =>
   db.prepareQuery<
     [CalendarAccess],
-    { calendarid: number; userid: number },
+    { calendarid: number; userid: number; permissions: AccessPermissions },
     { calendarid: number; permissions: AccessPermissions }
   >(
     `
-      SELECT calendarid, userid
+      SELECT calendarid, userid, permissions
         FROM calendar_access
        WHERE calendarid = :calendarid
          AND permissions = :permissions

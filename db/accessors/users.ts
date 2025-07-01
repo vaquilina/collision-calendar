@@ -1,4 +1,4 @@
-import { selectCalendarAccessByIdAndPermissionsQuery } from '../queries/calendar_access.ts';
+import { selectCalendarAccessByCalendarIdAndPermissionsQuery } from '../queries/calendar_access.ts';
 import { selectUserByIdQuery } from '../queries/user.ts';
 import { selectSpaceAccessByIdAndPermissionsQuery } from '../queries/space_access.ts';
 
@@ -21,7 +21,7 @@ export const getAllUsersWithCalendarAccess = (
   permissions: AccessPermissions,
   db: DB,
 ): UserLogin[] => {
-  const calendar_access_query = selectCalendarAccessByIdAndPermissionsQuery(db);
+  const calendar_access_query = selectCalendarAccessByCalendarIdAndPermissionsQuery(db);
   const calendar_access_entries = calendar_access_query.allEntries({ calendarid, permissions });
   calendar_access_query.finalize();
 

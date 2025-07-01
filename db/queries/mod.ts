@@ -84,7 +84,7 @@ import {
   deleteCalendarAccessByIdQuery,
   deleteCalendarAccessByUserAndCalendarQuery,
   insertCalendarAccessQuery,
-  selectCalendarAccessByIdAndPermissionsQuery,
+  selectCalendarAccessByCalendarIdAndPermissionsQuery,
   updateCalendarAccessPermissionsQuery,
 } from './calendar_access.ts';
 import {
@@ -146,7 +146,7 @@ export {
   insertVoteQuery,
   selectBlockByIdQuery,
   selectBlockBySpaceIdQuery,
-  selectCalendarAccessByIdAndPermissionsQuery,
+  selectCalendarAccessByCalendarIdAndPermissionsQuery,
   selectCalendarByIdQuery,
   selectCalendarByOwnerUserIdQuery,
   selectCollisionByIdQuery,
