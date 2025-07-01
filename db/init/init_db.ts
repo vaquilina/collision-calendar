@@ -42,6 +42,10 @@ export const create_tables_sql: string = `
       FOREIGN KEY(userid)
       REFERENCES user(id)
       ON DELETE CASCADE
+      
+    CONSTRAINT uniq_calendar_access
+      UNIQUE (calendarid, userid)
+      ON CONFLICT IGNORE
   );
   
   CREATE TABLE IF NOT EXISTS space ( 
@@ -72,6 +76,10 @@ export const create_tables_sql: string = `
       FOREIGN KEY(userid)
       REFERENCES user(id)
       ON DELETE CASCADE
+      
+    CONSTRAINT uniq_space_access
+      UNIQUE (spaceid, userid)
+      ON CONFLICT IGNORE
   );
   
   CREATE TABLE IF NOT EXISTS collision (
@@ -89,6 +97,10 @@ export const create_tables_sql: string = `
       FOREIGN KEY(spaceid_r)
       REFERENCES space(id)
       ON DELETE CASCADE
+      
+    CONSTRAINT uniq_collision
+      UNIQUE (spaceid_l, spaceid_r)
+      ON CONFLICT IGNORE
   );
   
   CREATE TABLE IF NOT EXISTS occupant (
@@ -106,6 +118,10 @@ export const create_tables_sql: string = `
       FOREIGN KEY(spaceid)
       REFERENCES space(id)
       ON DELETE CASCADE
+    
+    CONSTRAINT uniq_user_space
+      UNIQUE (userid, spaceid)
+      ON CONFLICT IGNORE
   );
   
   CREATE TABLE IF NOT EXISTS proposal (
@@ -150,6 +166,10 @@ export const create_tables_sql: string = `
       FOREIGN KEY(blockid)
       REFERENCES block(id)
       ON DELETE CASCADE
+      
+    CONSTRAINT uniq_proposal_block
+      UNIQUE (proposalid, blockid)
+      ON CONFLICT IGNORE
   );
   
   CREATE TABLE IF NOT EXISTS repeat (
@@ -164,6 +184,10 @@ export const create_tables_sql: string = `
     CONSTRAINT fk_block
       FOREIGN KEY(blockid)
       REFERENCES block(id)
+      
+    CONSTRAINT uniq_config
+      UNIQUE (unit, interval, start, end, blockid)
+      ON CONFLICT IGNORE
   );
   
   CREATE TABLE IF NOT EXISTS vote (
@@ -188,6 +212,10 @@ export const create_tables_sql: string = `
       FOREIGN KEY(occupantid)
       REFERENCES occupant(id)
       ON DELETE CASCADE
+      
+    CONSTRAINT uniq_vote
+      UNIQUE (blockid, proposalid, occupantid)
+      ON CONFLICT IGNORE
   );
 `;
 
