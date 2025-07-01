@@ -5,10 +5,13 @@
     "jsr:@std/assert@^1.0.13": "1.0.13",
     "jsr:@std/data-structures@^1.0.8": "1.0.8",
     "jsr:@std/fs@^1.0.17": "1.0.18",
-    "jsr:@std/fs@^1.0.18": "1.0.18",
-    "jsr:@std/internal@^1.0.6": "1.0.8",
-    "jsr:@std/internal@^1.0.8": "1.0.8",
-    "jsr:@std/path@^1.1.0": "1.1.0",
+    "jsr:@std/fs@^1.0.18": "1.0.19",
+    "jsr:@std/fs@^1.0.19": "1.0.19",
+    "jsr:@std/internal@^1.0.6": "1.0.9",
+    "jsr:@std/internal@^1.0.8": "1.0.9",
+    "jsr:@std/internal@^1.0.9": "1.0.9",
+    "jsr:@std/path@^1.1.0": "1.1.1",
+    "jsr:@std/path@^1.1.1": "1.1.1",
     "jsr:@std/random@~0.1.2": "0.1.2",
     "jsr:@std/testing@^1.0.14": "1.0.14",
     "npm:@faker-js/faker@^9.8.0": "9.8.0",
@@ -34,14 +37,30 @@
     "@std/fs@1.0.18": {
       "integrity": "24bcad99eab1af4fde75e05da6e9ed0e0dce5edb71b7e34baacf86ffe3969f3a",
       "dependencies": [
-        "jsr:@std/path"
+        "jsr:@std/path@^1.1.0"
+      ]
+    },
+    "@std/fs@1.0.19": {
+      "integrity": "051968c2b1eae4d2ea9f79a08a3845740ef6af10356aff43d3e2ef11ed09fb06",
+      "dependencies": [
+        "jsr:@std/internal@^1.0.9",
+        "jsr:@std/path@^1.1.1"
       ]
     },
     "@std/internal@1.0.8": {
       "integrity": "fc66e846d8d38a47cffd274d80d2ca3f0de71040f855783724bb6b87f60891f5"
     },
+    "@std/internal@1.0.9": {
+      "integrity": "bdfb97f83e4db7a13e8faab26fb1958d1b80cc64366501af78a0aee151696eb8"
+    },
     "@std/path@1.1.0": {
       "integrity": "ddc94f8e3c275627281cbc23341df6b8bcc874d70374f75fec2533521e3d6886"
+    },
+    "@std/path@1.1.1": {
+      "integrity": "fe00026bd3a7e6a27f73709b83c607798be40e20c81dde655ce34052fd82ec76",
+      "dependencies": [
+        "jsr:@std/internal@^1.0.9"
+      ]
     },
     "@std/random@0.1.2": {
       "integrity": "21e28f39dcc72d522bb0d2bc13586567d6044c86ee77a0056fcde0e13758c3ee"
@@ -53,7 +72,7 @@
         "jsr:@std/data-structures",
         "jsr:@std/fs@^1.0.18",
         "jsr:@std/internal@^1.0.8",
-        "jsr:@std/path"
+        "jsr:@std/path@^1.1.0"
       ]
     }
   },
@@ -259,8 +278,8 @@
     "dependencies": [
       "jsr:@da/bcrypt@^1.0.1",
       "jsr:@std/assert@^1.0.13",
-      "jsr:@std/fs@^1.0.18",
-      "jsr:@std/path@^1.1.0",
+      "jsr:@std/fs@^1.0.19",
+      "jsr:@std/path@^1.1.1",
       "jsr:@std/random@~0.1.2",
       "jsr:@std/testing@^1.0.14",
       "npm:@faker-js/faker@^9.8.0",
