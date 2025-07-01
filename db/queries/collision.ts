@@ -34,10 +34,8 @@ export const selectCollisionBySpaceIdsQuery = (db: DB) =>
   >(
     `
      SELECT * FROM collision
-      WHERE spaceid_l = :spaceid_1
-         OR spaceid_l = :spaceid_2
-        AND spaceid_r = :spaceid_1
-         OR spaceid_r = :spaceid_2
+      WHERE (spaceid_l = :spaceid_1 OR spaceid_l = :spaceid_2)
+        AND (spaceid_r = :spaceid_1 OR spaceid_r = :spaceid_2)
     `,
   );
 
