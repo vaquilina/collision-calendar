@@ -16,3 +16,7 @@
 
 ### database ###
 *.db
+
+### test coverage ###
+/cov_profile
+*/cov_profile
