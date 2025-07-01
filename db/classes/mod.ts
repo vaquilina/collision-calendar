@@ -11,6 +11,7 @@ import { SpaceAccess } from './space_access.ts';
 import { User } from './user.ts';
 import { Vote } from './vote.ts';
 
+/** Crawl the classes directory to get the table names. */
 const getTables = async (): Promise<string[]> => {
   const exclude_entries = ['mod', 'base_record'];
 
