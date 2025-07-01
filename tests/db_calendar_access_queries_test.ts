@@ -11,6 +11,7 @@ import {
   deleteCalendarAccessByUserAndCalendarQuery,
   insertCalendarAccessQuery,
   selectCalendarAccessByCalendarIdAndPermissionsQuery,
+  updateCalendarAccessPermissionsQuery,
 } from '@collision-calendar/db/queries';
 
 import { create_tables_sql } from '@collision-calendar/db/init';
@@ -157,6 +158,32 @@ Deno.test('DB: calendar_access queries', async (t) => {
     );
     assertExists(actual_entry, 'inserted calendar_access not found');
     assertObjectMatch(actual_entry, mock_calendar_access_data);
+  });
+
+  await t.step('query: update calendar access permissions', () => {
+    const entry_to_update = sample(calendar_access_entries);
+    assertExists(entry_to_update);
+
+    const new_permissions = sample(access_permissions.filter((p) => p !== entry_to_update.permissions));
+    assertExists(new_permissions);
+
+    const query = updateCalendarAccessPermissionsQuery(db);
+    query.execute({
+      calendarid: entry_to_update.calendarid,
+      userid: entry_to_update.userid,
+      permissions: new_permissions,
+    });
+    query.finalize();
+
+    const [updated_entry] = db.queryEntries<CalendarAccessEntry>(
+      `
+        SELECT * FROM calendar_access
+         WHERE calendarid = ${entry_to_update.calendarid}
+           AND userid = ${entry_to_update.userid}
+      `,
+    );
+    assertExists(updated_entry);
+    assertEquals(updated_entry.permissions, new_permissions);
   });
 
   const getEntries = () => db.queryEntries<CalendarAccessEntry>('SELECT * FROM calendar_access');
