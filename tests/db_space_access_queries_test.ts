@@ -34,7 +34,7 @@ Deno.test('DB: space_access queries', async (t) => {
 
   const access_permissions: AccessPermissions[] = [100, 110, 111];
 
-  const number_of_users_to_insert = randomIntegerBetween(10, 20);
+  const number_of_users_to_insert = randomIntegerBetween(20, 40);
   for (let i = 0; i < number_of_users_to_insert; i++) {
     const mock_user_data = {
       name: faker.person.firstName().replaceAll(`'`, ''),
@@ -109,7 +109,7 @@ Deno.test('DB: space_access queries', async (t) => {
   assertExists(space_entry, 'inserted space not found');
   assertObjectMatch(space_entry, mock_space_data);
 
-  const number_of_space_access_to_insert = randomIntegerBetween(1, number_of_users_to_insert);
+  const number_of_space_access_to_insert = randomIntegerBetween(1, number_of_users_to_insert - 1);
   for (let i = 0; i < number_of_space_access_to_insert; i++) {
     const mock_space_access_data = {
       userid: user_entries[i].id,

@@ -22,7 +22,6 @@ import {
 } from '@collision-calendar/db/queries';
 
 import type { VoteAnswer } from '@collision-calendar/types';
-import { SpaceAccess } from '@collision-calendar/db/classes';
 
 type UserData = { name: string; email: string; password: string; created_at: string };
 type UserEntry = UserData & { id: number };
@@ -36,7 +35,8 @@ type BlockData = { name: string; color: string; start: string; end: string; spac
 type BlockEntry = BlockData & { id: number };
 type ProposalData = { name: string; spaceid: number; created_at: string };
 type ProposalEntry = ProposalData & { id: number };
-type ProposalBlockEntry = { proposalid: number; blockid: number; created_at: string; id: number };
+type ProposalBlockData = { proposalid: number; blockid: number; created_at: string };
+type ProposalBlockEntry = ProposalBlockData & { id: number };
 type VoteData = { answer: VoteAnswer; blockid: number; occupantid: number; proposalid: number; created_at: string };
 type VoteEntry = VoteData & { id: number };
 
@@ -298,17 +298,119 @@ Deno.test('DB: vote queries', async (t) => {
   });
 
   await t.step('query: insert vote', () => {
-    const occupant_voter_ids = vote_entries.map((e) => e.occupantid);
-    const remaining_occupants = occupant_entries.filter((e) => !occupant_voter_ids.includes(e.id));
-    assertGreater(remaining_occupants.length, 0);
+    const mock_user_data: UserData = {
+      name: faker.person.firstName().replaceAll(`'`, ''),
+      email: faker.internet.email(),
+      password: faker.internet.password(),
+      created_at: Temporal.Now.instant().toString(),
+    };
 
-    const proposal_block = sample(proposal_block_entries);
-    assertExists(proposal_block);
+    db.execute(
+      `
+        INSERT INTO user (name, email, password, created_at)
+        VALUES ('${mock_user_data.name}',
+                '${mock_user_data.email}',
+                '${mock_user_data.password}',
+                '${mock_user_data.created_at}')
+      `,
+    );
+
+    const [user_entry] = db.queryEntries<UserEntry>(
+      `
+        SELECT * FROM user
+         WHERE created_at = '${mock_user_data.created_at}'
+      `,
+    );
+
+    assertExists(user_entry);
+    assertObjectMatch(user_entry, mock_user_data);
+
+    const mock_occupant_data: OccupantData = {
+      userid: user_entry.id,
+      spaceid: space_entry.id,
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    db.execute(
+      `
+        INSERT INTO occupant (userid, spaceid, created_at)
+        VALUES (${mock_occupant_data.userid},
+                ${mock_occupant_data.spaceid},
+               '${mock_occupant_data.created_at}')
+      `,
+    );
+
+    const [occupant_entry] = db.queryEntries<OccupantEntry>(
+      `
+        SELECT * FROM occupant
+         WHERE created_at = '${mock_occupant_data.created_at}'
+      `,
+    );
+
+    assertExists(occupant_entry);
+    assertObjectMatch(occupant_entry, mock_occupant_data);
+
+    const start = Temporal.Now.plainDateTimeISO();
+    const mock_block_data: BlockData = {
+      name: faker.word.noun(),
+      color: faker.color.rgb(),
+      start: start.toString(),
+      end: start.add({ hours: randomIntegerBetween(1, 8) }).toString(),
+      spaceid: space_entry.id,
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    db.execute(
+      `
+        INSERT INTO block (name, color, start, end, spaceid, created_at)
+        VALUES ('${mock_block_data.name}',
+                '${mock_block_data.color}',
+                '${mock_block_data.start}',
+                '${mock_block_data.end}',
+                 ${mock_block_data.spaceid},
+                '${mock_block_data.created_at}')
+      `,
+    );
+
+    const [block_entry] = db.queryEntries<BlockEntry>(
+      `
+        SELECT * FROM block
+         WHERE created_at = '${mock_block_data.created_at}'
+      `,
+    );
+
+    assertExists(block_entry);
+    assertObjectMatch(block_entry, mock_block_data);
+
+    const mock_proposal_block_data: ProposalBlockData = {
+      proposalid: proposal_entry.id,
+      blockid: block_entry.id,
+      created_at: Temporal.Now.instant().toString(),
+    };
+
+    db.execute(
+      `
+        INSERT INTO proposal_block (proposalid, blockid, created_at)
+        VALUES (${mock_proposal_block_data.proposalid},
+                ${mock_proposal_block_data.blockid},
+               '${mock_proposal_block_data.created_at}')
+      `,
+    );
+
+    const [proposal_block_entry] = db.queryEntries<ProposalBlockEntry>(
+      `
+        SELECT * FROM proposal_block
+         WHERE created_at = '${mock_proposal_block_data.created_at}'
+      `,
+    );
+
+    assertExists(proposal_block_entry);
+    assertObjectMatch(proposal_block_entry, mock_proposal_block_data);
 
     const mock_vote_data: VoteData = {
-      blockid: proposal_block.blockid,
-      proposalid: proposal_block.proposalid,
-      occupantid: sample(remaining_occupants.map((e) => e.id))!,
+      blockid: proposal_block_entry.blockid,
+      proposalid: proposal_block_entry.proposalid,
+      occupantid: occupant_entry.id,
       created_at: Temporal.Now.instant().toString(),
       answer: randomIntegerBetween(0, 1),
     };
