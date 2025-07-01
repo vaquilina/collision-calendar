@@ -91,7 +91,7 @@ import {
   deleteSpaceAccessByIdQuery,
   deleteSpaceAccessByUserAndSpaceQuery,
   insertSpaceAccessQuery,
-  selectSpaceAccessByIdAndPermissionsQuery,
+  selectSpaceAccessBySpaceIdAndPermissionsQuery,
   updateSpaceAccessPermissionsQuery,
 } from './space_access.ts';
 import {
@@ -164,7 +164,7 @@ export {
   selectProposalBySpaceIdQuery,
   selectRepeatByBlockIdQuery,
   selectRepeatByIdQuery,
-  selectSpaceAccessByIdAndPermissionsQuery,
+  selectSpaceAccessBySpaceIdAndPermissionsQuery,
   selectSpaceByCalendarIdQuery,
   selectSpaceByIdQuery,
   selectUserByEmailQuery,

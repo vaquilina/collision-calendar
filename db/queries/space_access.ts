@@ -3,14 +3,14 @@ import type { SpaceAccess } from '../classes/space_access.ts';
 import type { AccessPermissions } from '@collision-calendar/types';
 
 /** Get prepared query for retrieving {@link SpaceAccess} entries. */
-export const selectSpaceAccessByIdAndPermissionsQuery = (db: DB) =>
+export const selectSpaceAccessBySpaceIdAndPermissionsQuery = (db: DB) =>
   db.prepareQuery<
     [SpaceAccess],
-    { spaceid: number; userid: number },
+    { spaceid: number; userid: number; permissions: AccessPermissions },
     { spaceid: number; permissions: AccessPermissions }
   >(
     `
-      SELECT spaceid, userid
+      SELECT spaceid, userid, permissions
         FROM space_access
        WHERE spaceid = :spaceid
          AND permissions = :permissions

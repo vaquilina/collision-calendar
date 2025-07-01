@@ -1,6 +1,6 @@
 import { selectCalendarAccessByCalendarIdAndPermissionsQuery } from '../queries/calendar_access.ts';
 import { selectUserByIdQuery } from '../queries/user.ts';
-import { selectSpaceAccessByIdAndPermissionsQuery } from '../queries/space_access.ts';
+import { selectSpaceAccessBySpaceIdAndPermissionsQuery } from '../queries/space_access.ts';
 
 import type { AccessPermissions } from '@collision-calendar/types';
 import type { Calendar } from '../classes/calendar.ts';
@@ -42,7 +42,7 @@ export const getAllUsersWithSpaceAccess = (
   permissions: AccessPermissions,
   db: DB,
 ): UserLogin[] => {
-  const space_access_query = selectSpaceAccessByIdAndPermissionsQuery(db);
+  const space_access_query = selectSpaceAccessBySpaceIdAndPermissionsQuery(db);
   const space_access_entries = space_access_query.allEntries({ spaceid, permissions });
   space_access_query.finalize();
 

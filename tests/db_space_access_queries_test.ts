@@ -1,12 +1,4 @@
-import {
-  assert,
-  assertArrayIncludes,
-  assertEquals,
-  assertExists,
-  assertGreater,
-  assertNotEquals,
-  assertObjectMatch,
-} from '@std/assert';
+import { assertEquals, assertExists, assertGreater, assertNotEquals, assertObjectMatch } from '@std/assert';
 
 import { randomIntegerBetween, sample } from '@std/random';
 
@@ -18,7 +10,7 @@ import {
   deleteSpaceAccessByIdQuery,
   deleteSpaceAccessByUserAndSpaceQuery,
   insertSpaceAccessQuery,
-  selectSpaceAccessByIdAndPermissionsQuery,
+  selectSpaceAccessBySpaceIdAndPermissionsQuery,
   updateSpaceAccessPermissionsQuery,
 } from '@collision-calendar/db/queries';
 
@@ -36,20 +28,15 @@ type SpaceData = { name: string; calendarid: number; created_at: string };
 type SpaceEntry = SpaceData & { id: number };
 
 Deno.test('DB: space_access queries', async (t) => {
-  // open an in-memory database
   const db = new DB();
 
-  // create tables
   db.execute(create_tables_sql);
 
-  const access_permissions_values: AccessPermissions[] = [100, 110, 111];
+  const access_permissions: AccessPermissions[] = [100, 110, 111];
 
-  // create users
-  const mock_user_data: UserData[] = [];
-  const user_entries: UserEntry[] = [];
-  const number_of_users_to_insert = randomIntegerBetween(3, 6);
+  const number_of_users_to_insert = randomIntegerBetween(10, 20);
   for (let i = 0; i < number_of_users_to_insert; i++) {
-    mock_user_data[i] = {
+    const mock_user_data = {
       name: faker.person.firstName().replaceAll(`'`, ''),
       email: faker.internet.email(),
       password: faker.internet.password(),
@@ -59,28 +46,17 @@ Deno.test('DB: space_access queries', async (t) => {
     db.execute(
       `
           INSERT INTO user (name, email, password, created_at)
-          VALUES ('${mock_user_data[i].name}',
-                  '${mock_user_data[i].email}',
-                  '${mock_user_data[i].password}',
-                  '${mock_user_data[i].created_at}')
+          VALUES ('${mock_user_data.name}',
+                  '${mock_user_data.email}',
+                  '${mock_user_data.password}',
+                  '${mock_user_data.created_at}')
         `,
     );
-
-    const [user_entry] = db.queryEntries<UserEntry>(
-      `
-          SELECT * FROM user
-           WHERE name = '${mock_user_data[i].name}'
-             AND email = '${mock_user_data[i].email}'
-             AND password = '${mock_user_data[i].password}'
-             AND created_at = '${mock_user_data[i].created_at}'
-        `,
-    );
-    assertExists(user_entry, 'inserted user not found');
-
-    user_entries[i] = user_entry;
   }
 
-  // create a calendar
+  const user_entries = db.queryEntries<UserEntry>('SELECT * FROM user');
+  assertGreater(user_entries.length, 0);
+
   const mock_calendar_data: CalendarData = {
     name: faker.company.name().replaceAll(`'`, ''),
     owneruserid: user_entries[0].id,
@@ -105,8 +81,8 @@ Deno.test('DB: space_access queries', async (t) => {
       `,
   );
   assertExists(calendar_entry, 'inserted calendar not found');
+  assertObjectMatch(calendar_entry, mock_calendar_data);
 
-  // create a space
   const mock_space_data: SpaceData = {
     name: faker.commerce.department().replaceAll(`'`, ''),
     calendarid: calendar_entry.id,
@@ -131,76 +107,64 @@ Deno.test('DB: space_access queries', async (t) => {
       `,
   );
   assertExists(space_entry, 'inserted space not found');
+  assertObjectMatch(space_entry, mock_space_data);
 
-  // create space access
-  const mock_space_access_data: SpaceAccessData[] = [];
-  const space_access_entries: SpaceAccessEntry[] = [];
   const number_of_space_access_to_insert = randomIntegerBetween(1, number_of_users_to_insert);
   for (let i = 0; i < number_of_space_access_to_insert; i++) {
-    mock_space_access_data[i] = {
+    const mock_space_access_data = {
       userid: user_entries[i].id,
       spaceid: space_entry.id,
-      permissions: access_permissions_values[randomIntegerBetween(0, access_permissions_values.length - 1)],
+      permissions: access_permissions[randomIntegerBetween(0, access_permissions.length - 1)],
       created_at: Temporal.Now.instant().toString(),
     };
 
     db.execute(
       `
           INSERT INTO space_access (userid, spaceid, permissions, created_at)
-          VALUES (${mock_space_access_data[i].userid},
-                  ${mock_space_access_data[i].spaceid},
-                  ${mock_space_access_data[i].permissions},
-                 '${mock_space_access_data[i].created_at}')
+          VALUES (${mock_space_access_data.userid},
+                  ${mock_space_access_data.spaceid},
+                  ${mock_space_access_data.permissions},
+                 '${mock_space_access_data.created_at}')
         `,
     );
-
-    const [space_access_entry] = db.queryEntries<SpaceAccessEntry>(
-      `
-          SELECT * FROM space_access
-           WHERE userid = ${mock_space_access_data[i].userid}
-             AND spaceid = ${mock_space_access_data[i].spaceid}
-             AND permissions = ${mock_space_access_data[i].permissions}
-             AND created_at = '${mock_space_access_data[i].created_at}'
-        `,
-    );
-    assertExists(space_access_entry, 'inserted space access not found');
-
-    space_access_entries[i] = space_access_entry;
   }
 
-  await t.step('query: select space_access', () => {
-    const query = selectSpaceAccessByIdAndPermissionsQuery(db);
-    const results: { [permissions: number]: { spaceid: number; userid: number }[] } = {};
-    for (const access_permissions_value of access_permissions_values) {
-      results[access_permissions_value] = query.allEntries({
-        spaceid: space_entry.id,
-        permissions: access_permissions_value,
-      });
-      assertExists(results[access_permissions_value]);
-      assertEquals(
-        results[access_permissions_value].length,
-        space_access_entries.filter((entry) => entry.permissions === access_permissions_value).length,
-      );
-      assert(
-        results[access_permissions_value].map((result) => result.spaceid).every((spaceid) =>
-          spaceid === space_entry.id
-        ),
-      );
-      assertArrayIncludes(
-        results[access_permissions_value].map((result) => result.userid),
-        space_access_entries.filter((entry) => entry.permissions === access_permissions_value).map((entry) =>
-          entry.userid
-        ),
-      );
-    }
+  const space_access_entries = db.queryEntries<SpaceAccessEntry>('SELECT * FROM space_access');
+  assertGreater(space_access_entries.length, 0);
+
+  await t.step('query: select space_access by space id and permissions', () => {
+    const spaceid = space_entry.id;
+    assertExists(spaceid);
+
+    const permissions = sample(space_access_entries.filter((e) => e.spaceid === spaceid).map((e) => e.permissions));
+    assertExists(permissions);
+
+    const expected_entries = space_access_entries.filter((e) => e.spaceid === spaceid && e.permissions === permissions)
+      .map((e) => ({ userid: e.userid, spaceid: e.spaceid, permissions: e.permissions }));
+    assertGreater(expected_entries.length, 0);
+
+    const query = selectSpaceAccessBySpaceIdAndPermissionsQuery(db);
+    const actual_entries = query.allEntries({ spaceid, permissions });
     query.finalize();
+
+    assertExists(actual_entries);
+    assertEquals(
+      actual_entries.toSorted((a, b) => a.userid - b.userid),
+      expected_entries.toSorted((a, b) => a.userid - b.userid),
+    );
   });
 
   await t.step('query: insert space_access', () => {
+    const all_user_ids = user_entries.map((e) => e.id);
+    assertGreater(all_user_ids.length, 0);
+
+    const used_user_ids = space_access_entries.map((e) => e.userid);
+    assertGreater(used_user_ids.length, 0);
+
     const mock_space_access_data: SpaceAccessData = {
-      userid: user_entries[randomIntegerBetween(0, number_of_users_to_insert - 1)].id,
+      userid: sample(all_user_ids.filter((id) => !used_user_ids.includes(id)))!,
       spaceid: space_entry.id,
-      permissions: access_permissions_values[randomIntegerBetween(0, 2)],
+      permissions: sample(access_permissions)!,
       created_at: Temporal.Now.instant().toString(),
     };
 
@@ -224,92 +188,78 @@ Deno.test('DB: space_access queries', async (t) => {
   });
 
   await t.step('query: update space_access permissions', () => {
-    const space_access_entry_to_update =
-      space_access_entries[randomIntegerBetween(0, number_of_space_access_to_insert - 1)];
-    const [space_access_entry] = db.queryEntries<SpaceAccessEntry>(
-      `
-        SELECT * FROM space_access
-         WHERE id = ${space_access_entry_to_update.id}
-      `,
-    );
-    assertExists(space_access_entry);
+    const entry_to_update = sample(space_access_entries);
+    assertExists(entry_to_update);
 
-    const new_permissions_value = sample(
-      access_permissions_values.toSpliced(
-        access_permissions_values.indexOf(space_access_entry_to_update.permissions),
-        1,
-      ),
-    );
-    assertExists(new_permissions_value);
+    const new_permissions = sample(access_permissions.filter((p) => p !== entry_to_update.permissions));
+    assertExists(new_permissions);
 
     const query = updateSpaceAccessPermissionsQuery(db);
-    query.execute({
-      permissions: new_permissions_value,
-      userid: space_access_entry_to_update.userid,
-      spaceid: space_access_entry_to_update.spaceid,
-    });
+    query.execute({ userid: entry_to_update.userid, spaceid: entry_to_update.spaceid, permissions: new_permissions });
     query.finalize();
 
     const [updated_entry] = db.queryEntries<SpaceAccessEntry>(
-      `SELECT * FROM space_access WHERE id = ${space_access_entry_to_update.id}`,
+      `
+        SELECT * FROM space_access
+         WHERE id = ${entry_to_update.id}
+      `,
     );
+
     assertExists(updated_entry);
-    assertEquals(updated_entry.permissions, new_permissions_value, 'entry not updated');
+    assertNotEquals(updated_entry.permissions, entry_to_update.permissions);
+    assertEquals(updated_entry.permissions, new_permissions);
   });
 
-  await t.step('query: delete space_access by id', () => {
-    const existing_space_access_entries = db.queryEntries<SpaceAccessEntry>('SELECT * FROM space_access');
-    assertExists(existing_space_access_entries);
+  const getEntries = () => db.queryEntries<SpaceAccessEntry>('SELECT * FROM space_access');
 
-    const space_access_entry_to_delete = sample(existing_space_access_entries.map((e) => e.id));
-    assertExists(space_access_entry_to_delete);
+  await t.step('query: delete space_access by id', () => {
+    const entries = getEntries();
+    assertExists(entries);
+
+    const id = sample(entries.map((e) => e.id));
+    assertExists(id);
 
     const query = deleteSpaceAccessByIdQuery(db);
-    query.execute({ id: space_access_entry_to_delete });
+    query.execute({ id });
     query.finalize();
 
-    const result_entries = db.queryEntries<SpaceAccessEntry>('SELECT * FROM space_access');
-    assertExists(result_entries);
-    assertEquals(result_entries.length, existing_space_access_entries.length - 1);
+    const [deleted_entry] = db.queryEntries<SpaceAccessEntry>(
+      `
+        SELECT * FROM space_access
+         WHERE id = ${id}
+      `,
+    );
 
-    result_entries.forEach((e) => assertNotEquals(e.id, space_access_entry_to_delete));
+    assertEquals(deleted_entry, undefined);
   });
 
   await t.step('query: delete space_access by user and space', () => {
-    const existing_space_access_entries = db.queryEntries<SpaceAccessEntry>('SELECT * FROM space_access');
+    const entry_to_delete = sample(space_access_entries);
+    assertExists(entry_to_delete);
 
-    const target_space_access_entry = sample(existing_space_access_entries);
-    assertExists(target_space_access_entry);
-
-    const target_space_access_entries = db.queryEntries<SpaceAccessEntry>(
-      `
-        SELECT * FROM space_access
-         WHERE userid = ${target_space_access_entry.userid}
-           AND spaceid = ${target_space_access_entry.spaceid}
-      `,
-    );
-    assertExists(target_space_access_entries);
-    assertExists(target_space_access_entries);
-    assertGreater(target_space_access_entries.length, 0);
-
-    const { userid, spaceid } = target_space_access_entry;
+    const { userid, spaceid } = entry_to_delete;
 
     const query = deleteSpaceAccessByUserAndSpaceQuery(db);
     query.execute({ userid, spaceid });
     query.finalize();
 
-    const result_entries = db.queryEntries<SpaceAccessEntry>('SELECT * FROM space_access');
-    assertExists(result_entries);
-    result_entries.forEach((e) => assert(!target_space_access_entries.map((entry) => entry.id).includes(e.id)));
+    const [deleted_entry] = db.queryEntries<SpaceAccessEntry>(
+      `
+        SELECT * FROM space_access
+         WHERE id = ${entry_to_delete.id}
+      `,
+    );
+
+    assertEquals(deleted_entry, undefined);
   });
 
-  // clean up
   db.execute(
     `
-        DELETE FROM space;
-        DELETE FROM calendar;
-        DELETE FROM user;
-      `,
+      DELETE FROM space_access;
+      DELETE FROM space;
+      DELETE FROM calendar;
+      DELETE FROM user;
+    `,
   );
 
   db.close();
