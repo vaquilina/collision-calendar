@@ -13,6 +13,15 @@
     "deno.codeLens.referencesAllFunctions": true,
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "denoland.vscode-deno",
-    "editor.inlayHints.enabled": "off"
+    "editor.inlayHints.enabled": "off",
+    "files.readonlyInclude": {
+      "**/routeTree.gen.ts": true
+    },
+    "files.watcherExclude": {
+      "**/routeTree.gen.ts": true
+    },
+    "search.exclude": {
+      "**/routeTree.gen.ts": true
+    }
   }
 }
