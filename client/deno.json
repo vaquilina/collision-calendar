@@ -1,6 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "tasks": {
-    "dev:client": "deno run --watch-hmr --allow-net --allow-env main.ts"
+    "dev:vite": "deno run -A npm:vite"
+  },
+  "exclude": ["**/routeTree.gen.ts"],
+  "compilerOptions": {
+    "jsx": "preserve",
+    "jsxImportSource": "solid-js",
+    "lib": ["DOM", "DOM.Iterable", "ESNext", "deno.ns"]
   }
 }
