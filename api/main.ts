@@ -22,7 +22,10 @@ const app = new Hono()
   .onError((err, c) => {
     console.error(`${err}`);
     return c.text(`${faker.word.interjection()}! something broke`, 500);
-  })
-  .route('/api', user);
+  });
+
+const routes = app.route('/api', user);
 
 Deno.serve(app.fetch);
+
+export type Api = typeof routes;
