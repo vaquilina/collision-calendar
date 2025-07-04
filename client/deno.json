@@ -1,12 +1,12 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "tasks": {
-    "dev:vite": "deno run -A npm:vite"
+    "dev:vite": "deno run -A --node-modules-dir npm:vite"
   },
   "exclude": ["**/routeTree.gen.ts"],
   "compilerOptions": {
-    "jsx": "preserve",
+    "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
-    "lib": ["DOM", "DOM.Iterable", "DOM.asynciterable", "ESNext", "deno.ns", "deno.window", "webworker"]
+    "lib": ["DOM", "DOM.Iterable", "DOM.asynciterable", "ESNext", "deno.ns", "deno.window"]
   }
 }
