@@ -11,6 +11,7 @@
   },
   "imports": {
     "@da/bcrypt": "jsr:@da/bcrypt@^1.0.1",
+    "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
     "@faker-js/faker": "npm:@faker-js/faker@^9.9.0",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.0",
     "@openauthjs/openauth": "npm:@openauthjs/openauth@^0.4.3",
