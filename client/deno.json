@@ -7,6 +7,6 @@
   "compilerOptions": {
     "jsx": "preserve",
     "jsxImportSource": "solid-js",
-    "lib": ["DOM", "DOM.Iterable", "ESNext", "deno.ns"]
+    "lib": ["DOM", "DOM.Iterable", "DOM.asynciterable", "ESNext", "deno.ns", "deno.window", "webworker"]
   }
 }
