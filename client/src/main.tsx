@@ -1,11 +1,8 @@
-import { initEnv } from '@collision-calendar/db/init';
 import { render } from 'solid-js/web';
 import { createRouter, RouterProvider } from '@tanstack/solid-router';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen.ts';
-
-initEnv();
 
 // Create a new router instance
 const router = createRouter({ routeTree });
