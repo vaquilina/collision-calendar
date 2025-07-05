@@ -14,4 +14,7 @@ export default defineConfig({
     solid(),
     deno(),
   ],
+  optimizeDeps: {
+    include: ['jsesc'],
+  },
 });
