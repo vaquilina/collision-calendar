@@ -1,0 +1,19 @@
+/* https://www.paulirish.com/2010/font-face-gotchas/#smiley */
+
+@font-face {
+  font-family: 'Manrope';
+  src: url('Manrope.eot');
+  src:
+    local('☺'),
+    url('Manrope.woff') format('woff'),
+    url('Manrope.ttf') format('truetype');
+}
+
+@font-face {
+  font-family: 'Overpass Mono';
+  src: url('OverpassMono.eot');
+  src:
+    local('☺'),
+    url('OverpassMono.woff') format('woff'),
+    url('OverpassMono.ttf') format('truetype');
+}
