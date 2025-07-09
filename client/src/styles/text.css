@@ -1,0 +1,31 @@
+strong {
+  font-weight: var(--theme-font-weight-semibold);
+}
+
+small {
+  font-size: x-small;
+  font-weight: var(--theme-font-weight-extralight);
+  text-rendering: optimizeLegibility;
+}
+
+abbr {
+  text-decoration: none;
+  width: fit-content;
+  font-weight: var(--theme-font-weight-semibold);
+  text-transform: uppercase;
+  color: light-dark(var(--theme-green-dark), var(--theme-green-light));
+  cursor: help;
+}
+
+address {
+  font-style: normal;
+  line-height: 1em;
+}
+
+mark {
+  color: light-dark(var(--theme-grey-900), var(--theme-grey-100));
+  background: light-dark(var(--theme-orange-dark), var(--theme-orange-light));
+  border-radius: var(--theme-border-radius);
+  padding: 1px var(--theme-padding-medium);
+  font-weight: var(--theme-font-weight-medium);
+}

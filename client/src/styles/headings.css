@@ -1,9 +1,19 @@
+h1, h2, h3, h4 {
+  font-family: var(--theme-font);
+  font-weight: var(--theme-font-weight-bold);
+  text-transform: uppercase;
+  color: light-dark(var(--theme-grey-300), var(--theme-grey-700));
+  padding: 0;
+  margin: 0;
+  line-height: 1em;
+}
+
 h1 {
-  font-size: 4em;
+  font-size: 3em;
 }
 
 h2 {
-  font-size: 3em;
+  font-size: 2.5em;
 }
 
 h3 {
@@ -11,5 +21,5 @@ h3 {
 }
 
 h4 {
-  font-size: 1em;
+  font-size: 1.5em;
 }

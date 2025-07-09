@@ -1,31 +1,86 @@
-* {
-  font-family: Manrope, monospace;
-  font-optical-sizing: auto;
-  font-weight: 400;
+:root {
+  --theme-grey-100: #121212;
+  --theme-grey-200: #2e2e2e;
+  --theme-grey-300: #4a4a4a;
+  --theme-grey-400: #666666;
+  --theme-grey-500: #828282;
+  --theme-grey-600: #9e9e9e;
+  --theme-grey-700: #bababa;
+  --theme-grey-800: #d6d6d6;
+  --theme-grey-900: #f2f2f2;
+
+  --theme-orange-light: #e99c16;
+  --theme-orange-light-alt: #f1c373;
+  --theme-orange-dark: #653d2a;
+  --theme-orange-dark-alt: #5d3e08;
+
+  --theme-green-light: #16e99c;
+  --theme-green-light-alt: #5befb9;
+  --theme-green-dark: #085d3e;
+  --theme-green-dark-alt: #0d8b5d;
+
+  --theme-red-light: #e91663;
+  --theme-red-light-alt: #ed4482;
+  --theme-red-dark: #740b31;
+  --theme-red-dark-alt: #a30f45;
+
+  --theme-purple-light: #b95bef;
+  --theme-purple-light-alt: #d7a1f6;
+  --theme-purple-dark: #3e085d;
+  --theme-purple-dark-alt: #5d0d8b;
+
+  --theme-border-radius: 2px;
+  --theme-border-style: solid;
+
+  --theme-padding-comfortable: 8px;
+  --theme-padding-medium: 4px;
+  --theme-padding-dense: 2px;
+
+  --theme-font-weight-bold: 700;
+  --theme-font-weight-semibold: 600;
+  --theme-font-weight-medium: 500;
+  --theme-font-weight-regular: 400;
+  --theme-font-weight-light: 300;
+  --theme-font-weight-extralight: 200;
+  --theme-font-weight-thin: 100;
+
+  --theme-font: 'M PLUS 1 Code', monospace;
 }
 
-h1, h2, h3, h4 {
-  font-family: Overpass Mono, monospace;
+* {
+  font-family: var(--theme-font);
   font-optical-sizing: auto;
-  font-weight: 500;
-  text-transform: uppercase;
+  font-variant-numeric: tabular-nums;
+  font-weight: var(--theme-font-weight-regular);
+  color: light-dark(var(--theme-grey-100), var(--theme-grey-900));
+  transition: 0.3s ease;
+}
+
+body {
+  background: light-dark(var(--theme-grey-900), var(--theme-grey-100));
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd */
 kbd {
-  font-family: monospace;
   background-color: #eee;
   border-radius: 3px;
   border: 1px solid #b4b4b4;
   box-shadow: 0 1px 1px rgb(0 0 0 / 0.2), 0 2px 0 0 rgb(255 255 255 / 0.7) inset;
   color: #333;
   display: inline-block;
+  font-family: monospace;
   font-size: 0.85em;
-  font-weight: 700;
+  font-weight: var(--theme-font-weight-bold);
   line-height: 1;
-  padding: 2px 4px;
+  padding: var(--theme-padding-dense) var(--theme-padding-medium);
   white-space: nowrap;
   width: fit-content;
+}
+
+hr {
+  border-width: 1px;
+  border-style: var(--theme-border-style);
+  border-color: light-dark(var(--theme-grey-400), var(--theme-grey-600));
 }
 
 button,

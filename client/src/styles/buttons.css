@@ -1,0 +1,11 @@
+button {
+  cursor: pointer;
+  background: light-dark(var(--theme-grey-400), var(--theme-grey-700));
+  color: light-dark(var(--theme-grey-900), var(--theme-grey-100));
+  border-radius: var(--theme-border-radius);
+  border: 1px solid light-dark(var(--theme-grey-900), var(--theme-grey-100));
+  text-transform: uppercase;
+  font-weight: var(--theme-font-weight-bold);
+  width: fit-content;
+  padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
+}
