@@ -30,9 +30,9 @@
     "solid-js": "npm:solid-js@^1.9.7",
     "unstorage": "npm:unstorage@^1.16.0",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
-    "vite": "npm:vite@7.0.2",
+    "vite": "npm:vite@7.0.3",
     "vite-plugin-solid": "npm:vite-plugin-solid@^2.11.7",
-    "zod": "npm:zod@^3.25.75",
+    "zod": "npm:zod@^3.25.76",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   }
 }
