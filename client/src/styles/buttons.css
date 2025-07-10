@@ -1,11 +1,30 @@
 button {
   cursor: pointer;
-  background: light-dark(var(--theme-grey-400), var(--theme-grey-700));
-  color: light-dark(var(--theme-grey-900), var(--theme-grey-100));
-  border-radius: var(--theme-border-radius);
-  border: 1px solid light-dark(var(--theme-grey-900), var(--theme-grey-100));
-  text-transform: uppercase;
-  font-weight: var(--theme-font-weight-bold);
   width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  background: light-dark(var(--theme-color-21), var(--theme-color-04));
+  color: light-dark(var(--theme-color-01), var(--theme-color-25));
+  border-radius: var(--theme-border-radius);
+  border: 1px solid light-dark(var(--theme-color-05), var(--theme-color-20));
+  font-weight: var(--theme-font-weight-bold);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
+}
+button:hover {
+  background: light-dark(var(--theme-color-18), var(--theme-color-05));
+  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  transform: translateX(1px) translateY(1px);
+}
+button:active {
+  background: light-dark(var(--theme-color-04), var(--theme-color-21));
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
+  box-shadow: none;
+}
+button:disabled {
+  opacity: 0.3;
+}
+button:focus-visible {
+  transition: none;
+  outline: 1px solid light-dark(var(--theme-color-25), var(--theme-color-01));
+  outline-offset: 1px;
 }

@@ -2,7 +2,7 @@ h1, h2, h3, h4 {
   font-family: var(--theme-font);
   font-weight: var(--theme-font-weight-bold);
   text-transform: uppercase;
-  color: light-dark(var(--theme-grey-300), var(--theme-grey-700));
+  color: light-dark(var(--theme-color-22), var(--theme-color-03));
   padding: 0;
   margin: 0;
   line-height: 1em;
