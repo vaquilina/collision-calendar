@@ -17,8 +17,8 @@ button:hover {
 }
 button:active {
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
+  box-shadow: inset 0.5px 0.5px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
-  box-shadow: none;
 }
 button:disabled {
   opacity: 0.3;
