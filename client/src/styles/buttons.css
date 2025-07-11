@@ -10,18 +10,19 @@ button {
   font-weight: var(--theme-font-weight-bold);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
 }
-button:hover {
+button:hover:not(:disabled) {
   background: light-dark(var(--theme-color-18), var(--theme-color-05));
   box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
   transform: translateX(1px) translateY(1px);
 }
-button:active {
+button:active:not(:disabled) {
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
   box-shadow: inset 0.5px 0.5px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
 }
 button:disabled {
   opacity: 0.3;
+  cursor: not-allowed;
 }
 button:focus-visible {
   transition: none;

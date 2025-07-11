@@ -45,6 +45,13 @@
   --theme-font: 'M PLUS 1 Code', monospace;
 
   box-sizing: border-box;
+  scrollbar-width: thin;
+}
+
+@supports (scrollbar-color: auto) {
+  :root {
+    scrollbar-color: light-dark(var(--theme-color-10), var(--theme-color-15)) transparent;
+  }
 }
 
 *,
@@ -73,6 +80,8 @@ hr,
 meter,
 progress,
 textarea,
+select,
+option,
 input[type='checkbox'],
 input[type='radio'],
 input[type='date'],
@@ -93,7 +102,7 @@ input[type='range'] {
 }
 
 body {
-  background: light-dark(var(--theme-color-01), var(--theme-color-25));
+  background: light-dark(var(--theme-color-02), var(--theme-color-23));
 }
 
 /* https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd */
@@ -120,5 +129,22 @@ hr {
 }
 
 a {
-  text-decoration: underline;
+  text-decoration-line: underline;
+  font-weight: var(--theme-font-weight-medium);
+  color: light-dark(var(--theme-color-23), var(--theme-color-03));
+  max-width: fit-content;
+
+  &:hover {
+    text-decoration-style: double;
+  }
+
+  &:active {
+    text-decoration: none;
+  }
+
+  &:focus {
+    transition: none;
+    outline: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
+    outline-offset: 1px;
+  }
 }

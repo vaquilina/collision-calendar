@@ -22,6 +22,7 @@ textarea {
 }
 
 textarea,
+select,
 input[type='text'],
 input[type='search'],
 input[type='number'],
@@ -35,12 +36,13 @@ input[type='tel'],
 input[type='email'],
 input[type='password'],
 input[type='file'],
+input[type='color'],
 input[type='range'] {
   border-radius: var(--theme-border-radius);
   border-style: var(--theme-border-style);
   border-width: 1px;
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
-  background: light-dark(var(--theme-color-02), var(--theme-color-23));
+  background: light-dark(var(--theme-color-03), var(--theme-color-22));
 
   &:valid {
     border-color: light-dark(var(--theme-color-19), var(--theme-color-06));
@@ -58,6 +60,11 @@ input[type='range'] {
 
   &:placeholder-shown {
     color: light-dark(var(--theme-color-20), var(--theme-color-05));
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
   }
 }
 
@@ -148,11 +155,18 @@ input[type='range']::-moz-range-progress {
   cursor: pointer;
 }
 
+input[type='color'] {
+  cursor: pointer;
+}
+
 fieldset {
-  border: 1px var(--theme-border-style) light-dark(var(--theme-color-03), var(--theme-color-23));
+  background: light-dark(var(--theme-color-02), var(--theme-color-21));
+  border: 1px var(--theme-border-style) light-dark(var(--theme-color-23), var(--theme-color-03));
 }
 fieldset:focus-within {
   border: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
+  box-shadow: 4px 4px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  transform: translateX(-2px) translateY(-2px);
 }
 
 legend {
@@ -164,4 +178,33 @@ legend::before {
 }
 legend::after {
   content: ' ]';
+}
+
+select {
+  cursor: pointer;
+  width: clamp(100px, 100px, 100px);
+  height: clamp(4em, 6em, 8em);
+  scrollbar-color: light-dark(var(--theme-color-10), var(--theme-color-15)) transparent;
+  scrollbar-width: thin;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+select > option {
+  overflow: hidden;
+  width: 100%;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+select > option:hover {
+  background: light-dark(var(--theme-color-06), var(--theme-color-19));
+}
+select > option[disabled] {
+  opacity: 0.3;
+}
+select > option[disabled]:hover {
+  background: transparent;
+  cursor: not-allowed;
+}
+select > option[selected] {
+  background: light-dark(var(--theme-color-08), var(--theme-color-18));
 }
