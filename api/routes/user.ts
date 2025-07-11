@@ -2,7 +2,7 @@ import { Hono } from 'hono';
 
 import { zValidator } from '@hono/zod-validator';
 
-import { z } from 'zod/v4';
+import * as z from 'zod';
 
 import { DB } from 'sqlite';
 
