@@ -1,3 +1,8 @@
+.form-input {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
 label {
   display: block;
   text-transform: uppercase;
@@ -8,13 +13,35 @@ label {
   cursor: pointer;
   user-select: none;
 }
+input[type='checkbox'] + label,
+input[type='radio'] + label {
+  float: right;
+}
 label:invalid {
   color: var(--theme-color-error);
 }
-
-input[type='radio'],
-input[type='checkbox'] {
-  margin-left: 1em;
+textarea:disabled + label,
+select:disabled + label,
+input[type='checkbox']:disabled + label,
+input[type='radio']:disabled + label,
+input[type='text']:disabled + label,
+input[type='search']:disabled + label,
+input[type='number']:disabled + label,
+input[type='url']:disabled + label,
+input[type='date']:disabled + label,
+input[type='datetime-local']:disabled + label,
+input[type='month']:disabled + label,
+input[type='week']:disabled + label,
+input[type='time']:disabled + label,
+input[type='time']:disabled + label,
+input[type='tel']:disabled + label,
+input[type='email']:disabled + label,
+input[type='password']:disabled + label,
+input[type='file']:disabled + label,
+input[type='color']:disabled + label,
+input[type='range']:disabled + label {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
 textarea {
@@ -60,11 +87,6 @@ input[type='range'] {
 
   &:placeholder-shown {
     color: light-dark(var(--theme-color-20), var(--theme-color-05));
-  }
-
-  &:disabled {
-    opacity: 0.3;
-    cursor: not-allowed;
   }
 }
 
@@ -157,6 +179,53 @@ input[type='range']::-moz-range-progress {
 
 input[type='color'] {
   cursor: pointer;
+
+  &:disabled {
+    cursor: not-allowed;
+  }
+}
+
+input[type='checkbox'],
+input[type='radio'] {
+  transition: 0.3s all linear;
+  position: relative;
+  width: 0.9em;
+  height: 0.9em;
+  border: 1px solid light-dark(var(--theme-color-22), var(--theme-color-04));
+  vertical-align: -4px;
+
+  /* Set here so that Windows' High-Contrast Mode can override */
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
+
+  &:focus {
+    transition: none;
+    outline: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
+    outline-offset: 1px;
+  }
+
+  &:disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+  }
+}
+input[type='checkbox']::before {
+  content: '✖';
+  position: absolute;
+  font-size: 1.2em;
+  left: 0.5px;
+  top: -0.33em;
+  visibility: hidden;
+}
+input[type='checkbox']:checked::before {
+  visibility: visible;
+}
+
+input[type='radio'] {
+  border-radius: 50%;
+}
+input[type='radio']:checked {
+  background: light-dark(var(--theme-color-25), var(--theme-color-01));
+  box-shadow: inset 0 0 0 3px light-dark(var(--theme-color-01), var(--theme-color-25));
 }
 
 fieldset {
@@ -205,6 +274,12 @@ select > option[disabled]:hover {
   background: transparent;
   cursor: not-allowed;
 }
+select:disabled > option:hover {
+  background: transparent;
+}
 select > option[selected] {
+  background: light-dark(var(--theme-color-08), var(--theme-color-18));
+}
+select:disabled > option[selected]:hover {
   background: light-dark(var(--theme-color-08), var(--theme-color-18));
 }

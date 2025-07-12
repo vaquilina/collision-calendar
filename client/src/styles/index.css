@@ -60,6 +60,11 @@
   box-sizing: inherit;
 }
 
+*:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
 * {
   font-family: var(--theme-font);
   font-optical-sizing: auto;
@@ -105,21 +110,29 @@ body {
   background: light-dark(var(--theme-color-02), var(--theme-color-23));
 }
 
-/* https://developer.mozilla.org/en-US/docs/Web/HTML/Reference/Elements/kbd */
 kbd {
-  background-color: var(--theme-color-03);
-  border-radius: var(--theme-border-radius);
-  border: 1px solid var(--theme-color-05);
-  box-shadow: 0 1px 1px rgb(0 0 0 / 0.2), 0 2px 0 0 rgb(255 255 255 / 0.7) inset;
+  background-color: light-dark(var(--theme-color-03), var(--theme-color-09));
   color: var(--theme-color-20);
+  border: 1px solid light-dark(var(--theme-color-04), var(--theme-color-19));
+  border-radius: 1px;
+  box-shadow: 0 2px 0 1px light-dark(var(--theme-color-04), var(--theme-color-19));
   display: inline-block;
-  font-family: monospace;
-  font-size: 0.85em;
+  font-size: 0.75em;
+  min-width: 1.5em;
+  text-align: center;
   font-weight: var(--theme-font-weight-bold);
   line-height: 1;
-  padding: var(--theme-padding-medium) var(--theme-padding-dense);
+  padding: var(--theme-padding-dense) var(--theme-padding-medium);
   white-space: nowrap;
   width: fit-content;
+  cursor: default;
+  position: relative;
+  top: -1px;
+
+  &:hover {
+    box-shadow: 0 1px 0 0.5px light-dark(var(--theme-color-04), var(--theme-color-19));
+    top: 1px;
+  }
 }
 
 hr {
