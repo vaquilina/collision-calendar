@@ -43,10 +43,14 @@ function Index() {
       <dfn id='dfn-example'>definition</dfn>
       <em>emphasis</em>
       <kbd>Kbd</kbd>
-      <label for='meter'>meter</label>
-      <meter id='meter' value={45} min={0} max={100} low={33} high={66} optimum={80}>at 45/100</meter>
-      <label for='progress'>progress</label>
-      <progress id='progress' max={100} value={70}>70%</progress>
+      <div>
+        <label for='meter'>meter</label>
+        <meter id='meter' value={45} min={0} max={100} low={33} high={66} optimum={80}>at 45/100</meter>
+      </div>
+      <div>
+        <label for='progress'>progress</label>
+        <progress id='progress' max={100} value={70}>70%</progress>
+      </div>
       <ul>
         <li>
           A<ul>

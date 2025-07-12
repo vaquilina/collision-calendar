@@ -44,6 +44,11 @@ input[type='range']:disabled + label {
   cursor: not-allowed;
 }
 
+label[for='meter'],
+label[for='progress'] {
+  cursor: default;
+}
+
 textarea {
   resize: none;
 }
