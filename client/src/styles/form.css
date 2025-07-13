@@ -45,7 +45,6 @@ input[type='time']:disabled + label,
 input[type='tel']:disabled + label,
 input[type='email']:disabled + label,
 input[type='password']:disabled + label,
-input[type='file']:disabled + label,
 input[type='color']:disabled + label,
 input[type='range']:disabled + label {
   opacity: 0.3;
@@ -69,7 +68,6 @@ input[type='time']:invalid + label,
 input[type='tel']:invalid + label,
 input[type='email']:invalid + label,
 input[type='password']:invalid + label,
-input[type='file']:invalid + label,
 input[type='color']:invalid + label,
 input[type='range']:invalid + label {
   color: var(--theme-color-error);
@@ -92,7 +90,6 @@ input[type='time']:required + label::after,
 input[type='tel']:required + label::after,
 input[type='email']:required + label::after,
 input[type='password']:required + label::after,
-input[type='file']:required + label::after,
 input[type='color']:required + label::after,
 input[type='range']:required + label::after {
   content: ' *';
@@ -268,7 +265,12 @@ input[type='radio'] {
     opacity: 0.3;
     cursor: not-allowed;
   }
+
+  &:hover {
+    background: light-dark(var(--theme-color-05), var(--theme-color-15));
+  }
 }
+/* TODO: indeterminate state */
 input[type='checkbox']::before {
   content: '✖';
   position: absolute;
@@ -344,4 +346,41 @@ select > option[selected] {
 }
 select:disabled > option[selected]:hover {
   background: light-dark(var(--theme-color-08), var(--theme-color-18));
+}
+
+input[type='file'] {
+  height: 0;
+  padding: 0;
+  opacity: 0;
+}
+label[for='file'] {
+  cursor: pointer;
+  width: fit-content;
+  text-transform: uppercase;
+  box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  background: light-dark(var(--theme-color-21), var(--theme-color-04));
+  color: light-dark(var(--theme-color-01), var(--theme-color-25));
+  border-radius: var(--theme-border-radius);
+  border: 1px solid light-dark(var(--theme-color-05), var(--theme-color-20));
+  font-weight: var(--theme-font-weight-bold);
+  padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
+}
+label[for='file']:hover:not(:disabled) {
+  background: light-dark(var(--theme-color-18), var(--theme-color-05));
+  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  transform: translateX(1px) translateY(1px);
+}
+label[for='file']:active:not(:disabled) {
+  background: light-dark(var(--theme-color-04), var(--theme-color-21));
+  box-shadow: inset 0.5px 0.5px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
+}
+label[for='file']:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+label[for='file']:focus-visible {
+  transition: none;
+  outline: 1px solid light-dark(var(--theme-color-25), var(--theme-color-01));
+  outline-offset: 1px;
 }

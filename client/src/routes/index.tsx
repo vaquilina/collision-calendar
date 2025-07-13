@@ -30,7 +30,9 @@ function Index() {
       <button type='button'>button</button>
       <details>
         <summary>details</summary>
-        details content
+        <div class='content'>
+          details content
+        </div>
       </details>
       <span title='calendar icon' style={{ display: 'flex', 'align-items': 'center' }}>
         <CalendarBlank size={18} /> icon
@@ -43,14 +45,6 @@ function Index() {
       <dfn id='dfn-example'>definition</dfn>
       <em>emphasis</em>
       <kbd>Kbd</kbd>
-      <div>
-        <label for='meter'>meter</label>
-        <meter id='meter' value={45} min={0} max={100} low={33} high={66} optimum={80}>at 45/100</meter>
-      </div>
-      <div>
-        <label for='progress'>progress</label>
-        <progress id='progress' max={100} value={70}>70%</progress>
-      </div>
       <ul>
         <li>
           A<ul>
@@ -63,6 +57,7 @@ function Index() {
       <ol>
         <li>
           A<ol>
+            <li>very,</li>
             <li>very</li>
           </ol>
         </li>
@@ -149,8 +144,8 @@ function Index() {
             <label tabIndex={-1} for='password'>password input</label>
           </div>
           <div class='form-input'>
-            <input id='file' type='file' />
-            <label tabIndex={-1} for='file'>file input</label>
+            <input aria-hidden tabIndex={-1} id='file' type='file' />
+            <label role='button' tabIndex={0} for='file'>file input</label>
           </div>
           <div class='form-input'>
             <input id='color' type='color' />

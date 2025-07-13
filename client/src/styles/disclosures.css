@@ -1,0 +1,32 @@
+@supports (interpolate-size: allow-keywords) {
+  :root {
+    interpolate-size: allow-keywords;
+  }
+}
+
+summary::marker {
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
+}
+details {
+  font-size: small;
+}
+details > summary {
+  padding: var(--theme-padding-dense) var(--theme-padding-medium);
+  font-size: inherit;
+  text-transform: uppercase;
+  cursor: pointer;
+
+  &:hover {
+    background: light-dark(var(--theme-color-03), var(--theme-color-20));
+  }
+}
+details > .content {
+  transition: height 0.3s ease, content-visibility 0.5s ease allow-discrete;
+  padding: var(--theme-padding-medium);
+  height: 0;
+  overflow: clip;
+  text-indent: calc(1em - var(--theme-padding-medium) + 2px);
+}
+details[open] > .content {
+  height: auto;
+}

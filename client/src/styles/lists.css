@@ -1,0 +1,17 @@
+ul {
+  list-style-type: square;
+}
+
+ol {
+  counter-reset: item;
+}
+ol li {
+  display: block;
+}
+ol li::before {
+  content: counters(item, '.') ' ';
+  counter-increment: item;
+  font-size: small;
+  font-weight: var(--theme-font-weight-bold);
+  margin-right: 0.5em;
+}

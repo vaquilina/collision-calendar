@@ -54,6 +54,11 @@
   }
 }
 
+::selection {
+  background: light-dark(var(--theme-color-14), var(--theme-color-09));
+  color: light-dark(var(--theme-color-01), var(--theme-color-25));
+}
+
 *,
 *::before,
 *::after {
@@ -80,10 +85,7 @@
 
 a,
 button,
-blockquote,
 hr,
-meter,
-progress,
 textarea,
 select,
 option,
