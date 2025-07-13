@@ -78,13 +78,15 @@ function Index() {
             gap: '1em',
           }}
         >
-          <div>
-            <input id='checkbox' type='checkbox' />
-            <label for='checkbox'>checkbox</label>
-          </div>
-          <div>
-            <input id='radio' type='radio' />
-            <label for='radio'>radio</label>
+          <div style={{ width: '150px' }}>
+            <div class='form-check-input'>
+              <input id='checkbox' type='checkbox' />
+              <label tabIndex={-1} for='checkbox'>checkbox</label>
+            </div>
+            <div class='form-check-input'>
+              <input id='radio' type='radio' />
+              <label tabIndex={-1} for='radio'>radio</label>
+            </div>
           </div>
           <div class='form-input'>
             <select id='select' name='select' multiple>
@@ -92,71 +94,71 @@ function Index() {
               <option selected>selected</option>
               <option>normal</option>
             </select>
-            <label for='select'>Select</label>
+            <label tabIndex={-1} for='select'>Select</label>
           </div>
           <div class='form-input'>
-            <textarea id='textarea' rows={5} cols={33} placeholder='An area of text'></textarea>
-            <label for='textarea'>Textarea</label>
+            <textarea required id='textarea' rows={5} cols={33} placeholder='placeholder'></textarea>
+            <label tabIndex={-1} for='textarea'>Textarea</label>
           </div>
           <div class='form-input'>
             <input id='text' type='text' />
-            <label for='text'>text input</label>
+            <label tabIndex={-1} for='text'>text input</label>
           </div>
           <div class='form-input'>
             <input id='search' type='search' />
-            <label for='search'>search input</label>
+            <label tabIndex={-1} for='search'>search input</label>
           </div>
           <div class='form-input'>
             <input id='number' type='number' />
-            <label for='number'>number input</label>
+            <label tabIndex={-1} for='number'>number input</label>
           </div>
           <div class='form-input'>
             <input id='url' type='url' />
-            <label for='url'>url input</label>
+            <label tabIndex={-1} for='url'>url input</label>
           </div>
           <div class='form-input'>
             <input id='date' type='date' />
-            <label for='date'>date input</label>
+            <label tabIndex={-1} for='date'>date input</label>
           </div>
           <div class='form-input'>
             <input id='datetime' type='datetime-local' />
-            <label for='datetime'>datetime-local input</label>
+            <label tabIndex={-1} for='datetime'>datetime-local input</label>
           </div>
           <div class='form-input'>
             <input id='month' type='month' />
-            <label for='month'>month input (no ff/safari)</label>
+            <label tabIndex={-1} for='month'>month input (no ff/safari)</label>
           </div>
           <div class='form-input'>
             <input id='week' type='week' />
-            <label for='week'>week input (no ff/safari)</label>
+            <label tabIndex={-1} for='week'>week input (no ff/safari)</label>
           </div>
           <div class='form-input'>
             <input id='time' type='time' />
-            <label for='time'>time input</label>
+            <label tabIndex={-1} for='time'>time input</label>
           </div>
           <div class='form-input'>
             <input id='tel' type='tel' pattern='[0-9]{3}-[0-9]{3}-[0-9]{4}' placeholder='555-867-5309' />
-            <label for='tel'>tel input</label>
+            <label tabIndex={-1} for='tel'>tel input</label>
           </div>
           <div class='form-input'>
             <input id='email' type='email' placeholder='email@tld.suf' />
-            <label for='email'>email input</label>
+            <label tabIndex={-1} for='email'>email input</label>
           </div>
           <div class='form-input'>
             <input id='password' type='password' />
-            <label for='password'>password input</label>
+            <label tabIndex={-1} for='password'>password input</label>
           </div>
           <div class='form-input'>
             <input id='file' type='file' />
-            <label for='file'>file input</label>
+            <label tabIndex={-1} for='file'>file input</label>
           </div>
           <div class='form-input'>
             <input id='color' type='color' />
-            <label for='color'>color input</label>
+            <label tabIndex={-1} for='color'>color input</label>
           </div>
           <div class='form-input'>
             <input id='range' type='range' min={0} max={10} step={1} />
-            <label for='range'>range input</label>
+            <label tabIndex={-1} for='range'>range input</label>
           </div>
         </div>
       </fieldset>
