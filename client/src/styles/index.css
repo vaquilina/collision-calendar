@@ -25,7 +25,7 @@
   --theme-color-24: #0a0a0a;
   --theme-color-25: #000000;
 
-  --theme-color-error: #ff0000;
+  --theme-color-error: light-dark(#be0000, #ff0000);
 
   --theme-border-radius: 0;
   --theme-border-style: solid;
