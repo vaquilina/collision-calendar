@@ -2,6 +2,12 @@
   display: flex;
   flex-direction: column-reverse;
 }
+.form-check-input {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
 
 label {
   display: block;
@@ -16,6 +22,8 @@ label {
 input[type='checkbox'] + label,
 input[type='radio'] + label {
   float: right;
+  width: 100%;
+  text-align: right;
 }
 label:invalid {
   color: var(--theme-color-error);
@@ -42,6 +50,52 @@ input[type='color']:disabled + label,
 input[type='range']:disabled + label {
   opacity: 0.3;
   cursor: not-allowed;
+}
+
+textarea:invalid + label,
+select:invalid + label,
+input[type='checkbox']:invalid + label,
+input[type='radio']:invalid + label,
+input[type='text']:invalid + label,
+input[type='search']:invalid + label,
+input[type='number']:invalid + label,
+input[type='url']:invalid + label,
+input[type='date']:invalid + label,
+input[type='datetime-local']:invalid + label,
+input[type='month']:invalid + label,
+input[type='week']:invalid + label,
+input[type='time']:invalid + label,
+input[type='time']:invalid + label,
+input[type='tel']:invalid + label,
+input[type='email']:invalid + label,
+input[type='password']:invalid + label,
+input[type='file']:invalid + label,
+input[type='color']:invalid + label,
+input[type='range']:invalid + label {
+  color: var(--theme-color-error);
+}
+
+textarea:required + label::after,
+select:required + label::after,
+input[type='checkbox']:required + label::after,
+input[type='radio']:required + label::after,
+input[type='text']:required + label::after,
+input[type='search']:required + label::after,
+input[type='number']:required + label::after,
+input[type='url']:required + label::after,
+input[type='date']:required + label::after,
+input[type='datetime-local']:required + label::after,
+input[type='month']:required + label::after,
+input[type='week']:required + label::after,
+input[type='time']:required + label::after,
+input[type='time']:required + label::after,
+input[type='tel']:required + label::after,
+input[type='email']:required + label::after,
+input[type='password']:required + label::after,
+input[type='file']:required + label::after,
+input[type='color']:required + label::after,
+input[type='range']:required + label::after {
+  content: ' *';
 }
 
 label[for='meter'],
@@ -192,12 +246,14 @@ input[type='color'] {
 
 input[type='checkbox'],
 input[type='radio'] {
+  display: flex;
   transition: 0.3s all linear;
   position: relative;
-  width: 0.9em;
-  height: 0.9em;
+  font-size: 0.9em;
+  min-width: 0.9em;
+  min-height: 0.9em;
   border: 1px solid light-dark(var(--theme-color-22), var(--theme-color-04));
-  vertical-align: -4px;
+  margin-left: 0;
 
   /* Set here so that Windows' High-Contrast Mode can override */
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
@@ -227,6 +283,7 @@ input[type='checkbox']:checked::before {
 
 input[type='radio'] {
   border-radius: 50%;
+  margin-top: -1px;
 }
 input[type='radio']:checked {
   background: light-dark(var(--theme-color-25), var(--theme-color-01));
