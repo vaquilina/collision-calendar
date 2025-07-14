@@ -183,7 +183,6 @@ input[type='range']::-webkit-slider-thumb {
   width: 12px;
   height: 100%;
   cursor: grab;
-  margin-top: -14px;
   appearance: none;
 }
 input[type='range']::-webkit-slider-thumb:active {
@@ -273,11 +272,18 @@ input[type='radio'] {
 /* TODO: indeterminate state */
 input[type='checkbox']::before {
   content: '✖';
+  font-family: var(--theme-font);
   position: absolute;
   font-size: 1.2em;
   left: 0.5px;
   top: -0.33em;
   visibility: hidden;
+  margin: 0;
+}
+html[data-user-agent*='Chrome'] input[type='checkbox']::before {
+  top: -0.15em;
+  left: 0;
+  font-size: 0.9em;
 }
 input[type='checkbox']:checked::before {
   visibility: visible;

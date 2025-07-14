@@ -9,6 +9,7 @@ button {
   border: 1px solid light-dark(var(--theme-color-05), var(--theme-color-20));
   font-weight: var(--theme-font-weight-bold);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
+  transition: all 0.2s linear;
 }
 button:hover:not(:disabled) {
   background: light-dark(var(--theme-color-18), var(--theme-color-05));

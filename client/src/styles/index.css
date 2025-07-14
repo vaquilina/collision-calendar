@@ -29,6 +29,8 @@
 
   --theme-border-radius: 0;
   --theme-border-style: solid;
+  --theme-header-border-width: 1px;
+  --theme-footer-border-width: 1px;
 
   --theme-padding-comfortable: 8px;
   --theme-padding-medium: 4px;
@@ -43,6 +45,9 @@
   --theme-font-weight-thin: 100;
 
   --theme-font: 'M PLUS 1 Code', monospace;
+
+  --header-height: 1.5em;
+  --footer-height: 1em;
 
   box-sizing: border-box;
   scrollbar-width: thin;
@@ -75,12 +80,17 @@
   font-optical-sizing: auto;
   font-variant-numeric: tabular-nums;
   font-weight: var(--theme-font-weight-regular);
-  color: light-dark(var(--theme-color-25), var(--theme-color-01));
   transition: 0.3s ease;
 
   @media screen and (prefers-reduced-motion: reduce) {
     transition: none;
   }
+}
+
+div,
+p,
+span {
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
 }
 
 a,
@@ -110,6 +120,35 @@ input[type='range'] {
 
 body {
   background: light-dark(var(--theme-color-02), var(--theme-color-23));
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+header {
+  height: var(--header-height);
+  background: transparent;
+  display: flex;
+  overflow: visible;
+}
+
+footer {
+  height: var(--footer-height);
+  border-top-width: var(--theme-footer-border-width);
+  border-top-style: var(--theme-border-style);
+  border-top-color: light-dark(var(--theme-color-19), var(--theme-color-06));
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+}
+
+main {
+  height: calc(
+    100vh - var(--header-height) - var(--footer-height) - var(--theme-header-border-width)
+      - var(--theme-footer-border-width)
+  );
+  overflow: scroll;
 }
 
 kbd {

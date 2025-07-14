@@ -1,5 +1,13 @@
 ul {
   list-style-type: square;
+  list-style-position: inside;
+}
+ul li::marker {
+  margin-right: 0.5em;
+  font-size: 1em;
+}
+ul li::before {
+  content: ' ';
 }
 
 ol {
@@ -14,4 +22,5 @@ ol li::before {
   font-size: small;
   font-weight: var(--theme-font-weight-bold);
   margin-right: 0.5em;
+  color: light-dark(var(--theme-color-21), var(--theme-color-02));
 }
