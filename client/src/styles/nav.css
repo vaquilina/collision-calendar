@@ -1,5 +1,4 @@
 #nav-menu {
-  position-area: bottom span-right;
   border: none;
   padding: 0;
   overflow: visible;
@@ -22,23 +21,23 @@
   max-width: unset;
   width: 100%;
   cursor: pointer;
-  background: light-dark(var(--theme-color-21), var(--theme-color-04));
+  background: light-dark(var(--theme-color-04), var(--theme-color-21));
   border-radius: var(--theme-border-radius);
-  border: 1px solid light-dark(var(--theme-color-05), var(--theme-color-20));
+  border: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
   font-weight: var(--theme-font-weight-bold);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
-  box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
-  color: light-dark(var(--theme-color-01), var(--theme-color-25));
+  box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
 }
 .nav-link:hover {
-  background: light-dark(var(--theme-color-18), var(--theme-color-05));
-  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  background: light-dark(var(--theme-color-05), var(--theme-color-18));
+  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   transform: translateX(1px) translateY(1px);
 }
 .nav-link:active {
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
-  box-shadow: inset 0.5px 0.5px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
-  color: light-dark(var(--theme-color-25), var(--theme-color-01));
+  box-shadow: inset 0.5px 0.5px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
+  color: light-dark(var(--theme-color-21), var(--theme-color-05));
 }
 .nav-link:focus-visible {
   transition: none;
@@ -52,8 +51,41 @@
 .nav-link > span {
   width: 6em;
   text-align: left;
-  color: light-dark(var(--theme-color-01), var(--theme-color-25));
+  color: inherit;
 }
 .nav-link > span:active {
+  color: inherit;
+}
+
+.nav-link[data-status='active'] {
+  background: light-dark(var(--theme-color-06), var(--theme-color-16));
+  pointer-events: none;
+  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
+  transform: translateX(1px) translateY(1px);
+}
+.nav-link[data-status='active'] > span {
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
+}
+
+/* Transition for the popover itself */
+
+[popover]:popover-open {
+  opacity: 1;
+}
+
+[popover] {
+  /* Final state of the exit animation */
+  opacity: 0;
+
+  transition: opacity 0.3s, overlay 0.3s allow-discrete, display 0.3s allow-discrete;
+  /* Equivalent to
+  transition: all 0.7s allow-discrete; */
+}
+
+/* Needs to be after the previous [popover]:popover-open rule
+to take effect, as the specificity is the same */
+@starting-style {
+  [popover]:popover-open {
+    opacity: 0;
+  }
 }
