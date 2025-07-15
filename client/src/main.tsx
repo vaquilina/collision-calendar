@@ -1,5 +1,6 @@
 import { render } from 'solid-js/web';
 import { createRouter, RouterProvider } from '@tanstack/solid-router';
+import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools';
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen.ts';
@@ -17,5 +18,10 @@ declare module '@tanstack/solid-router' {
 // Render the app
 const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
-  render(() => <RouterProvider router={router} />, rootElement);
+  render(() => (
+    <>
+      <RouterProvider router={router} />
+      <TanStackRouterDevtools router={router} position='top-right' containerElement='div' />
+    </>
+  ), rootElement);
 }

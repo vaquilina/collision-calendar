@@ -47,7 +47,7 @@
   --theme-font: 'M PLUS 1 Code', monospace;
 
   --header-height: 1.5em;
-  --footer-height: 1em;
+  --footer-height: 0.75rem;
 
   box-sizing: border-box;
   scrollbar-width: thin;
@@ -201,4 +201,9 @@ a {
     outline: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
     outline-offset: 1px;
   }
+}
+
+/* don't apply the page styles to the router devtools */
+.TanStackRouterDevtools * {
+  all: revert;
 }
