@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/solid-router';
 
 export const Route = createFileRoute('/calendar')({
-  component: RouteComponent,
+  component: CalendarComponent,
 });
 
-function RouteComponent() {
+function CalendarComponent() {
   return <div>Hello "/calendar"!</div>;
 }

@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/solid-router';
 
 export const Route = createFileRoute('/logout')({
-  component: RouteComponent,
+  component: LogoutComponent,
 });
 
-function RouteComponent() {
+function LogoutComponent() {
   return <div>Hello "/logout"!</div>;
 }

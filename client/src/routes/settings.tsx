@@ -1,9 +1,9 @@
 import { createFileRoute } from '@tanstack/solid-router';
 
 export const Route = createFileRoute('/settings')({
-  component: RouteComponent,
+  component: SettingsComponent,
 });
 
-function RouteComponent() {
+function SettingsComponent() {
   return <div>Hello "/settings"!</div>;
 }
