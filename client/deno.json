@@ -3,7 +3,12 @@
   "tasks": {
     "dev:vite": "deno run -A --node-modules-dir npm:vite"
   },
-  "exclude": ["**/routeTree.gen.ts"],
+  "lint": {
+    "exclude": ["**/routeTree.gen.ts"]
+  },
+  "fmt": {
+    "exclude": ["**/routeTree.gen.ts"]
+  },
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
