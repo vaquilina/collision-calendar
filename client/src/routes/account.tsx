@@ -5,5 +5,13 @@ export const Route = createFileRoute('/account')({
 });
 
 function AccountComponent() {
-  return <div>Hello "/account"!</div>;
+  return (
+    <>
+      <header>
+        <h5>Account</h5>
+      </header>
+      <aside>sidebar</aside>
+      <main>account content</main>
+    </>
+  );
 }

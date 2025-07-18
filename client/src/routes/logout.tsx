@@ -5,5 +5,13 @@ export const Route = createFileRoute('/logout')({
 });
 
 function LogoutComponent() {
-  return <div>Hello "/logout"!</div>;
+  return (
+    <>
+      <header>
+        <h5>Logout</h5>
+      </header>
+      <aside>sidebar</aside>
+      <main>logout content</main>
+    </>
+  );
 }

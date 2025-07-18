@@ -11,6 +11,9 @@ button {
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   transition: all 0.2s linear;
 }
+button.small-button {
+  padding: var(--theme-padding-dense) var(--theme-padding-medium);
+}
 button:hover:not(:disabled) {
   background: light-dark(var(--theme-color-05), var(--theme-color-18));
   box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));

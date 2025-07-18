@@ -7,17 +7,12 @@ export const Route = createRootRoute({
     b.setAttribute('data-user-agent', navigator.userAgent);
 
     return (
-      <>
-        <header>
+      <div class='screen'>
+        <div class='logo-nav'>
           <NavMenu />
-        </header>
-        <main>
-          <Outlet />
-        </main>
-        <footer>
-          <small>footer</small>
-        </footer>
-      </>
+        </div>
+        <Outlet />
+      </div>
     );
   },
 });

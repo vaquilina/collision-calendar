@@ -5,5 +5,13 @@ export const Route = createFileRoute('/settings')({
 });
 
 function SettingsComponent() {
-  return <div>Hello "/settings"!</div>;
+  return (
+    <>
+      <header>
+        <h5>Settings</h5>
+      </header>
+      <aside>sidebar</aside>
+      <main>settings content</main>
+    </>
+  );
 }

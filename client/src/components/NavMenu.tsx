@@ -22,36 +22,36 @@ import { Route as logoutRoute } from '../routes/logout.tsx';
 export function NavMenu() {
   return (
     <>
-      <button type='button' popovertarget='nav-menu'>
+      <button type='button' id='hamburger-menu' popovertarget='nav-menu'>
         <HamburgerIcon />
       </button>
       <div id='nav-menu' popover>
         <nav class='content'>
-          <NavLink to={homeRoute.to}>
+          <NavLink to={homeRoute.to} viewTransition>
             <HomeIcon />
             <span>Home</span>
           </NavLink>
-          <NavLink to={calendarRoute.to}>
+          <NavLink to={calendarRoute.to} viewTransition>
             <CalendarIcon />
             <span>Calendar</span>
           </NavLink>
-          <NavLink to={settingsRoute.to}>
+          <NavLink to={settingsRoute.to} viewTransition>
             <SettingsIcon />
             <span>Settings</span>
           </NavLink>
-          <NavLink to={accountRoute.to}>
+          <NavLink to={accountRoute.to} viewTransition>
             <AccountIcon />
             <span>Account</span>
           </NavLink>
-          <NavLink to={aboutRoute.to}>
+          <NavLink to={aboutRoute.to} viewTransition>
             <AboutIcon />
             <span>About</span>
           </NavLink>
-          <NavLink to={playgroundRoute.to}>
+          <NavLink to={playgroundRoute.to} viewTransition>
             <PlaygroundIcon />
             <span>Playground</span>
           </NavLink>
-          <NavLink to={logoutRoute.to}>
+          <NavLink to={logoutRoute.to} viewTransition>
             <LogoutIcon />
             <span>Log out</span>
           </NavLink>

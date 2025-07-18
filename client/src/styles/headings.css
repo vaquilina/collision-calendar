@@ -1,4 +1,4 @@
-h1, h2, h3, h4 {
+h1, h2, h3, h4, h5, h6 {
   font-family: var(--theme-font);
   font-weight: var(--theme-font-weight-bold);
   text-transform: uppercase;
@@ -22,4 +22,13 @@ h3 {
 
 h4 {
   font-size: 1.5em;
+}
+
+h5 {
+  font-size: 1em;
+}
+
+h6 {
+  font-size: 0.8em;
+  font-weight: var(--theme-font-weight-medium);
 }
