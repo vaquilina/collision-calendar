@@ -1,34 +1,32 @@
-import { createSignal } from 'solid-js';
+import { createEffect, createSignal } from 'solid-js';
 
-import { DesktopTower as SystemIcon, Moon as DarkIcon, SunDim as LightIcon } from 'phosphor-solid-js';
+import { Moon as DarkIcon, SunDim as LightIcon } from 'phosphor-solid-js';
 
 import { SegmentedControl, type SegmentedControlItem } from './primitives/SegmentedControl.tsx';
 
 export function ThemeSwitcher() {
-  const [selected, setSelected] = createSignal('theme-light');
+  const [selected, setSelected] = createSignal('light');
 
   const handleChange = (id: string) => {
     setSelected(id);
   };
 
+  createEffect(() => {
+    document.documentElement.setAttribute('data-theme', selected());
+  });
+
   const items: SegmentedControlItem[] = [
     {
-      id: 'theme-light',
+      id: 'light',
       disabled: false,
       title: 'Light theme',
       icon: <LightIcon size={20} />,
     },
     {
-      id: 'theme-dark',
+      id: 'dark',
       disabled: false,
       title: 'Dark theme',
       icon: <DarkIcon size={20} />,
-    },
-    {
-      id: 'theme-system',
-      disabled: false,
-      title: 'System theme',
-      icon: <SystemIcon size={20} />,
     },
   ];
 

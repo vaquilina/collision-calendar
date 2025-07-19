@@ -53,6 +53,14 @@
   scrollbar-width: thin;
 }
 
+[data-theme='light'] {
+  color-scheme: light;
+}
+
+[data-theme='dark'] {
+  color-scheme: dark;
+}
+
 @supports (scrollbar-color: auto) {
   :root {
     scrollbar-color: light-dark(var(--theme-color-10), var(--theme-color-15)) transparent;
