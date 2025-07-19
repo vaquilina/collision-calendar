@@ -1,0 +1,49 @@
+.segmented-control {
+  background: light-dark(var(--theme-color-05), var(--theme-color-20));
+  display: inline-flex;
+  position: relative;
+  border-radius: var(--theme-border-radius);
+  border: 2px double light-dark(var(--theme-color-20), var(--theme-color-10));
+  --width: 5rem;
+}
+
+.segmented-control input[type='radio'] + label {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--theme-padding-dense);
+  width: var(--width);
+  text-align: center;
+  z-index: 1;
+  margin: 0;
+}
+
+.segmented-control-focus {
+  width: var(--width);
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 100%;
+  border-radius: inherit;
+  background: light-dark(var(--theme-color-09), var(--theme-color-15));
+  outline-color: light-dark(var(--theme-color-20), var(--theme-color-05));
+  outline-width: 2px;
+  outline-style: solid;
+  transition: transform 0.3s ease-in-out;
+}
+
+.segmented-control [type='radio'] {
+  display: none;
+  position: relative;
+}
+
+.segmented-control [type='radio']:nth-child(3):checked ~ .segmented-control-focus {
+  transform: translateX(calc(var(--width) * 1));
+}
+.segmented-control [type='radio']:nth-child(5):checked ~ .segmented-control-focus {
+  transform: translateX(calc(var(--width) * 2));
+}
+.segmented-control [type='radio']:nth-child(7):checked ~ .segmented-control-focus {
+  transform: translateX(calc(var(--width) * 3));
+}

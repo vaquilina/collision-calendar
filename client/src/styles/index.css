@@ -182,6 +182,10 @@ a {
   }
 }
 
+.theme-switcher .segmented-control {
+  --width: 24px;
+}
+
 /* don't apply the page styles to the router devtools */
 .TanStackRouterDevtools * {
   all: revert;
