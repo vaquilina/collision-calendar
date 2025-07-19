@@ -11,13 +11,13 @@ import {
 
 import { NavLink } from './NavLink.tsx';
 
-import { Route as homeRoute } from '../routes/index.tsx';
-import { Route as calendarRoute } from '../routes/calendar.tsx';
-import { Route as settingsRoute } from '../routes/settings.tsx';
-import { Route as aboutRoute } from '../routes/about.tsx';
-import { Route as accountRoute } from '../routes/account.tsx';
-import { Route as playgroundRoute } from '../routes/playground.tsx';
-import { Route as logoutRoute } from '../routes/logout.tsx';
+import { Route as homeRoute } from '../../routes/index.tsx';
+import { Route as calendarRoute } from '../../routes/calendar.tsx';
+import { Route as settingsRoute } from '../../routes/settings.tsx';
+import { Route as aboutRoute } from '../../routes/about.tsx';
+import { Route as accountRoute } from '../../routes/account.tsx';
+import { Route as playgroundRoute } from '../../routes/playground.tsx';
+import { Route as logoutRoute } from '../../routes/logout.tsx';
 
 export function NavMenu() {
   return (
