@@ -2,7 +2,7 @@ import { createSignal } from 'solid-js';
 import { SegmentedControl, type SegmentedControlItem } from '../primitives/SegmentedControl.tsx';
 
 export function ViewSwitcher() {
-  const [selected, setSelected] = createSignal('month');
+  const [selected, setSelected] = createSignal('view-month');
 
   const handleChange = (id: string) => {
     setSelected(id);
