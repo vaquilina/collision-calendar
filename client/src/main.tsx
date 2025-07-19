@@ -21,7 +21,7 @@ if (!rootElement.innerHTML) {
   render(() => (
     <>
       <RouterProvider router={router} />
-      <TanStackRouterDevtools router={router} position='top-right' containerElement='div' />
+      <TanStackRouterDevtools router={router} position='bottom-right' containerElement='div' />
     </>
   ), rootElement);
 }
