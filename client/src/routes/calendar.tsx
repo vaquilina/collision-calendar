@@ -12,9 +12,7 @@ function CalendarComponent() {
   return (
     <>
       <header>
-        <button type='button' title='Go to today'>Today</button>
-        <ViewSwitcher />
-        <ThemeSwitcher />
+        <CalendarToolbar />
       </header>
       <aside>
         <MiniCalendar />
@@ -39,6 +37,16 @@ function CalendarComponent() {
       <main>
         <MonthCalendar />
       </main>
+    </>
+  );
+}
+
+function CalendarToolbar() {
+  return (
+    <>
+      <button type='button' title='Go to today'>Today</button>
+      <ViewSwitcher />
+      <ThemeSwitcher />
     </>
   );
 }
