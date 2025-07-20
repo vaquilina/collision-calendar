@@ -36,6 +36,7 @@
   outline-color: light-dark(var(--theme-color-20), var(--theme-color-05));
   outline-width: 1px;
   outline-style: solid;
+  opacity: 0.8;
   transition: transform 0.3s ease-in-out;
 }
 
