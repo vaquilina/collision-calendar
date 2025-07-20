@@ -1,3 +1,29 @@
+.cal-navigator {
+  display: flex;
+  min-width: fit-content;
+  align-items: center;
+  flex-wrap: nowrap;
+  gap: 1em;
+}
+.cal-navigator h5 {
+  min-width: 10em;
+}
+
+button.new-block-button {
+  width: 100%;
+}
+
+h6.timezone-display {
+  min-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5em;
+}
+
 .month-calendar {
   display: grid;
   grid-template-columns: 2em repeat(7, 1fr);
@@ -18,6 +44,7 @@
 
 .day-container {
   min-width: 6em;
+  min-height: 6em;
   position: relative;
   padding: var(--theme-padding-dense);
   border-bottom: 1px solid light-dark(var(--theme-color-10), var(--theme-color-15));
@@ -258,7 +285,6 @@
   font-size: x-small;
   width: 18em;
   height: 18em;
-  margin-top: 0.75em;
 }
 
 .mini-calendar header {
@@ -266,6 +292,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+}
+.mini-calendar header h5 {
+  margin-left: 2em;
 }
 
 .mini-calendar .day-of-week-container h6 {
