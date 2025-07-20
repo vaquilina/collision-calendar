@@ -390,3 +390,10 @@ label[for='file']:focus-visible {
   outline: 1px solid light-dark(var(--theme-color-25), var(--theme-color-01));
   outline-offset: 1px;
 }
+
+input[type='search'] {
+  background: url('../../public/magnifying-glass.svg') no-repeat left;
+  background-size: 16px;
+  background-color: light-dark(var(--theme-color-03), var(--theme-color-22));
+  padding-left: calc(16px + var(--theme-padding-dense));
+}
