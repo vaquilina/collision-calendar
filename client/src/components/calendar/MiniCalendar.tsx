@@ -4,7 +4,7 @@ export function MiniCalendar() {
   return (
     <div class='mini-calendar'>
       <header>
-        <h4>September 2025</h4>
+        <h5>September 2025</h5>
         <span>
           <button id='mini-cal-month-backward' class='small-button' type='button'>
             <CaretLeft size={12} />
