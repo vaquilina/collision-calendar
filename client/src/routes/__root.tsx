@@ -1,5 +1,6 @@
 import { createRootRoute, Outlet } from '@tanstack/solid-router';
 import { NavMenu } from '../components/nav/NavMenu.tsx';
+import { ThemeSwitcher } from '../components/ThemeSwitcher.tsx';
 
 export const Route = createRootRoute({
   component: () => {
@@ -11,6 +12,7 @@ export const Route = createRootRoute({
       <div class='screen'>
         <div class='logo-nav'>
           <NavMenu />
+          <ThemeSwitcher />
         </div>
         <Outlet />
       </div>
