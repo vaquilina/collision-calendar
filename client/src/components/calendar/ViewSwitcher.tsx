@@ -1,11 +1,17 @@
-import { createSignal } from 'solid-js';
+import { type Setter } from 'solid-js';
 import { SegmentedControl, type SegmentedControlItem } from '../primitives/SegmentedControl.tsx';
 
-export function ViewSwitcher() {
-  const [selected, setSelected] = createSignal('view-month');
-
+/**
+ * Component for switching between the calendar views.
+ * @remarks
+ * Views are:
+ * - Month -> `view-month`
+ * - Week -> `view-week`
+ * - Day -> `view-day`
+ */
+export function ViewSwitcher(props: { selected: string; setSelected: Setter<string> }) {
   const handleChange = (id: string) => {
-    setSelected(id);
+    props.setSelected(id);
   };
 
   const items: SegmentedControlItem[] = [
@@ -18,7 +24,6 @@ export function ViewSwitcher() {
     {
       id: 'view-week',
       title: 'Week view',
-      disabled: true,
       label: 'Week',
     },
     {
@@ -29,5 +34,5 @@ export function ViewSwitcher() {
     },
   ];
 
-  return <SegmentedControl checked={selected()} name='view-switcher' items={items} onchange={handleChange} />;
+  return <SegmentedControl checked={props.selected} name='view-switcher' items={items} onchange={handleChange} />;
 }

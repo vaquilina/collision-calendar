@@ -22,6 +22,7 @@ h6.timezone-display {
   align-items: center;
   justify-content: center;
   gap: 0.5em;
+  margin-bottom: -0.5em;
 }
 
 .month-calendar {
@@ -269,7 +270,7 @@ h6.timezone-display {
 .mini-calendar {
   display: grid;
   grid-template-columns: auto repeat(7, 1fr);
-  grid-template-rows: 4em 1.2em repeat(6, 1fr);
+  grid-template-rows: 3.5em 1.2em repeat(6, 1fr);
   gap: 0px 0px;
   grid-auto-flow: row;
   grid-template-areas:
@@ -294,11 +295,11 @@ h6.timezone-display {
   align-items: center;
 }
 .mini-calendar header h5 {
-  margin-left: 2em;
+  margin-left: 3em;
 }
 
 .mini-calendar .day-of-week-container h6 {
-  font-weight: var(--theme-font-weight-bold);
+  font-weight: var(--theme-font-weight-semibold);
 }
 
 .mini-calendar .week-number-container::after {
@@ -321,4 +322,54 @@ h6.timezone-display {
   &:hover {
     background: var(--theme-color-12);
   }
+}
+
+.week-calendar {
+  display: grid;
+  grid-auto-rows: 1fr;
+  grid-template-columns: 2em repeat(7, 1fr);
+  grid-template-rows: 3em auto;
+  gap: 0px 0px;
+  grid-template-areas:
+    'tz-offset dow01 dow02 dow03 dow04 dow05 dow06 dow07'
+    'all-day all-day01 all-day02 all-day03 all-day04 all-day05 all-day06 all-day07';
+}
+.week-calendar {
+  display: grid;
+  grid-template-columns: 2em repeat(7, 1fr);
+  grid-template-rows: 3em auto;
+  grid-auto-rows: 1fr;
+  gap: 0px 0px;
+  grid-auto-flow: row;
+  grid-template-areas:
+    'tz-offset dow01 dow02 dow03 dow04 dow05 dow06 dow07'
+    'all-day all-day01 all-day02 all-day03 all-day04 all-day05 all-day06 all-day07';
+}
+
+.tz-offset {
+  grid-area: tz-offset;
+}
+.all-day {
+  grid-area: all-day;
+}
+.all-day01 {
+  grid-area: all-day01;
+}
+.all-day02 {
+  grid-area: all-day02;
+}
+.all-day03 {
+  grid-area: all-day03;
+}
+.all-day04 {
+  grid-area: all-day04;
+}
+.all-day05 {
+  grid-area: all-day05;
+}
+.all-day06 {
+  grid-area: all-day06;
+}
+.all-day07 {
+  grid-area: all-day07;
 }
