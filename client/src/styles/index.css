@@ -44,7 +44,7 @@
   --theme-font-weight-extralight: 200;
   --theme-font-weight-thin: 100;
 
-  --theme-font: 'M PLUS 1 Code', monospace;
+  --theme-font: 'IBM Plex Mono', sans-serif;
 
   --header-height: 1.5em;
   --footer-height: 0.75rem;
