@@ -12,7 +12,7 @@ export function UserDisplay() {
         <h6>Vince Aquilina</h6>
         <address>vince.aquilina@protonmail.com</address>
       </div>
-      <UserRectangle size={38} weight='thin' />
+      <UserRectangle size={40} weight='thin' />
     </div>
   );
 }
