@@ -1,11 +1,12 @@
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--theme-font);
-  font-weight: var(--theme-font-weight-bold);
+  font-weight: var(--theme-font-weight-semibold);
   text-transform: uppercase;
   color: light-dark(var(--theme-color-22), var(--theme-color-03));
   padding: 0;
   margin: 0;
   line-height: 1em;
+  text-rendering: geometricPrecision;
 }
 
 h1 {

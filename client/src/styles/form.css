@@ -274,16 +274,14 @@ input[type='checkbox']::before {
   content: '✖';
   font-family: var(--theme-font);
   position: absolute;
-  font-size: 1.2em;
-  left: 0.5px;
-  top: -0.33em;
+  font-size: 0.9em;
+  left: 0;
+  top: -2.5px;
   visibility: hidden;
   margin: 0;
 }
 html[data-user-agent*='Chrome'] input[type='checkbox']::before {
-  top: -0.15em;
-  left: 0;
-  font-size: 0.9em;
+  left: 0.5px;
 }
 input[type='checkbox']:checked::before {
   visibility: visible;
@@ -368,7 +366,7 @@ label[for='file'] {
   color: light-dark(var(--theme-color-01), var(--theme-color-25));
   border-radius: var(--theme-border-radius);
   border: 1px solid light-dark(var(--theme-color-05), var(--theme-color-20));
-  font-weight: var(--theme-font-weight-bold);
+  font-weight: var(--theme-font-weight-medium);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
 }
 label[for='file']:hover:not(:disabled) {

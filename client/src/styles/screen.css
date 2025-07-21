@@ -49,11 +49,12 @@ div.screen {
   padding-right: var(--theme-padding-comfortable);
   padding-bottom: 0;
   width: 100%;
+  min-width: max-content;
   height: 100%;
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
   overflow: hidden;
-  border-bottom: 1px inset;
-  margin-left: -1px;
+  border-bottom: 2px outset light-dark(var(--theme-color-02), var(--theme-color-23));
+  margin-left: -2px; /* join borders */
 }
 
 .screen aside {
@@ -66,7 +67,7 @@ div.screen {
   flex-direction: column;
   gap: 0.8em;
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
-  border-right: 1px inset;
+  border-right: 2px outset light-dark(var(--theme-color-02), var(--theme-color-23));
 }
 
 .screen main {

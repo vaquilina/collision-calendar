@@ -28,7 +28,8 @@
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
   border-radius: var(--theme-border-radius);
   border: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
-  font-weight: var(--theme-font-weight-bold);
+  font-weight: var(--theme-font-weight-medium);
+  font-size: 0.9em;
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   color: light-dark(var(--theme-color-25), var(--theme-color-01));

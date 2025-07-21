@@ -7,7 +7,7 @@ button {
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
   border-radius: var(--theme-border-radius);
   border: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
-  font-weight: var(--theme-font-weight-bold);
+  font-weight: var(--theme-font-weight-medium);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   transition: all 0.2s linear;
 }
