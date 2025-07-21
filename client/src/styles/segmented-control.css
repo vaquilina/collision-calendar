@@ -32,7 +32,7 @@
   top: calc(var(--theme-padding-medium) / 2 * -1);
   height: calc(100% + var(--theme-padding-medium));
   border-radius: inherit;
-  background: light-dark(var(--theme-color-09), var(--theme-color-15));
+  background: light-dark(var(--theme-color-07), var(--theme-color-15));
   outline-color: light-dark(var(--theme-color-20), var(--theme-color-05));
   outline-width: 1px;
   outline-style: solid;
