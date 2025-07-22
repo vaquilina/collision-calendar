@@ -1,17 +1,25 @@
 import type { Setter } from 'solid-js';
+import { Temporal } from '@js-temporal/polyfill';
 import { MagnifyingGlass } from 'phosphor-solid-js';
 import { CalendarNavigator } from './CalendarNavigator.tsx';
 import { ViewSwitcher } from './ViewSwitcher.tsx';
 import { UserDisplay } from '../UserDisplay.tsx';
 
 /** Toolbar component for the calendar screen header. */
-export function CalendarToolbar(props: { selectedView: string; setSelectedView: Setter<string> }) {
+export function CalendarToolbar(
+  props: {
+    date: Temporal.PlainDate;
+    setDate: Setter<Temporal.PlainDate>;
+    selectedView: string;
+    setSelectedView: Setter<string>;
+  },
+) {
   return (
     <>
       <button type='button' title='Search'>
         <MagnifyingGlass />
       </button>
-      <CalendarNavigator />
+      <CalendarNavigator date={props.date} setDate={props.setDate} view={props.selectedView} />
       <ViewSwitcher selected={props.selectedView} setSelected={props.setSelectedView} />
       <UserDisplay />
     </>

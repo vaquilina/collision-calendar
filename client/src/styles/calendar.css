@@ -75,6 +75,16 @@ h6.timezone-display {
   user-select: none;
   padding: var(--theme-padding-dense) 0;
 }
+.day-container[data-outside-month='true'] {
+  background: light-dark(var(--theme-color-03), var(--theme-color-21));
+}
+.day-container[data-today='true']::after {
+  background: light-dark(var(--theme-color-23), var(--theme-color-02));
+  color: light-dark(var(--theme-color-02), var(--theme-color-23));
+  padding: 0;
+  margin: var(--theme-padding-dense);
+  min-width: calc(100% - var(--theme-padding-dense) * 2);
+}
 
 .week-number-container {
   width: 100%;
@@ -95,6 +105,9 @@ h6.timezone-display {
 
 .day-of-week-container {
   text-align: center;
+}
+.day-of-week-container[data-today='true'] h6 {
+  font-weight: var(--theme-font-weight-bold);
 }
 
 .week0 {

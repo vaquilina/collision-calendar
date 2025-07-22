@@ -1,69 +1,107 @@
+import { createEffect, createSignal, Index } from 'solid-js';
+import { Temporal } from '@js-temporal/polyfill';
+import { firstDayInMonthView } from '../../utils/date-arithmetic.tsx';
+
+type MonthViewDay = {
+  date: Temporal.PlainDate;
+  isOutsideMonth?: boolean;
+  isToday?: boolean;
+};
+
+type MonthViewWeek = {
+  weekNumber: Temporal.PlainDate['weekOfYear'];
+  days: MonthViewDay[];
+};
+
+const WEEKS_IN_VIEW = 5;
+
+const today = Temporal.Now.plainDateISO();
+
 /** Month calendar component. */
-export function MonthCalendar() {
+export function MonthCalendar(props: { date: Temporal.PlainDate }) {
+  const [weeks, setWeeks] = createSignal<MonthViewWeek[]>([]);
+  const [days, setDays] = createSignal<MonthViewDay[]>([]);
+
+  createEffect(() => {
+    /* Get the first day in the view
+     * e.g. If the 1st of the month falls on a Tuesday,
+     *      the first day in the view would fall on the prior Sunday
+     */
+    const firstInView = firstDayInMonthView(props.date);
+
+    const month = props.date.month;
+
+    const daysInView: MonthViewDay[] = [{
+      date: firstInView,
+      isOutsideMonth: firstInView.month !== month,
+      isToday: Temporal.PlainDate.compare(firstInView, today) === 0,
+    }];
+
+    let currDate = firstInView;
+    for (let i = 1; i < props.date.daysInWeek * WEEKS_IN_VIEW; i++) {
+      currDate = currDate.add({ days: 1 });
+      daysInView.push({
+        date: currDate,
+        isOutsideMonth: currDate.month !== month,
+        isToday: Temporal.PlainDate.compare(currDate, today) === 0,
+      });
+    }
+
+    setDays(daysInView);
+
+    const weeksOfYearInView = new Set(
+      daysInView.filter((day) => !day.isOutsideMonth).map((day) => day.date.weekOfYear),
+    );
+    const weeksInView: MonthViewWeek[] = [];
+    for (const weekNumber of weeksOfYearInView.keys()) {
+      weeksInView.push({
+        weekNumber,
+        days: daysInView.filter((day) => day.date.weekOfYear === weekNumber),
+      });
+    }
+
+    setWeeks(weeksInView);
+  });
+
   return (
     <div class='month-calendar'>
-      <div class='week0' />
-      <div class='day-of-week-container dow01'>
-        <h6>Sun</h6>
-      </div>
-      <div class='day-of-week-container dow02'>
-        <h6>Mon</h6>
-      </div>
-      <div class='day-of-week-container dow03'>
-        <h6>Tue</h6>
-      </div>
-      <div class='day-of-week-container dow04'>
-        <h6>Wed</h6>
-      </div>
-      <div class='day-of-week-container dow05'>
-        <h6>Thu</h6>
-      </div>
-      <div class='day-of-week-container dow06'>
-        <h6>Fri</h6>
-      </div>
-      <div class='day-of-week-container dow07'>
-        <h6>Sat</h6>
-      </div>
-      <div class='week-number-container week1' data-week-of-year='23'></div>
-      <div class='week-number-container week2'></div>
-      <div class='week-number-container week3'></div>
-      <div class='week-number-container week4'></div>
-      <div class='week-number-container week5'></div>
-      <div class='day-container day01' data-day-of-month='1'></div>
-      <div class='day-container day02'></div>
-      <div class='day-container day03'></div>
-      <div class='day-container day04'></div>
-      <div class='day-container day05'></div>
-      <div class='day-container day06'></div>
-      <div class='day-container day07'></div>
-      <div class='day-container day08' data-day-of-month='8'></div>
-      <div class='day-container day09'></div>
-      <div class='day-container day10'></div>
-      <div class='day-container day11'></div>
-      <div class='day-container day12'></div>
-      <div class='day-container day13'></div>
-      <div class='day-container day14'></div>
-      <div class='day-container day15' data-day-of-month='15'></div>
-      <div class='day-container day16'></div>
-      <div class='day-container day17'></div>
-      <div class='day-container day18'></div>
-      <div class='day-container day19'></div>
-      <div class='day-container day20'></div>
-      <div class='day-container day21'></div>
-      <div class='day-container day22'></div>
-      <div class='day-container day23'></div>
-      <div class='day-container day24'></div>
-      <div class='day-container day25'></div>
-      <div class='day-container day26'></div>
-      <div class='day-container day27'></div>
-      <div class='day-container day28'></div>
-      <div class='day-container day29'></div>
-      <div class='day-container day30'></div>
-      <div class='day-container day31'></div>
-      <div class='day-container day32'></div>
-      <div class='day-container day33'></div>
-      <div class='day-container day34'></div>
-      <div class='day-container day35'></div>
+      <WeekDayHeaders />
+      <Index each={weeks()}>
+        {(week, index) => (
+          <div class={`week-number-container week${index + 1}`} data-week-of-year={week().weekNumber}></div>
+        )}
+      </Index>
+      <Index each={days()}>
+        {(day, index) => (
+          <div
+            class={`day-container day${index + 1 < 10 ? '0' : ''}${index + 1}`}
+            data-day-of-month={day().date.day}
+            data-outside-month={day().isOutsideMonth || undefined}
+            data-today={day().isToday || undefined}
+          >
+          </div>
+        )}
+      </Index>
     </div>
+  );
+}
+
+const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+function WeekDayHeaders() {
+  return (
+    <>
+      <div class='week0' />
+      <Index each={DAYS_OF_WEEK}>
+        {(dow, index) => (
+          <div
+            class={`day-of-week-container dow0${index}`}
+            data-today={today.dayOfWeek === index ? true : undefined}
+          >
+            <h6>{dow()}</h6>
+          </div>
+        )}
+      </Index>
+    </>
   );
 }
