@@ -1,6 +1,5 @@
 import type { Setter } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
-import { MagnifyingGlass } from 'phosphor-solid-js';
 import { CalendarNavigator } from './CalendarNavigator.tsx';
 import { ViewSwitcher } from './ViewSwitcher.tsx';
 import { UserDisplay } from '../UserDisplay.tsx';
@@ -16,9 +15,6 @@ export function CalendarToolbar(
 ) {
   return (
     <>
-      <button type='button' title='Search'>
-        <MagnifyingGlass />
-      </button>
       <CalendarNavigator date={props.date} setDate={props.setDate} view={props.selectedView} />
       <ViewSwitcher selected={props.selectedView} setSelected={props.setSelectedView} />
       <UserDisplay />
