@@ -13,7 +13,7 @@ type MonthViewWeek = {
   days: MonthViewDay[];
 };
 
-const WEEKS_IN_VIEW = 5;
+const WEEKS_IN_VIEW = 6;
 
 const today = Temporal.Now.plainDateISO();
 
@@ -50,7 +50,7 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
     setDays(daysInView);
 
     const weeksOfYearInView = new Set(
-      daysInView.filter((day) => !day.isOutsideMonth).map((day) => day.date.weekOfYear),
+      daysInView.map((day) => day.date.weekOfYear),
     );
     const weeksInView: MonthViewWeek[] = [];
     for (const weekNumber of weeksOfYearInView.keys()) {
@@ -67,9 +67,10 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
     <div class='month-calendar'>
       <WeekDayHeaders />
       <Index each={weeks()}>
-        {(week, index) => (
-          <div class={`week-number-container week${index + 1}`} data-week-of-year={week().weekNumber}></div>
-        )}
+        {(week, index) =>
+          index === WEEKS_IN_VIEW
+            ? null
+            : <div class={`week-number-container week${index + 1}`} data-week-of-year={week().weekNumber}></div>}
       </Index>
       <Index each={days()}>
         {(day, index) => (
@@ -95,7 +96,7 @@ function WeekDayHeaders() {
       <Index each={DAYS_OF_WEEK}>
         {(dow, index) => (
           <div
-            class={`day-of-week-container dow0${index}`}
+            class={`day-of-week-container dow0${index + 1}`}
             data-today={today.dayOfWeek === index ? true : undefined}
           >
             <h6>{dow()}</h6>
