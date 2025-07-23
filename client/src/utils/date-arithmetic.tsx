@@ -16,7 +16,7 @@ export const firstDayInMonthView = (date: Temporal.PlainDate): Temporal.PlainDat
   const daysBeforeFirstOfMonth = (firstDayOfMonth.daysInWeek + firstDowOfMonth - START_OF_WEEK) %
     firstDayOfMonth.daysInWeek;
 
-  const firstDayInView = firstDayOfMonth.subtract({ days: daysBeforeFirstOfMonth });
+  const firstDayInView = firstDayOfMonth.subtract({ days: daysBeforeFirstOfMonth + 1 });
 
   return firstDayInView;
 };
