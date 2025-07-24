@@ -13,14 +13,14 @@
     "jsr:@std/testing@^1.0.15": "1.0.15",
     "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.0.5__picomatch@4.0.3",
     "npm:@faker-js/faker@^9.9.0": "9.9.0",
-    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.8.5_zod@4.0.5",
+    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.8.5_zod@4.0.8",
     "npm:@js-temporal/polyfill@~0.5.1": "0.5.1",
     "npm:@openauthjs/openauth@~0.4.3": "0.4.3_arctic@2.3.4_hono@4.8.5",
-    "npm:@tanstack/router-plugin@^1.129.7": "1.129.7_vite@7.0.5__picomatch@4.0.3_vite-plugin-solid@2.11.7__solid-js@1.9.7___seroval@1.3.2__vite@7.0.5___picomatch@4.0.3__@babel+core@7.28.0_@babel+core@7.28.0_solid-js@1.9.7__seroval@1.3.2",
+    "npm:@tanstack/router-plugin@^1.129.8": "1.129.8_vite@7.0.5__picomatch@4.0.3_vite-plugin-solid@2.11.7__solid-js@1.9.7___seroval@1.3.2__vite@7.0.5___picomatch@4.0.3__@babel+core@7.28.0_@babel+core@7.28.0_solid-js@1.9.7__seroval@1.3.2",
     "npm:@tanstack/solid-query-devtools@^5.83.0": "5.83.0_@tanstack+solid-query@5.83.0__solid-js@1.9.7___seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2",
     "npm:@tanstack/solid-query@^5.83.0": "5.83.0_solid-js@1.9.7__seroval@1.3.2",
-    "npm:@tanstack/solid-router-devtools@^1.129.7": "1.129.7_@tanstack+solid-router@1.129.7__solid-js@1.9.7___seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2",
-    "npm:@tanstack/solid-router@^1.129.7": "1.129.7_solid-js@1.9.7__seroval@1.3.2",
+    "npm:@tanstack/solid-router-devtools@^1.129.8": "1.129.8_@tanstack+solid-router@1.129.8__solid-js@1.9.7___seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2",
+    "npm:@tanstack/solid-router@^1.129.8": "1.129.8_solid-js@1.9.7__seroval@1.3.2",
     "npm:hono@^4.8.5": "4.8.5",
     "npm:phosphor-solid-js@2": "2.0.0_solid-js@1.9.7__seroval@1.3.2",
     "npm:solid-js@^1.9.7": "1.9.7_seroval@1.3.2",
@@ -28,7 +28,7 @@
     "npm:vite-plugin-solid@^2.11.7": "2.11.7_solid-js@1.9.7__seroval@1.3.2_vite@7.0.5__picomatch@4.0.3_@babel+core@7.28.0",
     "npm:vite@*": "7.0.5_picomatch@4.0.3",
     "npm:vite@7.0.5": "7.0.5_picomatch@4.0.3",
-    "npm:zod@^4.0.5": "4.0.5"
+    "npm:zod@^4.0.8": "4.0.8"
   },
   "jsr": {
     "@da/bcrypt@1.0.1": {
@@ -701,11 +701,11 @@
     "@faker-js/faker@9.9.0": {
       "integrity": "sha512-OEl393iCOoo/z8bMezRlJu+GlRGlsKbUAN7jKB6LhnKoqKve5DXRpalbItIIcwnCjs1k/FOPjFzcA6Qn+H+YbA=="
     },
-    "@hono/zod-validator@0.7.2_hono@4.8.5_zod@4.0.5": {
+    "@hono/zod-validator@0.7.2_hono@4.8.5_zod@4.0.8": {
       "integrity": "sha512-ub5eL/NeZ4eLZawu78JpW/J+dugDAYhwqUIdp9KYScI6PZECij4Hx4UsrthlEUutqDDhPwRI0MscUfNkvn/mqQ==",
       "dependencies": [
         "hono",
-        "zod@4.0.5"
+        "zod@4.0.8"
       ]
     },
     "@jridgewell/gen-mapping@0.3.12": {
@@ -1020,8 +1020,8 @@
     "@tanstack/query-devtools@5.81.2": {
       "integrity": "sha512-jCeJcDCwKfoyyBXjXe9+Lo8aTkavygHHsUHAlxQKKaDeyT0qyQNLKl7+UyqYH2dDF6UN/14873IPBHchcsU+Zg=="
     },
-    "@tanstack/router-core@1.129.7_seroval@1.3.2": {
-      "integrity": "sha512-k79Bd95XwHClSHep7UBdGRiY9y0uOMRpdUyOzcnnuOjKs11Fy+f4/PbKH5p2XDXLnVwMKkHLb72dSnSQ9mbnGw==",
+    "@tanstack/router-core@1.129.8_seroval@1.3.2": {
+      "integrity": "sha512-Izqf5q8TzJv0DJURynitJioPJT3dPAefrzHi2wlY/Q5+7nEG41SkjYMotTX2Q9i/Pjl91lW8gERCHpksszRdRw==",
       "dependencies": [
         "@tanstack/history",
         "@tanstack/store@0.7.2",
@@ -1032,8 +1032,8 @@
         "tiny-warning"
       ]
     },
-    "@tanstack/router-devtools-core@1.129.7_@tanstack+router-core@1.129.7__seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2_tiny-invariant@1.3.3": {
-      "integrity": "sha512-a3mevSm0kvLUySUbBToIAI7/rgS9R4Mv9s3BMDB+sEWpsF9yDtSeyPILeu8uoGzDIzmmTRrpBNX1E9spAXgHEw==",
+    "@tanstack/router-devtools-core@1.129.8_@tanstack+router-core@1.129.8__seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2_tiny-invariant@1.3.3": {
+      "integrity": "sha512-1yiAoWWYV3hWLXoHv92LMU67EjJpavoavo00EYzf7RLCy0TA/a+KyokZBS6PD38sITamHgVeY/jJBGD6hr47rQ==",
       "dependencies": [
         "@tanstack/router-core",
         "clsx",
@@ -1042,8 +1042,8 @@
         "tiny-invariant"
       ]
     },
-    "@tanstack/router-generator@1.129.7": {
-      "integrity": "sha512-W1IYDEq10GgGkJnh5iK+7q7DrZuKz2svUlJlDqJms6Nc+kyV8dIycDyU7jare+W6o65O74jpm/RUIjKoL3Jz1Q==",
+    "@tanstack/router-generator@1.129.8": {
+      "integrity": "sha512-i4QTtJeRq3jdRTuUXHKcmPNm6STS0jLJNTKEdeUCIzuVBiiP53oujMOd84e5ARP83k2IB2XcMHekTSzDlWD2fg==",
       "dependencies": [
         "@tanstack/router-core",
         "@tanstack/router-utils",
@@ -1055,8 +1055,8 @@
         "zod@3.25.76"
       ]
     },
-    "@tanstack/router-plugin@1.129.7_vite@7.0.5__picomatch@4.0.3_vite-plugin-solid@2.11.7__solid-js@1.9.7___seroval@1.3.2__vite@7.0.5___picomatch@4.0.3__@babel+core@7.28.0_@babel+core@7.28.0_solid-js@1.9.7__seroval@1.3.2": {
-      "integrity": "sha512-/DDym7f+2sUxm/WNS7dZ03NZBczv//B6jCYcZQd3iBJij4THp+ChqeYjWzIZIu6oAKn9UTMniKMi1Lk5g3CGsw==",
+    "@tanstack/router-plugin@1.129.8_vite@7.0.5__picomatch@4.0.3_vite-plugin-solid@2.11.7__solid-js@1.9.7___seroval@1.3.2__vite@7.0.5___picomatch@4.0.3__@babel+core@7.28.0_@babel+core@7.28.0_solid-js@1.9.7__seroval@1.3.2": {
+      "integrity": "sha512-DdO6el2slgBO2mIqIGdGyHCzsbQLsTNxsgbNz9ZY9y324iP4G+p3iEYopHWgzLKM2DKinMs9F7AxjLow4V3klQ==",
       "dependencies": [
         "@babel/core",
         "@babel/plugin-syntax-jsx",
@@ -1106,16 +1106,16 @@
         "solid-js"
       ]
     },
-    "@tanstack/solid-router-devtools@1.129.7_@tanstack+solid-router@1.129.7__solid-js@1.9.7___seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2": {
-      "integrity": "sha512-6qYvk1SzLlTg7AEOikUDXTZWSVBcDkvRsfzv71WYFje5oro7OhOoTonnrgfAp23qxXyM3lOPnwxh/5XnAPk8hQ==",
+    "@tanstack/solid-router-devtools@1.129.8_@tanstack+solid-router@1.129.8__solid-js@1.9.7___seroval@1.3.2_solid-js@1.9.7__seroval@1.3.2": {
+      "integrity": "sha512-PAg7DZ6ldCj175020+DBf2RyCQhYnh3lSK4LsBvOWG5C+sNoCCuBINsZDk/xwPt5f/DduojJFlqx1vflSb/jDQ==",
       "dependencies": [
         "@tanstack/router-devtools-core",
         "@tanstack/solid-router",
         "solid-js"
       ]
     },
-    "@tanstack/solid-router@1.129.7_solid-js@1.9.7__seroval@1.3.2": {
-      "integrity": "sha512-7JrbZor507aKA+7nPFIxTZleQgi71mZ8YDNypJ6N5l3EPEeaTzp4K+maRQZsufKuBOQQWb5Cyv9kSDifhd1oEg==",
+    "@tanstack/solid-router@1.129.8_solid-js@1.9.7__seroval@1.3.2": {
+      "integrity": "sha512-Z3ikeYs9tDOzcj3+Wsp4Yypgewk6Qh56d/bmTxEX4c5WFDL4N7LUwT5vcrqvI8HdZnz+UuphU8V+jxdfgAPBCg==",
       "dependencies": [
         "@solid-devtools/logger",
         "@solid-primitives/refs",
@@ -1750,8 +1750,8 @@
     "zod@3.25.76": {
       "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     },
-    "zod@4.0.5": {
-      "integrity": "sha512-/5UuuRPStvHXu7RS+gmvRf4NXrNxpSllGwDnCBcJZtQsKrviYXm54yDGV2KYNLT5kq0lHGcl7lqWJLgSaG+tgA=="
+    "zod@4.0.8": {
+      "integrity": "sha512-+MSh9cZU9r3QKlHqrgHMTSr3QwMGv4PLfR0M4N/sYWV5/x67HgXEhIGObdBkpnX8G78pTgWnIrBL2lZcNJOtfg=="
     }
   },
   "redirects": {
@@ -1799,18 +1799,18 @@
       "npm:@hono/zod-validator@~0.7.2",
       "npm:@js-temporal/polyfill@~0.5.1",
       "npm:@openauthjs/openauth@~0.4.3",
-      "npm:@tanstack/router-plugin@^1.129.7",
+      "npm:@tanstack/router-plugin@^1.129.8",
       "npm:@tanstack/solid-query-devtools@^5.83.0",
       "npm:@tanstack/solid-query@^5.83.0",
-      "npm:@tanstack/solid-router-devtools@^1.129.7",
-      "npm:@tanstack/solid-router@^1.129.7",
+      "npm:@tanstack/solid-router-devtools@^1.129.8",
+      "npm:@tanstack/solid-router@^1.129.8",
       "npm:hono@^4.8.5",
       "npm:phosphor-solid-js@2",
       "npm:solid-js@^1.9.7",
       "npm:unstorage@^1.16.1",
       "npm:vite-plugin-solid@^2.11.7",
       "npm:vite@7.0.5",
-      "npm:zod@^4.0.5"
+      "npm:zod@^4.0.8"
     ]
   }
 }
