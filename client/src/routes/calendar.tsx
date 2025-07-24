@@ -53,7 +53,7 @@ function CalendarComponent() {
             <MonthCalendar date={date()} />
           </Match>
           <Match when={calendarView() === 'view-week'}>
-            <WeekCalendar />
+            <WeekCalendar date={date()} />
           </Match>
           <Match when={calendarView() === 'view-day'}>
             todo
