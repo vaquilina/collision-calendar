@@ -1,6 +1,7 @@
 import { createEffect, createSignal, Index } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 import { firstDayInMonthView } from '../../utils/date-arithmetic.tsx';
+import { DAYS_OF_WEEK, WEEKS_IN_MONTH_VIEW } from '../../const/calendar.tsx';
 
 type MonthViewDay = {
   date: Temporal.PlainDate;
@@ -12,8 +13,6 @@ type MonthViewWeek = {
   weekNumber: Temporal.PlainDate['weekOfYear'];
   days: MonthViewDay[];
 };
-
-const WEEKS_IN_VIEW = 6;
 
 const today = Temporal.Now.plainDateISO();
 
@@ -38,7 +37,7 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
     }];
 
     let currDate = firstInView;
-    for (let i = 1; i < props.date.daysInWeek * WEEKS_IN_VIEW; i++) {
+    for (let i = 1; i < props.date.daysInWeek * WEEKS_IN_MONTH_VIEW; i++) {
       currDate = currDate.add({ days: 1 });
       daysInView.push({
         date: currDate,
@@ -68,7 +67,7 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
       <WeekDayHeaders />
       <Index each={weeks()}>
         {(week, index) =>
-          index === WEEKS_IN_VIEW
+          index === WEEKS_IN_MONTH_VIEW
             ? null
             : <div class={`week-number-container week${index + 1}`} data-week-of-year={week().weekNumber}></div>}
       </Index>
@@ -86,8 +85,6 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
     </div>
   );
 }
-
-const DAYS_OF_WEEK = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
 
 function WeekDayHeaders() {
   return (
