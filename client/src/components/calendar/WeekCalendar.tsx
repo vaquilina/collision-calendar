@@ -1,4 +1,46 @@
-export function WeekCalendar() {
+import { createEffect, createSignal } from 'solid-js';
+import { Temporal } from '@js-temporal/polyfill';
+import { firstDayInWeekView } from '../../utils/date-arithmetic.tsx';
+
+type WeekViewDay = {
+  date: Temporal.PlainDate;
+  isToday?: boolean;
+};
+
+const today = Temporal.Now.plainDateISO();
+
+/** Week Calendar component. */
+export function WeekCalendar(props: { date: Temporal.PlainDate }) {
+  const [days, setDays] = createSignal<WeekViewDay[]>();
+
+  createEffect(() => {
+    const firstDayInView = firstDayInWeekView(props.date);
+
+    const daysInView: WeekViewDay[] = [{
+      date: firstDayInView,
+      isToday: Temporal.PlainDate.compare(firstDayInView, today) === 0,
+    }];
+
+    let currDate = firstDayInView;
+    for (let i = 1; i < props.date.daysInWeek; i++) {
+      currDate = currDate.add({ days: 1 });
+      daysInView.push({
+        date: currDate,
+        isToday: Temporal.PlainDate.compare(currDate, today) === 0,
+      });
+    }
+
+    console.log(daysInView.map((day) => ({
+      ...day,
+      date: day.date.toLocaleString(),
+      dayOfWeek: day.date.dayOfWeek,
+      weekOfYear: day.date.weekOfYear,
+      yearOfWeek: day.date.yearOfWeek,
+    })));
+
+    setDays(daysInView);
+  });
+
   return (
     <div class='week-calendar'>
       <div class='tz-offset'></div>
