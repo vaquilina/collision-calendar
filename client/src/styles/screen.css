@@ -20,6 +20,8 @@ div.screen {
   width: 100%;
   height: 100%;
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
+  z-index: 1;
+  box-shadow: 2px 2px 0 0 light-dark(var(--theme-color-18), var(--theme-color-12));
 }
 
 .user-display {
@@ -45,29 +47,26 @@ div.screen {
   align-items: center;
   justify-content: flex-end;
   gap: 1em;
-  padding-top: 0;
-  padding-right: var(--theme-padding-comfortable);
-  padding-bottom: 0;
+  padding: 0 var(--theme-padding-medium);
   width: 100%;
   min-width: max-content;
   height: 100%;
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
   overflow: hidden;
-  border-bottom: 2px outset light-dark(var(--theme-color-02), var(--theme-color-23));
-  margin-left: -2px; /* join borders */
+  box-shadow: 2px 2px 0 0 light-dark(var(--theme-color-18), var(--theme-color-12));
+  z-index: 1;
 }
 
 .screen aside {
   grid-area: sidebar;
-  min-width: calc(180px + var(--theme-padding-comfortable));
-  padding: var(--theme-padding-medium);
-  padding-top: 0;
+  min-width: fit-content;
+  padding: var(--theme-padding-comfortable);
   display: flex;
   flex-wrap: nowrap;
   flex-direction: column;
   gap: 0.8em;
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
-  border-right: 2px outset light-dark(var(--theme-color-02), var(--theme-color-23));
+  box-shadow: 1px 1px 0 0 light-dark(var(--theme-color-17), var(--theme-color-13));
 }
 
 .screen main {
