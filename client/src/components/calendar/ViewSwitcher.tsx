@@ -1,4 +1,5 @@
 import { type Setter } from 'solid-js';
+
 import { SegmentedControl, type SegmentedControlItem } from '../primitives/SegmentedControl.tsx';
 
 /**
@@ -18,7 +19,6 @@ export function ViewSwitcher(props: { selected: string; setSelected: Setter<stri
     {
       id: 'view-month',
       title: 'Month view',
-      disabled: false,
       label: 'Month',
     },
     {
@@ -29,7 +29,6 @@ export function ViewSwitcher(props: { selected: string; setSelected: Setter<stri
     {
       id: 'view-day',
       title: 'Day view',
-      disabled: true,
       label: 'Day',
     },
   ];
