@@ -13,10 +13,20 @@ import { CaretLeft, CaretRight } from 'phosphor-solid-js';
 export function CalendarNavigator(
   props: { date: Temporal.PlainDate; setDate: Setter<Temporal.PlainDate>; view: string },
 ) {
-  const monthName = createMemo(() =>
+  const monthLabel = createMemo(() =>
     props.date.toLocaleString('en-US', {
       calendar: props.date.calendarId,
       month: 'long',
+      year: 'numeric',
+    })
+  );
+
+  const dayLabel = createMemo(() =>
+    props.date.toLocaleString('en-US', {
+      calendar: props.date.calendarId,
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric',
     })
   );
 
@@ -56,10 +66,13 @@ export function CalendarNavigator(
         </button>
       </div>
       <Show when={props.view === 'view-month'}>
-        <h5>{monthName()} {props.date.year}</h5>
+        <h5>{monthLabel()}</h5>
       </Show>
       <Show when={props.view === 'view-week'}>
-        <h5>Week {props.date.weekOfYear}, {props.date.year}</h5>
+        <h5>Week {props.date.weekOfYear}, {props.date.yearOfWeek}</h5>
+      </Show>
+      <Show when={props.view === 'view-day'}>
+        <h5>{dayLabel()}</h5>
       </Show>
     </div>
   );
