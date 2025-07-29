@@ -56,6 +56,10 @@ h6.timezone-display {
   &.day01, &.day02, &.day03, &.day04, &.day05, &.day06, &.day07 {
     border-top: 1px solid light-dark(var(--theme-color-10), var(--theme-color-15));
   }
+  
+  &:hover {
+    cursor: pointer;
+  }
 }
 .day-container::after {
   content: attr(data-day-of-month);
@@ -396,6 +400,10 @@ h6.timezone-display {
 .all-day-container {
   border-bottom: 1px solid light-dark(var(--theme-color-04), var(--theme-color-20));
   border-right: 1px dashed light-dark(var(--theme-color-06), var(--theme-color-18));
+  
+  &:hover {
+    cursor: pointer;
+  }
 }
 
 .all-day07.all-day-container {
@@ -1209,6 +1217,16 @@ body:has(.day-container-week):has(
 }
 .all-day {
   grid-area: all-day;
+  position: relative;
+}
+.all-day::after {
+  font-size: xx-small;
+  text-transform: uppercase;
+  writing-mode: sideways-lr;
+  text-orientation: sideways;
+  content: 'all day';
+  position: absolute;
+  right: 0;
 }
 .all-day01 {
   grid-area: all-day01;
