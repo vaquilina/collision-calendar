@@ -1,5 +1,6 @@
 import { createEffect, createSignal, Index } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
+
 import { firstDayInMonthView } from '../../utils/date-arithmetic.tsx';
 import { DAYS_OF_WEEK, WEEKS_IN_MONTH_VIEW } from '../../const/calendar.tsx';
 
@@ -94,7 +95,7 @@ function WeekDayHeaders() {
         {(dow, index) => (
           <div
             class={`day-of-week-container dow0${index + 1}`}
-            data-today={today.dayOfWeek === index ? true : undefined}
+            data-today={today.dayOfWeek === index + 1}
           >
             <h6>{dow()}</h6>
           </div>
