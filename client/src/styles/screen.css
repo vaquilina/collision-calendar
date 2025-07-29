@@ -72,6 +72,7 @@ div.screen {
 
 .screen main {
   grid-area: content;
+  position: relative;
   overflow: scroll;
   padding: var(--theme-padding-medium);
   padding-top: var(--theme-padding-comfortable);

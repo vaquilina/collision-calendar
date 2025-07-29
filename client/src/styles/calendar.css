@@ -1,3 +1,32 @@
+:root {
+  --hour-label-width: 3em;
+  --weekday-label-height: 3em;
+  --now-line-top: 0px;
+}
+
+#now-line {
+  position: absolute;
+  right: 0;
+  top: calc(var(--weekday-label-height) + var(--now-line-top));
+  width: calc(100% - var(--hour-label-width) - 4px);
+  height: 2px;
+  background: var(--theme-now-color);
+  opacity: 0.8;
+  z-index: 20;
+  pointer-events: none;
+}
+#now-line::before {
+  display: block;
+  height: 4px;
+  width: 4px;
+  margin-left: -2px;
+  margin-top: -1px;
+  content: '';
+  background: var(--theme-now-color);
+  border-radius: var(--theme-border-radius);
+  z-index: 20;
+}
+
 .cal-navigator {
   display: flex;
   min-width: fit-content;
@@ -354,7 +383,7 @@ h6.timezone-display {
   display: grid;
   grid-auto-rows: 1fr;
   grid-template-columns: 2em repeat(7, 1fr);
-  grid-template-rows: 3em auto;
+  grid-template-rows: var(--week-weekday-label-height) auto;
   gap: 0px 0px;
   grid-template-areas:
     'tz-offset dow01 dow02 dow03 dow04 dow05 dow06 dow07'
@@ -362,8 +391,8 @@ h6.timezone-display {
 }
 .week-calendar {
   display: grid;
-  grid-template-columns: 3em repeat(7, 1fr);
-  grid-template-rows: 2em minmax(1.5em, auto) repeat(24, auto);
+  grid-template-columns: var(--hour-label-width) repeat(7, 1fr);
+  grid-template-rows: var(--weekday-label-height) minmax(1.5em, auto) repeat(24, auto);
   gap: 0px 0px;
   grid-template-areas:
     'tz-offset dow01           dow02           dow03           dow04           dow05           dow06           dow07'
@@ -1834,8 +1863,8 @@ body:has(.day-container-week):has(
 
 .day-calendar {
   display: grid;
-  grid-template-columns: 3em 1fr;
-  grid-template-rows: 2em minmax(1.5em, auto) repeat(24, auto);
+  grid-template-columns: var(--hour-label-width) 1fr;
+  grid-template-rows: var(--weekday-label-height) minmax(1.5em, auto) repeat(24, auto);
   gap: 0px 0px;
   grid-template-areas:
     'tz-offset dow01'

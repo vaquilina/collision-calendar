@@ -12,6 +12,9 @@ type WeekViewDay = {
 /** Week Calendar component. */
 export function WeekCalendar(props: { date: Temporal.PlainDate }) {
   const [days, setDays] = createSignal<WeekViewDay[]>();
+  const [now, setNow] = createSignal<Temporal.PlainDateTime>();
+
+  createEffect(() => setNow(Temporal.Now.plainDateTimeISO()));
 
   createEffect(() => {
     const today = Temporal.Now.plainDateISO();
@@ -35,39 +38,42 @@ export function WeekCalendar(props: { date: Temporal.PlainDate }) {
   });
 
   return (
-    <div class='week-calendar'>
-      <div class='tz-offset' />
-      <div class='all-day' />
-      <Index each={days()}>
-        {(day, index) => (
-          <>
-            <div
-              class={`day-of-week-container dow0${index + 1}`}
-              data-today={day().isToday}
-              data-month={day().date.month}
-              data-day-of-month={day().date.day}
-              data-year={day().date.year}
-            >
-              <h6>{DAYS_OF_WEEK[index]}</h6>
-            </div>
-            <div class={`all-day-container all-day0${index + 1}`} data-today={day().isToday} />
-            <For each={HOURS_OF_DAY}>
-              {(hour) => (
-                <>
-                  <div
-                    class={`hour-label hour${hour < 10 ? `0${hour}` : hour}`}
-                    data-hour={`${hour < 10 ? `0${hour}` : hour}:00`}
-                  />
-                  <div
-                    class={`day-container-week dow0${index + 1}-hour${hour < 10 ? `0${hour}` : hour}`}
-                    data-today={day().isToday}
-                  />
-                </>
-              )}
-            </For>
-          </>
-        )}
-      </Index>
-    </div>
+    <>
+      <span id='now-line' data-hour={now()?.hour} data-minute={now()?.minute} />
+      <div class='week-calendar'>
+        <div class='tz-offset' />
+        <div class='all-day' />
+        <Index each={days()}>
+          {(day, index) => (
+            <>
+              <div
+                class={`day-of-week-container dow0${index + 1}`}
+                data-today={day().isToday}
+                data-month={day().date.month}
+                data-day-of-month={day().date.day}
+                data-year={day().date.year}
+              >
+                <h6>{DAYS_OF_WEEK[index]}</h6>
+              </div>
+              <div class={`all-day-container all-day0${index + 1}`} data-today={day().isToday} />
+              <For each={HOURS_OF_DAY}>
+                {(hour) => (
+                  <>
+                    <div
+                      class={`hour-label hour${hour < 10 ? `0${hour}` : hour}`}
+                      data-hour={`${hour < 10 ? `0${hour}` : hour}:00`}
+                    />
+                    <div
+                      class={`day-container-week dow0${index + 1}-hour${hour < 10 ? `0${hour}` : hour}`}
+                      data-today={day().isToday}
+                    />
+                  </>
+                )}
+              </For>
+            </>
+          )}
+        </Index>
+      </div>
+    </>
   );
 }
