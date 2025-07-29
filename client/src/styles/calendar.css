@@ -107,7 +107,15 @@ h6.timezone-display {
 }
 .day-of-week-container::after {
   font-size: x-small;
-  content: attr(data-day-of-month);
+  content: attr(data-day-of-month)
+}
+
+.day-of-week-container[data-month]::after {
+  content: attr(data-month) '/' attr(data-day-of-month);
+}
+
+.day-of-week-container[data-month][data-year]::after {
+  content: attr(data-month) '/' attr(data-day-of-month) '/' attr(data-year);
 }
 
 .week0 {
@@ -1804,4 +1812,40 @@ body:has(.day-container-week):has(
 }
 .dow07-hour23 {
   grid-area: dow07-hour23;
+}
+
+.day-calendar {
+  display: grid;
+  grid-template-columns: 3em 1fr;
+  grid-template-rows: 2em minmax(1.5em, auto) repeat(24, auto);
+  gap: 0px 0px;
+  grid-template-areas:
+    'tz-offset dow01'
+    'all-day   all-day01'
+    'hour00    dow01-hour00'
+    'hour01    dow01-hour01'
+    'hour02    dow01-hour02'
+    'hour03    dow01-hour03'
+    'hour04    dow01-hour04'
+    'hour05    dow01-hour05'
+    'hour06    dow01-hour06'
+    'hour07    dow01-hour07'
+    'hour08    dow01-hour08'
+    'hour09    dow01-hour09'
+    'hour10    dow01-hour10'
+    'hour11    dow01-hour11'
+    'hour12    dow01-hour12'
+    'hour13    dow01-hour13'
+    'hour14    dow01-hour14'
+    'hour15    dow01-hour15'
+    'hour16    dow01-hour16'
+    'hour17    dow01-hour17'
+    'hour18    dow01-hour18'
+    'hour19    dow01-hour19'
+    'hour20    dow01-hour20'
+    'hour21    dow01-hour21'
+    'hour22    dow01-hour22'
+    'hour23    dow01-hour23';
+
+  height: 100%;
 }
