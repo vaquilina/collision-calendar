@@ -426,6 +426,10 @@ body:has(.day-container-week)
   border-bottom: none;
 }
 
+:is(.day-of-week-container, .day-container-week, .all-day-container)[data-today='true'] {
+  background: light-dark(var(--theme-color-03), var(--theme-color-22));
+}
+
 .hour-label {
   font-size: x-small;
   position: relative;

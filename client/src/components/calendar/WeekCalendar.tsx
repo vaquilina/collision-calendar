@@ -41,28 +41,31 @@ export function WeekCalendar(props: { date: Temporal.PlainDate }) {
       <Index each={days()}>
         {(day, index) => (
           <>
-            <div class={`day-of-week-container dow0${index + 1}`} data-day-of-month={day().date.day}>
+            <div
+              class={`day-of-week-container dow0${index + 1}`}
+              data-today={day().isToday}
+              data-day-of-month={day().date.day}
+            >
               <h6>{DAYS_OF_WEEK[index]}</h6>
             </div>
-            <div class={`all-day-container all-day0${index + 1}`} />
+            <div class={`all-day-container all-day0${index + 1}`} data-today={day().isToday} />
+            <For each={HOURS_OF_DAY}>
+              {(hour) => (
+                <>
+                  <div
+                    class={`hour-label hour${hour < 10 ? `0${hour}` : hour}`}
+                    data-hour={`${hour < 10 ? `0${hour}` : hour}:00`}
+                  />
+                  <div
+                    class={`day-container-week dow0${index + 1}-hour${hour < 10 ? `0${hour}` : hour}`}
+                    data-today={day().isToday}
+                  />
+                </>
+              )}
+            </For>
           </>
         )}
       </Index>
-      <For each={HOURS_OF_DAY}>
-        {(hour) => (
-          <>
-            <div
-              class={`hour-label hour${hour < 10 ? `0${hour}` : hour}`}
-              data-hour={`${hour < 10 ? `0${hour}` : hour}:00`}
-            />
-            <Index each={DAYS_OF_WEEK}>
-              {(_day, index) => (
-                <div class={`day-container-week dow0${index + 1}-hour${hour < 10 ? `0${hour}` : hour}`} />
-              )}
-            </Index>
-          </>
-        )}
-      </For>
     </div>
   );
 }
