@@ -9,13 +9,12 @@ type WeekViewDay = {
   isToday?: boolean;
 };
 
-const today = Temporal.Now.plainDateISO();
-
 /** Week Calendar component. */
 export function WeekCalendar(props: { date: Temporal.PlainDate }) {
   const [days, setDays] = createSignal<WeekViewDay[]>();
 
   createEffect(() => {
+    const today = Temporal.Now.plainDateISO();
     const firstDayInView = firstDayInWeekView(props.date);
 
     const daysInView: WeekViewDay[] = [{
@@ -45,7 +44,9 @@ export function WeekCalendar(props: { date: Temporal.PlainDate }) {
             <div
               class={`day-of-week-container dow0${index + 1}`}
               data-today={day().isToday}
+              data-month={day().date.month}
               data-day-of-month={day().date.day}
+              data-year={day().date.year}
             >
               <h6>{DAYS_OF_WEEK[index]}</h6>
             </div>

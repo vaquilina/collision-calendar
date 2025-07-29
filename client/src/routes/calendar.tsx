@@ -4,6 +4,7 @@ import { Temporal } from '@js-temporal/polyfill';
 
 import { MiniCalendar } from '../components/calendar/MiniCalendar.tsx';
 import { MonthCalendar } from '../components/calendar/MonthCalendar.tsx';
+import { DayCalendar } from '../components/calendar/DayCalendar.tsx';
 import { CalendarToolbar } from '../components/calendar/CalendarToolbar.tsx';
 import { TimezoneDisplay } from '../components/calendar/TimezoneDisplay.tsx';
 import { WeekCalendar } from '../components/calendar/WeekCalendar.tsx';
@@ -57,7 +58,7 @@ function CalendarComponent() {
             <WeekCalendar date={date()} />
           </Match>
           <Match when={calendarView() === 'view-day'}>
-            todo
+            <DayCalendar date={date()} />
           </Match>
         </Switch>
       </main>

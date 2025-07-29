@@ -15,8 +15,6 @@ type MonthViewWeek = {
   days: MonthViewDay[];
 };
 
-const today = Temporal.Now.plainDateISO();
-
 /** Month calendar component. */
 export function MonthCalendar(props: { date: Temporal.PlainDate }) {
   const [weeks, setWeeks] = createSignal<MonthViewWeek[]>([]);
@@ -28,6 +26,8 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
      *      the first day in the view would fall on the prior Sunday
      */
     const firstInView = firstDayInMonthView(props.date);
+
+    const today = Temporal.Now.plainDateISO();
 
     const month = props.date.month;
 
@@ -93,10 +93,7 @@ function WeekDayHeaders() {
       <div class='week0' />
       <Index each={DAYS_OF_WEEK}>
         {(dow, index) => (
-          <div
-            class={`day-of-week-container dow0${index + 1}`}
-            data-today={today.dayOfWeek === index + 1}
-          >
+          <div class={`day-of-week-container dow0${index + 1}`}>
             <h6>{dow()}</h6>
           </div>
         )}
