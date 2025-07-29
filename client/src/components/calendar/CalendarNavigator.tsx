@@ -24,7 +24,7 @@ export function CalendarNavigator(
     props.setDate(Temporal.Now.plainDateISO());
   };
 
-  const handleClickBackward: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (_e) => {
+  const handleClickArrow = (direction: 'backward' | 'forward') => {
     const duration: Temporal.Duration | Temporal.DurationLike = {};
     switch (props.view) {
       case 'view-month':
@@ -33,37 +33,25 @@ export function CalendarNavigator(
       case 'view-week':
         duration.weeks = 1;
         break;
-      default:
-        return;
-    }
-
-    props.setDate((prev) => prev.subtract(duration));
-  };
-
-  const handleClickForward: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (_e) => {
-    const duration: Temporal.Duration | Temporal.DurationLike = {};
-    switch (props.view) {
-      case 'view-month':
-        duration.months = 1;
-        break;
-      case 'view-week':
-        duration.weeks = 1;
+      case 'view-day':
+        duration.days = 1;
         break;
       default:
         return;
     }
 
-    props.setDate((prev) => prev.add(duration));
+    if (direction === 'backward') props.setDate((prev) => prev.subtract(duration));
+    else props.setDate((prev) => prev.add(duration));
   };
 
   return (
     <div class='cal-navigator'>
       <div>
         <button type='button' title='Go to today' onclick={handleClickToday}>Today</button>
-        <button id='cal-backward' type='button' onclick={handleClickBackward}>
+        <button id='cal-backward' type='button' onclick={() => handleClickArrow('backward')}>
           <CaretLeft size={12} />
         </button>
-        <button id='cal-forward' type='button' onclick={handleClickForward}>
+        <button id='cal-forward' type='button' onclick={() => handleClickArrow('forward')}>
           <CaretRight size={12} />
         </button>
       </div>
