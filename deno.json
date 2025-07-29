@@ -33,7 +33,7 @@
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
     "vite": "npm:vite@7.0.6",
     "vite-plugin-solid": "npm:vite-plugin-solid@^2.11.7",
-    "zod": "npm:zod@^4.0.10",
+    "zod": "npm:zod@^4.0.11",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   }
 }

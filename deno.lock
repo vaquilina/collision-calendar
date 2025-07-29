@@ -13,7 +13,7 @@
     "jsr:@std/testing@^1.0.15": "1.0.15",
     "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.0.6__picomatch@4.0.3",
     "npm:@faker-js/faker@^9.9.0": "9.9.0",
-    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.8.9_zod@4.0.10",
+    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.8.9_zod@4.0.11",
     "npm:@js-temporal/polyfill@~0.5.1": "0.5.1",
     "npm:@openauthjs/openauth@~0.4.3": "0.4.3_arctic@2.3.4_hono@4.8.9",
     "npm:@tanstack/router-plugin@^1.130.2": "1.130.2_vite@7.0.6__picomatch@4.0.3_vite-plugin-solid@2.11.7__solid-js@1.9.7___seroval@1.3.2__vite@7.0.6___picomatch@4.0.3__@babel+core@7.28.0_@babel+core@7.28.0_solid-js@1.9.7__seroval@1.3.2",
@@ -26,8 +26,9 @@
     "npm:solid-js@^1.9.7": "1.9.7_seroval@1.3.2",
     "npm:unstorage@^1.16.1": "1.16.1",
     "npm:vite-plugin-solid@^2.11.7": "2.11.7_solid-js@1.9.7__seroval@1.3.2_vite@7.0.6__picomatch@4.0.3_@babel+core@7.28.0",
+    "npm:vite@*": "7.0.6_picomatch@4.0.3",
     "npm:vite@7.0.6": "7.0.6_picomatch@4.0.3",
-    "npm:zod@^4.0.10": "4.0.10"
+    "npm:zod@^4.0.11": "4.0.11"
   },
   "jsr": {
     "@da/bcrypt@1.0.1": {
@@ -700,11 +701,11 @@
     "@faker-js/faker@9.9.0": {
       "integrity": "sha512-OEl393iCOoo/z8bMezRlJu+GlRGlsKbUAN7jKB6LhnKoqKve5DXRpalbItIIcwnCjs1k/FOPjFzcA6Qn+H+YbA=="
     },
-    "@hono/zod-validator@0.7.2_hono@4.8.9_zod@4.0.10": {
+    "@hono/zod-validator@0.7.2_hono@4.8.9_zod@4.0.11": {
       "integrity": "sha512-ub5eL/NeZ4eLZawu78JpW/J+dugDAYhwqUIdp9KYScI6PZECij4Hx4UsrthlEUutqDDhPwRI0MscUfNkvn/mqQ==",
       "dependencies": [
         "hono",
-        "zod@4.0.10"
+        "zod@4.0.11"
       ]
     },
     "@jridgewell/gen-mapping@0.3.12": {
@@ -1849,8 +1850,8 @@
     "zod@3.25.76": {
       "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     },
-    "zod@4.0.10": {
-      "integrity": "sha512-3vB+UU3/VmLL2lvwcY/4RV2i9z/YU0DTV/tDuYjrwmx5WeJ7hwy+rGEEx8glHp6Yxw7ibRbKSaIFBgReRPe5KA=="
+    "zod@4.0.11": {
+      "integrity": "sha512-LVrgstTaQJek72n6ZGxhAhH/Q24PhGx4lIAcgBmjtvjRq0qYjiH9U0o3hfuC2vfExsnpoHElc4XOJjMKQjUQxg=="
     }
   },
   "redirects": {
@@ -1909,7 +1910,7 @@
       "npm:unstorage@^1.16.1",
       "npm:vite-plugin-solid@^2.11.7",
       "npm:vite@7.0.6",
-      "npm:zod@^4.0.10"
+      "npm:zod@^4.0.11"
     ]
   }
 }
