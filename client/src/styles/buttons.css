@@ -12,7 +12,10 @@ button {
   transition: all 0.2s linear;
 }
 button.small-button {
-  padding: var(--theme-padding-dense) var(--theme-padding-medium);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: var(--theme-padding-medium);
 }
 button:hover:not(:disabled) {
   background: light-dark(var(--theme-color-05), var(--theme-color-18));
