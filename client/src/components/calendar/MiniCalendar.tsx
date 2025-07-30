@@ -118,6 +118,7 @@ export function MiniCalendar(
   );
 }
 
+/** Small navigator buttons. */
 function MiniNavigatorButtons(props: { onclick: (direction: NavigatorDirection) => void }) {
   return (
     <>
@@ -143,6 +144,7 @@ function MiniNavigatorButtons(props: { onclick: (direction: NavigatorDirection) 
   );
 }
 
+/** Small 'today' button. */
 function MiniTodayButton(props: { onclick: JSX.EventHandler<HTMLButtonElement, MouseEvent> }) {
   return (
     <button type='button' id='mini-cal-today' class='small-button' title='Go to today' onclick={props.onclick}>
