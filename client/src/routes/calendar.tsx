@@ -9,12 +9,14 @@ import { CalendarToolbar } from '../components/calendar/CalendarToolbar.tsx';
 import { TimezoneDisplay } from '../components/calendar/TimezoneDisplay.tsx';
 import { WeekCalendar } from '../components/calendar/WeekCalendar.tsx';
 
+import type { CalendarView } from '../components/calendar/ViewSwitcher.tsx';
+
 export const Route = createFileRoute('/calendar')({
   component: CalendarComponent,
 });
 
 function CalendarComponent() {
-  const [calendarView, setCalendarView] = createSignal('view-month');
+  const [calendarView, setCalendarView] = createSignal<CalendarView>('view-month');
   const [date, setDate] = createSignal(Temporal.Now.plainDateISO());
 
   return (
@@ -30,7 +32,7 @@ function CalendarComponent() {
       <aside>
         <button type='button' class='new-block-button'>new block</button>
         <TimezoneDisplay />
-        <MiniCalendar />
+        <MiniCalendar date={date()} setDate={setDate} view={calendarView()} />
         <div>
           <fieldset>
             <legend>Spaces</legend>

@@ -350,10 +350,19 @@ h6.timezone-display {
   align-items: center;
 }
 .mini-calendar header h5 {
-  margin-left: 3em;
+  user-select: none;
+  padding-left: 2em;
+  width: 100%;
+}
+
+.mini-calendar-navigator-buttons {
+  display: flex;
+  align-items: center;
+  width: fit-content;
 }
 
 .mini-calendar .day-of-week-container h6 {
+  user-select: none;
   font-weight: var(--theme-font-weight-semibold);
 }
 
@@ -366,17 +375,38 @@ h6.timezone-display {
   min-width: 2em;
 }
 
-.mini-calendar .mini-day-container a {
+.mini-calendar span.mini-day-container {
   display: flex;
   align-items: center;
   justify-content: center;
   min-width: 100%;
   min-height: 100%;
-  text-decoration: none;
+  cursor: pointer;
+  position: relative;
 
   &:hover {
-    background: var(--theme-color-12);
+    background: light-dark(var(--theme-color-09), var(--theme-color-12));
   }
+}
+.mini-calendar span.mini-day-container::after {
+  content: attr(data-day-of-month);
+}
+.mini-calendar span.mini-day-container[data-outside-month='true']::after {
+  opacity: 0.4;
+}
+.mini-calendar span.mini-day-container[data-today='true']::before {
+  content: '';
+  position: absolute;
+  bottom: 2px;
+  width: calc(100% - 1.5ch);
+  height: 2px;
+  background: light-dark(var(--theme-color-10), var(--theme-color-11));
+}
+.mini-calendar span.mini-day-container[data-selected='true'] {
+  background: light-dark(var(--theme-color-14), var(--theme-color-07));
+  color: light-dark(var(--theme-color-03), var(--theme-color-22));
+  font-weight: var(--theme-font-weight-medium);
+  border-radius: var(--theme-border-radius);
 }
 
 .week-calendar {
