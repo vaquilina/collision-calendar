@@ -1,19 +1,18 @@
 import { createEffect, createSignal, For } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 
+import { NowLine } from './NowLine.tsx';
+
 import { DAYS_OF_WEEK, HOURS_OF_DAY } from '../../const/calendar.tsx';
 
 export function DayCalendar(props: { date: Temporal.PlainDate }) {
-  const [now, setNow] = createSignal<Temporal.PlainDateTime>();
   const [isToday, setIsToday] = createSignal(false);
-
-  createEffect(() => setNow(Temporal.Now.plainDateTimeISO()));
 
   createEffect(() => setIsToday(Temporal.PlainDate.compare(props.date, Temporal.Now.plainDateISO()) === 0));
 
   return (
     <>
-      <span id='now-line' data-hour={now()?.hour} data-minute={now()?.minute} />
+      <NowLine />
       <div class='day-calendar'>
         <div class='tz-offset' />
         <div class='all-day' />

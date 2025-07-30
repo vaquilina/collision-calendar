@@ -1,6 +1,8 @@
 import { createEffect, createSignal, For, Index } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 
+import { NowLine } from './NowLine.tsx';
+
 import { firstDayInWeekView } from '../../utils/date-arithmetic.tsx';
 import { DAYS_OF_WEEK, HOURS_OF_DAY } from '../../const/calendar.tsx';
 
@@ -12,9 +14,6 @@ type WeekViewDay = {
 /** Week Calendar component. */
 export function WeekCalendar(props: { date: Temporal.PlainDate }) {
   const [days, setDays] = createSignal<WeekViewDay[]>();
-  const [now, setNow] = createSignal<Temporal.PlainDateTime>();
-
-  createEffect(() => setNow(Temporal.Now.plainDateTimeISO()));
 
   createEffect(() => {
     const today = Temporal.Now.plainDateISO();
@@ -39,7 +38,7 @@ export function WeekCalendar(props: { date: Temporal.PlainDate }) {
 
   return (
     <>
-      <span id='now-line' data-hour={now()?.hour} data-minute={now()?.minute} />
+      <NowLine />
       <div class='week-calendar'>
         <div class='tz-offset' />
         <div class='all-day' />
