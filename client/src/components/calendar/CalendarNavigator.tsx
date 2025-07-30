@@ -15,7 +15,6 @@ export function CalendarNavigator(
 ) {
   const monthLabel = createMemo(() =>
     props.date.toLocaleString('en-US', {
-      calendar: props.date.calendarId,
       month: 'long',
       year: 'numeric',
     })
@@ -23,7 +22,6 @@ export function CalendarNavigator(
 
   const dayLabel = createMemo(() =>
     props.date.toLocaleString('en-US', {
-      calendar: props.date.calendarId,
       day: 'numeric',
       month: 'long',
       year: 'numeric',
