@@ -303,7 +303,7 @@ fieldset {
 }
 fieldset:focus-within {
   border: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
-  box-shadow: 4px 4px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+  box-shadow: 4px 4px 0 0 light-dark(var(--theme-color-20), var(--theme-color-14));
   transform: translateX(-2px) translateY(-2px);
 }
 
