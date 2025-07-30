@@ -89,7 +89,6 @@
   font-optical-sizing: auto;
   font-variant-numeric: tabular-nums;
   font-weight: var(--theme-font-weight-regular);
-  transition: 0.3s ease;
 
   @media screen and (prefers-reduced-motion: reduce) {
     transition: none;

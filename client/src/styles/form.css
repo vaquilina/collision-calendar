@@ -299,6 +299,7 @@ input[type='radio']:checked {
 fieldset {
   background: light-dark(var(--theme-color-02), var(--theme-color-21));
   border: 1px var(--theme-border-style) light-dark(var(--theme-color-23), var(--theme-color-03));
+  transition: 0.2s linear;
 }
 fieldset:focus-within {
   border: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));

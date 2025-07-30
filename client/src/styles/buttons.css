@@ -30,6 +30,8 @@ button:disabled {
 }
 button:focus-visible {
   transition: none;
-  outline: 1px solid light-dark(var(--theme-color-25), var(--theme-color-01));
-  outline-offset: 1px;
+  outline-color: light-dark(var(--theme-color-25), var(--theme-color-01));
+  outline-width: medium;
+  outline-style: double;
+  outline-offset: -2px;
 }

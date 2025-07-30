@@ -33,6 +33,7 @@
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
+  transition: 0.2s linear;
 }
 .nav-link:hover {
   background: light-dark(var(--theme-color-05), var(--theme-color-18));
@@ -48,6 +49,7 @@
   transition: none;
   outline: none;
   background: light-dark(var(--theme-color-18), var(--theme-color-07));
+  color: light-dark(var(--theme-color-01), var(--theme-color-25));
 }
 .nav-link:focus {
   outline: none;
