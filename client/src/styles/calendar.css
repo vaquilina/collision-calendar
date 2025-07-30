@@ -107,8 +107,8 @@ h6.timezone-display {
   background: light-dark(var(--theme-color-03), var(--theme-color-21));
 }
 .day-container[data-today='true']::after {
-  background: light-dark(var(--theme-color-15), var(--theme-color-08));
-  color: light-dark(var(--theme-color-02), var(--theme-color-23));
+  background: light-dark(var(--theme-color-10), var(--theme-color-11));
+  color: light-dark(var(--theme-color-02), var(--theme-color-24));
   font-weight: var(--theme-font-weight-semibold);
   padding: 0;
   margin: var(--theme-padding-dense);
