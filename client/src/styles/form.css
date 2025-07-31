@@ -18,6 +18,10 @@ label {
   margin-left: 1px;
   cursor: pointer;
   user-select: none;
+  -webkit-user-select: none;
+  transition-property: color, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 input[type='checkbox'] + label,
 input[type='radio'] + label {
@@ -126,6 +130,9 @@ input[type='range'] {
   border-width: 1px;
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
+  transition-property: color, background, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 
   &:valid {
     border-color: light-dark(var(--theme-color-19), var(--theme-color-06));
@@ -170,6 +177,9 @@ input[type='range']::-ms-thumb {
   height: 100%;
   cursor: grab;
   appearance: none;
+  transition-property: background, color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 input[type='range']::-ms-thumb:active {
   cursor: grabbing;
@@ -184,6 +194,9 @@ input[type='range']::-webkit-slider-thumb {
   height: 100%;
   cursor: grab;
   appearance: none;
+  transition-property: background, color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 input[type='range']::-webkit-slider-thumb:active {
   cursor: grabbing;
@@ -197,6 +210,9 @@ input[type='range']::-moz-range-thumb {
   height: 100%;
   cursor: grab;
   appearance: none;
+  transition-property: background, color, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 input[type='range']::-moz-range-thumb:active {
   cursor: grabbing;
@@ -230,6 +246,7 @@ input[type='range']::-moz-range-progress {
   background: light-dark(var(--theme-color-14), var(--theme-color-12));
   height: 100%;
   cursor: pointer;
+  transition: background 0.3s ease;
 }
 
 input[type='color'] {
@@ -264,8 +281,10 @@ input[type='radio'] {
     opacity: 0.3;
     cursor: not-allowed;
   }
-
-  &:hover {
+}
+@media (hover: hover) {
+  input[type='checkbox']:hover,
+  input[type='radio']:hover {
     background: light-dark(var(--theme-color-05), var(--theme-color-15));
   }
 }
@@ -299,7 +318,12 @@ input[type='radio']:checked {
 fieldset {
   background: light-dark(var(--theme-color-02), var(--theme-color-21));
   border: 1px var(--theme-border-style) light-dark(var(--theme-color-23), var(--theme-color-03));
-  transition: 0.2s linear;
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    transform 0.2s linear,
+    box-shadow 0.2s linear;
 }
 fieldset:focus-within {
   border: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
@@ -310,6 +334,7 @@ fieldset:focus-within {
 legend {
   text-transform: uppercase;
   font-size: small;
+  transition: color 0.3s ease;
 }
 legend::before {
   content: '[ ';
@@ -326,22 +351,32 @@ select {
   scrollbar-width: thin;
   overflow-x: hidden;
   overflow-y: scroll;
+  transition-property: scrollbar-color, background, color, border-color, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 select > option {
   overflow: hidden;
   width: 100%;
   white-space: nowrap;
   text-overflow: ellipsis;
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
-select > option:hover {
-  background: light-dark(var(--theme-color-06), var(--theme-color-19));
+@media (hover: hover) {
+  select > option:hover {
+    background: light-dark(var(--theme-color-06), var(--theme-color-19));
+  }
 }
 select > option[disabled] {
   opacity: 0.3;
 }
-select > option[disabled]:hover {
-  background: transparent;
-  cursor: not-allowed;
+@media (hover: hover) {
+  select > option[disabled]:hover {
+    background: transparent;
+    cursor: not-allowed;
+  }
 }
 select:disabled > option:hover {
   background: transparent;
@@ -349,8 +384,10 @@ select:disabled > option:hover {
 select > option[selected] {
   background: light-dark(var(--theme-color-08), var(--theme-color-18));
 }
-select:disabled > option[selected]:hover {
-  background: light-dark(var(--theme-color-08), var(--theme-color-18));
+@media (hover: hover) {
+  select:disabled > option[selected]:hover {
+    background: light-dark(var(--theme-color-08), var(--theme-color-18));
+  }
 }
 
 input[type='file'] {
@@ -369,11 +406,19 @@ label[for='file'] {
   border: 1px solid light-dark(var(--theme-color-05), var(--theme-color-20));
   font-weight: var(--theme-font-weight-medium);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
+  transition:
+    background 0.3s ease,
+    color 0.3s ease,
+    border-color 0.3s ease,
+    box-shadow 0.2s linear,
+    transform 0.2s linear;
 }
-label[for='file']:hover:not(:disabled) {
-  background: light-dark(var(--theme-color-18), var(--theme-color-05));
-  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
-  transform: translateX(1px) translateY(1px);
+@media (hover: hover) {
+  label[for='file']:hover:not(:disabled) {
+    background: light-dark(var(--theme-color-18), var(--theme-color-05));
+    box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-05));
+    transform: translateX(1px) translateY(1px);
+  }
 }
 label[for='file']:active:not(:disabled) {
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
@@ -388,6 +433,12 @@ label[for='file']:focus-visible {
   transition: none;
   outline: 1px solid light-dark(var(--theme-color-25), var(--theme-color-01));
   outline-offset: 1px;
+}
+
+input[type='search'] {
+  transition-property: background, background-color, color, border-color, stroke;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
 [data-theme='light'] input[type='search'] {

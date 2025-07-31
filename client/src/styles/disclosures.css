@@ -6,6 +6,7 @@
 
 summary::marker {
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
+  transition: color 0.3s ease;
 }
 details {
   font-size: small;
@@ -15,13 +16,19 @@ details > summary {
   font-size: inherit;
   text-transform: uppercase;
   cursor: pointer;
-
-  &:hover {
+  user-select: none;
+  -webkit-user-select: none;
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+@media (hover: hover) {
+  details > summary:hover {
     background: light-dark(var(--theme-color-03), var(--theme-color-20));
   }
 }
 details > .content {
-  transition: height 0.3s ease, content-visibility 0.5s ease allow-discrete;
+  transition: color 0.3s ease, height 0.3s ease, content-visibility 0.3s ease allow-discrete;
   padding: var(--theme-padding-medium);
   height: 0;
   overflow: clip;

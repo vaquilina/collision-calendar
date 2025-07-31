@@ -1,6 +1,9 @@
 ul {
   list-style-type: square;
   list-style-position: inside;
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 ul li::marker {
   margin-right: 0.5em;
@@ -23,4 +26,7 @@ ol li::before {
   font-weight: var(--theme-font-weight-bold);
   margin-right: 0.5em;
   color: light-dark(var(--theme-color-21), var(--theme-color-02));
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }

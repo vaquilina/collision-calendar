@@ -7,6 +7,9 @@
   border: 2px double light-dark(var(--theme-color-20), var(--theme-color-10));
   border-left: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
   border-right: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
+  transition-property: color, background, border-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
   --width: 5rem;
 }
 
@@ -37,7 +40,9 @@
   outline-width: 1px;
   outline-style: solid;
   opacity: 0.8;
-  transition: transform 0.3s ease-in-out;
+  transition-property: background, color, transform, outline-color;
+  transition-duration: 0.3s;
+  transition-timing-function: linear;
 }
 
 .segmented-control [type='radio'] {

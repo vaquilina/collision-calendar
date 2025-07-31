@@ -1,11 +1,24 @@
+p,
+span,
+time,
+dfn,
+em {
+  transition-property: color, background;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
 strong {
   font-weight: var(--theme-font-weight-semibold);
+  transition: color 0.3s ease;
 }
 
 small {
   font-size: x-small;
-  font-weight: var(--theme-font-weight-extralight);
+  font-weight: var(--theme-font-weight-normal);
+  font-variant-caps: all-small-caps;
   text-rendering: optimizeLegibility;
+  transition: color 0.3s ease;
 }
 
 abbr {
@@ -19,11 +32,15 @@ abbr {
   text-transform: uppercase;
   color: light-dark(var(--theme-color-20), var(--theme-color-05));
   cursor: help;
+  transition-property: text-decoration-color, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
 address {
   font-style: normal;
   line-height: 1em;
+  transition: color 0.3s ease;
 }
 
 mark {
@@ -32,4 +49,7 @@ mark {
   border-radius: var(--theme-border-radius);
   padding: 1px var(--theme-padding-medium);
   font-weight: var(--theme-font-weight-medium);
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }

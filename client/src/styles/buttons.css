@@ -9,7 +9,9 @@ button {
   border: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
   font-weight: var(--theme-font-weight-medium);
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
-  transition: all 0.2s linear;
+  transition-property: background, color, box-shadow, border-color, transform, opacity;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 button.small-button {
   display: flex;
@@ -17,10 +19,12 @@ button.small-button {
   justify-content: center;
   padding: var(--theme-padding-medium);
 }
-button:hover:not(:disabled) {
-  background: light-dark(var(--theme-color-05), var(--theme-color-18));
-  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
-  transform: translateX(1px) translateY(1px);
+@media (hover: hover) {
+  button:hover:not(:disabled) {
+    background: light-dark(var(--theme-color-05), var(--theme-color-18));
+    box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
+    transform: translateX(1px) translateY(1px);
+  }
 }
 button:active:not(:disabled) {
   background: light-dark(var(--theme-color-04), var(--theme-color-21));

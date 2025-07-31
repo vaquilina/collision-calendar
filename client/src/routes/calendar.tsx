@@ -30,7 +30,7 @@ function CalendarComponent() {
         />
       </header>
       <aside>
-        <button type='button' class='new-block-button'>new block</button>
+        <button type='button' id='new-block-button'>new block</button>
         <TimezoneDisplay />
         <MiniCalendar date={date()} setDate={setDate} view={calendarView()} />
         <div>

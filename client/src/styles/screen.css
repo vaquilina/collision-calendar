@@ -16,12 +16,13 @@ div.screen {
   align-items: center;
   justify-content: flex-start;
   gap: 1em;
-  padding: var(--theme-padding-medium);
+  padding: 0 var(--theme-padding-comfortable);
   width: 100%;
   height: 100%;
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
   z-index: 3;
   box-shadow: 0 2px 0 0 light-dark(var(--theme-color-18), var(--theme-color-12));
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .user-display {
@@ -55,6 +56,7 @@ div.screen {
   overflow: hidden;
   box-shadow: 0 2px 0 0 light-dark(var(--theme-color-18), var(--theme-color-12));
   z-index: 2;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .screen aside {
@@ -68,6 +70,7 @@ div.screen {
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
   box-shadow: 1px 0 0 0 light-dark(var(--theme-color-17), var(--theme-color-13));
   z-index: 1;
+  transition: background 0.3s ease, box-shadow 0.3s ease;
 }
 
 .screen main {

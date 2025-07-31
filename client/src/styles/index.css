@@ -101,6 +101,12 @@ span {
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
 }
 
+div {
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
+}
+
 a,
 button,
 hr,
@@ -131,7 +137,9 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  transition: 0.3s ease;
+  transition-property: background, color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease;
 }
 
 #root {
@@ -157,8 +165,10 @@ kbd {
   cursor: default;
   position: relative;
   top: -1px;
-
-  &:hover {
+  transition: top 0.2s linear, box-shadow 0.2s ease, background 0.3s ease, color 0.3s ease;
+}
+@media (hover: hover) {
+  kbd:hover {
     box-shadow: 0 1px 0 0.5px light-dark(var(--theme-color-04), var(--theme-color-19));
     top: 1px;
   }
@@ -168,6 +178,8 @@ hr {
   border-width: 1px;
   border-style: var(--theme-border-style);
   border-color: light-dark(var(--theme-color-19), var(--theme-color-06));
+  width: 100%;
+  transition: border-color 0.3s ease;
 }
 
 a {
@@ -175,10 +187,7 @@ a {
   font-weight: var(--theme-font-weight-medium);
   color: light-dark(var(--theme-color-23), var(--theme-color-03));
   max-width: fit-content;
-
-  &:hover {
-    text-decoration-style: double;
-  }
+  transition: color 0.3s ease;
 
   &:active {
     text-decoration: none;
@@ -188,6 +197,11 @@ a {
     transition: none;
     outline: 1px var(--theme-border-style) light-dark(var(--theme-color-25), var(--theme-color-01));
     outline-offset: 1px;
+  }
+}
+@media (hover: hover) {
+  a:hover {
+    text-decoration-style: double;
   }
 }
 

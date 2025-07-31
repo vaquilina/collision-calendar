@@ -27,6 +27,7 @@ function PlaygroundComponent() {
           <h4>This is h4</h4>
           <h5>This is h5</h5>
           <h6>This is h6</h6>
+          <hr />
           <p>
             This is a paragraph with <mark>mark text</mark>.
           </p>

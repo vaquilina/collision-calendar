@@ -14,7 +14,7 @@
   overflow: inherit;
 }
 
-.nav-link {
+a.nav-link {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -33,44 +33,48 @@
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
-  transition: 0.2s linear;
+  transition-property: background, color, border-color, box-shadow, transform;
+  transition-duration: 0.2s;
+  transition-timing-function: linear;
 }
-.nav-link:hover {
-  background: light-dark(var(--theme-color-05), var(--theme-color-18));
-  box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
-  transform: translateX(1px) translateY(1px);
+@media (hover: hover) {
+  a.nav-link:hover {
+    background: light-dark(var(--theme-color-05), var(--theme-color-18));
+    box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
+    transform: translateX(1px) translateY(1px);
+  }
 }
-.nav-link:active {
+a.nav-link:active {
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
   box-shadow: inset 0.5px 0.5px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   color: light-dark(var(--theme-color-21), var(--theme-color-05));
 }
-.nav-link:focus-visible {
+a.nav-link:focus-visible {
   transition: none;
   outline: none;
   background: light-dark(var(--theme-color-18), var(--theme-color-07));
   color: light-dark(var(--theme-color-01), var(--theme-color-25));
 }
-.nav-link:focus {
+a.nav-link:focus {
   outline: none;
 }
 
-.nav-link > span {
+a.nav-link > span {
   width: 6em;
   text-align: left;
   color: inherit;
 }
-.nav-link > span:active {
+a.nav-link > span:active {
   color: inherit;
 }
 
-.nav-link[data-status='active'] {
+a.nav-link[data-status='active'] {
   background: light-dark(var(--theme-color-06), var(--theme-color-16));
   pointer-events: none;
   box-shadow: 0.5px 1px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   transform: translateX(1px) translateY(1px);
 }
-.nav-link[data-status='active'] > span {
+a.nav-link[data-status='active'] > span {
   color: light-dark(var(--theme-color-25), var(--theme-color-01));
 }
 
