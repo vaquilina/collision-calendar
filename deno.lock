@@ -26,6 +26,7 @@
     "npm:solid-js@^1.9.7": "1.9.7_seroval@1.3.2",
     "npm:unstorage@^1.16.1": "1.16.1",
     "npm:vite-plugin-solid@^2.11.8": "2.11.8_solid-js@1.9.7__seroval@1.3.2_vite@7.0.6__picomatch@4.0.3_@babel+core@7.28.0",
+    "npm:vite@*": "7.0.6_picomatch@4.0.3",
     "npm:vite@7.0.6": "7.0.6_picomatch@4.0.3",
     "npm:zod@^4.0.14": "4.0.14"
   },
