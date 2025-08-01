@@ -19,7 +19,7 @@ export type MonthViewWeek = {
   days: MonthViewDay[];
 };
 
-/** Month calendar component. */
+/** Month view calendar. */
 export function MonthCalendar(props: { date: Temporal.PlainDate }) {
   const [weeks, setWeeks] = createSignal<MonthViewWeek[]>([]);
   const [days, setDays] = createSignal<MonthViewDay[]>([]);

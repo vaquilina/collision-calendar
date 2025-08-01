@@ -1,4 +1,4 @@
-import { createEffect, createSignal, For, Index } from 'solid-js';
+import { createEffect, createSignal, Index } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 
 import { NowLine } from './NowLine.tsx';
@@ -11,7 +11,7 @@ type WeekViewDay = {
   isToday?: boolean;
 };
 
-/** Week Calendar component. */
+/** Week view calendar. */
 export function WeekCalendar(props: { date: Temporal.PlainDate }) {
   const [days, setDays] = createSignal<WeekViewDay[]>();
 
@@ -38,13 +38,13 @@ export function WeekCalendar(props: { date: Temporal.PlainDate }) {
 
   return (
     <>
-      <NowLine />
       <div class='week-calendar'>
         <div class='tz-offset' />
         <div class='all-day' />
         <Index each={days()}>
           {(day, index) => (
             <>
+              {day().isToday && <NowLine view='view-week' />}
               <div
                 class={`day-of-week-container dow0${index + 1}`}
                 data-today={day().isToday}
@@ -55,20 +55,20 @@ export function WeekCalendar(props: { date: Temporal.PlainDate }) {
                 <h6>{DAYS_OF_WEEK[index]}</h6>
               </div>
               <div class={`all-day-container all-day0${index + 1}`} data-today={day().isToday} />
-              <For each={HOURS_OF_DAY}>
+              <Index each={HOURS_OF_DAY}>
                 {(hour) => (
                   <>
                     <div
-                      class={`hour-label hour${hour < 10 ? `0${hour}` : hour}`}
-                      data-hour={`${hour < 10 ? `0${hour}` : hour}:00`}
+                      class={`hour-label hour${hour() < 10 ? `0${hour()}` : hour()}`}
+                      data-hour={`${hour() < 10 ? `0${hour()}` : hour()}:00`}
                     />
                     <div
-                      class={`day-container-week dow0${index + 1}-hour${hour < 10 ? `0${hour}` : hour}`}
+                      class={`day-container-week dow0${index + 1}-hour${hour() < 10 ? `0${hour()}` : hour()}`}
                       data-today={day().isToday}
                     />
                   </>
                 )}
-              </For>
+              </Index>
             </>
           )}
         </Index>

@@ -1,21 +1,19 @@
 :root {
   --hour-label-width: 3em;
   --weekday-label-height: 3em;
-  --now-line-top: 0px;
 }
 
 #now-line {
-  position: absolute;
-  top: var(--weekday-label-height);
-  right: 0;
-  width: calc(100% - var(--hour-label-width) - 4px);
+  grid-column: var(--col);
+  grid-row: var(--row);
+  transform-origin: top;
+  transform: translateY(calc(var(--minute) / 60 * var(--row-height)));
+  width: 100%;
   height: 2px;
   background: var(--theme-now-color);
   opacity: 0.8;
   z-index: 20;
   pointer-events: none;
-  /* transform: translateY(var(--now-line-pos)) */
-  transition: transform 0.3s;
 }
 #now-line::before {
   display: block;
@@ -433,16 +431,6 @@ h6.timezone-display {
 
 .week-calendar {
   display: grid;
-  grid-auto-rows: 1fr;
-  grid-template-columns: 2em repeat(7, 1fr);
-  grid-template-rows: var(--week-weekday-label-height) auto;
-  gap: 0px 0px;
-  grid-template-areas:
-    'tz-offset dow01 dow02 dow03 dow04 dow05 dow06 dow07'
-    'all-day all-day01 all-day02 all-day03 all-day04 all-day05 all-day06 all-day07';
-}
-.week-calendar {
-  display: grid;
   grid-template-columns: var(--hour-label-width) repeat(7, 1fr);
   grid-template-rows: var(--weekday-label-height) minmax(1.5em, auto) repeat(24, auto);
   gap: 0px 0px;
@@ -475,6 +463,9 @@ h6.timezone-display {
     'hour23    dow01-hour23    dow02-hour23    dow03-hour23    dow04-hour23    dow05-hour23    dow06-hour23    dow07-hour23';
 
   height: 100%;
+}
+.week-calendar > div {
+  position: relative;
 }
 
 .day-container-week,
