@@ -209,6 +209,28 @@ a {
   --width: 24px;
 }
 
+#not-found-screen {
+  display: grid;
+  place-items: center;
+  width: 100%;
+  height: 100%;
+  position: relative;
+  overflow: hidden;
+}
+#not-found-screen::before {
+  content: '404';
+  font-size: 20em;
+  position: absolute;
+  top: 0;
+  left: 0;
+  transform: translateX(59%) translateY(25%);
+  z-index: -1;
+  opacity: 0.05;
+}
+#not-found-message {
+  text-indent: 1ch;
+}
+
 /* don't apply the page styles to the router devtools */
 .TanStackRouterDevtools * {
   all: revert;
