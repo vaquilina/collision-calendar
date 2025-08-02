@@ -1,4 +1,5 @@
 import { faker } from '@faker-js/faker';
+import { Link } from '@tanstack/solid-router';
 
 export function NotFound() {
   return (
@@ -13,7 +14,7 @@ export function NotFound() {
             </h3>
             <p id='not-found-message'>
               You <em>could</em> try to <strong>{faker.company.buzzPhrase()}</strong>... Or just{' '}
-              <a href='#'>go back.</a>
+              <Link to='..'>go back.</Link>
             </p>
           </div>
         </div>
