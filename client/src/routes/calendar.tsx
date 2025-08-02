@@ -52,18 +52,24 @@ function CalendarComponent() {
         </div>
       </aside>
       <main>
-        <Switch fallback={<div>Error</div>}>
-          <Match when={calendarView() === 'view-month'}>
-            <MonthCalendar date={date()} />
-          </Match>
-          <Match when={calendarView() === 'view-week'}>
-            <WeekCalendar date={date()} />
-          </Match>
-          <Match when={calendarView() === 'view-day'}>
-            <DayCalendar date={date()} />
-          </Match>
-        </Switch>
+        <Calendar view={calendarView()} date={date()} />
       </main>
     </>
+  );
+}
+
+function Calendar(props: { view: CalendarView; date: Temporal.PlainDate }) {
+  return (
+    <Switch fallback={<div>Error</div>}>
+      <Match when={props.view === 'view-month'}>
+        <MonthCalendar date={props.date} />
+      </Match>
+      <Match when={props.view === 'view-week'}>
+        <WeekCalendar date={props.date} />
+      </Match>
+      <Match when={props.view === 'view-day'}>
+        <DayCalendar date={props.date} />
+      </Match>
+    </Switch>
   );
 }
