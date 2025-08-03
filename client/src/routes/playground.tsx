@@ -111,10 +111,12 @@ function PlaygroundComponent() {
                 <input id='text' type='text' />
                 <label tabIndex={-1} for='text'>text input</label>
               </div>
-              <div class='form-input'>
-                <input id='search' type='search' />
-                <label tabIndex={-1} for='search'>search input</label>
-              </div>
+              <search>
+                <div class='form-input'>
+                  <input id='search' type='search' />
+                  <label tabIndex={-1} for='search'>search input</label>
+                </div>
+              </search>
               <div class='form-input'>
                 <input id='number' type='number' />
                 <label tabIndex={-1} for='number'>number input</label>

@@ -20,13 +20,13 @@ export function ThemeSwitcher() {
       id: 'light',
       disabled: false,
       title: 'Light theme',
-      icon: <LightIcon size={20} />,
+      icon: <LightIcon size={20} aria-role='img' aria-label='Light theme' />,
     },
     {
       id: 'dark',
       disabled: false,
       title: 'Dark theme',
-      icon: <DarkIcon size={20} />,
+      icon: <DarkIcon size={20} aria-role='img' aria-label='Dark theme' />,
     },
   ];
 

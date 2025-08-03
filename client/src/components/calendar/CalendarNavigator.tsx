@@ -56,11 +56,11 @@ export function CalendarNavigator(
     <div class='cal-navigator'>
       <div>
         <button type='button' title='Go to today' onclick={handleClickToday}>Today</button>
-        <button id='cal-backward' type='button' onclick={() => handleClickArrow('backward')}>
-          <CaretLeft size={12} />
+        <button id='cal-backward' title='Move backward' type='button' onclick={() => handleClickArrow('backward')}>
+          <CaretLeft size={12} aria-label='move back' />
         </button>
-        <button id='cal-forward' type='button' onclick={() => handleClickArrow('forward')}>
-          <CaretRight size={12} />
+        <button id='cal-forward' title='Move forward' type='button' onclick={() => handleClickArrow('forward')}>
+          <CaretRight size={12} aria-label='move forward' />
         </button>
       </div>
       <Show when={props.view === 'view-month'}>

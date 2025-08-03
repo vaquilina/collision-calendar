@@ -22,36 +22,36 @@ import { Route as logoutRoute } from '../../routes/logout.tsx';
 export function NavMenu() {
   return (
     <>
-      <button type='button' id='hamburger-menu' popovertarget='nav-menu'>
-        <HamburgerIcon />
+      <button type='button' id='hamburger-menu' title='navigation' popovertarget='nav-menu'>
+        <HamburgerIcon aria-label='menu icon' />
       </button>
       <div id='nav-menu' popover>
         <nav class='content'>
-          <NavLink to={homeRoute.to} viewTransition>
+          <NavLink to={homeRoute.to} title='home' viewTransition>
             <HomeIcon />
             <span>Home</span>
           </NavLink>
-          <NavLink to={calendarRoute.to} viewTransition>
+          <NavLink to={calendarRoute.to} title='calendar' viewTransition>
             <CalendarIcon />
             <span>Calendar</span>
           </NavLink>
-          <NavLink to={settingsRoute.to} viewTransition>
+          <NavLink to={settingsRoute.to} title='settings' viewTransition>
             <SettingsIcon />
             <span>Settings</span>
           </NavLink>
-          <NavLink to={accountRoute.to} viewTransition>
+          <NavLink to={accountRoute.to} title='account' viewTransition>
             <AccountIcon />
             <span>Account</span>
           </NavLink>
-          <NavLink to={aboutRoute.to} viewTransition>
+          <NavLink to={aboutRoute.to} title='about' viewTransition>
             <AboutIcon />
             <span>About</span>
           </NavLink>
-          <NavLink to={playgroundRoute.to} viewTransition>
+          <NavLink to={playgroundRoute.to} title='playground' viewTransition>
             <PlaygroundIcon />
             <span>Playground</span>
           </NavLink>
-          <NavLink to={logoutRoute.to} viewTransition>
+          <NavLink to={logoutRoute.to} title='logout' viewTransition>
             <LogoutIcon />
             <span>Log out</span>
           </NavLink>

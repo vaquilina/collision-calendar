@@ -370,7 +370,7 @@ select > option {
   }
 }
 select > option[disabled] {
-  opacity: 0.3;
+  opacity: 0.4;
 }
 @media (hover: hover) {
   select > option[disabled]:hover {

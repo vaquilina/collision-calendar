@@ -411,7 +411,7 @@ h6.timezone-display {
   transition-timing-function: ease;
 }
 .mini-calendar span.mini-day-container[data-outside-month='true']::after {
-  opacity: 0.4;
+  opacity: 0.5;
 }
 .mini-calendar span.mini-day-container[data-today='true']::before {
   content: '';
