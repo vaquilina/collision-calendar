@@ -24,8 +24,15 @@
   z-index: 1;
   margin: 0;
 }
+.segmented-control input[type='radio'] + label:focus-visible {
+  transition: none;
+  outline-color: light-dark(var(--theme-color-25), var(--theme-color-01));
+  outline-width: medium;
+  outline-style: double;
+  outline-offset: -2px;
+}
 .segmented-control input[type='radio']:not(:checked) + label {
-  color: light-dark(var(--theme-color-11), var(--theme-color-14));
+  color: light-dark(var(--theme-color-16), var(--theme-color-10));
 }
 
 .segmented-control-focus {
