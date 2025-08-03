@@ -21,7 +21,7 @@
     "@std/path": "jsr:@std/path@^1.1.1",
     "@std/random": "jsr:@std/random@^0.1.2",
     "@std/testing": "jsr:@std/testing@^1.0.15",
-    "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.130.12",
+    "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.130.15",
     "@tanstack/solid-query": "npm:@tanstack/solid-query@^5.83.1",
     "@tanstack/solid-query-devtools": "npm:@tanstack/solid-query-devtools@^5.84.0",
     "@tanstack/solid-router": "npm:@tanstack/solid-router@^1.130.12",
