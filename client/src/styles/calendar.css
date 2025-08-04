@@ -404,6 +404,12 @@ h6.timezone-display {
     background: light-dark(var(--theme-color-09), var(--theme-color-12));
   }
 }
+.mini-calendar span.mini-day-container:focus-visible {
+  transition: none;
+  outline-width: medium;
+  outline-style: double;
+  outline-color: light-dark(var(--theme-color-25), var(--theme-color-01));
+}
 .mini-calendar span.mini-day-container::after {
   content: attr(data-day-of-month);
   transition-property: background, color;

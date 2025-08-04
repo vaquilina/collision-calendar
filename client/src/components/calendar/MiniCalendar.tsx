@@ -1,4 +1,4 @@
-import { createEffect, createSignal, Index, type JSX, type Setter } from 'solid-js';
+import { createEffect, createSignal, Index } from 'solid-js';
 import { CalendarDot, CaretLeft, CaretRight } from 'phosphor-solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 
@@ -7,14 +7,19 @@ import { WeekdayHeaders } from './WeekdayHeaders.tsx';
 import { firstDayInMonthView } from '../../utils/date-arithmetic.tsx';
 import { WEEKS_IN_MONTH_VIEW } from '../../const/calendar.tsx';
 
+import type { Component, JSX, Setter } from 'solid-js';
 import type { CalendarView } from './ViewSwitcher.tsx';
 import type { MonthViewDay, MonthViewWeek } from './MonthCalendar.tsx';
 
 type NavigatorDirection = 'backward' | 'forward';
 
-export function MiniCalendar(
-  props: { date: Temporal.PlainDate; setDate: Setter<Temporal.PlainDate>; view: CalendarView },
-) {
+interface MiniCalendarProps {
+  date: Temporal.PlainDate;
+  setDate: Setter<Temporal.PlainDate>;
+  view: CalendarView;
+}
+
+export const MiniCalendar: Component<MiniCalendarProps> = (props) => {
   const [localDate, setLocalDate] = createSignal<Temporal.PlainDate>(props.date);
   const [weeks, setWeeks] = createSignal<MonthViewWeek[]>([]);
   const [days, setDays] = createSignal<MonthViewDay[]>([]);
@@ -65,15 +70,25 @@ export function MiniCalendar(
     setWeeks(weeksInView);
   });
 
-  const handleClickToday: JSX.EventHandler<HTMLButtonElement, MouseEvent> = (_e) =>
-    setLocalDate(Temporal.Now.plainDateISO());
+  const handleGoToToday: JSX.EventHandler<HTMLButtonElement, MouseEvent | KeyboardEvent> = (event) => {
+    if (event instanceof MouseEvent || event.key === ' ' || event.key === 'Enter') {
+      if (event instanceof KeyboardEvent) event.preventDefault();
 
-  const handleClickArrow = (direction: NavigatorDirection) => {
-    const duration = Temporal.Duration.from({ months: 1 });
+      setLocalDate(Temporal.Now.plainDateISO());
+    }
+  };
 
-    direction === 'backward'
-      ? setLocalDate((prev) => prev.subtract(duration))
-      : setLocalDate((prev) => prev.add(duration));
+  const handleShift: JSX.BoundEventHandler<HTMLButtonElement, MouseEvent | KeyboardEvent>[0] = (
+    direction: NavigatorDirection,
+    event,
+  ) => {
+    if (event instanceof MouseEvent || event.key === ' ' || event.key === 'Enter') {
+      const duration = Temporal.Duration.from({ months: 1 });
+
+      direction === 'backward'
+        ? setLocalDate((prev) => prev.subtract(duration))
+        : setLocalDate((prev) => prev.add(duration));
+    }
   };
 
   return (
@@ -86,8 +101,8 @@ export function MiniCalendar(
           })}
         </h5>
         <span class='mini-calendar-navigator-buttons'>
-          <MiniTodayButton onclick={handleClickToday} />
-          <MiniNavigatorButtons onclick={handleClickArrow} />
+          <MiniTodayButton onGoToToday={handleGoToToday} />
+          <MiniNavigatorButtons onShift={handleShift} />
         </span>
       </header>
       <WeekdayHeaders narrow />
@@ -101,6 +116,11 @@ export function MiniCalendar(
         {(day, index) => (
           <span
             role='button'
+            tabIndex={0}
+            title={day().date.toLocaleString('en-US', {
+              month: 'long',
+              day: 'numeric',
+            })}
             onclick={(_e) => props.setDate(day().date)}
             class={`mini-day-container day${index + 1 < 10 ? '0' : ''}${index + 1}`}
             data-view={props.view}
@@ -116,10 +136,25 @@ export function MiniCalendar(
       </Index>
     </div>
   );
+};
+
+interface MiniNavigatorButtonsProps {
+  onShift: JSX.BoundEventHandler<HTMLButtonElement, MouseEvent | KeyboardEvent>[0];
 }
 
 /** Small navigator buttons. */
-function MiniNavigatorButtons(props: { onclick: (direction: NavigatorDirection) => void }) {
+const MiniNavigatorButtons: Component<MiniNavigatorButtonsProps> = (props) => {
+  const handleClick: JSX.BoundEventHandler<HTMLButtonElement, MouseEvent>[0] = (direction, event) => {
+    props.onShift(direction, event);
+  };
+
+  const handleKeyDown: JSX.BoundEventHandler<HTMLButtonElement, KeyboardEvent>[0] = (direction, event) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      event.preventDefault();
+      props.onShift(direction, event);
+    }
+  };
+
   return (
     <>
       <button
@@ -127,28 +162,41 @@ function MiniNavigatorButtons(props: { onclick: (direction: NavigatorDirection) 
         title='Shift back by 1 month'
         class='small-button'
         type='button'
-        onclick={(_e) => props.onclick('backward')}
+        onclick={[handleClick, 'backward']}
+        onkeydown={[handleKeyDown, 'backward']}
       >
-        <CaretLeft size={12} />
+        <CaretLeft size={12} aria-role='img' aria-label='Left caret' />
       </button>
       <button
         id='mini-cal-month-forward'
         title='Shift forward by 1 month'
         class='small-button'
         type='button'
-        onclick={(_e) => props.onclick('forward')}
+        onclick={[handleClick, 'forward']}
+        onkeydown={[handleKeyDown, 'forward']}
       >
-        <CaretRight size={12} />
+        <CaretRight size={12} aria-role='img' aria-label='Right caret' />
       </button>
     </>
   );
+};
+
+interface MiniTodayButtonProps {
+  onGoToToday: JSX.EventHandler<HTMLButtonElement, MouseEvent | KeyboardEvent>;
 }
 
-/** Small 'today' button. */
-function MiniTodayButton(props: { onclick: JSX.EventHandler<HTMLButtonElement, MouseEvent> }) {
+/** Small 'go to today' button. */
+const MiniTodayButton: Component<MiniTodayButtonProps> = (props) => {
   return (
-    <button type='button' id='mini-cal-today' class='small-button' title='Go to today' onclick={props.onclick}>
-      <CalendarDot size={12} weight='duotone' />
+    <button
+      type='button'
+      id='mini-cal-today'
+      class='small-button'
+      title='Go to today'
+      onclick={props.onGoToToday}
+      onkeydown={props.onGoToToday}
+    >
+      <CalendarDot size={12} weight='duotone' aria-role='img' aria-label='calendar dot' />
     </button>
   );
-}
+};
