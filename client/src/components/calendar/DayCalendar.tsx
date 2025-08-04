@@ -5,8 +5,14 @@ import { NowLine } from './NowLine.tsx';
 
 import { DAYS_OF_WEEK, HOURS_OF_DAY } from '../../const/calendar.tsx';
 
+import type { Component } from 'solid-js';
+
+interface DayCalendarProps {
+  date: Temporal.PlainDate;
+}
+
 /** Day view calendar. */
-export function DayCalendar(props: { date: Temporal.PlainDate }) {
+export const DayCalendar: Component<DayCalendarProps> = (props) => {
   const [isToday, setIsToday] = createSignal(false);
 
   createEffect(() => setIsToday(Temporal.PlainDate.compare(props.date, Temporal.Now.plainDateISO()) === 0));
@@ -27,19 +33,24 @@ export function DayCalendar(props: { date: Temporal.PlainDate }) {
       <div class='all-day-container all-day01' data-today={isToday()} />
       {isToday() && <NowLine view='view-day' />}
       <Index each={HOURS_OF_DAY}>
-        {(hour) => (
-          <>
-            <div
-              class={`hour-label hour${hour() < 10 ? `0${hour()}` : hour()}`}
-              data-hour={`${hour() < 10 ? `0${hour()}` : hour()}:00`}
-            />
-            <div
-              class={`day-container-week dow01-hour${hour() < 10 ? `0${hour()}` : hour()}`}
-              data-today={isToday()}
-            />
-          </>
-        )}
+        {(hour) => {
+          const hourLabel = `${hour() < 10 ? `0${hour()}` : hour()}:00`;
+
+          return (
+            <>
+              <div
+                class={`hour-label hour${hour() < 10 ? `0${hour()}` : hour()}`}
+                title={hourLabel}
+                data-hour={hourLabel}
+              />
+              <div
+                class={`day-container-week dow01-hour${hour() < 10 ? `0${hour()}` : hour()}`}
+                data-today={isToday()}
+              />
+            </>
+          );
+        }}
       </Index>
     </div>
   );
-}
+};

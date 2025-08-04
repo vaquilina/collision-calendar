@@ -32,11 +32,11 @@ export const MiniCalendar: Component<MiniCalendarProps> = (props) => {
      * e.g. If the 1st of the month falls on a Wednesday,
      *      the first day in the view would fall on the prior Monday
      */
-    const firstInView = firstDayInMonthView(localDate());
+    const firstInView: Temporal.PlainDate = firstDayInMonthView(localDate());
 
-    const today = Temporal.Now.plainDateISO();
+    const today: Temporal.PlainDate = Temporal.Now.plainDateISO();
 
-    const month = localDate().month;
+    const month: number = localDate().month;
 
     const daysInView: MonthViewDay[] = [{
       date: firstInView,
@@ -44,7 +44,7 @@ export const MiniCalendar: Component<MiniCalendarProps> = (props) => {
       isToday: Temporal.PlainDate.compare(firstInView, today) === 0,
     }];
 
-    let currDate = firstInView;
+    let currDate: Temporal.PlainDate = firstInView;
     for (let i = 1; i < localDate().daysInWeek * WEEKS_IN_MONTH_VIEW; i++) {
       currDate = currDate.add({ days: 1 });
       daysInView.push({
@@ -56,7 +56,7 @@ export const MiniCalendar: Component<MiniCalendarProps> = (props) => {
 
     setDays(daysInView);
 
-    const weeksOfYearInView = new Set(
+    const weeksOfYearInView: Set<number | undefined> = new Set(
       daysInView.map((day) => day.date.weekOfYear),
     );
     const weeksInView: MonthViewWeek[] = [];
@@ -186,17 +186,15 @@ interface MiniTodayButtonProps {
 }
 
 /** Small 'go to today' button. */
-const MiniTodayButton: Component<MiniTodayButtonProps> = (props) => {
-  return (
-    <button
-      type='button'
-      id='mini-cal-today'
-      class='small-button'
-      title='Go to today'
-      onclick={props.onGoToToday}
-      onkeydown={props.onGoToToday}
-    >
-      <CalendarDot size={12} weight='duotone' aria-role='img' aria-label='calendar dot' />
-    </button>
-  );
-};
+const MiniTodayButton: Component<MiniTodayButtonProps> = (props) => (
+  <button
+    type='button'
+    id='mini-cal-today'
+    class='small-button'
+    title='Go to today'
+    onclick={props.onGoToToday}
+    onkeydown={props.onGoToToday}
+  >
+    <CalendarDot size={12} weight='duotone' aria-role='img' aria-label='calendar dot' />
+  </button>
+);

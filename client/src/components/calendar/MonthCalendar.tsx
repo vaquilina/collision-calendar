@@ -6,6 +6,8 @@ import { WeekdayHeaders } from './WeekdayHeaders.tsx';
 import { firstDayInMonthView } from '../../utils/date-arithmetic.tsx';
 import { WEEKS_IN_MONTH_VIEW } from '../../const/calendar.tsx';
 
+import type { Component } from 'solid-js';
+
 /** A day in the month view, complete with metadata. */
 export type MonthViewDay = {
   date: Temporal.PlainDate;
@@ -19,8 +21,12 @@ export type MonthViewWeek = {
   days: MonthViewDay[];
 };
 
+interface MonthCalendarProps {
+  date: Temporal.PlainDate;
+}
+
 /** Month view calendar. */
-export function MonthCalendar(props: { date: Temporal.PlainDate }) {
+export const MonthCalendar: Component<MonthCalendarProps> = (props) => {
   const [weeks, setWeeks] = createSignal<MonthViewWeek[]>([]);
   const [days, setDays] = createSignal<MonthViewDay[]>([]);
 
@@ -29,11 +35,11 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
      * e.g. If the 1st of the month falls on a Tuesday,
      *      the first day in the view would fall on the prior Sunday
      */
-    const firstInView = firstDayInMonthView(props.date);
+    const firstInView: Temporal.PlainDate = firstDayInMonthView(props.date);
 
-    const today = Temporal.Now.plainDateISO();
+    const today: Temporal.PlainDate = Temporal.Now.plainDateISO();
 
-    const month = props.date.month;
+    const month: number = props.date.month;
 
     const daysInView: MonthViewDay[] = [{
       date: firstInView,
@@ -41,7 +47,7 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
       isToday: Temporal.PlainDate.compare(firstInView, today) === 0,
     }];
 
-    let currDate = firstInView;
+    let currDate: Temporal.PlainDate = firstInView;
     for (let i = 1; i < props.date.daysInWeek * WEEKS_IN_MONTH_VIEW; i++) {
       currDate = currDate.add({ days: 1 });
       daysInView.push({
@@ -53,7 +59,7 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
 
     setDays(daysInView);
 
-    const weeksOfYearInView = new Set(
+    const weeksOfYearInView: Set<number | undefined> = new Set(
       daysInView.map((day) => day.date.weekOfYear),
     );
     const weeksInView: MonthViewWeek[] = [];
@@ -89,4 +95,4 @@ export function MonthCalendar(props: { date: Temporal.PlainDate }) {
       </Index>
     </div>
   );
-}
+};

@@ -13,19 +13,15 @@ export type SegmentedControlProps = {
   name: string;
   checked: SegmentedControlItem['id'];
   items?: SegmentedControlItem[];
-  onchange: (id: string) => void;
+  onchange: JSX.BoundEventHandler<Element, Event>[0];
 };
 
 export const SegmentedControl: Component<SegmentedControlProps> = (props) => {
   const finalProps = mergeProps({ items: [] }, props);
 
-  const handleKeyDown: JSX.BoundEventHandler<HTMLLabelElement, KeyboardEvent>[0] = (itemId, event) => {
-    if (
-      typeof itemId === 'string' &&
-      (event instanceof KeyboardEvent && (event.key === ' ' || event.key === 'Space' || event.key === 'Enter'))
-    ) {
-      event.preventDefault();
-      finalProps.onchange(itemId);
+  const handleKeyDown: JSX.BoundEventHandler<HTMLLabelElement, KeyboardEvent>[0] = (itemId: string, event) => {
+    if (event.key === ' ' || event.key === 'Enter') {
+      finalProps.onchange(itemId, event);
     }
   };
 

@@ -12,6 +12,6 @@ const BasicLinkComponent: Solid.Component<BasicLinkProps> = (props) => (
 const CreatedLinkComponent = createLink(BasicLinkComponent);
 
 /** A link component for an item in the navigation menu. */
-export const NavLink: LinkComponent<typeof BasicLinkComponent> = (props) => {
-  return <CreatedLinkComponent preload='intent' {...props} />;
-};
+export const NavLink: LinkComponent<typeof BasicLinkComponent> = (props) => (
+  <CreatedLinkComponent preload='intent' {...props} />
+);

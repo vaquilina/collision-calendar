@@ -9,6 +9,7 @@ import { CalendarToolbar } from '../components/calendar/CalendarToolbar.tsx';
 import { TimezoneDisplay } from '../components/calendar/TimezoneDisplay.tsx';
 import { WeekCalendar } from '../components/calendar/WeekCalendar.tsx';
 
+import type { Component } from 'solid-js';
 import type { CalendarView } from '../components/calendar/ViewSwitcher.tsx';
 
 export const Route = createFileRoute('/calendar')({
@@ -17,7 +18,7 @@ export const Route = createFileRoute('/calendar')({
 
 function CalendarComponent() {
   const [calendarView, setCalendarView] = createSignal<CalendarView>('view-month');
-  const [date, setDate] = createSignal(Temporal.Now.plainDateISO());
+  const [date, setDate] = createSignal<Temporal.PlainDate>(Temporal.Now.plainDateISO());
 
   return (
     <>
@@ -58,7 +59,12 @@ function CalendarComponent() {
   );
 }
 
-function Calendar(props: { view: CalendarView; date: Temporal.PlainDate }) {
+interface CalendarProps {
+  view: CalendarView;
+  date: Temporal.PlainDate;
+}
+
+const Calendar: Component<CalendarProps> = (props) => {
   return (
     <Switch fallback={<div>Error</div>}>
       <Match when={props.view === 'view-month'}>
@@ -72,4 +78,4 @@ function Calendar(props: { view: CalendarView; date: Temporal.PlainDate }) {
       </Match>
     </Switch>
   );
-}
+};

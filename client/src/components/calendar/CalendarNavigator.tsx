@@ -2,7 +2,7 @@ import { createMemo, Show } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 import { CaretLeft, CaretRight } from 'phosphor-solid-js';
 
-import type { Component, JSX, Setter } from 'solid-js';
+import type { Accessor, Component, JSX, Setter } from 'solid-js';
 
 type NavigatorDirection = 'backward' | 'forward';
 
@@ -21,14 +21,14 @@ interface CalendarNavigatorProps {
  * - buttons to shift the timeframe forward or backward
  */
 export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
-  const monthLabel = createMemo(() =>
+  const monthLabel: Accessor<string> = createMemo(() =>
     props.date.toLocaleString('en-US', {
       month: 'long',
       year: 'numeric',
     })
   );
 
-  const dayLabel = createMemo(() =>
+  const dayLabel: Accessor<string> = createMemo(() =>
     props.date.toLocaleString('en-US', {
       day: 'numeric',
       month: 'long',

@@ -19,44 +19,45 @@ import { Route as accountRoute } from '../../routes/account.tsx';
 import { Route as playgroundRoute } from '../../routes/playground.tsx';
 import { Route as logoutRoute } from '../../routes/logout.tsx';
 
-export function NavMenu() {
-  return (
-    <>
-      <button type='button' id='hamburger-menu' title='navigation' popovertarget='nav-menu'>
-        <HamburgerIcon aria-label='menu icon' />
-      </button>
-      <div id='nav-menu' popover>
-        <nav class='content'>
-          <NavLink to={homeRoute.to} title='home' viewTransition>
-            <HomeIcon />
-            <span>Home</span>
-          </NavLink>
-          <NavLink to={calendarRoute.to} title='calendar' viewTransition>
-            <CalendarIcon />
-            <span>Calendar</span>
-          </NavLink>
-          <NavLink to={settingsRoute.to} title='settings' viewTransition>
-            <SettingsIcon />
-            <span>Settings</span>
-          </NavLink>
-          <NavLink to={accountRoute.to} title='account' viewTransition>
-            <AccountIcon />
-            <span>Account</span>
-          </NavLink>
-          <NavLink to={aboutRoute.to} title='about' viewTransition>
-            <AboutIcon />
-            <span>About</span>
-          </NavLink>
-          <NavLink to={playgroundRoute.to} title='playground' viewTransition>
-            <PlaygroundIcon />
-            <span>Playground</span>
-          </NavLink>
-          <NavLink to={logoutRoute.to} title='logout' viewTransition>
-            <LogoutIcon />
-            <span>Log out</span>
-          </NavLink>
-        </nav>
-      </div>
-    </>
-  );
-}
+import type { Component } from 'solid-js';
+
+/** Navigation menu component. */
+export const NavMenu: Component = () => (
+  <>
+    <button type='button' id='hamburger-menu' title='navigation' popovertarget='nav-menu'>
+      <HamburgerIcon aria-label='hamburger' />
+    </button>
+    <div id='nav-menu' popover>
+      <nav class='content'>
+        <NavLink to={homeRoute.to} title='home' viewTransition>
+          <HomeIcon aria-role='img' aria-label='house' />
+          <span>Home</span>
+        </NavLink>
+        <NavLink to={calendarRoute.to} title='calendar' viewTransition>
+          <CalendarIcon aria-role='img' aria-label='calendar' />
+          <span>Calendar</span>
+        </NavLink>
+        <NavLink to={settingsRoute.to} title='settings' viewTransition>
+          <SettingsIcon aria-role='img' aria-label='cog' />
+          <span>Settings</span>
+        </NavLink>
+        <NavLink to={accountRoute.to} title='account' viewTransition>
+          <AccountIcon aria-role='img' aria-label='person' />
+          <span>Account</span>
+        </NavLink>
+        <NavLink to={aboutRoute.to} title='about' viewTransition>
+          <AboutIcon aria-role='img' aria-label='info' />
+          <span>About</span>
+        </NavLink>
+        <NavLink to={playgroundRoute.to} title='playground' viewTransition>
+          <PlaygroundIcon aria-role='img' aria-label='beaker' />
+          <span>Playground</span>
+        </NavLink>
+        <NavLink to={logoutRoute.to} title='logout' viewTransition>
+          <LogoutIcon aria-role='img' aria-label='sign out' />
+          <span>Log out</span>
+        </NavLink>
+      </nav>
+    </div>
+  </>
+);

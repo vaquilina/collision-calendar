@@ -3,12 +3,17 @@ import { Temporal } from '@js-temporal/polyfill';
 
 import { createAnimationLoop } from '../../utils/scheduler.tsx';
 
+import type { Component } from 'solid-js';
 import type { CalendarView } from './ViewSwitcher.tsx';
 
-const getCurrentTime = () => Temporal.Now.plainDateTimeISO();
+interface NowLineProps {
+  view: CalendarView;
+}
+
+const getCurrentTime = (): Temporal.PlainDateTime => Temporal.Now.plainDateTimeISO();
 
 /** A line rendered across the hour axis to indicate the current time. */
-export function NowLine(props: { view: CalendarView }) {
+export const NowLine: Component<NowLineProps> = (props) => {
   const [currentTime, setCurrentTime] = createSignal<Temporal.PlainDateTime>(getCurrentTime());
   const [rowHeight, setRowHeight] = createSignal<number>(0);
 
@@ -34,6 +39,7 @@ export function NowLine(props: { view: CalendarView }) {
   return (
     <span
       id='now-line'
+      aria-label='now line'
       ref={ref}
       style={`
         --col: ${props.view === 'view-week' ? dayOfWeek() + 1 : 2 /* always column 2 in day view */};
@@ -43,4 +49,4 @@ export function NowLine(props: { view: CalendarView }) {
         `}
     />
   );
-}
+};

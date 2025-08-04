@@ -1,13 +1,15 @@
 import { createEffect, createSignal } from 'solid-js';
-
 import { Moon as DarkIcon, SunDim as LightIcon } from 'phosphor-solid-js';
 
-import { SegmentedControl, type SegmentedControlItem } from './primitives/SegmentedControl.tsx';
+import { SegmentedControl } from './primitives/SegmentedControl.tsx';
 
-export function ThemeSwitcher() {
+import type { SegmentedControlItem } from './primitives/SegmentedControl.tsx';
+import type { Component, JSX } from 'solid-js';
+
+export const ThemeSwitcher: Component = () => {
   const [selected, setSelected] = createSignal('light');
 
-  const handleChange = (id: string) => {
+  const handleChange: JSX.BoundEventHandler<Element, Event>[0] = (id: string, _event) => {
     setSelected(id);
   };
 
@@ -35,4 +37,4 @@ export function ThemeSwitcher() {
       <SegmentedControl checked={selected()} onchange={handleChange} name='theme-switcher' items={items} />
     </div>
   );
-}
+};

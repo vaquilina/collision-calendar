@@ -10,13 +10,13 @@ export const firstDayInMonthView = (date: Temporal.PlainDate): Temporal.PlainDat
     throw new RangeError('date argument must be a Temporal.PlainDate instance');
   }
 
-  const firstDayOfMonth = date.with({ day: 1 });
-  const firstDowOfMonth = firstDayOfMonth.dayOfWeek;
+  const firstDayOfMonth: Temporal.PlainDate = date.with({ day: 1 });
+  const firstDowOfMonth: number = firstDayOfMonth.dayOfWeek;
 
-  const daysBeforeFirstOfMonth = (firstDayOfMonth.daysInWeek + firstDowOfMonth - START_OF_WEEK) %
+  const daysBeforeFirstOfMonth: number = (firstDayOfMonth.daysInWeek + firstDowOfMonth - START_OF_WEEK) %
     firstDayOfMonth.daysInWeek;
 
-  const firstDayInView = firstDayOfMonth.subtract({ days: daysBeforeFirstOfMonth });
+  const firstDayInView: Temporal.PlainDate = firstDayOfMonth.subtract({ days: daysBeforeFirstOfMonth });
 
   return firstDayInView;
 };
@@ -30,9 +30,9 @@ export const firstDayInWeekView = (date: Temporal.PlainDate): Temporal.PlainDate
     throw new RangeError('date argument must be a Temporal.PlainDate instance');
   }
 
-  const daysBefore = (date.daysInWeek + date.dayOfWeek - START_OF_WEEK) % date.daysInWeek;
+  const daysBefore: number = (date.daysInWeek + date.dayOfWeek - START_OF_WEEK) % date.daysInWeek;
 
-  const firstDayInView = date.subtract({ days: daysBefore });
+  const firstDayInView: Temporal.PlainDate = date.subtract({ days: daysBefore });
 
   return firstDayInView;
 };
