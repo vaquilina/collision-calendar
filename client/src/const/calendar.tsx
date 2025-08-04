@@ -1,8 +1,8 @@
 /** Labels for the days of the week. */
-export const DAYS_OF_WEEK: string[] = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
+export const DAYS_OF_WEEK = ['Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat', 'Sun'];
 
 /** Hour markers for a day. */
-export const HOURS_OF_DAY: number[] = [
+export const HOURS_OF_DAY = [
   0,
   1,
   2,
