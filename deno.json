@@ -1,7 +1,7 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "workspace": ["./auth", "./db", "./client", "./api", "./types"],
-  "unstable": ["temporal", "kv"],
+  "unstable": ["temporal", "kv", "raw-imports"],
   "fmt": {
     "useTabs": false,
     "lineWidth": 120,
@@ -12,9 +12,11 @@
   "imports": {
     "@da/bcrypt": "jsr:@da/bcrypt@^1.0.1",
     "@deno/vite-plugin": "npm:@deno/vite-plugin@^1.0.5",
+    "@es-toolkit/es-toolkit": "jsr:@es-toolkit/es-toolkit@^1.39.8",
     "@faker-js/faker": "npm:@faker-js/faker@^9.9.0",
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.2",
     "@js-temporal/polyfill": "npm:@js-temporal/polyfill@^0.5.1",
+    "@libsql/client": "npm:@libsql/client@^0.15.10",
     "@openauthjs/openauth": "npm:@openauthjs/openauth@^0.4.3",
     "@std/assert": "jsr:@std/assert@^1.0.13",
     "@std/fs": "jsr:@std/fs@^1.0.19",
