@@ -1,3 +1,3 @@
 # Database
 
-![ER Diagram](img/erd.svg)
+![ER Diagram](img/erd.png)
