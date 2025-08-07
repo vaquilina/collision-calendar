@@ -30,12 +30,12 @@
     "@tanstack/solid-router-devtools": "npm:@tanstack/solid-router-devtools@^1.130.13",
     "hono": "npm:hono@^4.8.12",
     "phosphor-solid-js": "npm:phosphor-solid-js@^2.0.0",
-    "solid-js": "npm:solid-js@^1.9.7",
+    "solid-js": "npm:solid-js@^1.9.8",
     "unstorage": "npm:unstorage@^1.16.1",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
     "vite": "npm:vite@7.0.6",
     "vite-plugin-solid": "npm:vite-plugin-solid@^2.11.8",
-    "zod": "npm:zod@^4.0.14",
+    "zod": "npm:zod@^4.0.15",
     "denomailer": "https://deno.land/x/denomailer/mod.ts"
   }
 }
