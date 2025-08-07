@@ -1,26 +1,10 @@
 import { Hono } from 'hono';
-
 import { zValidator } from '@hono/zod-validator';
-
 import * as z from 'zod';
-
-import { DB } from 'sqlite';
-
 import * as bcrypt from '@da/bcrypt';
 
-import {
-  deleteUserByIdQuery,
-  insertUserQuery,
-  selectUserByIdQuery,
-  updateUserEmailQuery,
-  updateUserNameQuery,
-  updateUserPasswordQuery,
-} from '@collision-calendar/db/queries';
-
-import { ENV_VAR } from '@collision-calendar/db/init';
-
+import { turso } from '@collision-calendar/db/init';
 import { processEntry } from '@collision-calendar/db/util';
-
 import { User } from '@collision-calendar/db/classes';
 
 const zUserIdSchema = z.preprocess((val) => {
@@ -43,126 +27,34 @@ const deleteUserSchema = z.object({ id: zUserIdSchema });
 /** {@link User} route. */
 export const user = new Hono().basePath('/user')
   /* get user */
-  .get('/:id', zValidator('param', getUserSchema), (c) => {
+  .get('/:id', zValidator('param', getUserSchema), async (c) => {
     const { id } = c.req.valid('param');
 
-    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
-    const query = selectUserByIdQuery(db);
-    const entry = query.firstEntry({ id: id });
-    const user = entry ? new User(processEntry(entry)) : undefined;
-    query.finalize();
-    db.close();
+    const rs = await turso.execute({
+      sql: 'SELECT * FROM user WHERE id = $id',
+      args: { id },
+    });
 
-    if (!user) return c.notFound();
+    if (rs.rows.length < 1) return c.notFound();
 
-    return c.json(user);
+    console.log({ rows: rs.rows });
+
+    return c.json(rs.rows[0]);
   })
   /* get many users */
   .get('/', zValidator('query', getUsersSchema), (c) => {
     // eg. /user?ids=1&ids=2
-    const { ids } = c.req.valid('query');
-
-    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'read' });
-    const query = selectUserByIdQuery(db);
-
-    const entries: ReturnType<typeof query.allEntries> = [];
-    if (ids) {
-      for (const id of ids) {
-        const entry = query.firstEntry({ id: id });
-        if (entry) entries.push(entry);
-      }
-    }
-    query.finalize();
-
-    db.close();
-
-    const users = entries.map((entry) => new User(processEntry(entry)));
-
-    return c.json(users);
+    return c.text('todo: get users');
   })
   /* create user */
   .post('/', zValidator('json', createUserSchema), async (c) => {
-    const body = c.req.valid('json');
-
-    const hashed_password = await bcrypt.hash(body.password);
-
-    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
-    const query = insertUserQuery(db);
-    query.execute({
-      name: body.name,
-      email: body.email,
-      password: hashed_password,
-      created_at: Temporal.Now.instant().toString(),
-    });
-    query.finalize();
-    db.close();
-
-    return c.json('created user', 201);
+    return c.text('todo: create user');
   })
   /* update user */
-  .patch('/:id', zValidator('param', updateUserParamSchema), zValidator('json', updateUserBodySchema), async (c) => {
-    const { id } = c.req.valid('param');
-    const { field, value } = c.req.valid('json');
-
-    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
-
-    // ensure user exists
-    const fetch_query = selectUserByIdQuery(db);
-    const record = fetch_query.firstEntry({ id });
-    fetch_query.finalize();
-
-    if (!record) {
-      db.close();
-      return c.notFound();
-    }
-
-    switch (field) {
-      case 'name': {
-        const query = updateUserNameQuery(db);
-        query.execute({ id, name: value });
-        query.finalize();
-        break;
-      }
-      case 'email': {
-        const query = updateUserEmailQuery(db);
-        query.execute({ id, email: value });
-        query.finalize();
-        break;
-      }
-      case 'password': {
-        const hashed_password = await bcrypt.hash(value);
-
-        const query = updateUserPasswordQuery(db);
-        query.execute({ id, password: hashed_password });
-        query.finalize();
-      }
-    }
-
-    db.close();
-
-    return c.json(`updated user ${field}`);
+  .patch('/:id', zValidator('param', updateUserParamSchema), zValidator('json', updateUserBodySchema), (c) => {
+    return c.text('todo: update user');
   })
   /* delete user */
   .delete('/:id', zValidator('param', deleteUserSchema), (c) => {
-    const { id } = c.req.valid('param');
-
-    const db = new DB(Deno.env.get(ENV_VAR.DB_PATH), { mode: 'write' });
-
-    // ensure record exists
-    const fetch_query = selectUserByIdQuery(db);
-    const record = fetch_query.firstEntry({ id });
-    fetch_query.finalize();
-
-    if (!record) {
-      db.close();
-      return c.notFound();
-    }
-
-    const query = deleteUserByIdQuery(db);
-    query.execute({ id });
-    query.finalize();
-
-    db.close();
-
-    return c.json('deleted user');
+    return c.text('todo: delete user');
   });

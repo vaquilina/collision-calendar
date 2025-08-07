@@ -10,7 +10,6 @@
     "./accessors": "./accessors/mod.ts",
     "./classes": "./classes/mod.ts",
     "./init": "./init/mod.ts",
-    "./queries": "./queries/mod.ts",
     "./util": "./util/mod.ts"
   }
 }
