@@ -14,6 +14,17 @@ export const create_tables_stmnts: string[] = [
     password    TEXT,
     created_at  TEXT NOT NULL
   )`,
+  `CREATE TABLE IF NOT EXISTS space ( 
+    id          INTEGER PRIMARY KEY,
+    name        TEXT NOT NULL,
+    calendarid  INTEGER NOT NULL,
+    created_at  TEXT NOT NULL,
+    
+    CONSTRAINT fk_calendar
+      FOREIGN KEY(calendarid)
+      REFERENCES calendar(id)
+      ON DELETE CASCADE
+  )`,
   `CREATE TABLE IF NOT EXISTS calendar (
     id          INTEGER PRIMARY KEY,
     name        TEXT NOT NULL,
