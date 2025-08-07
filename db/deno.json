@@ -7,7 +7,6 @@
     "init:env": "deno run --allow-env --allow-read --allow-write init/init_env.ts"
   },
   "exports": {
-    "./accessors": "./accessors/mod.ts",
     "./classes": "./classes/mod.ts",
     "./init": "./init/mod.ts",
     "./util": "./util/mod.ts"

@@ -1,6 +1,6 @@
 {
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
-  "workspace": ["./auth", "./db", "./client", "./api", "./types"],
+  "workspace": ["./db", "./client", "./api", "./types"],
   "unstable": ["temporal", "kv", "raw-imports"],
   "fmt": {
     "useTabs": false,
@@ -17,7 +17,6 @@
     "@hono/zod-validator": "npm:@hono/zod-validator@^0.7.2",
     "@js-temporal/polyfill": "npm:@js-temporal/polyfill@^0.5.1",
     "@libsql/client": "npm:@libsql/client@^0.15.10",
-    "@openauthjs/openauth": "npm:@openauthjs/openauth@^0.4.3",
     "@std/assert": "jsr:@std/assert@^1.0.13",
     "@std/fs": "jsr:@std/fs@^1.0.19",
     "@std/path": "jsr:@std/path@^1.1.1",
@@ -31,7 +30,6 @@
     "hono": "npm:hono@^4.8.12",
     "phosphor-solid-js": "npm:phosphor-solid-js@^2.0.0",
     "solid-js": "npm:solid-js@^1.9.8",
-    "unstorage": "npm:unstorage@^1.16.1",
     "sqlite": "https://deno.land/x/sqlite/mod.ts",
     "vite": "npm:vite@7.0.6",
     "vite-plugin-solid": "npm:vite-plugin-solid@^2.11.8",
