@@ -107,17 +107,6 @@ export const create_tables_stmnts: string[] = [
       UNIQUE (userid, spaceid)
       ON CONFLICT IGNORE
   )`,
-  `CREATE TABLE IF NOT EXISTS proposal (
-    id          INTEGER PRIMARY KEY,
-    name        TEXT NOT NULL,
-    spaceid     INTEGER NOT NULL,
-    created_at  TEXT NOT NULL,
-    
-    CONSTRAINT fk_space
-      FOREIGN KEY(spaceid)
-      REFERENCES space(id)
-      ON DELETE CASCADE
-  )`,
   `CREATE TABLE IF NOT EXISTS block (
     id          INTEGER PRIMARY KEY,
     name        TEXT,
@@ -131,26 +120,6 @@ export const create_tables_stmnts: string[] = [
       FOREIGN KEY(spaceid)
       REFERENCES space(id)
       ON DELETE CASCADE
-  )`,
-  `CREATE TABLE IF NOT EXISTS proposal_block (
-    id          INTEGER PRIMARY KEY,
-    proposalid  INTEGER NOT NULL,
-    blockid     INTEGER NOT NULL,
-    created_at  TEXT NOT NULL,
-
-    CONSTRAINT fk_proposal
-      FOREIGN KEY(proposalid)
-      REFERENCES proposal(id)
-      ON DELETE CASCADE
-    
-    CONSTRAINT fk_block
-      FOREIGN KEY(blockid)
-      REFERENCES block(id)
-      ON DELETE CASCADE
-      
-    CONSTRAINT uniq_proposal_block
-      UNIQUE (proposalid, blockid)
-      ON CONFLICT IGNORE
   )`,
   `CREATE TABLE IF NOT EXISTS repeat (
     id          INTEGER PRIMARY KEY,
@@ -167,33 +136,6 @@ export const create_tables_stmnts: string[] = [
       
     CONSTRAINT uniq_config
       UNIQUE (unit, interval, start, end, blockid)
-      ON CONFLICT IGNORE
-  )`,
-  `CREATE TABLE IF NOT EXISTS vote (
-    id          INTEGER PRIMARY KEY,
-    answer      INTEGER NOT NULL,
-    blockid     INTEGER NOT NULL,
-    proposalid  INTEGER NOT NULL,
-    occupantid  INTEGER NOT NULL,
-    created_at  TEXT NOT NULL,
-    
-    CONSTRAINT fk_block
-      FOREIGN KEY(blockid)
-      REFERENCES block(id)
-      ON DELETE CASCADE,
-
-    CONSTRAINT fk_proposal
-      FOREIGN KEY(proposalid)
-      REFERENCES proposal(id)
-      ON DELETE CASCADE,
-    
-    CONSTRAINT fk_occupant
-      FOREIGN KEY(occupantid)
-      REFERENCES occupant(id)
-      ON DELETE CASCADE
-      
-    CONSTRAINT uniq_vote
-      UNIQUE (blockid, proposalid, occupantid)
       ON CONFLICT IGNORE
   )`,
 ];
@@ -320,18 +262,6 @@ export const create_tables_sql: string = `
       ON CONFLICT IGNORE
   );
   
-  CREATE TABLE IF NOT EXISTS proposal (
-    id          INTEGER PRIMARY KEY,
-    name        TEXT NOT NULL,
-    spaceid     INTEGER NOT NULL,
-    created_at  TEXT NOT NULL,
-    
-    CONSTRAINT fk_space
-      FOREIGN KEY(spaceid)
-      REFERENCES space(id)
-      ON DELETE CASCADE
-  );
-
   CREATE TABLE IF NOT EXISTS block (
     id          INTEGER PRIMARY KEY,
     name        TEXT,
@@ -346,28 +276,6 @@ export const create_tables_sql: string = `
       REFERENCES space(id)
       ON DELETE CASCADE
   );
-  
-  CREATE TABLE IF NOT EXISTS proposal_block (
-    id          INTEGER PRIMARY KEY,
-    proposalid  INTEGER NOT NULL,
-    blockid     INTEGER NOT NULL,
-    created_at  TEXT NOT NULL,
-
-    CONSTRAINT fk_proposal
-      FOREIGN KEY(proposalid)
-      REFERENCES proposal(id)
-      ON DELETE CASCADE
-    
-    CONSTRAINT fk_block
-      FOREIGN KEY(blockid)
-      REFERENCES block(id)
-      ON DELETE CASCADE
-      
-    CONSTRAINT uniq_proposal_block
-      UNIQUE (proposalid, blockid)
-      ON CONFLICT IGNORE
-  );
-  
   CREATE TABLE IF NOT EXISTS repeat (
     id          INTEGER PRIMARY KEY,
     unit        TEXT NOT NULL,
@@ -383,34 +291,6 @@ export const create_tables_sql: string = `
       
     CONSTRAINT uniq_config
       UNIQUE (unit, interval, start, end, blockid)
-      ON CONFLICT IGNORE
-  );
-  
-  CREATE TABLE IF NOT EXISTS vote (
-    id          INTEGER PRIMARY KEY,
-    answer      INTEGER NOT NULL,
-    blockid     INTEGER NOT NULL,
-    proposalid  INTEGER NOT NULL,
-    occupantid  INTEGER NOT NULL,
-    created_at  TEXT NOT NULL,
-    
-    CONSTRAINT fk_block
-      FOREIGN KEY(blockid)
-      REFERENCES block(id)
-      ON DELETE CASCADE,
-
-    CONSTRAINT fk_proposal
-      FOREIGN KEY(proposalid)
-      REFERENCES proposal(id)
-      ON DELETE CASCADE,
-    
-    CONSTRAINT fk_occupant
-      FOREIGN KEY(occupantid)
-      REFERENCES occupant(id)
-      ON DELETE CASCADE
-      
-    CONSTRAINT uniq_vote
-      UNIQUE (blockid, proposalid, occupantid)
       ON CONFLICT IGNORE
   );
 `;

@@ -2,18 +2,6 @@
 export type RepeatUnit = 'day' | 'week' | 'month' | 'year';
 
 /**
- * Enum for valid vote answers.
- * @remarks
- * Answers map to integers.
- * - `0` -> Against
- * - `1` -> For
- */
-export enum VoteAnswer {
-  Against = 0,
-  For,
-}
-
-/**
  * Enum for valid permissions codes.
  * @remarks
  * These codes are similar to the binary representation *nix of file permissions.

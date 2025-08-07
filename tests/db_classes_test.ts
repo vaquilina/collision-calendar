@@ -10,24 +10,19 @@ import {
   CalendarAccess,
   Collision,
   Occupant,
-  Proposal,
-  ProposalBlock,
   Repeat,
   Space,
   SpaceAccess,
   Tables,
   User,
-  Vote,
 } from '@collision-calendar/db/classes';
 
-import type { AccessPermissions, RepeatUnit, VoteAnswer } from '@collision-calendar/types';
+import type { AccessPermissions, RepeatUnit } from '@collision-calendar/types';
 
 const id_options: Parameters<NumberModule['int']>[0] = {
   min: 1,
   max: 100,
 };
-
-const vote_answers: VoteAnswer[] = [1, 0];
 
 const repeat_units: RepeatUnit[] = ['day', 'week', 'month', 'year'];
 
@@ -39,13 +34,10 @@ const table_names = [
   'calendar_access',
   'collision',
   'occupant',
-  'proposal',
-  'proposal_block',
   'repeat',
   'space',
   'space_access',
   'user',
-  'vote',
 ];
 
 Deno.test('DB: classes', async (t) => {
@@ -98,28 +90,6 @@ Deno.test('DB: classes', async (t) => {
     assertInstanceOf(block, Block);
   });
 
-  await t.step('class: Proposal', () => {
-    const proposal = new Proposal({
-      id: faker.number.int(id_options),
-      name: faker.company.buzzPhrase(),
-      spaceid: faker.number.int(id_options),
-      created_at: Temporal.Now.instant(),
-    });
-
-    assertInstanceOf(proposal, Proposal);
-  });
-
-  await t.step('class: ProposalBlock', () => {
-    const proposal_block = new ProposalBlock({
-      id: faker.number.int(id_options),
-      proposalid: faker.number.int(id_options),
-      blockid: faker.number.int(id_options),
-      created_at: Temporal.Now.instant(),
-    });
-
-    assertInstanceOf(proposal_block, ProposalBlock);
-  });
-
   await t.step('class: Collision', () => {
     const collision = new Collision({
       id: faker.number.int(id_options),
@@ -155,19 +125,6 @@ Deno.test('DB: classes', async (t) => {
     });
 
     assertInstanceOf(repeat, Repeat);
-  });
-
-  await t.step('class: Vote', () => {
-    const vote = new Vote({
-      id: faker.number.int(id_options),
-      answer: sample(vote_answers)!,
-      occupantid: faker.number.int(id_options),
-      blockid: faker.number.int(id_options),
-      proposalid: faker.number.int(id_options),
-      created_at: Temporal.Now.instant(),
-    });
-
-    assertInstanceOf(vote, Vote);
   });
 
   await t.step('class: CalendarAccess', () => {

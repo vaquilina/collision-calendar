@@ -3,13 +3,10 @@ import { Calendar } from './calendar.ts';
 import { CalendarAccess } from './calendar_access.ts';
 import { Collision } from './collision.ts';
 import { Occupant } from './occupant.ts';
-import { Proposal } from './proposal.ts';
-import { ProposalBlock } from './proposal_block.ts';
 import { Repeat } from './repeat.ts';
 import { Space } from './space.ts';
 import { SpaceAccess } from './space_access.ts';
 import { User } from './user.ts';
-import { Vote } from './vote.ts';
 
 /** Crawl the classes directory to get the table names. */
 const getTables = async (): Promise<string[]> => {
@@ -32,18 +29,4 @@ const getTables = async (): Promise<string[]> => {
 /** Array of table names that should exist in the database. */
 const Tables = await getTables();
 
-export {
-  Block,
-  Calendar,
-  CalendarAccess,
-  Collision,
-  Occupant,
-  Proposal,
-  ProposalBlock,
-  Repeat,
-  Space,
-  SpaceAccess,
-  Tables,
-  User,
-  Vote,
-};
+export { Block, Calendar, CalendarAccess, Collision, Occupant, Repeat, Space, SpaceAccess, Tables, User };
