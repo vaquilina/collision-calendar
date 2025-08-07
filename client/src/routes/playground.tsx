@@ -53,6 +53,7 @@ function PlaygroundComponent() {
           <address class='tel'>(705) 978-3845</address>
           <dfn role='definition' id='dfn-example'>definition</dfn>
           <em>emphasis</em>
+          <div class='circle-pulse-1' />
           <kbd>Kbd</kbd>
           <ul>
             <li>
