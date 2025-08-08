@@ -3,11 +3,12 @@
   "name": "@collision-calendar/db",
   "version": "0.1.0",
   "tasks": {
-    "init:db": "deno run --allow-env --allow-read --allow-write init/init_db.ts",
-    "init:env": "deno run --allow-env --allow-read --allow-write init/init_env.ts"
+    "db:generate": "deno run -A npm:drizzle-kit generate",
+    "db:migrate": "deno run -A npm:drizzle-kit migrate",
+    "db:studio": "deno run -A npm:drizzle-kit studio"
   },
   "exports": {
-    "./classes": "./classes/mod.ts",
+    "./schema": "./schema/mod.ts",
     "./init": "./init/mod.ts",
     "./util": "./util/mod.ts"
   }
