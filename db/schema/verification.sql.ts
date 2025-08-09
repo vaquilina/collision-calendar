@@ -1,5 +1,4 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
-import { timestamps } from './columns.helpers.ts';
 
 /**
  * Verification table.
@@ -14,5 +13,8 @@ export const verification = sqliteTable('verification', {
   value: text(),
   /** The time when the verification request expires */
   expiresAt: integer({ mode: 'timestamp' }),
-  ...timestamps,
+  /** Timestamp of when the verification request was created */
+  createdAt: integer({ mode: 'timestamp' }),
+  /** Timestamp of when the verification request was updated */
+  updatedAt: integer({ mode: 'timestamp' }),
 });

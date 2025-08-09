@@ -1,7 +1,6 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { user } from './user.sql.ts';
-import { timestamps } from './columns.helpers.ts';
 
 /**
  * Session table.
@@ -20,5 +19,8 @@ export const session = sqliteTable('session', {
   ipAddress: text(),
   /** The user agent information of the device */
   userAgent: text(),
-  ...timestamps,
+  /** Timestamp of when the session was created */
+  createdAt: integer({ mode: 'timestamp' }),
+  /** Timestamp of when the session was updated */
+  updatedAt: integer({ mode: 'timestamp' }),
 });

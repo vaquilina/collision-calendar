@@ -1,7 +1,6 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { user } from './user.sql.ts';
-import { timestamps } from './columns.helpers.ts';
 
 /**
  * Account table.
@@ -30,5 +29,8 @@ export const account = sqliteTable('account', {
   idToken: text(),
   /** The password of the account. Mainly used for email and password authentication */
   password: text(),
-  ...timestamps,
+  /** Timestamp of when the account was created */
+  createdAt: integer({ mode: 'timestamp' }),
+  /** Timestamp of when the account was updated */
+  updatedAt: integer({ mode: 'timestamp' }),
 });

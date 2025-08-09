@@ -1,7 +1,5 @@
 import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
-import { timestamps } from './columns.helpers.ts';
-
 /**
  * User table.
  * @see https://www.better-auth.com/docs/concepts/database#user
@@ -15,5 +13,8 @@ export const user = sqliteTable('user', {
   email: text({ mode: 'text' }),
   /** Whether the user's email is verified */
   emailVerified: integer({ mode: 'boolean' }),
-  ...timestamps,
+  /** Timestamp of when the user was created */
+  createdAt: integer({ mode: 'timestamp' }),
+  /** Timestamp of when the user was updated */
+  updatedAt: integer({ mode: 'timestamp' }),
 });
