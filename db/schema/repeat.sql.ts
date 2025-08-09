@@ -12,11 +12,15 @@ import { timestamps } from './columns.helpers.ts';
 export const repeat = sqliteTable('repeat', {
   /** Unique identifier for each repeat rule */
   id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
-  /** Repeat */
+  /** Repeat unit for the rule */
   unit: text({ mode: 'text', enum: ['day', 'week', 'month', 'year'] }).notNull(),
+  /** Repeat interval for the rule */
   interval: integer({ mode: 'number' }).notNull(),
+  /** Timestamp for when the repeat rule starts being applied */
   start: integer({ mode: 'timestamp_ms' }).notNull(),
+  /** Timestamp for when the repeat rule stops being applied */
   end: integer({ mode: 'timestamp_ms' }).notNull(),
+  /** The ID of the {@link block} */
   blockId: integer({ mode: 'number' }).references(() => block.id, { onDelete: 'cascade' }).notNull(),
   ...timestamps,
 }, (t) => [

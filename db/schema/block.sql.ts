@@ -24,5 +24,5 @@ export const block = sqliteTable('block', {
   spaceId: integer({ mode: 'number' }).references(() => space.id).notNull(),
   ...timestamps,
 }, (t) => [
-  check('start_before_end', sql`CHECK ${t.start} < ${t.end}`),
+  check('start_before_end', sql`${t.start} < ${t.end}`),
 ]);
