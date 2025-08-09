@@ -3,9 +3,9 @@
   "name": "@collision-calendar/db",
   "version": "0.1.0",
   "tasks": {
-    "db:generate": "deno run -A npm:drizzle-kit generate",
-    "db:migrate": "deno run -A npm:drizzle-kit migrate",
-    "db:studio": "deno run -A npm:drizzle-kit studio"
+    "db:generate": "deno run -A --node-modules-dir npm:drizzle-kit generate",
+    "db:migrate": "deno run -A --node-modules-dir npm:drizzle-kit migrate",
+    "db:studio": "deno run -A --node-modules-dir npm:drizzle-kit studio"
   },
   "exports": {
     "./schema": "./schema/mod.ts",
