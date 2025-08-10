@@ -9,18 +9,12 @@ export const ENV_VAR = {
 } as const;
 
 /** Set environment variables. */
-export const initEnv = async (): Promise<void> => {
-  const db_credentials = await import('../../db.txt', {
-    with: { type: 'text' },
-  });
+export const initEnv = () => {
+  const db_credentials = Deno.readTextFileSync('db.txt');
+  const better_auth_env = Deno.readTextFileSync('ba.txt');
 
-  const [db_url, auth_token] = db_credentials.default.split('\n');
-
-  const better_auth_env = await import('../../ba.txt', {
-    with: { type: 'text' },
-  });
-
-  const [ba_url, ba_secret] = better_auth_env.default.split('\n');
+  const [db_url, auth_token] = db_credentials.split('\n');
+  const [ba_url, ba_secret] = better_auth_env.split('\n');
 
   Deno.env.set(ENV_VAR.SMTP_PORT, '1025'); // replace
   Deno.env.set(ENV_VAR.AUTH_PORT, '3001');

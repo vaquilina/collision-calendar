@@ -24,5 +24,5 @@ export const calendarAccess = sqliteTable('calendar_access', {
   ...timestamps,
 }, (t) => [
   unique('uniq_calendar_access').on(t.calendarId, t.userId),
-  check('perm_check1', sql`${t.permissions} IN (100, 110, 111)`),
+  check('perm_check1', sql`${t.permissions} = 100 OR ${t.permissions} = 110 OR ${t.permissions} = 111`),
 ]);

@@ -2,6 +2,7 @@ import { sql } from 'drizzle-orm';
 import { check, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { space } from './space.sql.ts';
+import { user } from './user.sql.ts';
 import { timestamps } from './columns.helpers.ts';
 
 /**
@@ -20,8 +21,10 @@ export const block = sqliteTable('block', {
   start: integer({ mode: 'timestamp_ms' }).notNull(),
   /** The timestamp for when the block ends */
   end: integer({ mode: 'timestamp_ms' }).notNull(),
-  /** The ID of the {@link space} */
-  spaceId: integer({ mode: 'number' }).references(() => space.id).notNull(),
+  /** The ID of the {@link space} the block belongs to */
+  spaceId: integer({ mode: 'number' }).references(() => space.id, { onDelete: 'cascade' }).notNull(),
+  /** The ID of the {@link user} who owns the block */
+  userId: integer({ mode: 'number' }).references(() => user.id),
   ...timestamps,
 }, (t) => [
   check('start_before_end', sql`${t.start} < ${t.end}`),

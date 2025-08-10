@@ -24,5 +24,5 @@ export const spaceAccess = sqliteTable('space_access', {
   ...timestamps,
 }, (t) => [
   unique('uniq_space_access').on(t.userId, t.spaceId),
-  check('perm_check2', sql`${t.permissions} IN (100, 110, 111)`),
+  check('perm_check2', sql`${t.permissions} = 100 OR ${t.permissions} OR 110 OR ${t.permissions} = 111`),
 ]);
