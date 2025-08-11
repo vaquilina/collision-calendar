@@ -7,7 +7,6 @@
   },
   "exports": {
     ".": "./main.ts",
-    "./util": "./util/email.ts",
-    "./routes": "./routes/user.ts"
+    "./utils": "./utils/mod.ts"
   }
 }

@@ -16,6 +16,7 @@
 
 ### database ###
 *.db
+db/migrations/
 
 ### test coverage ###
 /cov_profile

@@ -1,18 +1,13 @@
 import { faker } from '@faker-js/faker';
-
 import { Hono } from 'hono';
-
 import { logger } from 'hono/logger';
 import { serveStatic } from 'hono/deno';
 
-import { initEnv } from '@collision-calendar/db/init';
+import auth from './routes/auth.ts';
 
-import { user } from './routes/user.ts';
+import type { AuthType } from './utils/auth.ts';
 
-// Initialize environment variables
-initEnv();
-
-const app = new Hono()
+const app = new Hono<{ Variables: AuthType }>({ strict: false })
   .use(logger())
   .use('/favicon.ico', serveStatic({ path: './favicon.ico' }))
   .notFound((c) => c.text('resource not found', 404))
@@ -21,7 +16,7 @@ const app = new Hono()
     return c.text(`${faker.word.interjection()}! something broke`, 500);
   });
 
-const routes = app.route('/api', user);
+const routes = app.route('/api', auth);
 
 Deno.serve(app.fetch);
 

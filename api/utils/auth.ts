@@ -1,5 +1,6 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
+import { haveIBeenPwned } from 'better-auth/plugins';
 
 import { db } from '@collision-calendar/db/init';
 
@@ -13,6 +14,15 @@ export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'sqlite',
   }),
+  trustedOrigins: ['http://localhost:5173'],
+  plugins: [
+    haveIBeenPwned({
+      customPasswordCompromisedMessage: 'Please choose a more secure password.',
+    }),
+  ],
+  emailAndPassword: {
+    enabled: true,
+  },
   user: {
     modelName: 'user',
     fields: {
@@ -31,6 +41,10 @@ export const auth = betterAuth({
       userAgent: 'user_agent',
       expiresAt: 'expires_at',
       ...timestamp_fields,
+    },
+    cookieCache: {
+      enabled: true,
+      maxAge: 5 * 60, // Cache duration in seconds
     },
   },
   account: {
@@ -59,3 +73,8 @@ export const auth = betterAuth({
     },
   },
 });
+
+export type AuthType = {
+  user: typeof auth.$Infer.Session.user | null;
+  session: typeof auth.$Infer.Session.session | null;
+};
