@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core';
 
 /**
  * User table.
@@ -17,4 +17,6 @@ export const user = sqliteTable('user', {
   createdAt: integer({ mode: 'timestamp' }),
   /** Timestamp of when the user was updated */
   updatedAt: integer({ mode: 'timestamp' }),
-});
+}, (t) => [
+  uniqueIndex('email_idx').on(t.email),
+]);

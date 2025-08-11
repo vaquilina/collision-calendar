@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { user } from './user.sql.ts';
 
@@ -33,4 +33,6 @@ export const account = sqliteTable('account', {
   createdAt: integer({ mode: 'timestamp' }),
   /** Timestamp of when the account was updated */
   updatedAt: integer({ mode: 'timestamp' }),
-});
+}, (t) => [
+  index('account_user_idx').on(t.userId),
+]);

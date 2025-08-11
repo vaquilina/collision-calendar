@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 /**
  * Verification table.
@@ -17,4 +17,6 @@ export const verification = sqliteTable('verification', {
   createdAt: integer({ mode: 'timestamp' }),
   /** Timestamp of when the verification request was updated */
   updatedAt: integer({ mode: 'timestamp' }),
-});
+}, (t) => [
+  index('identifier_idx').on(t.identifier),
+]);

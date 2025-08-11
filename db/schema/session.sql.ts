@@ -1,4 +1,4 @@
-import { integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
+import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
 
 import { user } from './user.sql.ts';
 
@@ -23,4 +23,7 @@ export const session = sqliteTable('session', {
   createdAt: integer({ mode: 'timestamp' }),
   /** Timestamp of when the session was updated */
   updatedAt: integer({ mode: 'timestamp' }),
-});
+}, (t) => [
+  index('session_user_idx').on(t.userId),
+  index('token_idx').on(t.token),
+]);
