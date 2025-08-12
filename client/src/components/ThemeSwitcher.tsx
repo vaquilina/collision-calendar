@@ -1,5 +1,4 @@
 import { createEffect, createSignal } from 'solid-js';
-import { Moon as DarkIcon, SunDim as LightIcon } from 'phosphor-solid-js';
 
 import { SegmentedControl } from './primitives/SegmentedControl.tsx';
 
@@ -22,13 +21,13 @@ export const ThemeSwitcher: Component = () => {
       id: 'light',
       disabled: false,
       title: 'Light theme',
-      icon: <LightIcon size={20} aria-role='img' aria-label='Light theme' />,
+      label: 'LIGHT',
     },
     {
       id: 'dark',
       disabled: false,
       title: 'Dark theme',
-      icon: <DarkIcon size={20} aria-role='img' aria-label='Dark theme' />,
+      label: 'DARK',
     },
   ];
 

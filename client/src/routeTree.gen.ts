@@ -9,180 +9,207 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root.tsx'
-import { Route as SettingsRouteImport } from './routes/settings.tsx'
-import { Route as PlaygroundRouteImport } from './routes/playground.tsx'
-import { Route as LogoutRouteImport } from './routes/logout.tsx'
-import { Route as CalendarRouteImport } from './routes/calendar.tsx'
-import { Route as AccountRouteImport } from './routes/account.tsx'
-import { Route as AboutRouteImport } from './routes/about.tsx'
-import { Route as IndexRouteImport } from './routes/index.tsx'
+import { Route as AuthRouteImport } from './routes/auth.tsx'
+import { Route as AppRouteImport } from './routes/app.tsx'
+import { Route as AppIndexRouteImport } from './routes/app.index.tsx'
+import { Route as AppSettingsRouteImport } from './routes/app.settings.tsx'
+import { Route as AppPlaygroundRouteImport } from './routes/app.playground.tsx'
+import { Route as AppCalendarRouteImport } from './routes/app.calendar.tsx'
+import { Route as AppAccountRouteImport } from './routes/app.account.tsx'
+import { Route as AppAboutRouteImport } from './routes/app.about.tsx'
 
-const SettingsRoute = SettingsRouteImport.update({
-  id: '/settings',
-  path: '/settings',
+const AuthRoute = AuthRouteImport.update({
+  id: '/auth',
+  path: '/auth',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PlaygroundRoute = PlaygroundRouteImport.update({
-  id: '/playground',
-  path: '/playground',
+const AppRoute = AppRouteImport.update({
+  id: '/app',
+  path: '/app',
   getParentRoute: () => rootRouteImport,
 } as any)
-const LogoutRoute = LogoutRouteImport.update({
-  id: '/logout',
-  path: '/logout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const CalendarRoute = CalendarRouteImport.update({
-  id: '/calendar',
-  path: '/calendar',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AccountRoute = AccountRouteImport.update({
-  id: '/account',
-  path: '/account',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AboutRoute = AboutRouteImport.update({
-  id: '/about',
-  path: '/about',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const IndexRoute = IndexRouteImport.update({
+const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
-  getParentRoute: () => rootRouteImport,
+  getParentRoute: () => AppRoute,
+} as any)
+const AppSettingsRoute = AppSettingsRouteImport.update({
+  id: '/settings',
+  path: '/settings',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppPlaygroundRoute = AppPlaygroundRouteImport.update({
+  id: '/playground',
+  path: '/playground',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppCalendarRoute = AppCalendarRouteImport.update({
+  id: '/calendar',
+  path: '/calendar',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAccountRoute = AppAccountRouteImport.update({
+  id: '/account',
+  path: '/account',
+  getParentRoute: () => AppRoute,
+} as any)
+const AppAboutRoute = AppAboutRouteImport.update({
+  id: '/about',
+  path: '/about',
+  getParentRoute: () => AppRoute,
 } as any)
 
 export interface FileRoutesByFullPath {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
-  '/calendar': typeof CalendarRoute
-  '/logout': typeof LogoutRoute
-  '/playground': typeof PlaygroundRoute
-  '/settings': typeof SettingsRoute
+  '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/app/about': typeof AppAboutRoute
+  '/app/account': typeof AppAccountRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/playground': typeof AppPlaygroundRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
-  '/calendar': typeof CalendarRoute
-  '/logout': typeof LogoutRoute
-  '/playground': typeof PlaygroundRoute
-  '/settings': typeof SettingsRoute
+  '/auth': typeof AuthRoute
+  '/app/about': typeof AppAboutRoute
+  '/app/account': typeof AppAccountRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/playground': typeof AppPlaygroundRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
-  '/': typeof IndexRoute
-  '/about': typeof AboutRoute
-  '/account': typeof AccountRoute
-  '/calendar': typeof CalendarRoute
-  '/logout': typeof LogoutRoute
-  '/playground': typeof PlaygroundRoute
-  '/settings': typeof SettingsRoute
+  '/app': typeof AppRouteWithChildren
+  '/auth': typeof AuthRoute
+  '/app/about': typeof AppAboutRoute
+  '/app/account': typeof AppAccountRoute
+  '/app/calendar': typeof AppCalendarRoute
+  '/app/playground': typeof AppPlaygroundRoute
+  '/app/settings': typeof AppSettingsRoute
+  '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
-    | '/'
-    | '/about'
-    | '/account'
-    | '/calendar'
-    | '/logout'
-    | '/playground'
-    | '/settings'
+    | '/app'
+    | '/auth'
+    | '/app/about'
+    | '/app/account'
+    | '/app/calendar'
+    | '/app/playground'
+    | '/app/settings'
+    | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/'
-    | '/about'
-    | '/account'
-    | '/calendar'
-    | '/logout'
-    | '/playground'
-    | '/settings'
+    | '/auth'
+    | '/app/about'
+    | '/app/account'
+    | '/app/calendar'
+    | '/app/playground'
+    | '/app/settings'
+    | '/app'
   id:
     | '__root__'
-    | '/'
-    | '/about'
-    | '/account'
-    | '/calendar'
-    | '/logout'
-    | '/playground'
-    | '/settings'
+    | '/app'
+    | '/auth'
+    | '/app/about'
+    | '/app/account'
+    | '/app/calendar'
+    | '/app/playground'
+    | '/app/settings'
+    | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
-  IndexRoute: typeof IndexRoute
-  AboutRoute: typeof AboutRoute
-  AccountRoute: typeof AccountRoute
-  CalendarRoute: typeof CalendarRoute
-  LogoutRoute: typeof LogoutRoute
-  PlaygroundRoute: typeof PlaygroundRoute
-  SettingsRoute: typeof SettingsRoute
+  AppRoute: typeof AppRouteWithChildren
+  AuthRoute: typeof AuthRoute
 }
 
 declare module '@tanstack/solid-router' {
   interface FileRoutesByPath {
-    '/settings': {
-      id: '/settings'
-      path: '/settings'
-      fullPath: '/settings'
-      preLoaderRoute: typeof SettingsRouteImport
+    '/auth': {
+      id: '/auth'
+      path: '/auth'
+      fullPath: '/auth'
+      preLoaderRoute: typeof AuthRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/playground': {
-      id: '/playground'
-      path: '/playground'
-      fullPath: '/playground'
-      preLoaderRoute: typeof PlaygroundRouteImport
+    '/app': {
+      id: '/app'
+      path: '/app'
+      fullPath: '/app'
+      preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/logout': {
-      id: '/logout'
-      path: '/logout'
-      fullPath: '/logout'
-      preLoaderRoute: typeof LogoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/calendar': {
-      id: '/calendar'
-      path: '/calendar'
-      fullPath: '/calendar'
-      preLoaderRoute: typeof CalendarRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/account': {
-      id: '/account'
-      path: '/account'
-      fullPath: '/account'
-      preLoaderRoute: typeof AccountRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/about': {
-      id: '/about'
-      path: '/about'
-      fullPath: '/about'
-      preLoaderRoute: typeof AboutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/': {
-      id: '/'
+    '/app/': {
+      id: '/app/'
       path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
-      parentRoute: typeof rootRouteImport
+      fullPath: '/app/'
+      preLoaderRoute: typeof AppIndexRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/settings': {
+      id: '/app/settings'
+      path: '/settings'
+      fullPath: '/app/settings'
+      preLoaderRoute: typeof AppSettingsRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/playground': {
+      id: '/app/playground'
+      path: '/playground'
+      fullPath: '/app/playground'
+      preLoaderRoute: typeof AppPlaygroundRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/calendar': {
+      id: '/app/calendar'
+      path: '/calendar'
+      fullPath: '/app/calendar'
+      preLoaderRoute: typeof AppCalendarRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/account': {
+      id: '/app/account'
+      path: '/account'
+      fullPath: '/app/account'
+      preLoaderRoute: typeof AppAccountRouteImport
+      parentRoute: typeof AppRoute
+    }
+    '/app/about': {
+      id: '/app/about'
+      path: '/about'
+      fullPath: '/app/about'
+      preLoaderRoute: typeof AppAboutRouteImport
+      parentRoute: typeof AppRoute
     }
   }
 }
 
+interface AppRouteChildren {
+  AppAboutRoute: typeof AppAboutRoute
+  AppAccountRoute: typeof AppAccountRoute
+  AppCalendarRoute: typeof AppCalendarRoute
+  AppPlaygroundRoute: typeof AppPlaygroundRoute
+  AppSettingsRoute: typeof AppSettingsRoute
+  AppIndexRoute: typeof AppIndexRoute
+}
+
+const AppRouteChildren: AppRouteChildren = {
+  AppAboutRoute: AppAboutRoute,
+  AppAccountRoute: AppAccountRoute,
+  AppCalendarRoute: AppCalendarRoute,
+  AppPlaygroundRoute: AppPlaygroundRoute,
+  AppSettingsRoute: AppSettingsRoute,
+  AppIndexRoute: AppIndexRoute,
+}
+
+const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
-  IndexRoute: IndexRoute,
-  AboutRoute: AboutRoute,
-  AccountRoute: AccountRoute,
-  CalendarRoute: CalendarRoute,
-  LogoutRoute: LogoutRoute,
-  PlaygroundRoute: PlaygroundRoute,
-  SettingsRoute: SettingsRoute,
+  AppRoute: AppRouteWithChildren,
+  AuthRoute: AuthRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

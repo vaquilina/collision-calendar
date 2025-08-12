@@ -206,7 +206,7 @@ a {
 }
 
 .theme-switcher .segmented-control {
-  --width: 24px;
+  --width: 3rem;
 }
 
 #not-found-screen {

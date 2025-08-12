@@ -1,7 +1,7 @@
 import { createFileRoute } from '@tanstack/solid-router';
 import { CalendarBlank } from 'phosphor-solid-js';
 
-export const Route = createFileRoute('/playground')({
+export const Route = createFileRoute('/app/playground')({
   component: PlaygroundComponent,
 });
 

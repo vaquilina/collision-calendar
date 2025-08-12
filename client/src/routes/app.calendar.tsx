@@ -12,7 +12,7 @@ import { WeekCalendar } from '../components/calendar/WeekCalendar.tsx';
 import type { Component } from 'solid-js';
 import type { CalendarView } from '../components/calendar/ViewSwitcher.tsx';
 
-export const Route = createFileRoute('/calendar')({
+export const Route = createFileRoute('/app/calendar')({
   component: CalendarComponent,
 });
 
