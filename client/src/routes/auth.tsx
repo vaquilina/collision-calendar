@@ -19,8 +19,8 @@ function AuthLayoutComponent() {
         <Outlet />
       </main>
       <footer>
-        <a href='https://github.com/vaquilina/collision-calendar'>
-          <h5>collision calendar</h5>
+        <a href='https://github.com/vaquilina/collision-calendar' title='source code'>
+          <h6>source</h6>
         </a>
       </footer>
     </div>

@@ -12,6 +12,8 @@ import { Route as rootRouteImport } from './routes/__root.tsx'
 import { Route as AuthRouteImport } from './routes/auth.tsx'
 import { Route as AppRouteImport } from './routes/app.tsx'
 import { Route as AppIndexRouteImport } from './routes/app.index.tsx'
+import { Route as AuthSignupRouteImport } from './routes/auth.signup.tsx'
+import { Route as AuthSigninRouteImport } from './routes/auth.signin.tsx'
 import { Route as AppSettingsRouteImport } from './routes/app.settings.tsx'
 import { Route as AppPlaygroundRouteImport } from './routes/app.playground.tsx'
 import { Route as AppCalendarRouteImport } from './routes/app.calendar.tsx'
@@ -32,6 +34,16 @@ const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => AppRoute,
+} as any)
+const AuthSignupRoute = AuthSignupRouteImport.update({
+  id: '/signup',
+  path: '/signup',
+  getParentRoute: () => AuthRoute,
+} as any)
+const AuthSigninRoute = AuthSigninRouteImport.update({
+  id: '/signin',
+  path: '/signin',
+  getParentRoute: () => AuthRoute,
 } as any)
 const AppSettingsRoute = AppSettingsRouteImport.update({
   id: '/settings',
@@ -61,32 +73,38 @@ const AppAboutRoute = AppAboutRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/app': typeof AppRouteWithChildren
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/app/about': typeof AppAboutRoute
   '/app/account': typeof AppAccountRoute
   '/app/calendar': typeof AppCalendarRoute
   '/app/playground': typeof AppPlaygroundRoute
   '/app/settings': typeof AppSettingsRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/signup': typeof AuthSignupRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRoutesByTo {
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/app/about': typeof AppAboutRoute
   '/app/account': typeof AppAccountRoute
   '/app/calendar': typeof AppCalendarRoute
   '/app/playground': typeof AppPlaygroundRoute
   '/app/settings': typeof AppSettingsRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/signup': typeof AuthSignupRoute
   '/app': typeof AppIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/app': typeof AppRouteWithChildren
-  '/auth': typeof AuthRoute
+  '/auth': typeof AuthRouteWithChildren
   '/app/about': typeof AppAboutRoute
   '/app/account': typeof AppAccountRoute
   '/app/calendar': typeof AppCalendarRoute
   '/app/playground': typeof AppPlaygroundRoute
   '/app/settings': typeof AppSettingsRoute
+  '/auth/signin': typeof AuthSigninRoute
+  '/auth/signup': typeof AuthSignupRoute
   '/app/': typeof AppIndexRoute
 }
 export interface FileRouteTypes {
@@ -99,6 +117,8 @@ export interface FileRouteTypes {
     | '/app/calendar'
     | '/app/playground'
     | '/app/settings'
+    | '/auth/signin'
+    | '/auth/signup'
     | '/app/'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -108,6 +128,8 @@ export interface FileRouteTypes {
     | '/app/calendar'
     | '/app/playground'
     | '/app/settings'
+    | '/auth/signin'
+    | '/auth/signup'
     | '/app'
   id:
     | '__root__'
@@ -118,12 +140,14 @@ export interface FileRouteTypes {
     | '/app/calendar'
     | '/app/playground'
     | '/app/settings'
+    | '/auth/signin'
+    | '/auth/signup'
     | '/app/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   AppRoute: typeof AppRouteWithChildren
-  AuthRoute: typeof AuthRoute
+  AuthRoute: typeof AuthRouteWithChildren
 }
 
 declare module '@tanstack/solid-router' {
@@ -148,6 +172,20 @@ declare module '@tanstack/solid-router' {
       fullPath: '/app/'
       preLoaderRoute: typeof AppIndexRouteImport
       parentRoute: typeof AppRoute
+    }
+    '/auth/signup': {
+      id: '/auth/signup'
+      path: '/signup'
+      fullPath: '/auth/signup'
+      preLoaderRoute: typeof AuthSignupRouteImport
+      parentRoute: typeof AuthRoute
+    }
+    '/auth/signin': {
+      id: '/auth/signin'
+      path: '/signin'
+      fullPath: '/auth/signin'
+      preLoaderRoute: typeof AuthSigninRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/app/settings': {
       id: '/app/settings'
@@ -207,9 +245,21 @@ const AppRouteChildren: AppRouteChildren = {
 
 const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 
+interface AuthRouteChildren {
+  AuthSigninRoute: typeof AuthSigninRoute
+  AuthSignupRoute: typeof AuthSignupRoute
+}
+
+const AuthRouteChildren: AuthRouteChildren = {
+  AuthSigninRoute: AuthSigninRoute,
+  AuthSignupRoute: AuthSignupRoute,
+}
+
+const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
+
 const rootRouteChildren: RootRouteChildren = {
   AppRoute: AppRouteWithChildren,
-  AuthRoute: AuthRoute,
+  AuthRoute: AuthRouteWithChildren,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
