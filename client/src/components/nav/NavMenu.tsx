@@ -2,7 +2,6 @@ import {
   CalendarBlank as CalendarIcon,
   Flask as PlaygroundIcon,
   Gear as SettingsIcon,
-  HouseSimple as HomeIcon,
   Info as AboutIcon,
   List as HamburgerIcon,
   UserCircle as AccountIcon,
@@ -10,7 +9,6 @@ import {
 
 import { NavLink } from './NavLink.tsx';
 
-import { Route as homeRoute } from '../../routes/app.index.tsx';
 import { Route as calendarRoute } from '../../routes/app.calendar.tsx';
 import { Route as settingsRoute } from '../../routes/app.settings.tsx';
 import { Route as aboutRoute } from '../../routes/app.about.tsx';
@@ -27,10 +25,6 @@ export const NavMenu: Component = () => (
     </button>
     <div id='nav-menu' popover>
       <nav class='content'>
-        <NavLink to={homeRoute.to} title='home' viewTransition>
-          <HomeIcon aria-role='img' aria-label='house' />
-          <span>Home</span>
-        </NavLink>
         <NavLink to={calendarRoute.to} title='calendar' viewTransition>
           <CalendarIcon aria-role='img' aria-label='calendar' />
           <span>Calendar</span>
