@@ -1,9 +1,13 @@
+import { useNavigate } from '@tanstack/solid-router';
+
 import { SegmentedControl } from '../primitives/SegmentedControl.tsx';
+import { Route as SignInRoute } from '../../routes/auth.signin.tsx';
+import { Route as SignUpRoute } from '../../routes/auth.signup.tsx';
 
 import type { SegmentedControlItem } from '../primitives/SegmentedControl.tsx';
 import type { Component, JSX, Setter } from 'solid-js';
 
-export type AuthView = 'sign-in' | 'sign-up' | string;
+export type AuthView = 'sign-in' | 'sign-up';
 
 interface AuthSwitcherProps {
   selected: AuthView;
@@ -18,11 +22,14 @@ interface AuthSwitcherProps {
  * - Sign up -> 'sign-up'
  */
 export const AuthSwitcher: Component<AuthSwitcherProps> = (props) => {
+  const navigate = useNavigate();
+
   const handleChange: JSX.BoundEventHandler<Element, Event>[0] = (
     id: AuthView,
     _event,
   ) => {
     props.setSelected(id);
+    navigate({ to: id === 'sign-in' ? SignInRoute.to : SignUpRoute.to });
   };
 
   const items: SegmentedControlItem[] = [
