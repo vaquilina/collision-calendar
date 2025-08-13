@@ -1,19 +1,21 @@
-import { createEffect, createSignal } from 'solid-js';
+import { createEffect, useContext } from 'solid-js';
 
 import { SegmentedControl } from './primitives/SegmentedControl.tsx';
+import { ThemeContext } from '../context/ThemeContext.tsx';
 
 import type { SegmentedControlItem } from './primitives/SegmentedControl.tsx';
 import type { Component, JSX } from 'solid-js';
+import type { Theme } from '../utils/detect-theme.tsx';
 
 export const ThemeSwitcher: Component = () => {
-  const [selected, setSelected] = createSignal('light');
+  const [state, setThemeStore] = useContext(ThemeContext);
 
-  const handleChange: JSX.BoundEventHandler<Element, Event>[0] = (id: string, _event) => {
-    setSelected(id);
+  const handleChange: JSX.BoundEventHandler<Element, Event>[0] = (id: Theme, _event) => {
+    setThemeStore({ theme: id });
   };
 
   createEffect(() => {
-    document.documentElement.setAttribute('data-theme', selected());
+    document.documentElement.setAttribute('data-theme', state.theme);
   });
 
   const items: SegmentedControlItem[] = [
@@ -33,7 +35,7 @@ export const ThemeSwitcher: Component = () => {
 
   return (
     <div class='theme-switcher'>
-      <SegmentedControl checked={selected()} onchange={handleChange} name='theme-switcher' items={items} />
+      <SegmentedControl checked={state.theme} onchange={handleChange} name='theme-switcher' items={items} />
     </div>
   );
 };
