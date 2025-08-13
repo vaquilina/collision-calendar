@@ -1,9 +1,10 @@
-import * as Solid from 'solid-js';
 import { createLink, LinkComponent } from '@tanstack/solid-router';
 
-type BasicLinkProps = Solid.JSX.IntrinsicElements['a'];
+import type { Component, JSX } from 'solid-js';
 
-const BasicLinkComponent: Solid.Component<BasicLinkProps> = (props) => (
+type BasicLinkProps = JSX.IntrinsicElements['a'];
+
+const BasicLinkComponent: Component<BasicLinkProps> = (props) => (
   <a {...props} role='button' class='nav-link'>
     {props.children}
   </a>
