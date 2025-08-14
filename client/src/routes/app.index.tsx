@@ -6,5 +6,5 @@ export const Route = createFileRoute('/app/')({
 });
 
 function Index() {
-  return <Navigate to={CalendarRoute.to} />;
+  return <Navigate to={CalendarRoute.to} replace />;
 }

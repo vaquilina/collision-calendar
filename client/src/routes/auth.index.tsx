@@ -8,5 +8,5 @@ export const Route = createFileRoute('/auth/')({
 });
 
 function AuthIndexRoute() {
-  return <Navigate to={SignInRoute.to} />;
+  return <Navigate to={SignInRoute.to} replace />;
 }
