@@ -11,6 +11,7 @@
 import { Route as rootRouteImport } from './routes/__root.tsx'
 import { Route as AuthRouteImport } from './routes/auth.tsx'
 import { Route as AppRouteImport } from './routes/app.tsx'
+import { Route as AuthIndexRouteImport } from './routes/auth.index.tsx'
 import { Route as AppIndexRouteImport } from './routes/app.index.tsx'
 import { Route as AuthSignupRouteImport } from './routes/auth.signup.tsx'
 import { Route as AuthSigninRouteImport } from './routes/auth.signin.tsx'
@@ -29,6 +30,11 @@ const AppRoute = AppRouteImport.update({
   id: '/app',
   path: '/app',
   getParentRoute: () => rootRouteImport,
+} as any)
+const AuthIndexRoute = AuthIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => AuthRoute,
 } as any)
 const AppIndexRoute = AppIndexRouteImport.update({
   id: '/',
@@ -82,9 +88,9 @@ export interface FileRoutesByFullPath {
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/app/': typeof AppIndexRoute
+  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRoutesByTo {
-  '/auth': typeof AuthRouteWithChildren
   '/app/about': typeof AppAboutRoute
   '/app/account': typeof AppAccountRoute
   '/app/calendar': typeof AppCalendarRoute
@@ -93,6 +99,7 @@ export interface FileRoutesByTo {
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/app': typeof AppIndexRoute
+  '/auth': typeof AuthIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -106,6 +113,7 @@ export interface FileRoutesById {
   '/auth/signin': typeof AuthSigninRoute
   '/auth/signup': typeof AuthSignupRoute
   '/app/': typeof AppIndexRoute
+  '/auth/': typeof AuthIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -120,9 +128,9 @@ export interface FileRouteTypes {
     | '/auth/signin'
     | '/auth/signup'
     | '/app/'
+    | '/auth/'
   fileRoutesByTo: FileRoutesByTo
   to:
-    | '/auth'
     | '/app/about'
     | '/app/account'
     | '/app/calendar'
@@ -131,6 +139,7 @@ export interface FileRouteTypes {
     | '/auth/signin'
     | '/auth/signup'
     | '/app'
+    | '/auth'
   id:
     | '__root__'
     | '/app'
@@ -143,6 +152,7 @@ export interface FileRouteTypes {
     | '/auth/signin'
     | '/auth/signup'
     | '/app/'
+    | '/auth/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -165,6 +175,13 @@ declare module '@tanstack/solid-router' {
       fullPath: '/app'
       preLoaderRoute: typeof AppRouteImport
       parentRoute: typeof rootRouteImport
+    }
+    '/auth/': {
+      id: '/auth/'
+      path: '/'
+      fullPath: '/auth/'
+      preLoaderRoute: typeof AuthIndexRouteImport
+      parentRoute: typeof AuthRoute
     }
     '/app/': {
       id: '/app/'
@@ -248,11 +265,13 @@ const AppRouteWithChildren = AppRoute._addFileChildren(AppRouteChildren)
 interface AuthRouteChildren {
   AuthSigninRoute: typeof AuthSigninRoute
   AuthSignupRoute: typeof AuthSignupRoute
+  AuthIndexRoute: typeof AuthIndexRoute
 }
 
 const AuthRouteChildren: AuthRouteChildren = {
   AuthSigninRoute: AuthSigninRoute,
   AuthSignupRoute: AuthSignupRoute,
+  AuthIndexRoute: AuthIndexRoute,
 }
 
 const AuthRouteWithChildren = AuthRoute._addFileChildren(AuthRouteChildren)
