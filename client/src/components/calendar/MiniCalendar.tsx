@@ -19,6 +19,7 @@ interface MiniCalendarProps {
   view: CalendarView;
 }
 
+/** Mini calendar component that serves as a date picker. */
 export const MiniCalendar: Component<MiniCalendarProps> = (props) => {
   const [localDate, setLocalDate] = createSignal<Temporal.PlainDate>(props.date);
   const [weeks, setWeeks] = createSignal<MonthViewWeek[]>([]);

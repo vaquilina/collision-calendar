@@ -6,6 +6,7 @@ const prefersLightColorScheme = () => matchMedia && matchMedia(LIGHT).matches;
 
 export type Theme = 'light' | 'dark';
 
+/** Detect the system color scheme. */
 export function detectColorScheme(): Theme | undefined {
   if (prefersDarkColorScheme()) return 'dark';
   if (prefersLightColorScheme()) return 'light';

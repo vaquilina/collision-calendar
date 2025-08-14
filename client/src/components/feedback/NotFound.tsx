@@ -3,6 +3,7 @@ import { Link } from '@tanstack/solid-router';
 
 import type { Component } from 'solid-js';
 
+/** Not found component. */
 export const NotFound: Component = () => (
   <>
     <header />

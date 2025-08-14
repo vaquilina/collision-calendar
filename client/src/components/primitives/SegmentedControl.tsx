@@ -16,6 +16,7 @@ export type SegmentedControlProps = {
   onchange: JSX.BoundEventHandler<Element, Event>[0];
 };
 
+/** Generic segmented control component. */
 export const SegmentedControl: Component<SegmentedControlProps> = (props) => {
   const finalProps = mergeProps({ items: [] }, props);
 
