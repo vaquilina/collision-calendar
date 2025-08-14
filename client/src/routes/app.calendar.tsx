@@ -38,7 +38,9 @@ function CalendarComponent() {
       <aside>
         <div class='sidebar-content'>
           <button type='button' id='new-block-button'>
-            {sidebarState.expanded ? 'new block' : <Plus weight='bold' size='1em' />}
+            {sidebarState.expanded
+              ? 'new block'
+              : <Plus aria-role='img' aria-label='plus sign' weight='bold' size='1em' />}
           </button>
           {sidebarState.expanded && (
             <>

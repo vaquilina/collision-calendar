@@ -9,22 +9,20 @@ import type { Component, JSX } from 'solid-js';
 export const ExpandCollapseButton: Component = () => {
   const [state, setSidebarStore] = useContext(SidebarContext);
 
-  const toggleState = () => {
-    setSidebarStore((prevState) => ({ expanded: !prevState.expanded }));
-  };
-
   const handleClick: JSX.EventHandler<HTMLButtonElement, MouseEvent | KeyboardEvent> = (event) => {
     if (
       event instanceof MouseEvent ||
       (event instanceof KeyboardEvent && (event.key === ' ' || event.key === 'Space' || event.key === 'Enter'))
     ) {
-      toggleState();
+      setSidebarStore((prevState) => ({ expanded: !prevState.expanded }));
     }
   };
 
   return (
-    <button type='button' onclick={handleClick}>
-      {state.expanded ? <CaretDoubleLeft weight='bold' size='1em' /> : <CaretDoubleRight weight='bold' size='1em' />}
+    <button type='button' onclick={handleClick} title={`${state.expanded ? 'collapse' : 'expand'} sidebar`}>
+      {state.expanded
+        ? <CaretDoubleLeft aria-role='img' aria-label='double caret left' weight='bold' size='1em' />
+        : <CaretDoubleRight aria-role='img' aria-label='double caret right' weight='bold' size='1em' />}
     </button>
   );
 };

@@ -25,13 +25,13 @@ export const ThemeSwitcher: Component = () => {
       id: 'light',
       disabled: false,
       title: 'Light theme',
-      icon: <Sun weight='duotone' size='1rem' />,
+      icon: <Sun aria-role='img' aria-label='sun' weight='duotone' size='1rem' />,
     },
     {
       id: 'dark',
       disabled: false,
       title: 'Dark theme',
-      icon: <Moon weight='duotone' size='1rem' />,
+      icon: <Moon aria-role='img' aria-label='moon' weight='duotone' size='1rem' />,
     },
   ];
 
