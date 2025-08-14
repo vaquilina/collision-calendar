@@ -68,8 +68,7 @@ div.screen {
 
 .screen aside {
   grid-area: sidebar;
-  min-width: 2em;
-  max-width: fit-content;
+  min-width: fit-content;
   display: flex;
   flex-direction: column;
   flex: 1;
