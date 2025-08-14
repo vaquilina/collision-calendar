@@ -1,17 +1,10 @@
-import { createFileRoute } from '@tanstack/solid-router';
+import { createFileRoute, Navigate } from '@tanstack/solid-router';
+import { Route as CalendarRoute } from './app.calendar.tsx';
 
 export const Route = createFileRoute('/app/')({
   component: Index,
 });
 
 function Index() {
-  return (
-    <>
-      <header>
-        <h5>Home</h5>
-      </header>
-      <aside>sidebar</aside>
-      <main>home content</main>
-    </>
-  );
+  return <Navigate to={CalendarRoute.to} />;
 }

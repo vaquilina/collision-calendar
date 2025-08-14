@@ -20,8 +20,8 @@ import type { Component } from 'solid-js';
 /** Navigation menu component. */
 export const NavMenu: Component = () => (
   <>
-    <button type='button' id='hamburger-menu' title='navigation' popovertarget='nav-menu'>
-      <HamburgerIcon aria-label='hamburger' />
+    <button type='button' id='hamburger-menu' class='small-button' title='navigation' popovertarget='nav-menu'>
+      <HamburgerIcon aria-label='hamburger' weight='bold' size='1em' />
     </button>
     <div id='nav-menu' popover>
       <nav class='content'>

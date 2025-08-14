@@ -1,4 +1,5 @@
 import { createEffect, useContext } from 'solid-js';
+import { Moon, Sun } from 'phosphor-solid-js';
 
 import { SegmentedControl } from './primitives/SegmentedControl.tsx';
 import { ThemeContext } from '../context/ThemeContext.tsx';
@@ -7,6 +8,7 @@ import type { SegmentedControlItem } from './primitives/SegmentedControl.tsx';
 import type { Component, JSX } from 'solid-js';
 import type { Theme } from '../utils/detect-theme.tsx';
 
+/** Segmented control for switching between light/dark theme. */
 export const ThemeSwitcher: Component = () => {
   const [state, setThemeStore] = useContext(ThemeContext);
 
@@ -23,13 +25,13 @@ export const ThemeSwitcher: Component = () => {
       id: 'light',
       disabled: false,
       title: 'Light theme',
-      label: 'LIGHT',
+      icon: <Sun weight='duotone' size='1rem' />,
     },
     {
       id: 'dark',
       disabled: false,
       title: 'Dark theme',
-      label: 'DARK',
+      icon: <Moon weight='duotone' size='1rem' />,
     },
   ];
 

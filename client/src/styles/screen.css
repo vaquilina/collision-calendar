@@ -55,7 +55,7 @@ div.screen {
   align-items: center;
   justify-content: flex-end;
   gap: 1em;
-  padding: 0 var(--theme-padding-medium);
+  padding: 0 var(--theme-padding-medium) 0 calc(var(--theme-padding-medium) - 2px);
   width: 100%;
   min-width: max-content;
   height: 100%;
@@ -68,16 +68,24 @@ div.screen {
 
 .screen aside {
   grid-area: sidebar;
-  min-width: fit-content;
-  padding: var(--theme-padding-comfortable);
+  min-width: 2em;
+  max-width: fit-content;
   display: flex;
-  flex-wrap: nowrap;
   flex-direction: column;
-  gap: 0.8em;
+  flex: 1;
+  align-items: flex-end;
+  justify-content: space-between;
+  padding: var(--theme-padding-comfortable);
   background: light-dark(var(--theme-color-03), var(--theme-color-22));
   box-shadow: 1px 0 0 0 light-dark(var(--theme-color-17), var(--theme-color-13));
   z-index: 1;
   transition: background 0.3s ease, box-shadow 0.3s ease;
+}
+.screen aside .sidebar-content {
+  display: flex;
+  flex-wrap: nowrap;
+  flex-direction: column;
+  gap: 0.8em;
 }
 
 .screen main {

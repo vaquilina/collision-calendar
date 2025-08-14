@@ -1,7 +1,7 @@
 import { createFileRoute, Outlet } from '@tanstack/solid-router';
 
-import { NavMenu } from '../components/nav/NavMenu.tsx';
-import { ThemeSwitcher } from '../components/ThemeSwitcher.tsx';
+import { SidebarProvider } from '../context/SidebarProvider.tsx';
+import { LogoNav } from '../components/nav/LogoNav.tsx';
 
 export const Route = createFileRoute('/app')({
   component: AppLayoutComponent,
@@ -10,11 +10,10 @@ export const Route = createFileRoute('/app')({
 function AppLayoutComponent() {
   return (
     <div class='screen'>
-      <div class='logo-nav'>
-        <NavMenu />
-        <ThemeSwitcher />
-      </div>
-      <Outlet />
+      <SidebarProvider expanded>
+        <LogoNav />
+        <Outlet />
+      </SidebarProvider>
     </div>
   );
 }
