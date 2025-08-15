@@ -1,9 +1,10 @@
 import { createEffect, createSignal, Index } from 'solid-js';
-import { CalendarDot, CaretLeft, CaretRight } from 'phosphor-solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 
+import Calendar from '../../../assets/calendar.svg';
+import ChevronLeft from '../../../assets/chevron-left.svg';
+import ChevronRight from '../../../assets/chevron-right.svg';
 import { WeekdayHeaders } from './WeekdayHeaders.tsx';
-
 import { firstDayInMonthView } from '../../utils/date-arithmetic.tsx';
 import { WEEKS_IN_MONTH_VIEW } from '../../const/calendar.tsx';
 
@@ -166,7 +167,7 @@ const MiniNavigatorButtons: Component<MiniNavigatorButtonsProps> = (props) => {
         onclick={[handleClick, 'backward']}
         onkeydown={[handleKeyDown, 'backward']}
       >
-        <CaretLeft size={12} aria-role='img' aria-label='Left caret' />
+        <ChevronLeft aria-role='img' aria-label='chevron left' viewBox='2 2 20 20' />
       </button>
       <button
         id='mini-cal-month-forward'
@@ -176,7 +177,7 @@ const MiniNavigatorButtons: Component<MiniNavigatorButtonsProps> = (props) => {
         onclick={[handleClick, 'forward']}
         onkeydown={[handleKeyDown, 'forward']}
       >
-        <CaretRight size={12} aria-role='img' aria-label='Right caret' />
+        <ChevronRight aria-role='img' aria-label='chevron right' viewBox='2 2 20 20' />
       </button>
     </>
   );
@@ -196,6 +197,6 @@ const MiniTodayButton: Component<MiniTodayButtonProps> = (props) => (
     onclick={props.onGoToToday}
     onkeydown={props.onGoToToday}
   >
-    <CalendarDot size={12} weight='duotone' aria-role='img' aria-label='calendar dot' />
+    <Calendar aria-role='img' aria-label='calendar' viewBox='2 2 20 20' />
   </button>
 );

@@ -1,6 +1,7 @@
 button {
   cursor: pointer;
   width: fit-content;
+  max-height: calc(1em + var(--theme-padding-comfortable) * 2);
   text-transform: uppercase;
   box-shadow: 1.5px 2px 0 0 light-dark(var(--theme-color-20), var(--theme-color-10));
   background: light-dark(var(--theme-color-04), var(--theme-color-21));
@@ -8,6 +9,7 @@ button {
   border-radius: var(--theme-border-radius);
   border: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
   font-weight: var(--theme-font-weight-medium);
+  font-size: 1em;
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   transition-property: background, color, box-shadow, border-color, transform, opacity;
   transition-duration: 0.3s;

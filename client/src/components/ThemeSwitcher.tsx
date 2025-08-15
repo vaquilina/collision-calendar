@@ -1,6 +1,7 @@
 import { createEffect, useContext } from 'solid-js';
-import { Moon, Sun } from 'phosphor-solid-js';
 
+import Sun from '../../assets/sun.svg';
+import Moon from '../../assets/moon.svg';
 import { SegmentedControl } from './primitives/SegmentedControl.tsx';
 import { ThemeContext } from '../context/ThemeContext.tsx';
 
@@ -25,13 +26,13 @@ export const ThemeSwitcher: Component = () => {
       id: 'light',
       disabled: false,
       title: 'Light theme',
-      icon: <Sun aria-role='img' aria-label='sun' weight='duotone' size='1rem' />,
+      icon: <Sun aria-role='img' aria-label='sun' viewBox='2 2 20 20' height='auto' />,
     },
     {
       id: 'dark',
       disabled: false,
       title: 'Dark theme',
-      icon: <Moon aria-role='img' aria-label='moon' weight='duotone' size='1rem' />,
+      icon: <Moon aria-role='img' aria-label='moon' viewBox='2 2 20 20' height='auto' />,
     },
   ];
 

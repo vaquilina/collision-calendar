@@ -12,6 +12,10 @@
   "compilerOptions": {
     "jsx": "react-jsx",
     "jsxImportSource": "solid-js",
-    "lib": ["DOM", "DOM.Iterable", "DOM.asynciterable", "ESNext", "deno.ns", "deno.window"]
+    "lib": ["DOM", "DOM.Iterable", "DOM.asynciterable", "ESNext", "deno.ns", "deno.window"],
+    "types": [
+      "vite-plugin-solid-svg/types-component-solid",
+      "vite/client"
+    ]
   }
 }

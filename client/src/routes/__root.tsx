@@ -18,5 +18,5 @@ export const Route = createRootRoute({
       </ThemeProvider>
     );
   },
-  notFoundComponent: () => <div class='centered'>Nothing here.. should probably redirect you</div>,
+  notFoundComponent: () => <div class='centered'>Nothing here.. you should probably be redirected.</div>,
 });

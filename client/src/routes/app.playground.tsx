@@ -1,5 +1,6 @@
 import { createFileRoute } from '@tanstack/solid-router';
-import { CalendarBlank } from 'phosphor-solid-js';
+
+import Calendar from '../../assets/calendar.svg';
 
 export const Route = createFileRoute('/app/playground')({
   component: PlaygroundComponent,
@@ -44,7 +45,7 @@ function PlaygroundComponent() {
             </div>
           </details>
           <span title='calendar icon' style={{ display: 'flex', 'align-items': 'center' }}>
-            <CalendarBlank size={18} /> icon
+            <Calendar width='1em' height='1em' fill='currentColor' /> icon
           </span>
           <abbr title='abbreviation'>ABBR</abbr>
           <address class='home'>103 Campbell Ave.</address>

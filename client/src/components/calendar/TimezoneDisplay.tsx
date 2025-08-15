@@ -1,6 +1,7 @@
 import { createEffect, createSignal } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
-import { Globe } from 'phosphor-solid-js';
+
+import Globe from '../../../assets/globe.svg';
 
 import type { Component } from 'solid-js';
 
@@ -13,7 +14,12 @@ export const TimezoneDisplay: Component = () => {
   const [timezone, setTimezone] = createSignal('');
 
   createEffect(() => {
-    setTimezone(Temporal.Now.timeZoneId);
+    setTimezone([
+      Temporal.Now.timeZoneId(),
+      Temporal.Now.zonedDateTimeISO().toLocaleString('en-US', {
+        timeZoneName: 'shortOffset',
+      }).slice(-6),
+    ].join(' '));
   });
 
   return (

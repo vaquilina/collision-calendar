@@ -1,8 +1,8 @@
 import { createSignal, Match, Switch, useContext } from 'solid-js';
 import { createFileRoute } from '@tanstack/solid-router';
 import { Temporal } from '@js-temporal/polyfill';
-import { Plus } from 'phosphor-solid-js';
 
+import Add from '../../assets/add.svg';
 import { MiniCalendar } from '../components/calendar/MiniCalendar.tsx';
 import { MonthCalendar } from '../components/calendar/MonthCalendar.tsx';
 import { DayCalendar } from '../components/calendar/DayCalendar.tsx';
@@ -38,9 +38,7 @@ function CalendarComponent() {
       <aside>
         <div class='sidebar-content'>
           <button type='button' id='new-block-button' title='new block'>
-            {sidebarState.expanded
-              ? 'new block'
-              : <Plus aria-role='img' aria-label='plus sign' weight='bold' size='1em' />}
+            {sidebarState.expanded ? 'new block' : <Add aria-role='img' aria-label='plus sign' viewBox='0 -2 24 24' />}
           </button>
           {sidebarState.expanded && (
             <>

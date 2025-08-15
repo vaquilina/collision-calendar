@@ -1,6 +1,7 @@
 import { createMemo, Show } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
-import { CaretLeft, CaretRight } from 'phosphor-solid-js';
+import ChevronLeft from '../../../assets/chevron-left.svg';
+import ChevronRight from '../../../assets/chevron-right.svg';
 
 import type { Accessor, Component, JSX, Setter } from 'solid-js';
 
@@ -83,7 +84,7 @@ export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
           onclick={[handleShift, 'backward']}
           onkeydown={[handleShift, 'backward']}
         >
-          <CaretLeft size={12} aria-role='img' aria-label='Shift back' />
+          <ChevronLeft aria-role='img' aria-label='chevron left' viewBox='2 0 20 20' />
         </button>
         <button
           id='cal-forward'
@@ -92,7 +93,7 @@ export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
           onclick={[handleShift, 'forward']}
           onkeydown={[handleShift, 'forward']}
         >
-          <CaretRight size={12} aria-role='img' aria-label='Shift forward' />
+          <ChevronRight aria-role='img' aria-label='chevron right' viewBox='2 0 20 20' />
         </button>
       </div>
       <Show when={props.view === 'view-month'}>

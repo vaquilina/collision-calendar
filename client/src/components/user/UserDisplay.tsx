@@ -1,4 +1,4 @@
-import { UserRectangle } from 'phosphor-solid-js';
+import { UserAvatar } from './UserAvatar.tsx';
 
 import type { Component } from 'solid-js';
 
@@ -13,6 +13,6 @@ export const UserDisplay: Component = () => (
       <h6>Vince Aquilina</h6>
       <address>vince.aquilina@protonmail.com</address>
     </div>
-    <UserRectangle aria-role='img' aria-label='user avatar' title='avatar' size={40} weight='thin' />
+    <UserAvatar name='Vince Aquilina' />
   </div>
 );

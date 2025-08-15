@@ -1,6 +1,7 @@
 import { useContext } from 'solid-js';
-import { CaretDoubleLeft, CaretDoubleRight } from 'phosphor-solid-js';
 
+import ChevronDoubleLeft from '../../../assets/chevron-double-left.svg';
+import ChevronDoubleRight from '../../../assets/chevron-double-right.svg';
 import { SidebarContext } from '../../context/SidebarContext.tsx';
 
 import type { Component, JSX } from 'solid-js';
@@ -21,8 +22,8 @@ export const ExpandCollapseButton: Component = () => {
   return (
     <button type='button' onclick={handleClick} title={`${state.expanded ? 'collapse' : 'expand'} sidebar`}>
       {state.expanded
-        ? <CaretDoubleLeft aria-role='img' aria-label='double caret left' weight='bold' size='1em' />
-        : <CaretDoubleRight aria-role='img' aria-label='double caret right' weight='bold' size='1em' />}
+        ? <ChevronDoubleLeft aria-role='img' aria-label='double caret left' viewBox='2 0 20 20' />
+        : <ChevronDoubleRight aria-role='img' aria-label='double caret right' viewBox='2 0 20 20' />}
     </button>
   );
 };

@@ -2,7 +2,7 @@ import { Temporal } from '@js-temporal/polyfill';
 
 import { CalendarNavigator } from './CalendarNavigator.tsx';
 import { ViewSwitcher } from './ViewSwitcher.tsx';
-import { UserDisplay } from '../UserDisplay.tsx';
+import { UserDisplay } from '../user/UserDisplay.tsx';
 
 import type { Component, Setter } from 'solid-js';
 import type { CalendarView } from './ViewSwitcher.tsx';

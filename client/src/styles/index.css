@@ -245,6 +245,18 @@ a {
   width: 1px;
 }
 
+svg {
+  width: 1em;
+  height: 1em;
+}
+svg path {
+  image-rendering: optimizeQuality;
+  fill: currentColor;
+  stroke: currentColor;
+  stroke-width: 0;
+  color: light-dark(var(--theme-color-25), var(--theme-color-01));
+}
+
 /* don't apply the page styles to the router devtools */
 .TanStackRouterDevtools * {
   all: revert;

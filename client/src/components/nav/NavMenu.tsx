@@ -1,12 +1,9 @@
-import {
-  CalendarBlank as CalendarIcon,
-  Flask as PlaygroundIcon,
-  Gear as SettingsIcon,
-  Info as AboutIcon,
-  List as HamburgerIcon,
-  UserCircle as AccountIcon,
-} from 'phosphor-solid-js';
-
+import Calendar from '../../../assets/calendar.svg';
+import Lock from '../../../assets/lock.svg';
+import Settings from '../../../assets/settings.svg';
+import Info from '../../../assets/circle-information.svg';
+import Menu from '../../../assets/menu.svg';
+import User from '../../../assets/user.svg';
 import { NavLink } from './NavLink.tsx';
 
 import { Route as calendarRoute } from '../../routes/app.calendar.tsx';
@@ -21,28 +18,28 @@ import type { Component } from 'solid-js';
 export const NavMenu: Component = () => (
   <>
     <button type='button' id='hamburger-menu' class='small-button' title='navigation' popovertarget='nav-menu'>
-      <HamburgerIcon aria-role='img' aria-label='hamburger' weight='bold' size='1em' />
+      <Menu aria-role='img' aria-label='hamburger' viewBox='0 0 24 24' />
     </button>
     <div id='nav-menu' popover>
       <nav class='content'>
         <NavLink to={calendarRoute.to} title='calendar' viewTransition>
-          <CalendarIcon aria-role='img' aria-label='calendar' />
+          <Calendar aria-role='img' aria-label='calendar' viewBox='0 0 24 24' />
           <span>Calendar</span>
         </NavLink>
         <NavLink to={settingsRoute.to} title='settings' viewTransition>
-          <SettingsIcon aria-role='img' aria-label='cog' />
+          <Settings aria-role='img' aria-label='cog' viewBox='0 0 24 24' />
           <span>Settings</span>
         </NavLink>
         <NavLink to={accountRoute.to} title='account' viewTransition>
-          <AccountIcon aria-role='img' aria-label='person' />
+          <User aria-role='img' aria-label='person' viewBox='0 0 24 24' />
           <span>Account</span>
         </NavLink>
         <NavLink to={aboutRoute.to} title='about' viewTransition>
-          <AboutIcon aria-role='img' aria-label='info' />
+          <Info aria-role='img' aria-label='info' viewBox='0 0 24 24' />
           <span>About</span>
         </NavLink>
         <NavLink to={playgroundRoute.to} title='playground' viewTransition>
-          <PlaygroundIcon aria-role='img' aria-label='beaker' />
+          <Lock aria-role='img' aria-label='lock' viewBox='0 0 24 24' />
           <span>Playground</span>
         </NavLink>
       </nav>

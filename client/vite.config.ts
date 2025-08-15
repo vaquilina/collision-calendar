@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import solid from 'vite-plugin-solid';
+import solidSvg from 'vite-plugin-solid-svg';
 import deno from '@deno/vite-plugin';
 import { tanstackRouter } from '@tanstack/router-plugin/vite';
 
@@ -12,6 +13,7 @@ export default defineConfig({
       addExtensions: true,
     }),
     solid(),
+    solidSvg(),
     deno(),
   ],
   optimizeDeps: {
