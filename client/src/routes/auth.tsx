@@ -13,6 +13,9 @@ function AuthLayoutComponent() {
   return (
     <div class='auth'>
       <header>
+        <h1>
+          collision calendar
+        </h1>
         <AuthSwitcher selected={selectedView()} setSelected={setSelectedView} />
       </header>
       <main aria-role='tabpanel'>

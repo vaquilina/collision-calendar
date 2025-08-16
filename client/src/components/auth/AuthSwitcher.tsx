@@ -29,7 +29,7 @@ export const AuthSwitcher: Component<AuthSwitcherProps> = (props) => {
     _event,
   ) => {
     props.setSelected(id);
-    navigate({ to: id === 'sign-in' ? SignInRoute.to : SignUpRoute.to });
+    navigate({ to: id === 'sign-in' ? SignInRoute.to : SignUpRoute.to, viewTransition: true });
   };
 
   const items: SegmentedControlItem[] = [
