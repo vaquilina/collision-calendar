@@ -9,7 +9,7 @@ button {
   border-radius: var(--theme-border-radius);
   border: 1px solid light-dark(var(--theme-color-20), var(--theme-color-10));
   font-weight: var(--theme-font-weight-medium);
-  font-size: 1em;
+  font-size: 0.8em;
   padding: var(--theme-padding-medium) var(--theme-padding-comfortable);
   transition-property: background, color, box-shadow, border-color, transform, opacity;
   transition-duration: 0.3s;
