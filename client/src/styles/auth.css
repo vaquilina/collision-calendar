@@ -43,6 +43,14 @@ form.auth-form button#login {
   align-self: flex-end;
 }
 
+button#oauth-google {
+  align-self: center;
+  margin-top: -0.5em;
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
 .better-auth {
   width: 100%;
   text-align: end;

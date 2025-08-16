@@ -1,5 +1,7 @@
 import { createFileRoute } from '@tanstack/solid-router';
 
+import GoogleLogo from '../../assets/google-logo.svg';
+
 export const Route = createFileRoute('/auth/signin')({
   component: SignInComponent,
 });
@@ -33,6 +35,10 @@ function SignInComponent() {
         </div>
         <button type='submit' id='login'>login</button>
       </form>
+      <hr />
+      <button type='button' id='oauth-google'>
+        <GoogleLogo role='img' aria-label='google logo' />sign in with google
+      </button>
     </article>
   );
 }

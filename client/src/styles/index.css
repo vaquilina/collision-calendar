@@ -175,11 +175,13 @@ kbd {
 }
 
 hr {
-  border-width: 1px;
+  border-width: 0.5px;
   border-style: var(--theme-border-style);
-  border-color: light-dark(var(--theme-color-19), var(--theme-color-06));
+  border-color: light-dark(var(--theme-color-15), var(--theme-color-10));
   width: 100%;
   transition: border-color 0.3s ease;
+  margin-top: var(--theme-padding-medium);
+  margin-bottom: var(--theme-padding-medium);
 }
 
 a {
