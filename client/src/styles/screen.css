@@ -16,12 +16,21 @@ div.screen {
     'logo-nav header'
     'sidebar content';
 }
+@media only screen and (max-width: 450px) {
+  div.screen {
+    grid-template-columns: 3em calc(100% - 3em);
+    grid-template-rows: 2.5em calc(100% - 2.5em);
+    grid-template-areas:
+      'logo-nav header'
+      'content content';
+  }
+}
 
 .logo-nav {
   grid-area: logo-nav;
   display: flex;
   align-items: center;
-  justify-content: flex-start;
+  justify-content: space-between;
   gap: 1em;
   padding: 0 var(--theme-padding-comfortable);
   width: 100%;
@@ -53,8 +62,8 @@ div.screen {
   grid-area: header;
   display: flex;
   align-items: center;
-  justify-content: flex-end;
-  gap: 1em;
+  justify-content: space-between;
+  gap: 0.5em;
   padding: 0 var(--theme-padding-medium) 0 calc(var(--theme-padding-medium) - 2px);
   width: 100%;
   min-width: max-content;
@@ -86,6 +95,11 @@ div.screen {
   flex-direction: column;
   gap: 0.8em;
 }
+@media only screen and (max-width: 450px) {
+  .screen aside {
+    visibility: hidden;
+  }
+}
 
 .screen main {
   grid-area: content;
@@ -95,7 +109,15 @@ div.screen {
   padding-top: var(--theme-padding-comfortable);
   padding-right: 0;
   width: 100%;
-  height: 100%;
+  height: calc(100vh - 2.5em);
+}
+@media only screen and (max-width: 450px) {
+  .screen main {
+    padding: var(--theme-padding-dense);
+    padding-top: var(--theme-padding-dense);
+    padding-bottom: var(--theme-padding-comfortable);
+    padding-right: var(--theme-padding-dense);
+  }
 }
 
 div.auth {

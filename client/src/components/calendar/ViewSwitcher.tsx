@@ -30,19 +30,23 @@ export const ViewSwitcher: Component<ViewSwitcherProps> = (props) => {
     {
       id: 'view-month',
       title: 'Month view',
-      label: 'Month',
+      label: 'M',
     },
     {
       id: 'view-week',
       title: 'Week view',
-      label: 'Week',
+      label: 'W',
     },
     {
       id: 'view-day',
       title: 'Day view',
-      label: 'Day',
+      label: 'D',
     },
   ];
 
-  return <SegmentedControl checked={props.selected} name='view-switcher' items={items} onchange={handleChange} />;
+  return (
+    <div class='view-switcher'>
+      <SegmentedControl checked={props.selected} name='view-switcher' items={items} onchange={handleChange} />
+    </div>
+  );
 };

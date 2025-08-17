@@ -32,11 +32,15 @@
   min-width: fit-content;
   align-items: center;
   flex-wrap: nowrap;
-  gap: 1em;
+  gap: 0.5em;
 }
-.cal-navigator h5 {
+.cal-navigator h6 {
   font-weight: var(--theme-font-weight-medium);
-  min-width: 10em;
+  min-width: 14ch;
+}
+
+.view-switcher .segmented-control {
+  --width: 1.5rem;
 }
 
 button#new-block-button {
@@ -73,10 +77,14 @@ h6.timezone-display {
   min-width: 100%;
   min-height: 100%;
 }
+@media only screen and (max-width: 450px) {
+  .month-calendar {
+    grid-template-columns: 2ch repeat(7, 1fr);
+    font-size: small;
+  }
+}
 
 .day-container {
-  min-width: 6em;
-  min-height: 6em;
   position: relative;
   padding: var(--theme-padding-dense);
   border-bottom: 1px solid light-dark(var(--theme-color-10), var(--theme-color-15));
@@ -107,6 +115,11 @@ h6.timezone-display {
   font-size: small;
   user-select: none;
   padding: var(--theme-padding-dense) 0;
+}
+@media only screen and (max-width : 450px) {
+  .day-container::after {
+    font-size: x-small;
+  }
 }
 .day-container[data-outside-month='true'] {
   background: light-dark(var(--theme-color-03), var(--theme-color-21));
@@ -142,6 +155,11 @@ h6.timezone-display {
   user-select: none;
   color: light-dark(var(--theme-color-10), var(--theme-color-15));
 }
+@media only screen and (max-width : 450px) {
+  .week-number-container::after {
+    font-size: x-small;
+  }
+}
 
 .day-of-week-container {
   display: flex;
@@ -153,8 +171,9 @@ h6.timezone-display {
   transition-timing-function: ease;
 }
 .day-of-week-container::after {
-  font-size: x-small;
   content: attr(data-day-of-month);
+  font-size: x-small;
+  text-align: center;
   transition: color 0.3s ease;
 }
 
@@ -164,6 +183,11 @@ h6.timezone-display {
 
 .day-of-week-container[data-month][data-year]::after {
   content: attr(data-month) '/' attr(data-day-of-month) '/' attr(data-year);
+}
+@media only screen and (max-width: 450px) {
+  .day-of-week-container[data-month][data-year]::after {
+    content: attr(data-month) '/' attr(data-day-of-month) '\a' attr(data-year);
+  }
 }
 
 .week0 {

@@ -20,6 +20,8 @@ export const Route = createFileRoute('/app/calendar')({
 });
 
 function CalendarComponent() {
+  const mediaQuery = matchMedia('(min-width: 450px)');
+
   const [sidebarState] = useContext(SidebarContext);
 
   const [calendarView, setCalendarView] = createSignal<CalendarView>('view-month');
@@ -36,35 +38,41 @@ function CalendarComponent() {
         />
       </header>
       <aside>
-        <div class='sidebar-content'>
-          <button type='button' id='new-block-button' title='new block'>
-            {sidebarState.expanded ? 'new block' : <Add aria-role='img' aria-label='plus sign' viewBox='0 -2 24 24' />}
-          </button>
-          {sidebarState.expanded && (
-            <>
-              <TimezoneDisplay />
-              <MiniCalendar date={date()} setDate={setDate} view={calendarView()} />
-              <div>
-                <fieldset>
-                  <legend>Spaces</legend>
-                  <div class='form-check-input'>
-                    <input type='checkbox' id='space1' />
-                    <label tabIndex={-1} for='space1'>Jam Room</label>
+        {mediaQuery.matches && (
+          <>
+            <div class='sidebar-content'>
+              <button type='button' id='new-block-button' title='new block'>
+                {sidebarState.expanded
+                  ? 'new block'
+                  : <Add aria-role='img' aria-label='plus sign' viewBox='0 -2 24 24' />}
+              </button>
+              {sidebarState.expanded && (
+                <>
+                  <TimezoneDisplay />
+                  <MiniCalendar date={date()} setDate={setDate} view={calendarView()} />
+                  <div>
+                    <fieldset>
+                      <legend>Spaces</legend>
+                      <div class='form-check-input'>
+                        <input type='checkbox' id='space1' />
+                        <label tabIndex={-1} for='space1'>Jam Room</label>
+                      </div>
+                      <div class='form-check-input'>
+                        <input type='checkbox' id='space2' />
+                        <label tabIndex={-1} for='space2'>Workshop</label>
+                      </div>
+                      <div class='form-check-input'>
+                        <input type='checkbox' id='space3' />
+                        <label tabIndex={-1} for='space3'>Fringe</label>
+                      </div>
+                    </fieldset>
                   </div>
-                  <div class='form-check-input'>
-                    <input type='checkbox' id='space2' />
-                    <label tabIndex={-1} for='space2'>Workshop</label>
-                  </div>
-                  <div class='form-check-input'>
-                    <input type='checkbox' id='space3' />
-                    <label tabIndex={-1} for='space3'>Fringe</label>
-                  </div>
-                </fieldset>
-              </div>
-            </>
-          )}
-        </div>
-        <ExpandCollapseButton />
+                </>
+              )}
+            </div>
+            <ExpandCollapseButton />
+          </>
+        )}
       </aside>
       <main>
         <Calendar view={calendarView()} date={date()} />

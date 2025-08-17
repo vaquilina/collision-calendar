@@ -19,6 +19,8 @@ interface WeekCalendarProps {
 
 /** Week view calendar. */
 export const WeekCalendar: Component<WeekCalendarProps> = (props) => {
+  const mediaQuery = matchMedia('(max-width: 450px)');
+
   const [days, setDays] = createSignal<WeekViewDay[]>();
 
   createEffect(() => {

@@ -17,8 +17,8 @@ interface CalendarToolbarProps {
 /** Toolbar component for the calendar screen header. */
 export const CalendarToolbar: Component<CalendarToolbarProps> = (props) => (
   <>
-    <CalendarNavigator date={props.date} setDate={props.setDate} view={props.selectedView} />
     <ViewSwitcher selected={props.selectedView} setSelected={props.setSelectedView} />
+    <CalendarNavigator date={props.date} setDate={props.setDate} view={props.selectedView} />
     <UserDisplay />
   </>
 );

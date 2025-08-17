@@ -1,5 +1,6 @@
 #hamburger-menu {
-  width: 100%;
+  font-size: 1em;
+  width: clamp(2em, 2em, 2em);
 }
 
 #nav-menu {

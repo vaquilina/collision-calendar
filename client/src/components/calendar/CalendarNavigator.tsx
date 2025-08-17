@@ -1,5 +1,6 @@
-import { createMemo, Show } from 'solid-js';
+import { createEffect, createMemo, Show } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
+import Calendar from '../../../assets/calendar.svg';
 import ChevronLeft from '../../../assets/chevron-left.svg';
 import ChevronRight from '../../../assets/chevron-right.svg';
 
@@ -22,9 +23,11 @@ interface CalendarNavigatorProps {
  * - buttons to shift the timeframe forward or backward
  */
 export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
+  const mediaQuery = matchMedia('(max-width: 450px)');
+
   const monthLabel: Accessor<string> = createMemo(() =>
     props.date.toLocaleString('en-US', {
-      month: 'long',
+      month: mediaQuery.matches ? 'short' : 'long',
       year: 'numeric',
     })
   );
@@ -32,7 +35,7 @@ export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
   const dayLabel: Accessor<string> = createMemo(() =>
     props.date.toLocaleString('en-US', {
       day: 'numeric',
-      month: 'long',
+      month: mediaQuery.matches ? 'short' : 'long',
       year: 'numeric',
     })
   );
@@ -76,7 +79,7 @@ export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
   return (
     <div class='cal-navigator'>
       <div>
-        <button type='button' title='Go to today' onclick={handleGoToToday}>Today</button>
+        <TodayButton small={mediaQuery.matches} onclick={handleGoToToday} />
         <button
           id='cal-backward'
           title='Move backward'
@@ -97,14 +100,27 @@ export const CalendarNavigator: Component<CalendarNavigatorProps> = (props) => {
         </button>
       </div>
       <Show when={props.view === 'view-month'}>
-        <h5>{monthLabel()}</h5>
+        <h6>{monthLabel()}</h6>
       </Show>
       <Show when={props.view === 'view-week'}>
-        <h5>Week {props.date.weekOfYear}, {props.date.yearOfWeek}</h5>
+        <h6>Week {props.date.weekOfYear}, {props.date.yearOfWeek}</h6>
       </Show>
       <Show when={props.view === 'view-day'}>
-        <h5>{dayLabel()}</h5>
+        <h6>{dayLabel()}</h6>
       </Show>
     </div>
+  );
+};
+
+interface TodayButtonProps {
+  onclick: JSX.EventHandler<HTMLButtonElement, MouseEvent | KeyboardEvent>;
+  small: boolean;
+}
+
+const TodayButton: Component<TodayButtonProps> = (props) => {
+  return (
+    <button type='button' title='Go to today' onclick={props.onclick}>
+      {props.small ? <Calendar role='img' aria-label='calendar' viewBox='1 0 20 20' /> : 'Today'}
+    </button>
   );
 };

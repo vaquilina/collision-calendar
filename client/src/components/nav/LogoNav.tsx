@@ -12,10 +12,12 @@ import { SidebarContext } from '../../context/SidebarContext.tsx';
 export const LogoNav: Component = () => {
   const [sidebarState] = useContext(SidebarContext);
 
+  const mediaQuery = matchMedia('(max-width: 450px)');
+
   return (
     <div class='logo-nav'>
       <NavMenu />
-      {sidebarState.expanded && <ThemeSwitcher />}
+      {mediaQuery.matches || sidebarState.expanded && <ThemeSwitcher />}
     </div>
   );
 };
