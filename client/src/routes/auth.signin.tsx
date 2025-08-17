@@ -35,10 +35,12 @@ function SignInComponent() {
         </div>
         <button type='submit' id='login'>login</button>
       </form>
-      <hr />
+      {
+        /*<hr />
       <button type='button' id='oauth-google'>
         <GoogleLogo role='img' aria-label='google logo' />sign in with google
-      </button>
+      </button>*/
+      }
     </article>
   );
 }
