@@ -1,3 +1,5 @@
+import * as path from '@std/path';
+
 /** Enum-like object containing environment variable keys. */
 export const ENV_VAR = {
   SMTP_PORT: 'SMTP_PORT',
@@ -8,10 +10,17 @@ export const ENV_VAR = {
   BETTER_AUTH_SECRET: 'BETTER_AUTH_SECRET',
 } as const;
 
-/** Set environment variables. */
+/**
+ * Set environment variables.
+ * @remarks
+ * Entry point must be `api/main.ts`.
+ */
 export const initEnv = () => {
-  const db_credentials = Deno.readTextFileSync('db.txt');
-  const better_auth_env = Deno.readTextFileSync('ba.txt');
+  const main_module_dir = path.dirname(path.fromFileUrl(Deno.mainModule));
+  Deno.chdir(main_module_dir);
+
+  const db_credentials = Deno.readTextFileSync(path.resolve('..', 'db', 'db.txt'));
+  const better_auth_env = Deno.readTextFileSync(path.resolve('..', 'db', 'ba.txt'));
 
   const [db_url, auth_token] = db_credentials.split('\n');
   const [ba_url, ba_secret] = better_auth_env.split('\n');
