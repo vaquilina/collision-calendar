@@ -3,7 +3,8 @@ import { createClient } from '@libsql/client';
 
 import { ENV_VAR, initEnv } from './init_env.ts';
 
-initEnv();
+// Set environment variables if they are not already present
+if (!Object.values(ENV_VAR).every((v) => Deno.env.has(v))) initEnv();
 
 /** Turso/libSQL client. */
 const client = createClient({
