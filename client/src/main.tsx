@@ -1,12 +1,24 @@
 import { render } from 'solid-js/web';
 import { createRouter, RouterProvider } from '@tanstack/solid-router';
-import { TanStackRouterDevtools } from '@tanstack/solid-router-devtools';
+import { QueryClient, QueryClientProvider } from '@tanstack/solid-query';
+
+export const queryClient = new QueryClient();
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen.ts';
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  context: {
+    queryClient,
+  },
+  scrollRestoration: true,
+  defaultPreload: 'intent',
+  // Since we're using Solid Query, we don't want loader calls to ever be stale
+  // This will ensure that the loader is always called when the route is preloaded or visited
+  defaultPreloadStaleTime: 0,
+});
 
 // Register the router instance for type safety
 declare module '@tanstack/solid-router' {
@@ -20,8 +32,9 @@ const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
   render(() => (
     <>
-      <RouterProvider router={router} />
-      <TanStackRouterDevtools router={router} position='bottom-right' containerElement='div' />
+      <QueryClientProvider client={queryClient}>
+        <RouterProvider router={router} />
+      </QueryClientProvider>
     </>
   ), rootElement);
 }
