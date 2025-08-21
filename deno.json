@@ -2,6 +2,21 @@
   "$schema": "https://raw.githubusercontent.com/denoland/deno/main/cli/schemas/config-file.v1.json",
   "workspace": ["./db", "./client", "./api", "./types"],
   "unstable": ["temporal", "kv", "raw-imports"],
+  "lint": {
+    "rules": {
+      "tags": ["recommended", "jsx", "jsr"],
+      "include": [
+        "default-param-last",
+        "guard-for-in",
+        "no-await-in-loop",
+        "no-self-compare",
+        "no-sparse-arrays",
+        "no-sync-fn-in-async-fn",
+        "no-throw-literal"
+      ],
+      "exclude": ["jsx-no-children-prop"]
+    }
+  },
   "fmt": {
     "useTabs": false,
     "lineWidth": 120,
@@ -21,6 +36,7 @@
     "@std/random": "jsr:@std/random@^0.1.2",
     "@std/testing": "jsr:@std/testing@^1.0.15",
     "@tanstack/router-plugin": "npm:@tanstack/router-plugin@^1.131.27",
+    "@tanstack/solid-form": "npm:@tanstack/solid-form@^1.19.2",
     "@tanstack/solid-query": "npm:@tanstack/solid-query@^5.85.5",
     "@tanstack/solid-query-devtools": "npm:@tanstack/solid-query-devtools@^5.85.5",
     "@tanstack/solid-router": "npm:@tanstack/solid-router@^1.131.27",
