@@ -1,14 +1,19 @@
+import { createSignal } from 'solid-js';
 import { createFileRoute } from '@tanstack/solid-router';
+
+import { authClient } from '../lib/auth-client.ts';
 
 export const Route = createFileRoute('/auth/signup')({
   component: SignUpComponent,
 });
 
 function SignUpComponent() {
+  const [loading, setLoading] = createSignal(false);
+
   return (
     <article class='auth-box'>
       <h5>
-        Sign Up <div class='circle-pulse-1' />
+        Sign Up {loading() && <div class='circle-pulse-1' />}
       </h5>
       <span>
         Enter your information to create an account
@@ -40,7 +45,7 @@ function SignUpComponent() {
           <label tabindex={-1} for='confirm-password'>confirm password</label>
         </div>
         <br />
-        <button type='submit' id='login'>create account</button>
+        <button type='submit' id='login' disabled={loading()}>create account</button>
       </form>
       <small class='better-auth'>
         secured by <a href='https://www.better-auth.com/'>better-auth</a>
