@@ -12,8 +12,8 @@
     "jsr:@std/random@~0.1.2": "0.1.2",
     "jsr:@std/testing@^1.0.15": "1.0.15",
     "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.1.3__picomatch@4.0.3",
-    "npm:@faker-js/faker@^9.9.0": "9.9.0",
-    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.9.4_zod@4.1.0",
+    "npm:@faker-js/faker@10": "10.0.0",
+    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.9.4_zod@4.1.1",
     "npm:@js-temporal/polyfill@~0.5.1": "0.5.1",
     "npm:@libsql/client@~0.15.12": "0.15.12",
     "npm:@tanstack/router-plugin@^1.131.27": "1.131.27_vite@7.1.3__picomatch@4.0.3_vite-plugin-solid@2.11.8__solid-js@1.9.9___seroval@1.3.2__vite@7.1.3___picomatch@4.0.3__@babel+core@7.28.3_@babel+core@7.28.3_solid-js@1.9.9__seroval@1.3.2",
@@ -31,7 +31,7 @@
     "npm:vite-plugin-solid@^2.11.8": "2.11.8_solid-js@1.9.9__seroval@1.3.2_vite@7.1.3__picomatch@4.0.3_@babel+core@7.28.3",
     "npm:vite@*": "7.1.3_picomatch@4.0.3",
     "npm:vite@7.1.3": "7.1.3_picomatch@4.0.3",
-    "npm:zod@^4.1.0": "4.1.0"
+    "npm:zod@^4.1.1": "4.1.1"
   },
   "jsr": {
     "@es-toolkit/es-toolkit@1.39.10": {
@@ -838,17 +838,17 @@
       "os": ["win32"],
       "cpu": ["x64"]
     },
-    "@faker-js/faker@9.9.0": {
-      "integrity": "sha512-OEl393iCOoo/z8bMezRlJu+GlRGlsKbUAN7jKB6LhnKoqKve5DXRpalbItIIcwnCjs1k/FOPjFzcA6Qn+H+YbA=="
+    "@faker-js/faker@10.0.0": {
+      "integrity": "sha512-UollFEUkVXutsaP+Vndjxar40Gs5JL2HeLcl8xO1QAjJgOdhc3OmBFWyEylS+RddWaaBiAzH+5/17PLQJwDiLw=="
     },
     "@hexagon/base64@1.1.28": {
       "integrity": "sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw=="
     },
-    "@hono/zod-validator@0.7.2_hono@4.9.4_zod@4.1.0": {
+    "@hono/zod-validator@0.7.2_hono@4.9.4_zod@4.1.1": {
       "integrity": "sha512-ub5eL/NeZ4eLZawu78JpW/J+dugDAYhwqUIdp9KYScI6PZECij4Hx4UsrthlEUutqDDhPwRI0MscUfNkvn/mqQ==",
       "dependencies": [
         "hono",
-        "zod@4.1.0"
+        "zod@4.1.1"
       ]
     },
     "@jridgewell/gen-mapping@0.3.13": {
@@ -2448,8 +2448,8 @@
     "zod@3.25.76": {
       "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     },
-    "zod@4.1.0": {
-      "integrity": "sha512-UWxluYj2IDX9MHRXTMbB/2eeWrAMmmMSESM+MfT9MQw8U1qo9q5ASW08anoJh6AJ7pkt099fLdNFmfI+4aChHg=="
+    "zod@4.1.1": {
+      "integrity": "sha512-SgMZK/h8Tigt9nnKkfJMvB/mKjiJXaX26xegP4sa+0wHIFVFWVlsQGdhklDmuargBD3Hsi3rsQRIzwJIhTPJHA=="
     }
   },
   "redirects": {
@@ -2492,7 +2492,7 @@
       "jsr:@std/random@~0.1.2",
       "jsr:@std/testing@^1.0.15",
       "npm:@deno/vite-plugin@^1.0.5",
-      "npm:@faker-js/faker@^9.9.0",
+      "npm:@faker-js/faker@10",
       "npm:@hono/zod-validator@~0.7.2",
       "npm:@js-temporal/polyfill@~0.5.1",
       "npm:@libsql/client@~0.15.12",
@@ -2510,7 +2510,7 @@
       "npm:vite-plugin-solid-svg@~0.8.1",
       "npm:vite-plugin-solid@^2.11.8",
       "npm:vite@7.1.3",
-      "npm:zod@^4.1.0"
+      "npm:zod@^4.1.1"
     ]
   }
 }
