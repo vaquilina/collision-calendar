@@ -39,7 +39,8 @@ form.auth-form .form-check-input {
   gap: 0.5em;
 }
 
-form.auth-form button#login {
+form.auth-form button#login,
+form.auth-form button#register {
   align-self: flex-end;
 }
 
