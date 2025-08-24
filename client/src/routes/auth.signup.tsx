@@ -2,6 +2,7 @@ import { createFileRoute } from '@tanstack/solid-router';
 import { createForm, formOptions } from '@tanstack/solid-form';
 import { z } from 'zod';
 
+import { MIN_NAME_LENGTH, MIN_PW_LENGTH } from '../const/auth.tsx';
 import { authClient } from '../lib/auth-client.ts';
 
 export const Route = createFileRoute('/auth/signup')({
@@ -60,7 +61,9 @@ function SignUpComponent() {
           <form.Field
             name='firstName'
             validators={{
-              onChange: z.string().min(1),
+              onChange: z.string().min(MIN_NAME_LENGTH, {
+                error: (iss) => `must be at least ${iss.minimum} character${iss.minimum > 1 ? 's' : ''} long`,
+              }),
             }}
             children={(field) => (
               <>
@@ -89,7 +92,9 @@ function SignUpComponent() {
           <form.Field
             name='lastName'
             validators={{
-              onChange: z.string().min(1),
+              onChange: z.string().min(MIN_NAME_LENGTH, {
+                error: (iss) => `must be at least ${iss.minimum} character${iss.minimum > 1 ? 's' : ''} long`,
+              }),
             }}
             children={(field) => (
               <>
@@ -110,7 +115,11 @@ function SignUpComponent() {
               </>
             )}
           />
-          <label tabindex={-1} for='lastName' class={!formMeta().lastName?.isValid ? 'invalid' : undefined}>
+          <label
+            tabindex={-1}
+            for='lastName'
+            class={!formMeta().lastName?.isValid ? 'invalid' : undefined}
+          >
             last name
           </label>
         </div>
@@ -145,12 +154,18 @@ function SignUpComponent() {
           <form.Field
             name='password'
             validators={{
-              onChange: z.string().min(8),
+              onChange: ({ value }) => {
+                if (!value) return 'required';
+                if (value.length < MIN_PW_LENGTH) {
+                  return `must be at least ${MIN_PW_LENGTH} character${MIN_PW_LENGTH > 1 ? 's' : ''} long`;
+                }
+                return undefined;
+              },
             }}
             children={(field) => (
               <>
                 {!field().state.meta.isValid && (
-                  <small class='helper-text invalid'>{field().state.meta.errors[0]?.message}</small>
+                  <small class='helper-text invalid'>{field().state.meta.errors[0]}</small>
                 )}
                 <input
                   name={field().name}
@@ -172,12 +187,17 @@ function SignUpComponent() {
           <form.Field
             name='confirm'
             validators={{
-              onChange: z.string().min(8),
+              onChangeListenTo: ['password'],
+              onChange: ({ value, fieldApi }) => {
+                if (!value) return 'required';
+                if (value !== fieldApi.form.getFieldValue('password')) return 'passwords do not match';
+                return undefined;
+              },
             }}
             children={(field) => (
               <>
                 {!field().state.meta.isValid && (
-                  <small class='helper-text invalid'>{field().state.meta.errors[0]?.message}</small>
+                  <small class='helper-text invalid'>{field().state.meta.errors[0]}</small>
                 )}
                 <input
                   name={field().name}
