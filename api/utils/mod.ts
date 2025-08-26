@@ -1,4 +1,4 @@
-import { sendMail } from './email.ts';
 import { auth } from './auth.ts';
+import { resend } from './email.ts';
 
-export { auth, sendMail };
+export { auth, resend };
