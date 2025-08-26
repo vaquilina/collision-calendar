@@ -83,12 +83,15 @@ function SignInComponent() {
           <form.Field
             name='password'
             validators={{
-              onChange: z.string().min(8),
+              onChange: ({ value }) => {
+                if (!value) return 'required';
+                return undefined;
+              },
             }}
             children={(field) => (
               <>
                 {!field().state.meta.isValid && (
-                  <small class='helper-text invalid'>{field().state.meta.errors[0]?.message}</small>
+                  <small class='helper-text invalid'>{field().state.meta.errors[0]}</small>
                 )}
                 <input
                   name={field().name}

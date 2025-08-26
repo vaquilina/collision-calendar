@@ -4,6 +4,8 @@ import { haveIBeenPwned } from 'better-auth/plugins';
 
 import { db } from '@collision-calendar/db/init';
 
+import { account, session, user, verification } from '@collision-calendar/db/schema';
+
 const timestamp_fields = {
   createdAt: 'created_at',
   updatedAt: 'updated_at',
@@ -13,6 +15,7 @@ const timestamp_fields = {
 export const auth = betterAuth({
   database: drizzleAdapter(db, {
     provider: 'sqlite',
+    schema: { account, session, user, verification },
   }),
   trustedOrigins: ['http://localhost:5173'],
   plugins: [
@@ -22,6 +25,7 @@ export const auth = betterAuth({
   ],
   emailAndPassword: {
     enabled: true,
+    autoSignIn: true,
   },
   user: {
     modelName: 'user',
@@ -70,6 +74,11 @@ export const auth = betterAuth({
       value: 'value',
       expiresAt: 'expires_at',
       ...timestamp_fields,
+    },
+  },
+  advanced: {
+    crossSubDomainCookies: {
+      enabled: true,
     },
   },
 });

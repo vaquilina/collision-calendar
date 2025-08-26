@@ -1,3 +1,4 @@
+import { createSignal } from 'solid-js';
 import { createFileRoute } from '@tanstack/solid-router';
 import { createForm, formOptions } from '@tanstack/solid-form';
 import { z } from 'zod';
@@ -18,6 +19,8 @@ interface Register {
 }
 
 function SignUpComponent() {
+  const [authError, setAuthError] = createSignal<string | undefined>();
+
   const formOpts = formOptions({
     defaultValues: {
       firstName: '',
@@ -32,6 +35,19 @@ function SignUpComponent() {
     ...formOpts,
     onSubmit: async ({ value }) => {
       console.log(value);
+
+      const { data, error } = await authClient.signUp.email({
+        email: value.email,
+        password: value.password,
+        name: `${value.firstName} ${value.lastName}`,
+        callbackURL: '/app',
+      }, {
+        onError: (ctx) => {
+          setAuthError(ctx.error?.message ?? ctx.error?.statusText);
+        },
+      });
+
+      console.log({ data, error });
     },
   }));
 
@@ -49,6 +65,7 @@ function SignUpComponent() {
       <span>
         Enter your information to create an account
       </span>
+      {authError() && <small class='invalid'>{authError()}</small>}
       <form
         class='auth-form'
         onsubmit={(e) => {
