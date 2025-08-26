@@ -31,10 +31,8 @@ declare module '@tanstack/solid-router' {
 const rootElement = document.getElementById('root')!;
 if (!rootElement.innerHTML) {
   render(() => (
-    <>
-      <QueryClientProvider client={queryClient}>
-        <RouterProvider router={router} />
-      </QueryClientProvider>
-    </>
+    <QueryClientProvider client={queryClient}>
+      <RouterProvider router={router} />
+    </QueryClientProvider>
   ), rootElement);
 }
