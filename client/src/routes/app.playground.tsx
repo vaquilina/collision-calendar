@@ -1,4 +1,5 @@
 import { createFileRoute } from '@tanstack/solid-router';
+import { toast } from 'solid-toast';
 
 import Calendar from '../../assets/calendar.svg';
 
@@ -38,6 +39,12 @@ function PlaygroundComponent() {
           <a href='#'>anchor</a>
           <time dateTime='2025-08-23'>August 23</time>
           <button type='button'>button</button>
+          <button
+            type='button'
+            onclick={(_e) => toast('This is information.')}
+          >
+            show toast
+          </button>
           <details>
             <summary>details</summary>
             <div class='content'>
@@ -45,7 +52,7 @@ function PlaygroundComponent() {
             </div>
           </details>
           <span title='calendar icon' style={{ display: 'flex', 'align-items': 'center' }}>
-            <Calendar width='1em' height='1em' fill='currentColor' /> icon
+            <Calendar width='1em' height='1em' fill='currentColor' viewBox='0 0 24 24' /> icon
           </span>
           <abbr title='abbreviation'>ABBR</abbr>
           <address class='home'>103 Campbell Ave.</address>
