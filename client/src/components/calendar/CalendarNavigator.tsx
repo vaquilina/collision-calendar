@@ -1,4 +1,4 @@
-import { createEffect, createMemo, Show } from 'solid-js';
+import { createMemo, Show } from 'solid-js';
 import { Temporal } from '@js-temporal/polyfill';
 import Calendar from '../../../assets/calendar.svg';
 import ChevronLeft from '../../../assets/chevron-left.svg';
