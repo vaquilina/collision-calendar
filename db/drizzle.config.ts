@@ -4,7 +4,7 @@ import { ENV_VAR, initEnv } from './init/init_env.ts';
 
 import type { Config } from 'drizzle-kit';
 
-initEnv();
+if (!Object.values(ENV_VAR).every((v) => Deno.env.has(v))) initEnv();
 
 export default defineConfig({
   dialect: 'turso',
