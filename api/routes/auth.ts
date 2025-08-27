@@ -19,6 +19,6 @@ const router = new Hono<{ Bindings: AuthType }>({
       credentials: true,
     }),
   )
-  .on(['POST', 'GET'], '/auth/*', (c) => auth.handler(c.req.raw));
+  .on(['POST', 'GET'], '/auth/**', (c) => auth.handler(c.req.raw));
 
 export default router;
