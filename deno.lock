@@ -1,20 +1,11 @@
 {
   "version": "5",
   "specifiers": {
-    "jsr:@es-toolkit/es-toolkit@^1.39.10": "1.39.10",
-    "jsr:@std/assert@^1.0.13": "1.0.14",
-    "jsr:@std/assert@^1.0.14": "1.0.14",
-    "jsr:@std/async@^1.0.13": "1.0.13",
-    "jsr:@std/data-structures@^1.0.9": "1.0.9",
-    "jsr:@std/fs@^1.0.19": "1.0.19",
     "jsr:@std/internal@^1.0.10": "1.0.10",
-    "jsr:@std/path@^1.1.1": "1.1.2",
     "jsr:@std/path@^1.1.2": "1.1.2",
-    "jsr:@std/random@~0.1.2": "0.1.2",
-    "jsr:@std/testing@^1.0.15": "1.0.15",
     "npm:@deno/vite-plugin@^1.0.5": "1.0.5_vite@7.1.3__picomatch@4.0.3",
     "npm:@faker-js/faker@10": "10.0.0",
-    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.9.4_zod@4.1.3",
+    "npm:@hono/zod-validator@~0.7.2": "0.7.2_hono@4.9.4_zod@4.1.4",
     "npm:@js-temporal/polyfill@~0.5.1": "0.5.1",
     "npm:@libsql/client@~0.15.14": "0.15.14",
     "npm:@tanstack/router-plugin@^1.131.28": "1.131.28_vite@7.1.3__picomatch@4.0.3_vite-plugin-solid@2.11.8__solid-js@1.9.9___seroval@1.3.2__vite@7.1.3___picomatch@4.0.3__@babel+core@7.28.3_@babel+core@7.28.3_solid-js@1.9.9__seroval@1.3.2",
@@ -23,7 +14,7 @@
     "npm:@tanstack/solid-query@^5.85.5": "5.85.5_solid-js@1.9.9__seroval@1.3.2",
     "npm:@tanstack/solid-router-devtools@^1.131.28": "1.131.28_@tanstack+solid-router@1.131.28__solid-js@1.9.9___seroval@1.3.2_solid-js@1.9.9__seroval@1.3.2",
     "npm:@tanstack/solid-router@^1.131.28": "1.131.28_solid-js@1.9.9__seroval@1.3.2",
-    "npm:better-auth@^1.3.7": "1.3.7_zod@4.1.3",
+    "npm:better-auth@^1.3.7": "1.3.7_zod@4.1.4",
     "npm:drizzle-kit@*": "0.31.4_esbuild@0.25.9",
     "npm:drizzle-kit@~0.31.4": "0.31.4_esbuild@0.25.9",
     "npm:drizzle-orm@~0.44.5": "0.44.5_@libsql+client@0.15.14",
@@ -33,31 +24,11 @@
     "npm:solid-toast@0.5": "0.5.0_solid-js@1.9.9__seroval@1.3.2",
     "npm:vite-plugin-solid-svg@~0.8.1": "0.8.1_solid-js@1.9.9__seroval@1.3.2_vite@7.1.3__picomatch@4.0.3",
     "npm:vite-plugin-solid@^2.11.8": "2.11.8_solid-js@1.9.9__seroval@1.3.2_vite@7.1.3__picomatch@4.0.3_@babel+core@7.28.3",
+    "npm:vite@*": "7.1.3_picomatch@4.0.3",
     "npm:vite@7.1.3": "7.1.3_picomatch@4.0.3",
-    "npm:zod@^4.1.3": "4.1.3"
+    "npm:zod@^4.1.4": "4.1.4"
   },
   "jsr": {
-    "@es-toolkit/es-toolkit@1.39.10": {
-      "integrity": "8757072a13aa64b3b349ba2b9d7d22fbe7ea6f138506c6cd2222d767cd79918f"
-    },
-    "@std/assert@1.0.14": {
-      "integrity": "68d0d4a43b365abc927f45a9b85c639ea18a9fab96ad92281e493e4ed84abaa4",
-      "dependencies": [
-        "jsr:@std/internal"
-      ]
-    },
-    "@std/async@1.0.13": {
-      "integrity": "1d76ca5d324aef249908f7f7fe0d39aaf53198e5420604a59ab5c035adc97c96"
-    },
-    "@std/data-structures@1.0.9": {
-      "integrity": "033d6e17e64bf1f84a614e647c1b015fa2576ae3312305821e1a4cb20674bb4d"
-    },
-    "@std/fs@1.0.19": {
-      "integrity": "051968c2b1eae4d2ea9f79a08a3845740ef6af10356aff43d3e2ef11ed09fb06",
-      "dependencies": [
-        "jsr:@std/path@^1.1.1"
-      ]
-    },
     "@std/internal@1.0.10": {
       "integrity": "e3be62ce42cab0e177c27698e5d9800122f67b766a0bea6ca4867886cbde8cf7"
     },
@@ -65,20 +36,6 @@
       "integrity": "c0b13b97dfe06546d5e16bf3966b1cadf92e1cc83e56ba5476ad8b498d9e3038",
       "dependencies": [
         "jsr:@std/internal"
-      ]
-    },
-    "@std/random@0.1.2": {
-      "integrity": "21e28f39dcc72d522bb0d2bc13586567d6044c86ee77a0056fcde0e13758c3ee"
-    },
-    "@std/testing@1.0.15": {
-      "integrity": "a490169f5ccb0f3ae9c94fbc69d2cd43603f2cffb41713a85f99bbb0e3087cbc",
-      "dependencies": [
-        "jsr:@std/assert@^1.0.13",
-        "jsr:@std/async",
-        "jsr:@std/data-structures",
-        "jsr:@std/fs",
-        "jsr:@std/internal",
-        "jsr:@std/path@^1.1.1"
       ]
     }
   },
@@ -591,11 +548,11 @@
     "@hexagon/base64@1.1.28": {
       "integrity": "sha512-lhqDEAvWixy3bZ+UOYbPwUbBkwBq5C1LAJ/xPC8Oi+lL54oyakv/npbA0aU2hgCsx/1NUd4IBvV03+aUBWxerw=="
     },
-    "@hono/zod-validator@0.7.2_hono@4.9.4_zod@4.1.3": {
+    "@hono/zod-validator@0.7.2_hono@4.9.4_zod@4.1.4": {
       "integrity": "sha512-ub5eL/NeZ4eLZawu78JpW/J+dugDAYhwqUIdp9KYScI6PZECij4Hx4UsrthlEUutqDDhPwRI0MscUfNkvn/mqQ==",
       "dependencies": [
         "hono",
-        "zod@4.1.3"
+        "zod@4.1.4"
       ]
     },
     "@jridgewell/gen-mapping@0.3.13": {
@@ -1279,7 +1236,7 @@
         "solid-js"
       ]
     },
-    "better-auth@1.3.7_zod@4.1.3": {
+    "better-auth@1.3.7_zod@4.1.4": {
       "integrity": "sha512-/1fEyx2SGgJQM5ujozDCh9eJksnVkNU/J7Fk/tG5Y390l8nKbrPvqiFlCjlMM+scR+UABJbQzA6An7HT50LHyQ==",
       "dependencies": [
         "@better-auth/utils",
@@ -1293,7 +1250,7 @@
         "jose",
         "kysely",
         "nanostores",
-        "zod@4.1.3"
+        "zod@4.1.4"
       ]
     },
     "better-call@1.0.16": {
@@ -1458,8 +1415,8 @@
         "@libsql/client"
       ]
     },
-    "electron-to-chromium@1.5.209": {
-      "integrity": "sha512-Xoz0uMrim9ZETCQt8UgM5FxQF9+imA7PBpokoGcZloA1uw2LeHzTlip5cb5KOAsXZLjh/moN2vReN3ZjJmjI9A=="
+    "electron-to-chromium@1.5.210": {
+      "integrity": "sha512-20kSVv1tyNBN2VFsjCIJZfyvxqo7ylHPrJLME040f/030lzNMA7uQNpxtqJjWSNpccD8/2sqe53EAjrFPvQmjw=="
     },
     "entities@4.5.0": {
       "integrity": "sha512-V0hjH4dGPh9Ao5p0MoRY6BVqtwCjhz6vI5LT8AJ55H+4g9/4vbHx1I54fS0XuclLhDHArPQCiMjDxjaL8fPxhw=="
@@ -2004,23 +1961,9 @@
     "zod@3.25.76": {
       "integrity": "sha512-gzUt/qt81nXsFGKIFcC3YnfEAx5NkunCfnDlvuBSSFS02bcXu4Lmea0AFIUwbLWxWPx3d9p8S5QoaujKcNQxcQ=="
     },
-    "zod@4.1.3": {
-      "integrity": "sha512-1neef4bMce1hNTrxvHVKxWjKfGDn0oAli3Wy1Uwb7TRO1+wEwoZUZNP1NXIEESybOBiFnBOhI6a4m6tCLE8dog=="
+    "zod@4.1.4": {
+      "integrity": "sha512-2YqJuWkU6IIK9qcE4k1lLLhyZ6zFw7XVRdQGpV97jEIZwTrscUw+DY31Xczd8nwaoksyJUIxCojZXwckJovWxA=="
     }
-  },
-  "redirects": {
-    "https://deno.land/x/sqlite/mod.ts": "https://deno.land/x/sqlite@v3.9.1/mod.ts"
-  },
-  "remote": {
-    "https://deno.land/x/sqlite@v3.9.1/build/sqlite.js": "2afc7875c7b9c85d89730c4a311ab3a304e5d1bf761fbadd8c07bbdf130f5f9b",
-    "https://deno.land/x/sqlite@v3.9.1/build/vfs.js": "7f7778a9fe499cd10738d6e43867340b50b67d3e39142b0065acd51a84cd2e03",
-    "https://deno.land/x/sqlite@v3.9.1/mod.ts": "e09fc79d8065fe222578114b109b1fd60077bff1bb75448532077f784f4d6a83",
-    "https://deno.land/x/sqlite@v3.9.1/src/constants.ts": "90f3be047ec0a89bcb5d6fc30db121685fc82cb00b1c476124ff47a4b0472aa9",
-    "https://deno.land/x/sqlite@v3.9.1/src/db.ts": "03d0c860957496eadedd86e51a6e650670764630e64f56df0092e86c90752401",
-    "https://deno.land/x/sqlite@v3.9.1/src/error.ts": "f7a15cb00d7c3797da1aefee3cf86d23e0ae92e73f0ba3165496c3816ab9503a",
-    "https://deno.land/x/sqlite@v3.9.1/src/function.ts": "bc778cab7a6d771f690afa27264c524d22fcb96f1bb61959ade7922c15a4ab8d",
-    "https://deno.land/x/sqlite@v3.9.1/src/query.ts": "d58abda928f6582d77bad685ecf551b1be8a15e8e38403e293ec38522e030cad",
-    "https://deno.land/x/sqlite@v3.9.1/src/wasm.ts": "e79d0baa6e42423257fb3c7cc98091c54399254867e0f34a09b5bdef37bd9487"
   },
   "workspace": {
     "dependencies": [
@@ -2050,7 +1993,7 @@
       "npm:vite-plugin-solid-svg@~0.8.1",
       "npm:vite-plugin-solid@^2.11.8",
       "npm:vite@7.1.3",
-      "npm:zod@^4.1.3"
+      "npm:zod@^4.1.4"
     ]
   }
 }
