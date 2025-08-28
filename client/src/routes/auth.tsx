@@ -1,5 +1,5 @@
 import { createSignal } from 'solid-js';
-import { createFileRoute, Outlet } from '@tanstack/solid-router';
+import { createFileRoute, Outlet, useLocation } from '@tanstack/solid-router';
 
 import { AuthSwitcher, type AuthView } from '../components/auth/AuthSwitcher.tsx';
 
@@ -8,7 +8,11 @@ export const Route = createFileRoute('/auth')({
 });
 
 function AuthLayoutComponent() {
-  const [selectedView, setSelectedView] = createSignal<AuthView>('sign-in');
+  const location = useLocation();
+
+  const [selectedView, setSelectedView] = createSignal<AuthView>(
+    location().pathname.endsWith('signin') ? 'sign-in' : 'sign-up',
+  );
 
   return (
     <div class='auth'>
