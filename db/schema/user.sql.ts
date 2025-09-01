@@ -6,7 +6,7 @@ import { integer, sqliteTable, text, uniqueIndex } from 'drizzle-orm/sqlite-core
  */
 export const user = sqliteTable('user', {
   /** Unique identifier for each user */
-  id: text({ mode: 'text' }).primaryKey(),
+  id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
   /** User's chosen display name */
   name: text({ mode: 'text' }),
   /** User's email address for communication and login */

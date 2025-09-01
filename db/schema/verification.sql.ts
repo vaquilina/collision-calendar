@@ -6,7 +6,7 @@ import { index, integer, sqliteTable, text } from 'drizzle-orm/sqlite-core';
  */
 export const verification = sqliteTable('verification', {
   /** Unique identifier for each verification */
-  id: text().primaryKey(),
+  id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
   /** The identifier for the verification request */
   identifier: text(),
   /** The value to be verified */

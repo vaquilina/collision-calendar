@@ -8,7 +8,7 @@ import { user } from './user.sql.ts';
  */
 export const session = sqliteTable('session', {
   /** Unique identifier for each session */
-  id: text().primaryKey(),
+  id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
   /** The ID of the user */
   userId: text().references(() => user.id),
   /** The unique session token */

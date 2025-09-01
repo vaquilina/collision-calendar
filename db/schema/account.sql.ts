@@ -8,7 +8,7 @@ import { user } from './user.sql.ts';
  */
 export const account = sqliteTable('account', {
   /** Unique identifier for each account */
-  id: text().primaryKey(),
+  id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
   /** The ID of the user */
   userId: text().references(() => user.id),
   /** The ID of the account as provided by the SSO or equal to userId for credential accounts */
