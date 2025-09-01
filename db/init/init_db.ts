@@ -1,10 +1,7 @@
 import { drizzle } from 'drizzle-orm/libsql';
 import { createClient } from '@libsql/client';
 
-import { ENV_VAR, initEnv } from './init_env.ts';
-
-// Set environment variables if they are not already present
-if (!Object.values(ENV_VAR).every((v) => Deno.env.has(v))) initEnv();
+import { ENV_VAR } from './init_env.ts';
 
 /** Turso/libSQL client. */
 const client = createClient({

@@ -3,7 +3,7 @@
   "name": "@collision-calendar/api",
   "version": "0.1.0",
   "tasks": {
-    "dev:api": "deno run --watch-hmr --allow-net --allow-env --allow-read --allow-write --allow-ffi --allow-sys=\"cpus,osRelease,systemMemoryInfo,homedir,networkInterfaces,hostname\" main.ts"
+    "dev:api": "deno run --env-file --watch-hmr --allow-net --allow-env --allow-read --allow-write --allow-ffi --allow-sys=\"cpus,osRelease,systemMemoryInfo,homedir,networkInterfaces,hostname\" main.ts"
   },
   "exports": {
     ".": "./main.ts",
