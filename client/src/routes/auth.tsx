@@ -11,7 +11,7 @@ function AuthLayoutComponent() {
   const location = useLocation();
 
   const [selectedView, setSelectedView] = createSignal<AuthView>(
-    location().pathname.endsWith('signin') ? 'sign-in' : 'sign-up',
+    location().pathname.endsWith('signin') ? 'signin' : 'signup',
   );
 
   return (

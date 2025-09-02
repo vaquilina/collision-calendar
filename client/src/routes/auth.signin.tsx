@@ -36,7 +36,7 @@ function SignInComponent() {
         Sign In{' '}
         <form.Subscribe
           selector={(state) => ({ isSubmitting: state.isSubmitting })}
-          children={(state) => state().isSubmitting && <div class='circle-pulse-1' />}
+          children={(state) => <>{state().isSubmitting && <div class='circle-pulse-1' />}</>}
         />
       </h5>
       <span>

@@ -9,7 +9,7 @@ const router = new Hono<{ Bindings: AuthType }>({
   strict: false,
 })
   .use(
-    '/auth/*',
+    '*',
     cors({
       origin: 'http://localhost:5173',
       allowHeaders: ['Content-Type', 'Authorization'],
@@ -19,6 +19,8 @@ const router = new Hono<{ Bindings: AuthType }>({
       credentials: true,
     }),
   )
-  .on(['POST', 'GET'], '/auth/**', (c) => auth.handler(c.req.raw));
+  .on(['POST', 'GET'], '/auth/*', (c) => {
+    return auth.handler(c.req.raw);
+  });
 
 export default router;

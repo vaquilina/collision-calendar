@@ -1,6 +1,6 @@
 import { betterAuth } from 'better-auth';
 import { drizzleAdapter } from 'better-auth/adapters/drizzle';
-import { haveIBeenPwned } from 'better-auth/plugins';
+import { haveIBeenPwned, openAPI } from 'better-auth/plugins';
 
 import { db } from '@collision-calendar/db/init';
 
@@ -22,16 +22,19 @@ export const auth = betterAuth({
     haveIBeenPwned({
       customPasswordCompromisedMessage: 'Please choose a more secure password.',
     }),
+    openAPI(),
   ],
+  logger: {
+    disabled: false,
+    level: 'debug',
+  },
   emailAndPassword: {
     enabled: true,
-    autoSignIn: true,
+    requireEmailVerification: false,
   },
   user: {
     modelName: 'user',
     fields: {
-      name: 'name',
-      email: 'email',
       emailVerified: 'email_verified',
       ...timestamp_fields,
     },
@@ -40,7 +43,6 @@ export const auth = betterAuth({
     modelName: 'session',
     fields: {
       userId: 'user_id',
-      token: 'token',
       ipAddress: 'ip_address',
       userAgent: 'user_agent',
       expiresAt: 'expires_at',
@@ -55,30 +57,26 @@ export const auth = betterAuth({
     modelName: 'account',
     fields: {
       userId: 'user_id',
+      accountId: 'account_id',
+      providerId: 'provider_id',
       accessToken: 'access_token',
       refreshToken: 'refresh_token',
       accessTokenExpiresAt: 'access_token_expires_at',
       refreshTokenExpiresAt: 'refresh_token_expires_at',
-      accountId: 'account_id',
-      providerId: 'provider_id',
       idToken: 'id_token',
-      password: 'password',
-      scope: 'scope',
       ...timestamp_fields,
     },
   },
   verification: {
     modelName: 'verification',
     fields: {
-      identifier: 'identifier',
-      value: 'value',
       expiresAt: 'expires_at',
       ...timestamp_fields,
     },
   },
   advanced: {
-    crossSubDomainCookies: {
-      enabled: true,
+    database: {
+      generateId: false,
     },
   },
 });

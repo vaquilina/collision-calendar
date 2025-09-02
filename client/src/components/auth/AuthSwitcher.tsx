@@ -7,7 +7,7 @@ import { Route as SignUpRoute } from '../../routes/auth.signup.tsx';
 import type { SegmentedControlItem } from '../primitives/SegmentedControl.tsx';
 import type { Component, JSX, Setter } from 'solid-js';
 
-export type AuthView = 'sign-in' | 'sign-up';
+export type AuthView = 'signin' | 'signup';
 
 interface AuthSwitcherProps {
   selected: AuthView;
@@ -29,17 +29,17 @@ export const AuthSwitcher: Component<AuthSwitcherProps> = (props) => {
     _event,
   ) => {
     props.setSelected(id);
-    navigate({ to: id === 'sign-in' ? SignInRoute.to : SignUpRoute.to, viewTransition: true });
+    navigate({ to: id === 'signin' ? SignInRoute.to : SignUpRoute.to, viewTransition: true });
   };
 
   const items: SegmentedControlItem[] = [
     {
-      id: 'sign-in',
+      id: 'signin',
       title: 'Sign in',
       label: 'sign in',
     },
     {
-      id: 'sign-up',
+      id: 'signup',
       title: 'Sign up',
       label: 'sign up',
     },

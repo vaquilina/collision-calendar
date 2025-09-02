@@ -1,10 +1,11 @@
-import { createSignal } from 'solid-js';
-import { createFileRoute } from '@tanstack/solid-router';
+import { createFileRoute, useNavigate } from '@tanstack/solid-router';
 import { createForm, formOptions } from '@tanstack/solid-form';
+import { toast } from 'solid-toast';
 import { z } from 'zod';
 
 import { MIN_NAME_LENGTH, MIN_PW_LENGTH } from '../const/auth.tsx';
 import { authClient } from '../lib/auth-client.ts';
+import { Route as SignInRoute } from './auth.signin.tsx';
 
 export const Route = createFileRoute('/auth/signup')({
   component: SignUpComponent,
@@ -19,7 +20,7 @@ interface Register {
 }
 
 function SignUpComponent() {
-  const [authError, setAuthError] = createSignal<string | undefined>();
+  const navigate = useNavigate({ from: Route.fullPath });
 
   const formOpts = formOptions({
     defaultValues: {
@@ -40,10 +41,12 @@ function SignUpComponent() {
         email: value.email,
         password: value.password,
         name: `${value.firstName} ${value.lastName}`,
-        callbackURL: '/app',
       }, {
+        onSuccess: (_ctx) => {
+          navigate({ to: SignInRoute.to });
+        },
         onError: (ctx) => {
-          setAuthError(ctx.error?.message ?? ctx.error?.statusText);
+          toast(ctx?.error?.message ?? 'Something went wrong');
         },
       });
 
@@ -59,13 +62,12 @@ function SignUpComponent() {
         Sign Up{' '}
         <form.Subscribe
           selector={(state) => ({ isSubmitting: state.isSubmitting })}
-          children={(state) => state().isSubmitting && <div class='circle-pulse-1' />}
+          children={(state) => <>{state().isSubmitting && <div class='circle-pulse-1' />}</>}
         />
       </h5>
       <span>
         Enter your information to create an account
       </span>
-      {authError() && <small class='invalid'>{authError()}</small>}
       <form
         class='auth-form'
         onsubmit={(e) => {
@@ -240,7 +242,7 @@ function SignUpComponent() {
           })}
           children={(state) => (
             <button type='submit' id='register' disabled={!state().canSubmit}>
-              {state().isSubmitting ? '...' : 'create account'}
+              create account
             </button>
           )}
         />
