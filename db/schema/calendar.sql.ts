@@ -14,6 +14,6 @@ export const calendar = sqliteTable('calendar', {
   /** The name of the calendar */
   name: text({ mode: 'text' }).notNull(),
   /** The id of the {@link user} that owns the calendar */
-  ownerUserId: text({ mode: 'text' }).references(() => user.id, { onDelete: 'cascade' }).notNull(),
+  ownerUserId: integer({ mode: 'number' }).references(() => user.id, { onDelete: 'cascade' }).notNull(),
   ...timestamps,
 });

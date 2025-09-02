@@ -13,6 +13,8 @@ export const user = sqliteTable('user', {
   email: text({ mode: 'text' }),
   /** Whether the user's email is verified */
   emailVerified: integer({ mode: 'boolean' }),
+  /** User's image url */
+  image: text({ mode: 'text' }),
   /** Timestamp of when the user was created */
   createdAt: integer({ mode: 'timestamp' }),
   /** Timestamp of when the user was updated */

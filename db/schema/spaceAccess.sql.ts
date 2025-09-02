@@ -1,5 +1,5 @@
 import { sql } from 'drizzle-orm';
-import { check, integer, sqliteTable, text, unique } from 'drizzle-orm/sqlite-core';
+import { check, integer, sqliteTable, unique } from 'drizzle-orm/sqlite-core';
 
 import { space } from './space.sql.ts';
 import { user } from './user.sql.ts';
@@ -16,7 +16,7 @@ export const spaceAccess = sqliteTable('space_access', {
   /** Unique identifier for each space access record */
   id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
   /** The id of the {@link user} */
-  userId: text({ mode: 'text' }).references(() => user.id, { onDelete: 'cascade' }).notNull(),
+  userId: integer({ mode: 'number' }).references(() => user.id, { onDelete: 'cascade' }).notNull(),
   /** The id of the {@link space} */
   spaceId: integer({ mode: 'number' }).references(() => space.id, { onDelete: 'cascade' }).notNull(),
   /** The {@link _AccessPermissions} code */

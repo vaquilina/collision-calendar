@@ -10,7 +10,7 @@ export const session = sqliteTable('session', {
   /** Unique identifier for each session */
   id: integer({ mode: 'number' }).primaryKey({ autoIncrement: true }),
   /** The ID of the user */
-  userId: text().references(() => user.id),
+  userId: integer({ mode: 'number' }).references(() => user.id),
   /** The unique session token */
   token: text(),
   /** The time when the session expires */
