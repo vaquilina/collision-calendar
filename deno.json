@@ -7,12 +7,16 @@
       "tags": ["recommended", "jsx", "jsr"],
       "include": [
         "default-param-last",
+        "eqeqeq",
         "guard-for-in",
         "no-await-in-loop",
+        "no-const-assign",
         "no-self-compare",
         "no-sparse-arrays",
         "no-sync-fn-in-async-fn",
-        "no-throw-literal"
+        "no-throw-literal",
+        "no-undef",
+        "no-useless-rename"
       ],
       "exclude": ["jsx-no-children-prop"]
     }
